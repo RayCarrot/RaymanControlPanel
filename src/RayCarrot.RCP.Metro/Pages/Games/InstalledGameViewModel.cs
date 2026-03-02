@@ -196,7 +196,7 @@ public class InstalledGameViewModel : BaseViewModel
         // Add external uri links
         AdditionalLaunchActions.AddGroup(GameInstallation.GetComponents<ExternalGameLinksComponent>().
             CreateManyObjects().
-            Select(x =>
+            Select<GameLinksComponent.GameUriLink, ActionItemViewModel>(x =>
             {
                 // Get the path
                 string path = x.Uri;
@@ -204,6 +204,13 @@ public class InstalledGameViewModel : BaseViewModel
                 // Create the command
                 AsyncRelayCommand command = new(async () =>
                     (await Services.File.LaunchFileAsync(path, arguments: x.Arguments))?.Dispose());
+
+                if (x.AssetIcon != null)
+                    return new ImageCommandItemViewModel(
+                        header: x.Header,
+                        description: path,
+                        assetValue: x.AssetIcon,
+                        command: command);
 
                 return new IconCommandItemViewModel(
                     header: x.Header,

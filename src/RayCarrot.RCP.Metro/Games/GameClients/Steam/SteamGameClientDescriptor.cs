@@ -32,11 +32,11 @@ public class SteamGameClientDescriptor : GameClientDescriptor
             new GameLinksComponent.GameUriLink(
                 Header: new ResourceLocString(nameof(Resources.GameDisplay_OpenSteamStore)),
                 Uri: SteamHelpers.GetStorePageURL(steamId),
-                Icon: GenericIconKind.GameAction_Steam),
+                AssetIcon: WebIconAsset.Steam),
             new GameLinksComponent.GameUriLink(
                 Header: new ResourceLocString(nameof(Resources.GameDisplay_OpenSteamCommunity)),
                 Uri: SteamHelpers.GetCommunityPageURL(steamId),
-                Icon: GenericIconKind.GameAction_Steam)
+                AssetIcon: WebIconAsset.Steam)
         };
     }
 

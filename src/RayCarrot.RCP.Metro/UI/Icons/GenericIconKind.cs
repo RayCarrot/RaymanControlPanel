@@ -8,8 +8,6 @@ public enum GenericIconKind
     GameAction_RunAsAdmin,
     GameAction_Location,
     GameAction_Web,
-    GameAction_Steam,
-    GameAction_Microsoft,
 
     GameFeature_Archive,
     GameFeature_Settings,

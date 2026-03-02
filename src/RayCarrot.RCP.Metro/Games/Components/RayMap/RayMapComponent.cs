@@ -26,10 +26,10 @@ public class RayMapComponent : GameComponent
         _ => throw new ArgumentOutOfRangeException(nameof(Viewer), Viewer, null)
     };
 
-    public RayMapIconAsset GetIcon() => Viewer switch
+    public WebIconAsset GetIcon() => Viewer switch
     {
-        RayMapViewer.RayMap => RayMapIconAsset.RayMap,
-        RayMapViewer.Ray1Map => RayMapIconAsset.Ray1Map,
+        RayMapViewer.RayMap => WebIconAsset.RayMap,
+        RayMapViewer.Ray1Map => WebIconAsset.Ray1Map,
         _ => throw new ArgumentOutOfRangeException(nameof(Viewer), Viewer, null)
     };
 

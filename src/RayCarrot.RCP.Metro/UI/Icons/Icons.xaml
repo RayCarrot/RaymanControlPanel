@@ -56,7 +56,6 @@
     <iconPacks:PackIconMaterialKind x:Key="RCP.Icons.EditJumpList">PencilBoxOutline</iconPacks:PackIconMaterialKind>
     
     <iconPacks:PackIconMaterialKind x:Key="RCP.Icons.Web">Earth</iconPacks:PackIconMaterialKind>
-    <iconPacks:PackIconMaterialKind x:Key="RCP.Icons.Steam">Steam</iconPacks:PackIconMaterialKind>
     <iconPacks:PackIconMaterialKind x:Key="RCP.Icons.Microsoft">MicrosoftWindows</iconPacks:PackIconMaterialKind>
 
     <iconPacks:PackIconMaterialKind x:Key="RCP.Icons.ModLoader">ArchiveOutline</iconPacks:PackIconMaterialKind>
@@ -91,12 +90,6 @@
                        IconColor="{StaticResource RCP.Brushes.Info}" />
     <local:GenericIcon x:Key="{x:Static local:GenericIconKind.GameAction_Web}" 
                        IconKind="{StaticResource RCP.Icons.Web}" 
-                       IconColor="{x:Null}" />
-    <local:GenericIcon x:Key="{x:Static local:GenericIconKind.GameAction_Steam}" 
-                       IconKind="{StaticResource RCP.Icons.Steam}" 
-                       IconColor="{x:Null}" />
-    <local:GenericIcon x:Key="{x:Static local:GenericIconKind.GameAction_Microsoft}" 
-                       IconKind="{StaticResource RCP.Icons.Microsoft}" 
                        IconColor="{x:Null}" />
 
     <local:GenericIcon x:Key="{x:Static local:GenericIconKind.GameFeature_Archive}" 

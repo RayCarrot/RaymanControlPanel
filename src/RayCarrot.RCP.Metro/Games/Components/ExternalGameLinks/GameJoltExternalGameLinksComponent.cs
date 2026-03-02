@@ -9,6 +9,6 @@ public class GameJoltExternalGameLinksComponent : ExternalGameLinksComponent
         new GameUriLink(
             Header: new ResourceLocString(nameof(Resources.GameDisplay_OpenGameJoltPage)),
             Uri: url,
-            Icon: GenericIconKind.GameAction_Web)
+            AssetIcon: WebIconAsset.GameJolt)
     };
 }

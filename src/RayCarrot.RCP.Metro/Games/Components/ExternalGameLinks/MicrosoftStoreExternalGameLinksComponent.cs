@@ -9,6 +9,6 @@ public class MicrosoftStoreExternalGameLinksComponent : ExternalGameLinksCompone
         new GameUriLink(
             Header: new ResourceLocString(nameof(Resources.GameDisplay_OpenInWinStore)),
             Uri: MicrosoftStoreHelpers.GetStorePageURI(productId),
-            Icon: GenericIconKind.GameAction_Microsoft)
+            AssetIcon: WebIconAsset.MicrosoftStore)
     };
 }

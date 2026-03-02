@@ -39,7 +39,7 @@ public class UbisoftConnectGameClientDescriptor : GameClientDescriptor
             new GameLinksComponent.GameUriLink(
                 Header: new ResourceLocString(nameof(Resources.GameDisplay_OpenInUbisoftStore)),
                 Uri: UbisoftConnectHelpers.GetStorePageURL(productId),
-                Icon: GenericIconKind.GameAction_Web)
+                AssetIcon: WebIconAsset.UbisoftConnect)
         };
     }
 

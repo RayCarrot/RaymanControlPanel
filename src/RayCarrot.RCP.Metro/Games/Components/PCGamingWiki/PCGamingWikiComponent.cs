@@ -19,7 +19,7 @@ public class PCGamingWikiComponent : GameComponent
             new GameLinksComponent.GameUriLink(
                 Header: "Open PCGamingWiki page", // TODO-LOC
                 Uri: $"https://www.pcgamingwiki.com/wiki/{pageName}",
-                Icon: GenericIconKind.GameAction_Web),
+                AssetIcon: WebIconAsset.PCGamingWiki),
         };
     }
 
