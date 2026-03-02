@@ -53,6 +53,8 @@ public sealed class GameDescriptor_RabbidsGoHome_Win32 : Win32GameDescriptor
         builder.Register<OnGameAddedComponent, AddToJumpListOnGameAddedComponent>();
         builder.Register(new Win32LaunchPathComponent(GetLaunchFilePath));
         builder.Register(new LaunchArgumentsComponent(GetLaunchArgs));
+
+        builder.Register(new PCGamingWikiComponent("Rabbids_Go_Home"));
     }
 
     protected override ProgramInstallationStructure CreateStructure() => new DirectoryProgramInstallationStructure(new ProgramFileSystem(new ProgramPath[]

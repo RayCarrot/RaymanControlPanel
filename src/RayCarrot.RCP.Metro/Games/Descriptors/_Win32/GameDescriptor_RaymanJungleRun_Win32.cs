@@ -45,6 +45,8 @@ public sealed class GameDescriptor_RaymanJungleRun_Win32 : Win32GameDescriptor
         builder.Register<OnGameAddedComponent, AddToJumpListOnGameAddedComponent>();
         builder.Register<BinaryGameModeComponent>(new UbiArtGameModeComponent(UbiArtGameMode.RaymanJungleRun_PC));
 
+        builder.Register(new PCGamingWikiComponent("Rayman_Jungle_Run"));
+
         builder.Register(new GameBananaGameComponent(19728));
     }
 

@@ -52,6 +52,7 @@ public sealed class GameDescriptor_TonicTrouble_Win32 : Win32GameDescriptor
         builder.Register<OnGameAddedComponent, AddToJumpListOnGameAddedComponent>();
         builder.Register(new LaunchArgumentsComponent(GetLaunchArgs));
         builder.Register(new LocalGameLinksComponent(GetLocalGameLinks));
+        builder.Register(new PCGamingWikiComponent("Tonic_Trouble"));
         builder.Register(new RayMapComponent(RayMapComponent.RayMapViewer.RayMap, "tt_pc", "tt_pc"));
         builder.Register<BinaryGameModeComponent>(new CPAGameModeComponent(CPAGameMode.TonicTrouble_PC));
         builder.Register<ArchiveComponent>(new CPAArchiveComponent(_ => new[]

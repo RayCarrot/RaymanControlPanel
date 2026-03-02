@@ -41,6 +41,7 @@ public sealed class GameDescriptor_RabbidsBigBang_WindowsPackage : WindowsPackag
         builder.Register(new ProgressionManagersComponent(x => new GameProgressionManager_RabbidsBigBang_WindowsPackage(this, x, "Rabbids Big Bang")));
         builder.Register<OnGameAddedComponent, AddToJumpListOnGameAddedComponent>();
         builder.Register<ExternalGameLinksComponent>(new MicrosoftStoreExternalGameLinksComponent(MicrosoftStoreID));
+        builder.Register(new PCGamingWikiComponent("Rabbids_Big_Bang"));
     }
 
     protected override ProgramInstallationStructure CreateStructure() => new DirectoryProgramInstallationStructure(new ProgramFileSystem(new ProgramPath[]

@@ -45,6 +45,7 @@ public sealed class GameDescriptor_DonaldDuckQuackAttack_Win32 : Win32GameDescri
         // TODO: Add progression support
         builder.Register<OnGameAddedComponent, AddToJumpListOnGameAddedComponent>();
         builder.Register(new LocalGameLinksComponent(GetLocalGameLinks));
+        builder.Register(new PCGamingWikiComponent("Donald_Duck:_Goin'_Quackers"));
         builder.Register(new RayMapComponent(RayMapComponent.RayMapViewer.RayMap, "dd_pc", "dd_pc"));
         builder.Register<BinaryGameModeComponent>(new CPAGameModeComponent(CPAGameMode.DonaldDuck_PC));
         builder.Register<ArchiveComponent>(new CPAArchiveComponent(_ => new[]

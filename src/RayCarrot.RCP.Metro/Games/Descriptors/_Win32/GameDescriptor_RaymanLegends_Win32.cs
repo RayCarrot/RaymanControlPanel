@@ -55,6 +55,8 @@ public sealed class GameDescriptor_RaymanLegends_Win32 : Win32GameDescriptor
         builder.Register(new UbiArtPathsComponent(String.Empty, "secure_fat.gf"));
         builder.Register<LaunchArgumentsComponent, UbiArtLaunchArgumentsComponent>();
 
+        builder.Register(new PCGamingWikiComponent("Rayman_Legends"));
+
         builder.Register(new GameBananaGameComponent(7400));
         builder.Register(new FilesModModuleExamplePaths(x => Path.GetFileName(x) switch
         {

@@ -55,6 +55,8 @@ public sealed class GameDescriptor_RaymanOrigins_Win32 : Win32GameDescriptor
         builder.Register(new UbiArtPathsComponent("GameData", null));
         builder.Register<LaunchArgumentsComponent, UbiArtLaunchArgumentsComponent>();
 
+        builder.Register(new PCGamingWikiComponent("Rayman_Origins"));
+
         builder.Register(new GameBananaGameComponent(5986));
         builder.Register(new FilesModModuleExamplePaths(x => Path.GetFileName(x) switch
         {

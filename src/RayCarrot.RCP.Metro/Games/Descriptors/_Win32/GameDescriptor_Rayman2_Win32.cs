@@ -88,6 +88,7 @@ public sealed class GameDescriptor_Rayman2_Win32 : Win32GameDescriptor
         builder.Register(new GameSettingsComponent(x => new Rayman2SettingsViewModel(x)));
         builder.Register<OnGameAddedComponent, AddToJumpListOnGameAddedComponent>();
         builder.Register(new LocalGameLinksComponent(GetLocalGameLinks));
+        builder.Register(new PCGamingWikiComponent("Rayman_2:_The_Great_Escape"));
         builder.Register(new RayMapComponent(RayMapComponent.RayMapViewer.RayMap, "r2_pc", "r2_pc"));
         builder.Register<BinaryGameModeComponent>(new CPAGameModeComponent(CPAGameMode.Rayman2_PC));
         builder.Register<ArchiveComponent>(new CPAArchiveComponent(_ => new[]

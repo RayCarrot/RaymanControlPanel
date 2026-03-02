@@ -65,6 +65,7 @@ public sealed class GameDescriptor_RaymanDesigner_MsDos : MsDosGameDescriptor
         builder.Register<MsDosGameRequiresDiscComponent>();
         builder.Register(new GameOptionsComponent(x => new Ray1MsDosGameOptionsViewModel(x)));
         builder.Register(new LocalGameLinksComponent(GetLocalGameLinks));
+        builder.Register(new PCGamingWikiComponent("Rayman_Designer"));
         builder.Register(new RayMapComponent(RayMapComponent.RayMapViewer.Ray1Map, "RaymanDesignerPC", "r1/pc_kit"));
         builder.Register<BinaryGameModeComponent>(new Ray1GameModeComponent(Ray1GameMode.RaymanDesigner_PC));
         builder.Register(new Ray1ConfigFileNameComponent(_ => "RAYKIT.CFG"));

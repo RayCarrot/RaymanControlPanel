@@ -50,6 +50,7 @@ public sealed class GameDescriptor_Rayman3_Win32 : Win32GameDescriptor
         builder.Register(new GameSettingsComponent(x => new Rayman3SettingsViewModel(x)));
         builder.Register<OnGameAddedComponent, AddToJumpListOnGameAddedComponent>();
         builder.Register<LocalGameLinksComponent>(new Rayman3SetupLocalGameLinksComponent(false));
+        builder.Register(new PCGamingWikiComponent("Rayman_3:_Hoodlum_Havoc"));
         builder.Register(new RayMapComponent(RayMapComponent.RayMapViewer.RayMap, "r3_pc", "r3_pc"));
         builder.Register<BinaryGameModeComponent>(new CPAGameModeComponent(CPAGameMode.Rayman3_PC));
         builder.Register<ArchiveComponent>(new CPAArchiveComponent(_ => new[]

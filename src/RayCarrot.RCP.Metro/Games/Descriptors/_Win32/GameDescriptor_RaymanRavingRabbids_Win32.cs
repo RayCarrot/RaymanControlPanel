@@ -64,6 +64,8 @@ public sealed class GameDescriptor_RaymanRavingRabbids_Win32 : Win32GameDescript
         builder.Register<BinaryGameModeComponent>(new JadeGameModeComponent(JadeGameMode.RaymanRavingRabbids_PC));
         builder.Register<PrototypeRestorationComponent>();
 
+        builder.Register(new PCGamingWikiComponent("Rayman_Raving_Rabbids"));
+
         builder.Register(new GameBananaGameComponent(18586));
     }
 

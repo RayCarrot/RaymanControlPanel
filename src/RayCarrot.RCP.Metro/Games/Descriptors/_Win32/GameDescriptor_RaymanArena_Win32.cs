@@ -37,6 +37,7 @@ public sealed class GameDescriptor_RaymanArena_Win32 : Win32GameDescriptor
         builder.Register(new GameSettingsComponent(x => new RaymanArenaSettingsViewModel(x)));
         builder.Register<OnGameAddedComponent, AddToJumpListOnGameAddedComponent>();
         builder.Register<LocalGameLinksComponent, RaymanMArenaSetupLocalGameLinksComponent>();
+        builder.Register(new PCGamingWikiComponent("Rayman_M"));
         builder.Register(new RayMapComponent(RayMapComponent.RayMapViewer.RayMap, "ra_pc", "ra_pc"));
         builder.Register<BinaryGameModeComponent>(new CPAGameModeComponent(CPAGameMode.RaymanArena_PC));
         builder.Register<ArchiveComponent>(new CPAArchiveComponent(_ => new[]

@@ -42,10 +42,12 @@ public sealed class GameDescriptor_Rayman30thAnniversaryEdition_Win32 : Win32Gam
 
         builder.Register(new SteamGameClientComponent(SteamId));
         builder.Register(new UbisoftConnectGameClientComponent(UbisoftConnectGameId, UbisoftConnectProductId));
-
+        
         // TODO: Add progression
         builder.Register(new GameSettingsComponent(x => new Rayman30thSettingsViewModel(x)));
         builder.Register<OnGameAddedComponent, AddToJumpListOnGameAddedComponent>();
+
+        builder.Register(new PCGamingWikiComponent("Rayman:_30th_Anniversary_Edition"));
     }
 
     protected override ProgramInstallationStructure CreateStructure() => new DirectoryProgramInstallationStructure(new ProgramFileSystem(new ProgramPath[]
