@@ -1,4 +1,5 @@
 ﻿using RayCarrot.RCP.Metro.Games.Components;
+using RayCarrot.RCP.Metro.Games.SetupGame;
 using RayCarrot.RCP.Metro.Games.Structure;
 
 namespace RayCarrot.RCP.Metro;
@@ -30,6 +31,8 @@ public sealed class GameDescriptor_Rayman1_Gbc : GbcGameDescriptor
         base.RegisterComponents(builder);
 
         builder.Register(new RayMapComponent(RayMapComponent.RayMapViewer.Ray1Map, "RaymanGBC", "gbc/r1_eu"));
+
+        builder.Register(new SetupGameActionComponent(_ => new Rayman1GBCRemoveUbiKeyRequirementSetupGameAction()));
 
         builder.Register(new GameBananaGameComponent(23858));
     }
