@@ -3,8 +3,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Security.AccessControl;
 using System.Security.Principal;
-using System.Text;
-using Microsoft.VisualBasic.FileIO;
 
 namespace RayCarrot.RCP.Metro;
 
@@ -22,29 +20,39 @@ public class FileManager
 
     private IMessageUIManager Message { get; }
 
-    private string GetVisualBasicExceptionMessage(IOException ex)
+    private static void CopyDirectoryRecursive(FileSystemPath source, FileSystemPath destination, bool replaceExistingFiles)
     {
-        StringBuilder sb = new();
-
-        sb.AppendLine($"{ex.Data.Count} IO errors have occured:");
-
-        int count = 0;
-
-        foreach (DictionaryEntry entry in ex.Data)
+        try
         {
-            sb.AppendLine($"({entry.Key}) {entry.Value}");
+            Directory.CreateDirectory(destination);
 
-            count++;
-
-            // Enumerate a max of 5 items to avoid the message being too long
-            if (count >= 5)
+            // Copy files
+            foreach (FileSystemPath file in Directory.GetFiles(source))
             {
-                sb.AppendLine("...");
-                break;
+                string destFile = Path.Combine(destination, file.Name);
+                File.Copy(file, destFile, replaceExistingFiles);
+
+                // Preserve timestamps
+                File.SetCreationTime(destFile, File.GetCreationTime(file));
+                File.SetLastWriteTime(destFile, File.GetLastWriteTime(file));
+            }
+
+            // Copy subdirectories recursively
+            foreach (FileSystemPath subDir in Directory.GetDirectories(source))
+            {
+                string destDir = Path.Combine(destination, subDir.Name);
+                CopyDirectoryRecursive(subDir, destDir, replaceExistingFiles);
+
+                // Preserve timestamps
+                Directory.SetCreationTime(destDir, Directory.GetCreationTime(subDir));
+                Directory.SetLastWriteTime(destDir, Directory.GetLastWriteTime(subDir));
             }
         }
-
-        return sb.ToString();
+        catch (Exception ex)
+        {
+            Logger.Error(ex, $"Recursive copying directory {source} to {destination}");
+            throw;
+        }
     }
 
     /// <summary>
@@ -280,54 +288,38 @@ public class FileManager
     /// <param name="replaceExistingFiles">Indicates if any existing files with the same name should be replaced</param>
     public void MoveDirectory(FileSystemPath source, FileSystemPath destination, bool replaceDir, bool replaceExistingFiles)
     {
+        if (!source.DirectoryExists)
+            throw new DirectoryNotFoundException($"Source directory does not exist: {source}");
+
         // Delete existing directory if set to replace
-        if (replaceDir)
+        if (replaceDir && destination.DirectoryExists)
             DeleteDirectory(destination);
 
-        // Check if the parent directory does not exist
+        // Create the parent directory if it does not exist
         if (!destination.Parent.DirectoryExists)
-            // Create the parent directory
             Directory.CreateDirectory(destination.Parent);
 
-        // If we replace, the directory will be deleted, thus we can simply move it
-        if (replaceDir)
+        try
         {
             try
-            {            
-                // Move the directory
-                FileSystem.MoveDirectory(source, destination); // Use Visual Basic API to support moving across volumes
-            }
-            catch (IOException ex)
             {
-                Logger.Error(ex, "Moving directory");
+                // Try a standard directory move
+                Directory.Move(source, destination);
+            }
+            catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+            {
+                Logger.Warn(ex, "Standard directory move failed. Attempting to manually move.");
 
-                // The Visual Basic API stores exceptions in the data. Use that to create a better error message.
-                if (ex.Data.Count > 0)
-                    throw new IOException(GetVisualBasicExceptionMessage(ex), ex);
-                else
-                    throw;
+                // Fall back to copy the directory if it fails, such as when copying between volumes or if the destination exists
+                CopyDirectory(source, destination, false, replaceExistingFiles);
+                DeleteDirectory(source);
             }
         }
-        // If we do not replace we have to move file by file and directory by directory
-        else
+        catch (Exception ex)
         {
-            // Recreate each directory
-            foreach (FileSystemPath dir in Directory.GetDirectories(source, "*", System.IO.SearchOption.AllDirectories))
-            {
-                // Get the destination directory
-                var destDir = destination + (dir - source);
-
-                // Create the directory
-                Directory.CreateDirectory(destDir);
-            }
-
-            // Move each file
-            MoveFiles(new IOSearchPattern(source), destination, replaceExistingFiles);
-
-            // Delete the source as there will be empty directories left there now
-            DeleteDirectory(source);
+            Logger.Error(ex, "Moving directory");
+            throw;
         }
-
 
         Logger.Debug("The directory {0} was moved to {1}", source, destination);
     }
@@ -366,24 +358,22 @@ public class FileManager
     /// <param name="replaceExistingFiles">Indicates if any existing files with the same name should be replaced</param>
     public void CopyDirectory(FileSystemPath source, FileSystemPath destination, bool replaceDir, bool replaceExistingFiles)
     {
+        if (!source.DirectoryExists)
+            throw new DirectoryNotFoundException($"Source directory does not exist: {source}");
+
         // Delete existing directory if set to replace
-        if (replaceDir)
+        if (replaceDir && destination.DirectoryExists)
             DeleteDirectory(destination);
 
         try
         {
-            // Copy the directory
-            FileSystem.CopyDirectory(source, destination, replaceExistingFiles);
+            // Recursively copy the directory
+            CopyDirectoryRecursive(source, destination, replaceExistingFiles);
         }
-        catch (IOException ex)
+        catch (Exception ex)
         {
-            Logger.Error(ex, "Copying directory");
-
-            // The Visual Basic API stores exceptions in the data. Use that to create a better error message.
-            if (ex.Data.Count > 0)
-                throw new IOException(GetVisualBasicExceptionMessage(ex), ex);
-            else
-                throw;
+            Logger.Error(ex, $"Copying directory {source} to {destination}");
+            throw;
         }
 
         Logger.Debug("The directory {0} was copied to {1}", source, destination);
