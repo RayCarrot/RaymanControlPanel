@@ -314,7 +314,144 @@ public class UbiArtIPKArchiveConfigViewModel : BaseViewModel
 
                 break;
 
-            case BinarySerializer.UbiArt.Game.JustDance2017:
+            case BinarySerializer.UbiArt.Game.JustDance2014:
+
+                switch (Settings.Platform)
+                {
+                    case Platform.WiiU:
+                        data.Version = 5;
+                        data.PlatformSupported = (BundlePlatform)8;
+                        data.Compressed = false;
+                        data.BinaryScene = true;
+                        data.BinaryLogic = true;
+                        data.DataSignature = 0;
+                        data.EngineSignature = 472168730;
+                        data.EngineVersion = 98119;
+                        break;
+
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(Settings.Platform), Settings.Platform, null);
+                }
+
+                break;
+
+            case BinarySerializer.UbiArt.Game.JustDance2014JP:
+
+                switch (Settings.Platform)
+                {
+                    case Platform.WiiU:
+                        data.Version = 5;
+                        data.PlatformSupported = (BundlePlatform)8;
+                        data.Compressed = false;
+                        data.BinaryScene = true;
+                        data.BinaryLogic = true;
+                        data.DataSignature = 0;
+                        data.EngineSignature = 3328194283;
+                        data.EngineVersion = 126881;
+                        break;
+
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(Settings.Platform), Settings.Platform, null);
+                }
+
+                break;
+
+            case BinarySerializer.UbiArt.Game.JustDanceYoKaiWatch:
+
+                switch (Settings.Platform)
+                {
+                    case Platform.WiiU:
+                        data.Version = 5;
+                        data.PlatformSupported = (BundlePlatform)8;
+                        data.Compressed = false;
+                        data.BinaryScene = true;
+                        data.BinaryLogic = true;
+                        data.DataSignature = 0;
+                        data.EngineSignature = 3363297708;
+                        data.EngineVersion = 220425;
+                        break;
+
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(Settings.Platform), Settings.Platform, null);
+                }
+
+                break;
+
+            case BinarySerializer.UbiArt.Game.JustDance2015:
+
+                switch (Settings.Platform)
+                {
+                    case Platform.WiiU:
+                        data.Version = 5;
+                        data.PlatformSupported = (BundlePlatform)8;
+                        data.Compressed = false;
+                        data.BinaryScene = true;
+                        data.BinaryLogic = true;
+                        data.DataSignature = 0;
+                        data.EngineSignature = 3311640408;
+                        data.EngineVersion = 156752;
+                        break;
+
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(Settings.Platform), Settings.Platform, null);
+                }
+
+                break;
+
+            case BinarySerializer.UbiArt.Game.JustDance2016Demo:
+
+                switch (Settings.Platform)
+                {
+                    case Platform.WiiU:
+                        data.Version = 5;
+                        data.PlatformSupported = (BundlePlatform)8;
+                        data.Compressed = false;
+                        data.BinaryScene = false;
+                        data.BinaryLogic = false;
+                        data.DataSignature = 125495;
+                        data.EngineSignature = 3555789263;
+                        data.EngineVersion = 203998;
+                        break;
+
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(Settings.Platform), Settings.Platform, null);
+                }
+
+                break;
+
+            case BinarySerializer.UbiArt.Game.JustDance2016:
+
+                switch (Settings.Platform)
+                {
+                    case Platform.PlayStation3:
+                        data.Version = 5;
+                        data.PlatformSupported = (BundlePlatform)2;
+                        data.Compressed = false;
+                        data.BinaryScene = true;
+                        data.BinaryLogic = true;
+                        data.DataSignature = 0;
+                        data.EngineSignature = 3107075135;
+                        data.EngineVersion = 212939;
+                        break;
+
+                    case Platform.WiiU:
+                        data.Version = 5;
+                        data.PlatformSupported = (BundlePlatform)8;
+                        data.Compressed = false;
+                        data.BinaryScene = false;
+                        data.BinaryLogic = false;
+                        data.DataSignature = 151683;
+                        data.EngineSignature = 3658767457;
+                        data.EngineVersion = 212930;
+                        break;
+
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(Settings.Platform), Settings.Platform, null);
+                }
+
+                break;
+
+            case BinarySerializer.UbiArt.Game.JustDance2017Demo:
 
                 switch (Settings.Platform)
                 {
@@ -326,7 +463,197 @@ public class UbiArtIPKArchiveConfigViewModel : BaseViewModel
                         data.BinaryLogic = false;
                         data.DataSignature = 0;
                         data.EngineSignature = 3346979248;
-                        data.EngineVersion = 241478;
+                        data.EngineVersion = 243733;
+                        break;
+
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(Settings.Platform), Settings.Platform, null);
+                }
+
+                break;
+
+            case BinarySerializer.UbiArt.Game.JustDance2017:
+
+                switch (Settings.Platform)
+                {
+                    case Platform.PC:
+                        data.Version = 5;
+                        data.PlatformSupported = BundlePlatform.PC;
+                        data.Compressed = false;
+                        data.BinaryScene = false;
+                        data.BinaryLogic = false;
+                        data.DataSignature = 0;
+                        data.EngineSignature = 490359856;
+                        data.EngineVersion = 253653;
+                        break;
+
+                    case Platform.WiiU:
+                        data.Version = 5;
+                        data.PlatformSupported = (BundlePlatform)8;
+                        data.Compressed = false;
+                        data.BinaryScene = false;
+                        data.BinaryLogic = false;
+                        data.DataSignature = 252898;
+                        data.EngineSignature = 77747065;
+                        data.EngineVersion = 248621;
+                        break;
+
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(Settings.Platform), Settings.Platform, null);
+                }
+
+                break;
+
+            case BinarySerializer.UbiArt.Game.JustDance2018Demo:
+
+                switch (Settings.Platform)
+                {
+                    case Platform.WiiU:
+                        data.Version = 5;
+                        data.PlatformSupported = (BundlePlatform)8;
+                        data.Compressed = false;
+                        data.BinaryScene = false;
+                        data.BinaryLogic = false;
+                        data.DataSignature = 345180;
+                        data.EngineSignature = 1536599657;
+                        data.EngineVersion = 271273;
+                        break;
+
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(Settings.Platform), Settings.Platform, null);
+                }
+
+                break;
+
+            case BinarySerializer.UbiArt.Game.JustDance2018:
+
+                switch (Settings.Platform)
+                {
+                    case Platform.WiiU:
+                        data.Version = 5;
+                        data.PlatformSupported = (BundlePlatform)8;
+                        data.Compressed = false;
+                        data.BinaryScene = false;
+                        data.BinaryLogic = false;
+                        data.DataSignature = 348384;
+                        data.EngineSignature = 53375429;
+                        data.EngineVersion = 272792;
+                        break;
+
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(Settings.Platform), Settings.Platform, null);
+                }
+
+                break;
+
+            case BinarySerializer.UbiArt.Game.JustDance2019Demo:
+
+                switch (Settings.Platform)
+                {
+                    case Platform.WiiU:
+                        data.Version = 5;
+                        data.PlatformSupported = (BundlePlatform)8;
+                        data.Compressed = false;
+                        data.BinaryScene = false;
+                        data.BinaryLogic = false;
+                        data.DataSignature = 432322;
+                        data.EngineSignature = 3266027038;
+                        data.EngineVersion = 287359;
+                        break;
+
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(Settings.Platform), Settings.Platform, null);
+                }
+
+                break;
+
+            case BinarySerializer.UbiArt.Game.JustDance2019:
+
+                switch (Settings.Platform)
+                {
+                    case Platform.WiiU:
+                        data.Version = 5;
+                        data.PlatformSupported = (BundlePlatform)8;
+                        data.Compressed = false;
+                        data.BinaryScene = false;
+                        data.BinaryLogic = false;
+                        data.DataSignature = 420252;
+                        data.EngineSignature = 526312495;
+                        data.EngineVersion = 284789;
+                        break;
+
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(Settings.Platform), Settings.Platform, null);
+                }
+
+                break;
+
+            case BinarySerializer.UbiArt.Game.JustDance2020:
+
+                switch (Settings.Platform)
+                {
+                    case Platform.Wii:
+                        data.Version = 5;
+                        data.PlatformSupported = (BundlePlatform)5;
+                        data.Compressed = false;
+                        data.BinaryScene = true;
+                        data.BinaryLogic = true;
+                        data.DataSignature = 494481;
+                        data.EngineSignature = 1284425157;
+                        data.EngineVersion = 299101;
+                        break;
+
+                    case Platform.NintendoSwitch:
+                        data.Version = 5;
+                        data.PlatformSupported = (BundlePlatform)11;
+                        data.Compressed = false;
+                        data.BinaryScene = false;
+                        data.BinaryLogic = false;
+                        data.DataSignature = 496756;
+                        data.EngineSignature = 1924411380;
+                        data.EngineVersion = 300176;
+                        break;
+
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(Settings.Platform), Settings.Platform, null);
+                }
+
+                break;
+
+            case BinarySerializer.UbiArt.Game.JustDance2021:
+
+                switch (Settings.Platform)
+                {
+                    case Platform.NintendoSwitch:
+                        data.Version = 5;
+                        data.PlatformSupported = (BundlePlatform)11;
+                        data.Compressed = false;
+                        data.BinaryScene = false;
+                        data.BinaryLogic = false;
+                        data.DataSignature = 553751;
+                        data.EngineSignature = 3948761164;
+                        data.EngineVersion = 317118;
+                        break;
+
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(Settings.Platform), Settings.Platform, null);
+                }
+
+                break;
+
+            case BinarySerializer.UbiArt.Game.JustDance2022:
+
+                switch (Settings.Platform)
+                {
+                    case Platform.NintendoSwitch:
+                        data.Version = 5;
+                        data.PlatformSupported = (BundlePlatform)11;
+                        data.Compressed = false;
+                        data.BinaryScene = false;
+                        data.BinaryLogic = false;
+                        data.DataSignature = 600931;
+                        data.EngineSignature = 500900456;
+                        data.EngineVersion = 326704;
                         break;
 
                     default:
