@@ -29,7 +29,8 @@ public class StartupManager
         GamesManager gamesManager, 
         GameClientsManager gameClientsManager, 
         IMessageUIManager messageUi, 
-        AppUIManager ui)
+        AppUIManager ui,
+        RunningGamesManager runningGamesManager)
     {
         Args = args ?? throw new ArgumentNullException(nameof(args));
         LoggerManager = loggerManager ?? throw new ArgumentNullException(nameof(loggerManager));
@@ -42,6 +43,7 @@ public class StartupManager
         GameClientsManager = gameClientsManager ?? throw new ArgumentNullException(nameof(gameClientsManager));
         MessageUI = messageUi ?? throw new ArgumentNullException(nameof(messageUi));
         UI = ui ?? throw new ArgumentNullException(nameof(ui));
+        RunningGamesManager = runningGamesManager ?? throw new ArgumentNullException(nameof(runningGamesManager));
     }
 
     #endregion
@@ -65,6 +67,7 @@ public class StartupManager
     private GameClientsManager GameClientsManager { get; }
     private IMessageUIManager MessageUI { get; }
     private AppUIManager UI { get; }
+    private RunningGamesManager RunningGamesManager { get; }
 
 
     #endregion
@@ -601,6 +604,9 @@ public class StartupManager
                 await PostUpdateAsync();
                 Logger.Debug("Startup {0} ms: Checked first launch, validated games and clients & ran post-update", sw.ElapsedMilliseconds);
             }
+
+            // Start checking for running games
+            RunningGamesManager.Start();
 
             ShowAppWindow<AppWindow>(createWindow, isFullStartup);
             Logger.Debug("Startup {0} ms: Showed app window", sw.ElapsedMilliseconds);

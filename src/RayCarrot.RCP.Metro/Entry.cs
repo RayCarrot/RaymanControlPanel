@@ -62,6 +62,7 @@ public static class Entry
         serviceCollection.AddSingleton<GameBackups_Manager>();
         serviceCollection.AddSingleton<DeployableFilesManager>();
         serviceCollection.AddSingleton<AssociatedFileEditorsManager>();
+        serviceCollection.AddSingleton<RunningGamesManager>();
 
         // Using a WeakReferenceMessenger can be convenient and I was originally doing that,
         // but for performance reasons it's still better to always unregister (to avoid

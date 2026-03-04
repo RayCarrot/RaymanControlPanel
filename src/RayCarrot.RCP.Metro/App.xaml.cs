@@ -372,6 +372,9 @@ public partial class App : Application
                 if (MainWindow is MainWindow m)
                     m.ViewModel.Dispose();
 
+                // Stop checking for running games
+                ServiceProvider.GetRequiredService<RunningGamesManager>().Stop();
+
                 // Save all user data
                 ServiceProvider.GetRequiredService<AppDataManager>().Save();
 
