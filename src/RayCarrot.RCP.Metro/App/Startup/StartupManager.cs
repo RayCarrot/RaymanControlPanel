@@ -502,6 +502,14 @@ public class StartupManager
                 await UI.ShowVersionHistoryAsync();
         }
 
+        // TODO-LOC
+        // Show April Fools' message if it's April Fools' Day
+        if (DateTime.Now.Month == 4 && DateTime.Now.Day == 1 && Data.App_LastYearShownAprilFoolsMessage < DateTime.Now.Year)
+        {
+            await Services.MessageUI.DisplayMessageAsync("APRIL FOOLS! The Rabbids have invaded the Rayman Control Panel! Can you find them all?", "APRIL FOOLS", MessageType.Information);
+            Data.App_LastYearShownAprilFoolsMessage = DateTime.Now.Year;
+        }
+
         // Clean deployed files
         await CleanDeployedFilesAsync();
 

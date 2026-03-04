@@ -7,6 +7,7 @@
              xmlns:games="clr-namespace:RayCarrot.RCP.Metro.Pages.Games"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:gif="https://github.com/XamlAnimatedGif/XamlAnimatedGif"
              mc:Ignorable="d" 
              d:DesignWidth="900" d:DesignHeight="600"
              d:DataContext="{d:DesignInstance games:GamesPageViewModel}"
@@ -76,6 +77,15 @@
         <Image Grid.Row="0"
                Source="pack://application:,,,/RayCarrot.RCP.Metro;component/Files/AppIcon.png"
                Height="128" Width="128" />
+
+        <rcp:AprilFoolsGif Grid.Row="1"
+                           RenderOptions.BitmapScalingMode="NearestNeighbor"
+                           Asset="RabbidDance"
+                           Height="128" 
+                           Margin="0 -78 0 0"
+                           FlashMargin="0 -108 38 0"
+                           VerticalAlignment="Top" 
+                           HorizontalAlignment="Right" />
 
         <!-- News -->
         <GroupBox Grid.Row="1"

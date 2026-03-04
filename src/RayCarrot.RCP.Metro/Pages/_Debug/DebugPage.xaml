@@ -309,6 +309,9 @@
                         <CheckBox Content="Show grid lines"
                                   IsChecked="{Binding Path=ShowGridLines}" />
 
+                        <CheckBox Content="Force show April Fools' Gifs"
+                                  IsChecked="{Binding Path=ForceShowAprilFoolsGifs}" />
+
                     </StackPanel>
 
                 </StackPanel>

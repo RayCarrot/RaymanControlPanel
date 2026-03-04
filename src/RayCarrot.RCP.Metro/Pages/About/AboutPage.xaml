@@ -52,25 +52,36 @@
 
         <ScrollViewer Grid.Row="2" Margin="{StaticResource RCP.Thicknesses.Vertical}">
 
-            <StackPanel>
+            <Grid>
+                <rcp:AprilFoolsGif Asset="RabbidEat"
+                                   RenderOptions.BitmapScalingMode="NearestNeighbor"
+                                   Height="128" 
+                                   Margin="0 0 0 0"
+                                   FlashMargin="0 -30 22 0"
+                                   VerticalAlignment="Center" 
+                                   HorizontalAlignment="Right" />
 
-                <rcp:DuoGrid ItemsSource="{Binding Path=Credits, Mode=OneTime}"
-                               HorizontalContentAlignment="Center">
-                    <rcp:DuoGrid.Resources>
-                        <Style TargetType="{x:Type rcp:DuoGridItem}" BasedOn="{StaticResource {x:Type rcp:DuoGridItem}}">
-                            <Setter Property="Margin" Value="0 0 0 4" />
-                        </Style>
-                    </rcp:DuoGrid.Resources>
-                </rcp:DuoGrid>
+                <StackPanel>
 
-                <TextBlock Text="{Resx About_SpecialThanks}"
-                           Margin="0 8 0 0"
-                           MaxWidth="600"
-                           TextAlignment="Center"
-                           TextWrapping="Wrap"
-                           HorizontalAlignment="Center" />
+                    <rcp:DuoGrid ItemsSource="{Binding Path=Credits, Mode=OneTime}"
+                                 HorizontalContentAlignment="Center">
+                        <rcp:DuoGrid.Resources>
+                            <Style TargetType="{x:Type rcp:DuoGridItem}" BasedOn="{StaticResource {x:Type rcp:DuoGridItem}}">
+                                <Setter Property="Margin" Value="0 0 0 4" />
+                            </Style>
+                        </rcp:DuoGrid.Resources>
+                    </rcp:DuoGrid>
 
-            </StackPanel>
+                    <TextBlock Text="{Resx About_SpecialThanks}"
+                               Margin="0 8 0 0"
+                               MaxWidth="600"
+                               TextAlignment="Center"
+                               TextWrapping="Wrap"
+                               HorizontalAlignment="Center" />
+
+                </StackPanel>
+
+            </Grid>
 
         </ScrollViewer>
 

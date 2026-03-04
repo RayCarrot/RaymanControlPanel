@@ -155,6 +155,12 @@ public class DebugPageViewModel : BasePageViewModel
         }
     }
 
+    public bool ForceShowAprilFoolsGifs
+    {
+        get => AprilFoolsGif.ForceShow;
+        set => AprilFoolsGif.ForceShow = value;
+    }
+
     #endregion
 
     #region Methods

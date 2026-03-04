@@ -33,6 +33,7 @@ public partial class AppUserData : BaseViewModel
         App_DisableGameValidation = false;
         App_CachedNews = new List<AppNewsEntry>();
         App_LoadNews = true;
+        App_LastYearShownAprilFoolsMessage = 0;
 
         // UI
         UI_WindowState = null;
@@ -191,6 +192,11 @@ public partial class AppUserData : BaseViewModel
     /// Indicates if the app news should be loaded
     /// </summary>
     public bool App_LoadNews { get; set; }
+
+    /// <summary>
+    /// The last year the April Fools' message was shown
+    /// </summary>
+    public int App_LastYearShownAprilFoolsMessage { get; set; }
 
     #endregion
 

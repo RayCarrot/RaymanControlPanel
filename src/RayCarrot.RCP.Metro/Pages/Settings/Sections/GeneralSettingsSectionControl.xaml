@@ -51,9 +51,10 @@
                    Text="{Resx Settings_General_JumpListHeader}"
                    Margin="0 0 0 4" />
 
-        <StackPanel HorizontalAlignment="Left">
+        <StackPanel>
 
-            <Button HorizontalContentAlignment="Left"
+            <Button HorizontalAlignment="Left"
+                    HorizontalContentAlignment="Left"
                     Content="{Resx Settings_EditJumpList}"
                     ToolTip="{Resx Settings_EditJumpListInfo}"
                     Command="{Binding Path=EditJumpListCommand, Mode=OneTime}"
@@ -61,12 +62,36 @@
                     Style="{StaticResource RCP.Styles.Button.Default}"
                     Margin="0 0 0 4" />
 
-            <mah:ClipBorder CornerRadius="{StaticResource CornerRadius.Default}" 
-                            Height="250"
-                            Margin="0 0 0 4">
-                <Image Source="JumpList.png" 
-                       RenderOptions.BitmapScalingMode="HighQuality" />
-            </mah:ClipBorder>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                
+                <mah:ClipBorder Grid.Column="0"
+                                HorizontalAlignment="Left"
+                                CornerRadius="{StaticResource CornerRadius.Default}" 
+                                Height="250"
+                                Margin="0 0 0 4">
+                    <Image Source="JumpList.png" 
+                           RenderOptions.BitmapScalingMode="HighQuality" />
+                </mah:ClipBorder>
+
+                <rcp:AprilFoolsGif Grid.Column="1"
+                                   RenderOptions.BitmapScalingMode="NearestNeighbor"
+                                   Asset="RabbidHelico"
+                                   Height="100" 
+                                   Margin="100 0 0 0"
+                                   FlashMargin="104 -16 0 0"
+                                   VerticalAlignment="Center" 
+                                   HorizontalAlignment="Left"
+                                   RenderTransformOrigin="0.5,0.5">
+                    <rcp:AprilFoolsGif.RenderTransform>
+                        <ScaleTransform ScaleX="-1"/>
+                    </rcp:AprilFoolsGif.RenderTransform>
+                </rcp:AprilFoolsGif>
+
+            </Grid>
 
             <TextBlock Text="{Resx Settings_General_JumpListImageCaption}" 
                        FontStyle="Italic" 
