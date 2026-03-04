@@ -64,6 +64,7 @@ public sealed class GameDescriptor_Rayman1_MsDos : MsDosGameDescriptor
         builder.Register<PerLevelSoundtrackComponent>();
 
         builder.Register(new SetupGameActionComponent(_ => new RaymanForeverCompleteSoundtrackSetupGameAction()));
+        builder.Register(new SetupGameActionComponent(_ => new Rayman1FMVsSetupGameAction()));
         builder.Register(new SetupGameActionComponent(_ => new Ray1InvalidGameConfigSetupGameAction()));
 
         builder.Register(new GameBananaGameComponent(21305));
