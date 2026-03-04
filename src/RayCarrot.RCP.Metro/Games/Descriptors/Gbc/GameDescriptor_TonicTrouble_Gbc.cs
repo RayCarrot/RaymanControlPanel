@@ -1,4 +1,5 @@
 ﻿using RayCarrot.RCP.Metro.Games.Components;
+using RayCarrot.RCP.Metro.Games.SetupGame;
 using RayCarrot.RCP.Metro.Games.Structure;
 
 namespace RayCarrot.RCP.Metro;
@@ -28,6 +29,8 @@ public sealed class GameDescriptor_TonicTrouble_Gbc : GbcGameDescriptor
     protected override void RegisterComponents(IGameComponentBuilder builder)
     {
         base.RegisterComponents(builder);
+
+        builder.Register(new SetupGameActionComponent(_ => new TonicTroubleGBCRemoveUbiKeyRequirementSetupGameAction()));
 
         builder.Register(new GameBananaGameComponent(24154));
     }
