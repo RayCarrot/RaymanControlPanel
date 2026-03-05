@@ -93,7 +93,6 @@ Open with (external) ->
 
 ### Changes
 - Rename Rayman 3 GBA Prototype to "preview" now that there are actual leaked prototypes
-- Show green text that game is running and gray out play button
 - Rewrite how the game installers work and support Rayman 1 games. Allow installing directly from bin/cue files. Alternatively look into allowing the native installers to run. RibShark made a patch for them.
 - Make Mapper panel for Rayman Designer maps, allow importing maps and viewing/editing properties for existing ones
 - Allow the RayMap component to be more dynamic, changing the link based on the game version/region

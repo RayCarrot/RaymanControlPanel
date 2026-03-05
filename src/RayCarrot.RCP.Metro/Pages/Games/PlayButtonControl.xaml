@@ -11,8 +11,18 @@
              d:DataContext="{d:DesignInstance games:InstalledGameViewModel}"
              d:Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}">
     <mah:ClipBorder x:Name="PlayButtonBorder"
-                    CornerRadius="{StaticResource CornerRadius.Default}"
-                    Background="{DynamicResource RCP.Brushes.FlatButton.Play}">
+                    CornerRadius="{StaticResource CornerRadius.Default}">
+        <mah:ClipBorder.Style>
+            <Style TargetType="{x:Type mah:ClipBorder}">
+                <Setter Property="Background" Value="{DynamicResource RCP.Brushes.FlatButton.Play}" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Path=IsRunning}" Value="True">
+                        <Setter Property="Background" Value="{DynamicResource RCP.Brushes.FlatButton.StopPlaying}" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </mah:ClipBorder.Style>
+
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -21,13 +31,25 @@
 
             <!-- Play -->
             <Button Grid.Column="0"
-                    Style="{StaticResource RCP.Styles.Button.Flat}"
                     mah:ControlsHelper.CornerRadius="0"
-                    rcp:Icon.Kind="Play"
                     FontSize="14"
-                    Content="{Resx GameHub_Play}"
-                    Command="{Binding Path=LaunchCommand, Mode=OneTime}"
-                    Padding="6 6 12 6" />
+                    Padding="6 6 12 6">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource RCP.Styles.Button.Flat}">
+                        <Setter Property="rcp:Icon.Kind" Value="Play" />
+                        <Setter Property="Content" Value="{Resx GameHub_Play, ResxName={x:Static rcp:LocalizationManager.ResourcePath}}" />
+                        <Setter Property="Command" Value="{Binding Path=LaunchCommand, Mode=OneTime}" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=IsRunning}" Value="True">
+                                <Setter Property="rcp:Icon.Kind" Value="Stop" />
+                                <!-- TODO-LOC -->
+                                <Setter Property="Content" Value="Stop" />
+                                <Setter Property="Command" Value="{Binding Path=CloseRunningGameCommand, Mode=OneTime}" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
 
             <!-- Drop-down -->
             <rcp:PopupCard Grid.Column="1"
@@ -41,43 +63,52 @@
                     </Style>
                 </rcp:PopupCard.PopupButtonStyle>
 
-                <ItemsControl ItemsSource="{Binding Path=AdditionalLaunchActions, Mode=OneTime}"
-                              MinWidth="{Binding Path=ActualWidth, ElementName=PlayButtonBorder}">
-                    <ItemsControl.Resources>
-                        <DataTemplate DataType="{x:Type rcp:SeparatorItemViewModel}">
-                            <Separator rcp:UserLevelAssist.MinUserLevel="{Binding Path=MinUserLevel, Mode=OneTime}" />
-                        </DataTemplate>
-                        <DataTemplate DataType="{x:Type rcp:IconCommandItemViewModel}">
-                            <Button Content="{Binding Path=Header.Value}"
-                                    rcp:Icon.Kind="{Binding Path=IconKind, Mode=OneTime, Converter={rcp:GenericIconToIconKindConverter}}"
-                                    rcp:Icon.Brush="{Binding Path=IconKind, Mode=OneTime, Converter={rcp:GenericIconToBrushConverter}}"
-                                    ToolTip="{Binding Path=Description.Value}"
-                                    Command="{Binding Path=Command, Mode=OneTime}"
-                                    rcp:UserLevelAssist.MinUserLevel="{Binding Path=MinUserLevel, Mode=OneTime}" />
-                        </DataTemplate>
-                        <DataTemplate DataType="{x:Type rcp:ImageCommandItemViewModel}">
-                            <Button ToolTip="{Binding Path=Description.Value}"
-                                    Command="{Binding Path=Command, Mode=OneTime}"
-                                    rcp:UserLevelAssist.MinUserLevel="{Binding Path=MinUserLevel, Mode=OneTime}">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <Button Visibility="{Binding Path=IsRunning, Converter={rcp:BooleanToVisibilityConverter}}" 
+                            Content="{Resx GameHub_Play}"
+                            rcp:Icon.Kind="Play"
+                            rcp:Icon.Brush="{DynamicResource RCP.Brushes.FlatButton.Play}"
+                            Command="{Binding Path=LaunchCommand, Mode=OneTime}" />
+                    <Separator Visibility="{Binding Path=IsRunning, Converter={rcp:BooleanToVisibilityConverter}}" />
+                    <ItemsControl ItemsSource="{Binding Path=AdditionalLaunchActions, Mode=OneTime}"
+                                  MinWidth="{Binding Path=ActualWidth, ElementName=PlayButtonBorder}">
+                        <ItemsControl.Resources>
+                            <DataTemplate DataType="{x:Type rcp:SeparatorItemViewModel}">
+                                <Separator rcp:UserLevelAssist.MinUserLevel="{Binding Path=MinUserLevel, Mode=OneTime}" />
+                            </DataTemplate>
+                            <DataTemplate DataType="{x:Type rcp:IconCommandItemViewModel}">
+                                <Button Content="{Binding Path=Header.Value}"
+                                        rcp:Icon.Kind="{Binding Path=IconKind, Mode=OneTime, Converter={rcp:GenericIconToIconKindConverter}}"
+                                        rcp:Icon.Brush="{Binding Path=IconKind, Mode=OneTime, Converter={rcp:GenericIconToBrushConverter}}"
+                                        ToolTip="{Binding Path=Description.Value}"
+                                        Command="{Binding Path=Command, Mode=OneTime}"
+                                        rcp:UserLevelAssist.MinUserLevel="{Binding Path=MinUserLevel, Mode=OneTime}" />
+                            </DataTemplate>
+                            <DataTemplate DataType="{x:Type rcp:ImageCommandItemViewModel}">
+                                <Button ToolTip="{Binding Path=Description.Value}"
+                                        Command="{Binding Path=Command, Mode=OneTime}"
+                                        rcp:UserLevelAssist.MinUserLevel="{Binding Path=MinUserLevel, Mode=OneTime}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
 
-                                    <Image Grid.Column="0" 
-                                           Margin="0 0 4 0"
-                                           Source="{Binding Path=ImageSource, Mode=OneTime}"
-                                           MaxWidth="16"
-                                           MaxHeight="16" />
+                                        <Image Grid.Column="0" 
+                                               Margin="0 0 4 0"
+                                               Source="{Binding Path=ImageSource, Mode=OneTime}"
+                                               MaxWidth="16"
+                                               MaxHeight="16" />
 
-                                    <TextBlock Grid.Column="1"
-                                               Text="{Binding Path=Header.Value}" />
-                                </Grid>
-                            </Button>
-                        </DataTemplate>
-                    </ItemsControl.Resources>
-                </ItemsControl>
+                                        <TextBlock Grid.Column="1"
+                                                   Text="{Binding Path=Header.Value}" />
+                                    </Grid>
+                                </Button>
+                            </DataTemplate>
+                        </ItemsControl.Resources>
+                    </ItemsControl>
+
+                </StackPanel>
 
             </rcp:PopupCard>
         </Grid>

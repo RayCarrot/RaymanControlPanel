@@ -42,6 +42,7 @@ public class InstalledGameViewModel : BaseViewModel
 
         // Create commands
         LaunchCommand = new AsyncRelayCommand(LaunchAsync);
+        CloseRunningGameCommand = new AsyncRelayCommand(CloseRunningGameAsync);
         OpenGameClientGameSettingsCommand = new AsyncRelayCommand(OpenGameClientGameSettingsAsync);
         OpenGameSettingsCommand = new AsyncRelayCommand(OpenGameSettingsAsync);
         RenameCommand = new AsyncRelayCommand(RenameAsync);
@@ -72,6 +73,7 @@ public class InstalledGameViewModel : BaseViewModel
     #region Commands
 
     public ICommand LaunchCommand { get; }
+    public ICommand CloseRunningGameCommand { get; }
     public ICommand OpenGameClientGameSettingsCommand { get; }
     public ICommand OpenGameSettingsCommand { get; }
     public ICommand RenameCommand { get; }
@@ -103,6 +105,8 @@ public class InstalledGameViewModel : BaseViewModel
 
     public ObservableCollection<GamePanelViewModel> GamePanels { get; }
     public ObservableActionItemsCollection AdditionalLaunchActions { get; }
+
+    public bool IsRunning { get; set; }
 
     /// <summary>
     /// Indicates if the game can be uninstalled through the Rayman Control Panel
@@ -316,6 +320,9 @@ public class InstalledGameViewModel : BaseViewModel
             // Load additional launch actions
             AddAdditionalLaunchActions();
 
+            // Check if running
+            IsRunning = Services.RunningGamesManager.IsGameRunning(GameInstallation);
+
             // Load setup game
             await SetupGameViewModel.LoadAsync();
 
@@ -370,6 +377,21 @@ public class InstalledGameViewModel : BaseViewModel
         }
 
         await launchComponent.LaunchAsync();
+    }
+
+    public async Task CloseRunningGameAsync()
+    {
+        try
+        {
+            Services.RunningGamesManager.CloseGame(GameInstallation);
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex, "Closing running game");   
+
+            // TODO-LOC
+            await Services.MessageUI.DisplayExceptionMessageAsync(ex, "An error occured when closing the game");
+        }
     }
 
     public Task OpenGameClientGameSettingsAsync()

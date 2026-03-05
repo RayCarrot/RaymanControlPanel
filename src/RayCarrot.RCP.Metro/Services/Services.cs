@@ -80,4 +80,6 @@ public static class Services
     public static JumpListManager JumpList => GetService<JumpListManager>();
 
     public static IHttpClientFactory HttpClientFactory => GetService<IHttpClientFactory>();
+
+    public static RunningGamesManager RunningGamesManager => GetService<RunningGamesManager>();
 }

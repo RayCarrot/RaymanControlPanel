@@ -121,5 +121,31 @@ public class RunningGamesManager
             return RunningGames.Any(x => x.GameInstallation == gameInstallation);
     }
 
+    public void CloseGame(GameInstallation gameInstallation)
+    {
+        lock (RunningGames)
+        {
+            foreach (RunningGame runningGame in RunningGames)
+            {
+                if (runningGame.GameInstallation == gameInstallation)
+                {
+                    // Get the process
+                    Process process = Process.GetProcessById(runningGame.ProcessId);
+                    
+                    // Verify it's the correct process so the ID hasn't been assigned to a new process
+                    if (process.StartTime != runningGame.ProcessStartTime)
+                        continue;
+                    
+                    // Try and close the main window
+                    bool closeMessageSent = process.CloseMainWindow();
+
+                    // If the process didn't receive the message to close the window then we fall back to force killing the process
+                    if (!closeMessageSent)
+                        process.Kill();
+                }
+            }
+        }
+    }
+
     private readonly record struct RunningGame(GameInstallation GameInstallation, int ProcessId, DateTime ProcessStartTime);
 }
