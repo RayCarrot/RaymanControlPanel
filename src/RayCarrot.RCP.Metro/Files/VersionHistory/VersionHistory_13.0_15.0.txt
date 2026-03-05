@@ -1,5 +1,5 @@
 ﻿-----   Version 14.4.0 - March ??, 2026   -----
-• Added support for Rayman 30th Anniversary Edition (currently no progression or game settings support)
+• Added support for Rayman 30th Anniversary Edition
 • Added support for Atari Jaguar games:
     • Rayman
     • Rayman Prototype
@@ -10,11 +10,19 @@
 • Added support for the fan-game Rayman Mystery of Polokus
 • Added support for the BigPEmu and Dolphin emulators
 • Added progression for Rayman 2 (GBC)
+• Added Discord Rich Presence support
+• Supported games now show when they're running and can be closed directly from the game's page
 • Added GameBanana mod support for Tonic Trouble (GBC)
 • Added a serializer for Rayman 1 (Atari Jaguar) and Rayman 2 (GBC) save files
 • Removed the option to download demos and minigames directly through the Rayman Control Panel. The Rayman Minigames and Rayman 3 Print Studio no longer have the option to switch edition, meaning the different editions now have to be added as separate games instead. If you previously downloaded any of these games then they will automatically be split into separate games and still work.
 • The Per-level Soundtrack tool is now a downloadable mod, allowing it to be updated directly through GameBanana
 • Added a toggle when adding a new game for if the demos and prototypes should be shown
+• Added a setting for joypad rumble to Rayman M/Arena
+• Added a recommended setup game action to Rayman 1 for installing the Rayman FMVs mod
+• Added an optional setup game action to Rayman 1 (GBC) and Tonic Trouble (GBC) for installing the Remove Ubi Key Requirement mod
+• Added links to the game pages on PCGamingWiki and updated the icons for external game links
+• Added an April Fools' easter egg
+• Added more Just Dance game modes when opening an IPK archive
 • Indexed textures from the Tonic Trouble 1998 demo can now be correctly exported through the Archive Explorer
 • Rayman 2 now launches through the Twofold dll mod loader if available
 • Updated the app updater and created a custom dialog for new available updates
@@ -23,6 +31,7 @@
 • Fixed showing archived GameBanana files for downloadable mods due to a change in the GameBanana API
 • Fixed a bug where Rabbids Go Home wouldn't launch from the right path
 • Fixed a bug where applying patches to the BF file in the Rayman Raving Rabbids Prototype Restoration tool wouldn't work
+• Bug fixes
 
 
 -----   Version 14.3.0 - December 31, 2025   -----
