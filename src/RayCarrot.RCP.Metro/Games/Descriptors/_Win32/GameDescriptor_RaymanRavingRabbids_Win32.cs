@@ -67,6 +67,8 @@ public sealed class GameDescriptor_RaymanRavingRabbids_Win32 : Win32GameDescript
         builder.Register(new PCGamingWikiComponent("Rayman_Raving_Rabbids"));
 
         builder.Register(new GameBananaGameComponent(18586));
+
+        builder.Register(new DiscordRichPresenceComponent("Rayman Raving Rabbids", "rayman_raving_rabbids"));
     }
 
     protected override ProgramInstallationStructure CreateStructure() => new DirectoryProgramInstallationStructure(new ProgramFileSystem(new ProgramPath[]

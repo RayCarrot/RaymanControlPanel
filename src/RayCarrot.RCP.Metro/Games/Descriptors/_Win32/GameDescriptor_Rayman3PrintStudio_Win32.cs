@@ -1,4 +1,5 @@
-﻿using RayCarrot.RCP.Metro.Games.Structure;
+﻿using RayCarrot.RCP.Metro.Games.Components;
+using RayCarrot.RCP.Metro.Games.Structure;
 
 namespace RayCarrot.RCP.Metro;
 
@@ -23,6 +24,13 @@ public sealed class GameDescriptor_Rayman3PrintStudio_Win32 : Win32GameDescripto
     #endregion
 
     #region Protected Methods
+
+    protected override void RegisterComponents(IGameComponentBuilder builder)
+    {
+        base.RegisterComponents(builder);
+
+        builder.Register(new DiscordRichPresenceComponent("Rayman 3 Print Studio", "rayman_3_print_studio"));
+    }
 
     protected override ProgramInstallationStructure CreateStructure() => new DirectoryProgramInstallationStructure(new ProgramFileSystem(new ProgramPath[]
     {

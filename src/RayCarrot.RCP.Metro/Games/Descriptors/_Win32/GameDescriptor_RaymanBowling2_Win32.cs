@@ -37,6 +37,8 @@ public sealed class GameDescriptor_RaymanBowling2_Win32 : Win32GameDescriptor
 
         builder.Register(new ProgressionManagersComponent(x => new GameProgressionManager_RaymanBowling2_Win32(x, "Rayman Bowling 2")));
         builder.Register<ExternalGameLinksComponent>(new GameJoltExternalGameLinksComponent(GameJoltUrl));
+
+        builder.Register(new DiscordRichPresenceComponent("Rayman Bowling 2", "rayman_bowling_2"));
     }
 
     protected override ProgramInstallationStructure CreateStructure() => new DirectoryProgramInstallationStructure(new ProgramFileSystem(new ProgramPath[]

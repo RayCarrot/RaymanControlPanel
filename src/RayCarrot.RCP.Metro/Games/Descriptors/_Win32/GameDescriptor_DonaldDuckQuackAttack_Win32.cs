@@ -57,6 +57,8 @@ public sealed class GameDescriptor_DonaldDuckQuackAttack_Win32 : Win32GameDescri
             new CPATextureSyncDataItem(
                 Name: "Data",
                 Archives: new[] { "Textures.cnt", "Vignette.cnt" })));
+
+        builder.Register(new DiscordRichPresenceComponent("Donald Duck Quack Attack/Goin' Quackers", "donald_duck_quack_attack"));
     }
 
     protected override ProgramInstallationStructure CreateStructure() => new DirectoryProgramInstallationStructure(new ProgramFileSystem(new ProgramPath[]

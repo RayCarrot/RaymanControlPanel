@@ -37,6 +37,8 @@ public sealed class GameDescriptor_Rayman2_Demo_19990818_Win32 : Win32GameDescri
         {
             @"BinData\Textures.cnt",
         }));
+
+        builder.Register(new DiscordRichPresenceComponent("Rayman 2 Demo", "rayman_2"));
     }
 
     protected override ProgramInstallationStructure CreateStructure() => new DirectoryProgramInstallationStructure(new ProgramFileSystem(new ProgramPath[]

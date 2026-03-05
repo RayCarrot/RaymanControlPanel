@@ -53,6 +53,8 @@ public sealed class GameDescriptor_Rayman2Redreamed_Demo_Win32 : Win32GameDescri
         builder.Register(new GameOptionsComponent(x => new Rayman2RedreamedGameOptionsViewModel(x)));
         builder.Register(new LaunchArgumentsComponent(GetLaunchArgs));
         builder.Register<ExternalGameLinksComponent>(new GameJoltExternalGameLinksComponent(GameJoltUrl));
+
+        builder.Register(new DiscordRichPresenceComponent("Rayman 2: Redreamed Demo", "rayman_2_redreamed"));
     }
     
     protected override ProgramInstallationStructure CreateStructure() => new DirectoryProgramInstallationStructure(new ProgramFileSystem(new ProgramPath[]

@@ -36,6 +36,8 @@ public sealed class GameDescriptor_RaymanRedesigner_Win32 : Win32GameDescriptor
         base.RegisterComponents(builder);
 
         builder.Register<ExternalGameLinksComponent>(new GameJoltExternalGameLinksComponent(GameJoltUrl));
+
+        builder.Register(new DiscordRichPresenceComponent("Rayman ReDesigner", "rayman_redesigner"));
     }
 
     protected override ProgramInstallationStructure CreateStructure() => new DirectoryProgramInstallationStructure(new ProgramFileSystem(new ProgramPath[]

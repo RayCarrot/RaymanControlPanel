@@ -30,6 +30,8 @@ public sealed class GameDescriptor_RaymanPremiersClics_Win32 : Win32GameDescript
         base.RegisterComponents(builder);
 
         builder.Register(new PCGamingWikiComponent("Rayman_Premiers_Clics"));
+
+        builder.Register(new DiscordRichPresenceComponent("Rayman Premiers Clics", "rayman_premier_clics"));
     }
 
     protected override ProgramInstallationStructure CreateStructure() => new DirectoryProgramInstallationStructure(new ProgramFileSystem(new ProgramPath[]

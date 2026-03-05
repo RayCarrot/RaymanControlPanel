@@ -40,6 +40,8 @@ public sealed class GameDescriptor_Rayman3_Demo_20021210_Win32 : Win32GameDescri
             @"Gamedatabin\vignette.cnt",
         }));
         builder.Register<CPATextureSyncComponent, Rayman3DemoCPATextureSyncComponent>();
+
+        builder.Register(new DiscordRichPresenceComponent("Rayman 3 Demo", "rayman_3"));
     }
 
     protected override ProgramInstallationStructure CreateStructure() => new DirectoryProgramInstallationStructure(new ProgramFileSystem(new ProgramPath[]

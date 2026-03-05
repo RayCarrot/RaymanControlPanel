@@ -55,6 +55,8 @@ public sealed class GameDescriptor_RabbidsGoHome_Win32 : Win32GameDescriptor
         builder.Register(new LaunchArgumentsComponent(GetLaunchArgs));
 
         builder.Register(new PCGamingWikiComponent("Rabbids_Go_Home"));
+
+        builder.Register(new DiscordRichPresenceComponent("Rabbids Go Home", "rabbids_go_home"));
     }
 
     protected override ProgramInstallationStructure CreateStructure() => new DirectoryProgramInstallationStructure(new ProgramFileSystem(new ProgramPath[]

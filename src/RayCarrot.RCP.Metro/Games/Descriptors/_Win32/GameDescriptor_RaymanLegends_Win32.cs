@@ -68,6 +68,8 @@ public sealed class GameDescriptor_RaymanLegends_Win32 : Win32GameDescriptor
         builder.Register(new ModModuleComponent(_ => new UbiArtLocalizationModule()));
 
         builder.Register(new SetupGameActionComponent(_ => new InvalidUbiArtResolutionSetupGameAction(AppFilePaths.RaymanLegendsRegistryKey)));
+
+        builder.Register(new DiscordRichPresenceComponent("Rayman Legends", "rayman_legends"));
     }
 
     protected override ProgramInstallationStructure CreateStructure() => new DirectoryProgramInstallationStructure(new ProgramFileSystem(new ProgramPath[]

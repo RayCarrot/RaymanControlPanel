@@ -30,6 +30,8 @@ public sealed class GameDescriptor_Rayman2_Beta_19980722_Win32 : Win32GameDescri
         base.RegisterComponents(builder);
 
         builder.Register(new GameBananaGameComponent(21335));
+
+        builder.Register(new DiscordRichPresenceComponent("Rayman 2 Beta", "rayman_2"));
     }
 
     protected override ProgramInstallationStructure CreateStructure() => new DirectoryProgramInstallationStructure(new ProgramFileSystem(new ProgramPath[]

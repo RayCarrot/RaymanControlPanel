@@ -46,6 +46,8 @@ public sealed class GameDescriptor_RaymanRavingRabbidsActivityCenter_Win32 : Win
         base.RegisterComponents(builder);
 
         builder.Register(new OnGameLaunchedComponent(ShowLaunchMessageAsync));
+
+        builder.Register(new DiscordRichPresenceComponent("Rayman Raving Rabbids Activity Center", "rayman_raving_rabbids_activity_center"));
     }
 
     protected override ProgramInstallationStructure CreateStructure() => new DirectoryProgramInstallationStructure(new ProgramFileSystem(new ProgramPath[]

@@ -66,6 +66,8 @@ public sealed class GameDescriptor_RaymanRavingRabbids2_Win32 : Win32GameDescrip
         builder.Register<BinaryGameModeComponent>(new JadeGameModeComponent(JadeGameMode.RaymanRavingRabbids2_PC));
 
         builder.Register(new PCGamingWikiComponent("Rayman_Raving_Rabbids_2"));
+
+        builder.Register(new DiscordRichPresenceComponent("Rayman Raving Rabbids 2", "rayman_raving_rabbids_2"));
     }
 
     protected override ProgramInstallationStructure CreateStructure() => new DirectoryProgramInstallationStructure(new ProgramFileSystem(new ProgramPath[]

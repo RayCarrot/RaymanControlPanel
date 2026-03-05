@@ -50,6 +50,8 @@ public sealed class GameDescriptor_RaymanM_Win32 : Win32GameDescriptor
             @"TribeBin\vignette.cnt",
         }));
         builder.Register<CPATextureSyncComponent, RaymanMArenaCPATextureSyncComponent>();
+
+        builder.Register(new DiscordRichPresenceComponent("Rayman M", "rayman_m"));
     }
 
     protected override ProgramInstallationStructure CreateStructure() => new DirectoryProgramInstallationStructure(new ProgramFileSystem(new ProgramPath[]

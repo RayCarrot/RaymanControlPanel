@@ -48,6 +48,8 @@ public sealed class GameDescriptor_RaymanFiestaRun_Win32 : Win32GameDescriptor
         builder.Register(new PCGamingWikiComponent("Rayman_Fiesta_Run"));
 
         builder.Register(new GameBananaGameComponent(19729));
+
+        builder.Register(new DiscordRichPresenceComponent("Rayman Fiesta Run", "rayman_fiesta_run"));
     }
 
     protected override ProgramInstallationStructure CreateStructure() => new DirectoryProgramInstallationStructure(new ProgramFileSystem(new ProgramPath[]

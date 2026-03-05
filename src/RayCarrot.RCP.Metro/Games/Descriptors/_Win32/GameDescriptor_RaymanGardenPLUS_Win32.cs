@@ -38,6 +38,8 @@ public sealed class GameDescriptor_RaymanGardenPLUS_Win32 : Win32GameDescriptor
         builder.Register<Win32LaunchPathComponent, SingleExeWin32LaunchPathComponent>();
 
         builder.Register<ExternalGameLinksComponent>(new GameJoltExternalGameLinksComponent(GameJoltUrl));
+
+        builder.Register(new DiscordRichPresenceComponent("Rayman Garden PLUS", "rayman_garden_plus"));
     }
 
     protected override ProgramInstallationStructure CreateStructure() => new ExeProgramInstallationStructure();

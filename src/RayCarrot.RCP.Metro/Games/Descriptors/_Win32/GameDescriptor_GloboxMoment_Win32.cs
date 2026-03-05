@@ -37,6 +37,8 @@ public sealed class GameDescriptor_GloboxMoment_Win32 : Win32GameDescriptor
 
         builder.Register(new ProgressionManagersComponent(x => new GameProgressionManager_GloboxMoment_Win32(x, "Globox Moment")));
         builder.Register<ExternalGameLinksComponent>(new GameJoltExternalGameLinksComponent(GameJoltUrl));
+
+        builder.Register(new DiscordRichPresenceComponent("Globox Moment", "globox_moment"));
     }
 
     protected override ProgramInstallationStructure CreateStructure() => new DirectoryProgramInstallationStructure(new ProgramFileSystem(new ProgramPath[]

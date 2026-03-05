@@ -35,6 +35,8 @@ public sealed class GameDescriptor_RaymanMysteryOfPolokus_Win32 : Win32GameDescr
         base.RegisterComponents(builder);
 
         builder.Register<ExternalGameLinksComponent>(new GameJoltExternalGameLinksComponent(GameJoltUrl));
+
+        builder.Register(new DiscordRichPresenceComponent("Rayman Mystery of Polokus", "rayman_mystery_of_polokus"));
     }
     
     protected override ProgramInstallationStructure CreateStructure() => new DirectoryProgramInstallationStructure(new ProgramFileSystem(new ProgramPath[]

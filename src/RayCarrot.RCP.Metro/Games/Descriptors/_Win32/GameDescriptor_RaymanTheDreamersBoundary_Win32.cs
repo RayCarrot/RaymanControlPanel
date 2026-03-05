@@ -36,6 +36,8 @@ public sealed class GameDescriptor_RaymanTheDreamersBoundary_Win32 : Win32GameDe
 
         builder.Register(new ProgressionManagersComponent(x => new GameProgressionManager_RaymanTheDreamersBoundary_Win32(x, "Rayman The Dreamer's Boundary")));
         builder.Register<ExternalGameLinksComponent>(new GameJoltExternalGameLinksComponent(GameJoltUrl));
+
+        builder.Register(new DiscordRichPresenceComponent("Rayman: The Dreamer's Boundary", "rayman_the_dreamers_boundary"));
     }
     
     protected override ProgramInstallationStructure CreateStructure() => new DirectoryProgramInstallationStructure(new ProgramFileSystem(new ProgramPath[]

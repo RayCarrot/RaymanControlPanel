@@ -109,6 +109,7 @@ public sealed class GameDescriptor_Rayman2_Win32 : Win32GameDescriptor
             _ => null,
         }));
 
+        builder.Register(new DiscordRichPresenceComponent("Rayman 2", "rayman_2"));
         builder.Register(new RuntimeModificationsGameManagersComponent(EmulatedPlatform.None, _ =>
             new[]
             {

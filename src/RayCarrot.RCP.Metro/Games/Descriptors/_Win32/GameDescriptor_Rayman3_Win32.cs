@@ -73,6 +73,7 @@ public sealed class GameDescriptor_Rayman3_Win32 : Win32GameDescriptor
             _ => null,
         }));
 
+        builder.Register(new DiscordRichPresenceComponent("Rayman 3", "rayman_3"));
         builder.Register(new RuntimeModificationsGameManagersComponent(EmulatedPlatform.None, _ =>
             new[]
             {

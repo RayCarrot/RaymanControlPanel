@@ -36,6 +36,8 @@ public sealed class GameDescriptor_RaymanLumoGrams_Demo_Win32 : Win32GameDescrip
         base.RegisterComponents(builder);
 
         builder.Register<ExternalGameLinksComponent>(new GameJoltExternalGameLinksComponent(GameJoltUrl));
+
+        builder.Register(new DiscordRichPresenceComponent("Rayman Lum'o'Grams Demo", "rayman_lumo_grams"));
     }
     
     protected override ProgramInstallationStructure CreateStructure() => new DirectoryProgramInstallationStructure(new ProgramFileSystem(new ProgramPath[]

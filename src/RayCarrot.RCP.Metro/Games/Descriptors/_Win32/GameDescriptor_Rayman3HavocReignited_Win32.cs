@@ -30,10 +30,11 @@ public sealed class GameDescriptor_Rayman3HavocReignited_Win32 : Win32GameDescri
 
     #region Protected Methods
 
-    // ReSharper disable once RedundantOverriddenMember
     protected override void RegisterComponents(IGameComponentBuilder builder)
     {
         base.RegisterComponents(builder);
+
+        builder.Register(new DiscordRichPresenceComponent("Rayman 3 Havoc Reignited", "rayman_3_havoc_reignited"));
     }
     
     protected override ProgramInstallationStructure CreateStructure() => new DirectoryProgramInstallationStructure(new ProgramFileSystem(new ProgramPath[]

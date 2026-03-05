@@ -66,6 +66,8 @@ public sealed class GameDescriptor_TonicTrouble_Win32 : Win32GameDescriptor
                 Archives: new[] { "Textures.cnt", "Vignette.cnt" })));
 
         builder.Register(new GameBananaGameComponent(18937));
+
+        builder.Register(new DiscordRichPresenceComponent("Tonic Trouble", "tonic_trouble"));
     }
 
     protected override ProgramInstallationStructure CreateStructure() => new DirectoryProgramInstallationStructure(new ProgramFileSystem(new ProgramPath[]

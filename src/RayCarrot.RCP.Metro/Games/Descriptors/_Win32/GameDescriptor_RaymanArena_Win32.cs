@@ -57,6 +57,8 @@ public sealed class GameDescriptor_RaymanArena_Win32 : Win32GameDescriptor
         builder.Register<CPATextureSyncComponent, RaymanMArenaCPATextureSyncComponent>();
 
         builder.Register(new GameBananaGameComponent(8592));
+
+        builder.Register(new DiscordRichPresenceComponent("Rayman Arena", "rayman_arena"));
     }
 
     protected override ProgramInstallationStructure CreateStructure() => new DirectoryProgramInstallationStructure(new ProgramFileSystem(new ProgramPath[]

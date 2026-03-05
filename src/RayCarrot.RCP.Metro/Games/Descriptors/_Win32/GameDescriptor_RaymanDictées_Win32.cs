@@ -1,4 +1,5 @@
-﻿using RayCarrot.RCP.Metro.Games.Structure;
+﻿using RayCarrot.RCP.Metro.Games.Components;
+using RayCarrot.RCP.Metro.Games.Structure;
 
 namespace RayCarrot.RCP.Metro;
 
@@ -23,6 +24,13 @@ public sealed class GameDescriptor_RaymanDictées_Win32 : Win32GameDescriptor
     #endregion
 
     #region Protected Methods
+
+    protected override void RegisterComponents(IGameComponentBuilder builder)
+    {
+        base.RegisterComponents(builder);
+
+        builder.Register(new DiscordRichPresenceComponent("Rayman Dictées", "rayman_dictees"));
+    }
 
     protected override ProgramInstallationStructure CreateStructure() => new DirectoryProgramInstallationStructure(new ProgramFileSystem(new ProgramPath[]
     {

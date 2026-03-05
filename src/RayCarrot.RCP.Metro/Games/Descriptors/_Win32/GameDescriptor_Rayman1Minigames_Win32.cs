@@ -30,6 +30,9 @@ public sealed class GameDescriptor_Rayman1Minigames_Win32 : Win32GameDescriptor
         base.RegisterComponents(builder);
 
         builder.Register<OnGameAddedComponent, DefaultToRunAsAdminOnGameAddedComponent>();
+
+        // Doesn't work since it's a different executable, TODO: Allow defining a separate exe for some games
+        // builder.Register(new DiscordRichPresenceComponent("Rayman Minigames", "rayman_minigames"));
     }
 
     protected override ProgramInstallationStructure CreateStructure() => new DirectoryProgramInstallationStructure(new ProgramFileSystem(new ProgramPath[]

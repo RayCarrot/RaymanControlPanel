@@ -66,6 +66,8 @@ public sealed class GameDescriptor_RaymanOrigins_Win32 : Win32GameDescriptor
         }));
         builder.Register(new ModModuleComponent(_ => new UbiArtLocalizationModule()));
 
+        builder.Register(new DiscordRichPresenceComponent("Rayman Origins", "rayman_origins"));
+
         builder.Register(new SetupGameActionComponent(_ => new RaymanOriginsCrashDumpsSetupGameAction()));
         builder.Register(new SetupGameActionComponent(_ => new HighQualityRaymanOriginsVideosSetupGameAction()));
         builder.Register(new SetupGameActionComponent(_ => new MinimumRaymanOriginsLoadingTimesSetupGameAction()));

@@ -48,6 +48,8 @@ public sealed class GameDescriptor_RaymanJungleRun_Win32 : Win32GameDescriptor
         builder.Register(new PCGamingWikiComponent("Rayman_Jungle_Run"));
 
         builder.Register(new GameBananaGameComponent(19728));
+
+        builder.Register(new DiscordRichPresenceComponent("Rayman Jungle Run", "rayman_jungle_run"));
     }
 
     protected override ProgramInstallationStructure CreateStructure() => new DirectoryProgramInstallationStructure(new ProgramFileSystem(new ProgramPath[]

@@ -52,6 +52,8 @@ public sealed class GameDescriptor_RaymanFiestaRun_PreloadEdition_WindowsPackage
         builder.Register(new SetupGameActionComponent(_ => new CorruptRaymanFiestaRunSaveFileSetupGameAction(this, 1)));
 
         builder.Register(new GameBananaGameComponent(19729));
+
+        builder.Register(new DiscordRichPresenceComponent("Rayman Fiesta Run", "rayman_fiesta_run"));
     }
 
     protected override ProgramInstallationStructure CreateStructure() => new DirectoryProgramInstallationStructure(new ProgramFileSystem(new ProgramPath[]

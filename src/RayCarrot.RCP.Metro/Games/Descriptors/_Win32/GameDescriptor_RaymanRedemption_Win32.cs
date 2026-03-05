@@ -41,6 +41,8 @@ public sealed class GameDescriptor_RaymanRedemption_Win32 : Win32GameDescriptor
         builder.Register(new PCGamingWikiComponent("Rayman_Redemption"));
 
         builder.Register(new GameBananaGameComponent(20873));
+
+        builder.Register(new DiscordRichPresenceComponent("Rayman Redemption", "rayman_redemption"));
     }
     
     protected override ProgramInstallationStructure CreateStructure() => new DirectoryProgramInstallationStructure(new ProgramFileSystem(new ProgramPath[]

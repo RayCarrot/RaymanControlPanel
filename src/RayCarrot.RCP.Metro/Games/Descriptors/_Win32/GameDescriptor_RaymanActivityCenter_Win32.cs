@@ -30,6 +30,8 @@ public sealed class GameDescriptor_RaymanActivityCenter_Win32 : Win32GameDescrip
         base.RegisterComponents(builder);
 
         builder.Register(new PCGamingWikiComponent("Rayman_Activity_Center"));
+
+        builder.Register(new DiscordRichPresenceComponent("Rayman Activity Center", "rayman_activity_center"));
     }
 
     protected override ProgramInstallationStructure CreateStructure() => new DirectoryProgramInstallationStructure(new ProgramFileSystem(new ProgramPath[]
