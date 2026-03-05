@@ -72,7 +72,7 @@ public static class UbisoftConnectHelpers
             userId = gameClientInstallation.GetValue<string>(GameClientDataKey.UbisoftConnect_UserId);
 
         // Fallback to get the ID from the first added Ubisoft Connect game client installation
-        if (userId == null)
+        if (userId == null || !(savePath + userId).DirectoryExists)
         {
             gameClientInstallation = Services.GameClients.GetInstalledGameClients().
                 FirstOrDefault(x => x.GameClientDescriptor is UbisoftConnectGameClientDescriptor);
@@ -82,15 +82,14 @@ public static class UbisoftConnectHelpers
         }
 
         // Fallback to find from the save path
-        if (userId == null)
+        if (userId == null || !(savePath + userId).DirectoryExists)
         {
             if (savePath.DirectoryExists)
             {
                 string[] subDirs = Directory.GetDirectories(savePath);
                 if (subDirs.Length > 0)
-                    userId = Path.GetDirectoryName(subDirs[0]);
+                    userId = Path.GetFileName(subDirs[0]);
             }
-
         }
 
         if (userId == null)

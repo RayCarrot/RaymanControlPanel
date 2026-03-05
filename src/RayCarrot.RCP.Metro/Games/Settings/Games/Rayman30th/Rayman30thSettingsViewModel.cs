@@ -127,7 +127,7 @@ public class Rayman30thSettingsViewModel : GameSettingsViewModel
 
         // Get the language
         string? langId = global?[LanguageKey]?.Value<string>();
-        SelectedLanguageIndex = LanguageIds.IndexOf(langId);
+        SelectedLanguageIndex = langId == null ? -1 : LanguageIds.IndexOf(langId);
         if (SelectedLanguageIndex == -1)
             SelectedLanguageIndex = 0;
 
