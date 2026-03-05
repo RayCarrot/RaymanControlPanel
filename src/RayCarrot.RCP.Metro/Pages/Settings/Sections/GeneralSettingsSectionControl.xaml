@@ -19,6 +19,11 @@
                       Margin="0 0 0 8" />
 
             <!-- TODO-LOC -->
+            <CheckBox Content="Check for and show if games are running"
+                      IsChecked="{Binding Path=CheckForRunningGames}"
+                      Margin="0 0 0 8" />
+
+            <!-- TODO-LOC -->
             <CheckBox Content="Enable Discord Rich Presence"
                       ToolTip="If enabled then your Discord activity will show when you're using the Rayman Control Panel and the game's you're playing while it's running. Keep in mind that it currently doesn't work for emulated games. In some cases you need to restart the app for this to update."
                       IsChecked="{Binding Path=UseDiscordRichPresence}"

@@ -38,6 +38,17 @@ public class RunningGamesManager
         {
             // Do nothing
         }
+
+        // End by clearing the running games
+        lock (RunningGames)
+        {
+            List<GameInstallation> gameInstallations = RunningGames.Select(x => x.GameInstallation).Distinct().ToList();
+
+            RunningGames.Clear();
+
+            foreach (GameInstallation gameInstallation in gameInstallations)
+                Messenger.Send(new GameRunningChangedMessage(gameInstallation, false));
+        }
     }
 
     private void CheckGames()
@@ -126,13 +137,20 @@ public class RunningGamesManager
 
     public void Start()
     {
+        if (CancellationTokenSource != null)
+            return;
+
         CancellationTokenSource = new CancellationTokenSource();
         GameCheckLoop(CancellationTokenSource.Token).WithoutAwait("Checking for running games");
     }
 
     public void Stop()
     {
-        CancellationTokenSource?.Cancel();
+        if (CancellationTokenSource == null)
+            return;
+
+        CancellationTokenSource.Cancel();
+        CancellationTokenSource = null;
     }
 
     public bool IsGameRunning(GameInstallation gameInstallation)

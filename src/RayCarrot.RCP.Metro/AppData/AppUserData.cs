@@ -35,6 +35,7 @@ public partial class AppUserData : BaseViewModel
         App_LoadNews = true;
         App_LastYearShownAprilFoolsMessage = 0;
         App_UseDiscordRichPresence = true;
+        App_CheckForRunningGames = true;
 
         // UI
         UI_WindowState = null;
@@ -203,6 +204,11 @@ public partial class AppUserData : BaseViewModel
     /// Indicates if Discord Rich Presence integration should be enabled
     /// </summary>
     public bool App_UseDiscordRichPresence { get; set; }
+
+    /// <summary>
+    /// Indicates if the Rayman Control Panel should check for running games in the background
+    /// </summary>
+    public bool App_CheckForRunningGames { get; set; }
 
     #endregion
 

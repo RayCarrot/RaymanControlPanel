@@ -20,7 +20,8 @@ public class SettingsPageViewModel : BasePageViewModel
         FileManager fileManager,
         AssociatedFileEditorsManager associatedFileEditorsManager,
         IMessenger messenger,
-        DiscordManager discordManager) : base(app)
+        DiscordManager discordManager,
+        RunningGamesManager runningGamesManager) : base(app)
     {
         // Set services
         Data = data ?? throw new ArgumentNullException(nameof(data));
@@ -37,7 +38,7 @@ public class SettingsPageViewModel : BasePageViewModel
         Sections = new ObservableCollection<ObservableCollection<SettingsSectionViewModel>>()
         {
             new() { new LanguageSettingsSectionViewModel(Data, App), new UserLevelSettingsSectionViewModel(Data), },
-            new() { new GeneralSettingsSectionViewModel(Data, ui, jumpListManager, discordManager), },
+            new() { new GeneralSettingsSectionViewModel(Data, ui, jumpListManager, discordManager, runningGamesManager), },
             new() { new DesignSettingsSectionViewModel(Data), },
             new() { new StartupSettingsSectionViewModel(Data), },
             new() { new FilesSettingsSectionViewModel(Data, ui, messageUi, associatedFileEditorsManager, messenger), },
