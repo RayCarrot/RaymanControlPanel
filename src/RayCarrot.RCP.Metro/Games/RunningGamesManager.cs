@@ -48,39 +48,25 @@ public class RunningGamesManager
             {
                 bool isRunning = false;
 
-                // Get the exe file path
-                FileSystemPath exeFilePath;
+                // Get the primary exe file path
+                FileSystemPath primaryExeFilePath;
                 if (gameInstallation.InstallLocation.HasFile)
-                    exeFilePath = gameInstallation.InstallLocation.FilePath;
+                    primaryExeFilePath = gameInstallation.InstallLocation.FilePath;
                 else if (gameInstallation.GameDescriptor.Structure is DirectoryProgramInstallationStructure dirStructure)
-                    exeFilePath = dirStructure.FileSystem.GetAbsolutePath(gameInstallation, ProgramPathType.PrimaryExe);
+                    primaryExeFilePath = dirStructure.FileSystem.GetAbsolutePath(gameInstallation, ProgramPathType.PrimaryExe);
                 else
                     continue;
 
-                // Get the process name
-                string processName = Path.GetFileNameWithoutExtension(exeFilePath);
+                if (CheckGameExe(gameInstallation, primaryExeFilePath))
+                    isRunning = true;
 
-                // Enumerate every process with that name
-                foreach (Process process in Process.GetProcessesByName(processName))
+                // Check the other exe files
+                if (gameInstallation.GameDescriptor.Structure is DirectoryProgramInstallationStructure structure)
                 {
-                    using (process)
+                    foreach (FileSystemPath otherExeFilePath in structure.FileSystem.GetAbsolutePaths(gameInstallation, ProgramPathType.OtherExe))
                     {
-                        // Verify the path matches
-                        if (process.MainModule?.FileName.Equals(exeFilePath.FullPath, StringComparison.OrdinalIgnoreCase) != true)
-                            continue;
-
-                        lock (RunningGames)
-                        {
-                            RunningGame runningGame = new(gameInstallation, process.Id, process.StartTime);
-                            if (!RunningGames.Contains(runningGame))
-                            {
-                                RunningGames.Add(runningGame);
-                                Messenger.Send(new GameRunningChangedMessage(gameInstallation, true));
-                                Logger.Info("The game {0} has been detected as running in process {1}", gameInstallation.InstallationId, process.Id);
-                            }
-                        }
-
-                        isRunning = true;
+                        if (CheckGameExe(gameInstallation, otherExeFilePath))
+                            isRunning = true;
                     }
                 }
 
@@ -102,6 +88,40 @@ public class RunningGamesManager
                 // Don't log since then it'd log too often
             }
         }
+    }
+
+    private bool CheckGameExe(GameInstallation gameInstallation, FileSystemPath exeFilePath)
+    {
+        bool isRunning = false;
+
+        // Get the process name
+        string processName = Path.GetFileNameWithoutExtension(exeFilePath);
+
+        // Enumerate every process with that name
+        foreach (Process process in Process.GetProcessesByName(processName))
+        {
+            using (process)
+            {
+                // Verify the path matches
+                if (process.MainModule?.FileName.Equals(exeFilePath.FullPath, StringComparison.OrdinalIgnoreCase) != true)
+                    continue;
+
+                lock (RunningGames)
+                {
+                    RunningGame runningGame = new(gameInstallation, process.Id, process.StartTime);
+                    if (!RunningGames.Contains(runningGame))
+                    {
+                        RunningGames.Add(runningGame);
+                        Messenger.Send(new GameRunningChangedMessage(gameInstallation, true));
+                        Logger.Info("The game {0} has been detected as running in process {1}", gameInstallation.InstallationId, process.Id);
+                    }
+                }
+
+                isRunning = true;
+            }
+        }
+
+        return isRunning;
     }
 
     public void Start()
