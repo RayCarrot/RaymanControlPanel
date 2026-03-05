@@ -17,7 +17,7 @@ public class PCGamingWikiComponent : GameComponent
         return new[]
         {
             new GameLinksComponent.GameUriLink(
-                Header: "Open PCGamingWiki page", // TODO-LOC
+                Header: new ResourceLocString(nameof(Resources.GameDisplay_OpenPCGamingWikiPage)),
                 Uri: $"https://www.pcgamingwiki.com/wiki/{pageName}",
                 AssetIcon: WebIconAsset.PCGamingWiki),
         };

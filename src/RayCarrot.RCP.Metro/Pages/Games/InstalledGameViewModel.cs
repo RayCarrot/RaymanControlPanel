@@ -389,8 +389,7 @@ public class InstalledGameViewModel : BaseViewModel
         {
             Logger.Error(ex, "Closing running game");   
 
-            // TODO-LOC
-            await Services.MessageUI.DisplayExceptionMessageAsync(ex, "An error occured when closing the game");
+            await Services.MessageUI.DisplayExceptionMessageAsync(ex, Resources.CloseGameError);
         }
     }
 

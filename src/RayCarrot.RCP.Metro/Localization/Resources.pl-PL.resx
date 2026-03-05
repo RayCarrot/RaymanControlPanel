@@ -6062,7 +6062,7 @@ Zastosowanie modyfikacji bez nich może spowodować, że nie będzie ona działa
   <data name="UpdateAvailable_Info_NewVersion" xml:space="preserve">
     <value>Nowa wersja</value>
   </data>
-  <data name="UpdateAvailable_Info_NewVersionBeta" xml:space="preserve">
+  <data name="UpdateAvailable_Info_VersionBeta" xml:space="preserve">
     <value>{0} (BETA)</value>
   </data>
   <data name="UpdateAvailable_Info_ReleaseDate" xml:space="preserve">

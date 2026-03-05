@@ -706,6 +706,24 @@ namespace RayCarrot.RCP.Metro {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to APRIL FOOLS! The Rabbids have invaded the Rayman Control Panel! Can you find them all?.
+        /// </summary>
+        public static string AprilFoolsMessage {
+            get {
+                return ResourceManager.GetString("AprilFoolsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to APRIL FOOLS.
+        /// </summary>
+        public static string AprilFoolsMessageHeader {
+            get {
+                return ResourceManager.GetString("AprilFoolsMessageHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add files.
         /// </summary>
         public static string Archive_AddFiles {
@@ -1845,6 +1863,15 @@ namespace RayCarrot.RCP.Metro {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occured when closing the game.
+        /// </summary>
+        public static string CloseGameError {
+            get {
+                return ResourceManager.GetString("CloseGameError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Action.
         /// </summary>
         public static string Config_Action_Action {
@@ -2331,6 +2358,24 @@ namespace RayCarrot.RCP.Metro {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enable joypad rumble (battle mode).
+        /// </summary>
+        public static string Config_JoypadRumbleBattle {
+            get {
+                return ResourceManager.GetString("Config_JoypadRumbleBattle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable joypad rumble (race mode).
+        /// </summary>
+        public static string Config_JoypadRumbleRace {
+            get {
+                return ResourceManager.GetString("Config_JoypadRumbleRace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Language.
         /// </summary>
         public static string Config_Language {
@@ -2345,6 +2390,15 @@ namespace RayCarrot.RCP.Metro {
         public static string Config_LanguageR2Info {
             get {
                 return ResourceManager.GetString("Config_LanguageR2Info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Menu music.
+        /// </summary>
+        public static string Config_MenuMusic {
+            get {
+                return ResourceManager.GetString("Config_MenuMusic", resourceCulture);
             }
         }
         
@@ -2714,6 +2768,15 @@ namespace RayCarrot.RCP.Metro {
         public static string Config_VideoGood {
             get {
                 return ResourceManager.GetString("Config_VideoGood", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Volume.
+        /// </summary>
+        public static string Config_Volume {
+            get {
+                return ResourceManager.GetString("Config_Volume", resourceCulture);
             }
         }
         
@@ -4300,6 +4363,15 @@ namespace RayCarrot.RCP.Metro {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open PCGamingWiki page.
+        /// </summary>
+        public static string GameDisplay_OpenPCGamingWikiPage {
+            get {
+                return ResourceManager.GetString("GameDisplay_OpenPCGamingWikiPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open community page.
         /// </summary>
         public static string GameDisplay_OpenSteamCommunity {
@@ -4440,6 +4512,15 @@ namespace RayCarrot.RCP.Metro {
         public static string GameHub_ArchivePanel_Open {
             get {
                 return ResourceManager.GetString("GameHub_ArchivePanel_Open", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop.
+        /// </summary>
+        public static string GameHub_Close {
+            get {
+                return ResourceManager.GetString("GameHub_Close", resourceCulture);
             }
         }
         
@@ -6214,6 +6295,15 @@ namespace RayCarrot.RCP.Metro {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Portuguese (Brazil).
+        /// </summary>
+        public static string Lang_BrazilianPortuguese {
+            get {
+                return ResourceManager.GetString("Lang_BrazilianPortuguese", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Danish.
         /// </summary>
         public static string Lang_Danish {
@@ -6277,11 +6367,29 @@ namespace RayCarrot.RCP.Metro {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Japanese.
+        /// </summary>
+        public static string Lang_Japanese {
+            get {
+                return ResourceManager.GetString("Lang_Japanese", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Norwegian.
         /// </summary>
         public static string Lang_Norwegian {
             get {
                 return ResourceManager.GetString("Lang_Norwegian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chinese (Simplified).
+        /// </summary>
+        public static string Lang_SimplifiedChinese {
+            get {
+                return ResourceManager.GetString("Lang_SimplifiedChinese", resourceCulture);
             }
         }
         
@@ -6300,6 +6408,15 @@ namespace RayCarrot.RCP.Metro {
         public static string Lang_Swedish {
             get {
                 return ResourceManager.GetString("Lang_Swedish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chinese (Traditional).
+        /// </summary>
+        public static string Lang_TraditionalChinese {
+            get {
+                return ResourceManager.GetString("Lang_TraditionalChinese", resourceCulture);
             }
         }
         
@@ -15621,6 +15738,15 @@ namespace RayCarrot.RCP.Metro {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Check for and show if games are running.
+        /// </summary>
+        public static string Settings_CheckForRunningGames {
+            get {
+                return ResourceManager.GetString("Settings_CheckForRunningGames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Debug.
         /// </summary>
         public static string Settings_DebugHeader {
@@ -16107,6 +16233,24 @@ namespace RayCarrot.RCP.Metro {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enable Discord Rich Presence.
+        /// </summary>
+        public static string Settings_UseDiscordRichPresence {
+            get {
+                return ResourceManager.GetString("Settings_UseDiscordRichPresence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If enabled then your Discord activity will show when you&apos;re using the Rayman Control Panel and the game&apos;s you&apos;re playing while it&apos;s running. Keep in mind that it currently doesn&apos;t work for emulated games. In some cases you need to restart the app for this to update..
+        /// </summary>
+        public static string Settings_UseDiscordRichPresenceInfo {
+            get {
+                return ResourceManager.GetString("Settings_UseDiscordRichPresenceInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User Level.
         /// </summary>
         public static string Settings_UserLevel {
@@ -16413,6 +16557,24 @@ namespace RayCarrot.RCP.Metro {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Install the Remove Ubi Key Requirement mod.
+        /// </summary>
+        public static string SetupGameAction_GBCRemoveUbiKeyRequirement_Header {
+            get {
+                return ResourceManager.GetString("SetupGameAction_GBCRemoveUbiKeyRequirement_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is a bonus level which can normally only be unlocked by linking the game to another supported title through the Ubi Key feature. The Remove Ubi Key Requirement mod by RayCarrot removes this requirements, allowing the level to be accessed without linking to another game..
+        /// </summary>
+        public static string SetupGameAction_GBCRemoveUbiKeyRequirement_Info {
+            get {
+                return ResourceManager.GetString("SetupGameAction_GBCRemoveUbiKeyRequirement_Info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fix.
         /// </summary>
         public static string SetupGameAction_GeneralFix {
@@ -16580,6 +16742,24 @@ namespace RayCarrot.RCP.Metro {
         public static string SetupGameAction_Ray2Fix_Info {
             get {
                 return ResourceManager.GetString("SetupGameAction_Ray2Fix_Info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Install the Rayman FMVs mod.
+        /// </summary>
+        public static string SetupGameAction_Rayman1FMVs_Header {
+            get {
+                return ResourceManager.GetString("SetupGameAction_Rayman1FMVs_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Some versions of the game don&apos;t come with the intro and outro FMVs. By using the Rayman FMVs mod, alongside the per-level soundtrack tool, it allows the FMVs to be restored..
+        /// </summary>
+        public static string SetupGameAction_Rayman1FMVs_Info {
+            get {
+                return ResourceManager.GetString("SetupGameAction_Rayman1FMVs_Info", resourceCulture);
             }
         }
         
@@ -17008,15 +17188,6 @@ namespace RayCarrot.RCP.Metro {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} (BETA).
-        /// </summary>
-        public static string UpdateAvailable_Info_NewVersionBeta {
-            get {
-                return ResourceManager.GetString("UpdateAvailable_Info_NewVersionBeta", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Release Date.
         /// </summary>
         public static string UpdateAvailable_Info_ReleaseDate {
@@ -17040,6 +17211,15 @@ namespace RayCarrot.RCP.Metro {
         public static string UpdateAvailable_Info_Url {
             get {
                 return ResourceManager.GetString("UpdateAvailable_Info_Url", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} (BETA).
+        /// </summary>
+        public static string UpdateAvailable_Info_VersionBeta {
+            get {
+                return ResourceManager.GetString("UpdateAvailable_Info_VersionBeta", resourceCulture);
             }
         }
         

@@ -6288,7 +6288,7 @@ nonRetailVersionsCount</comment>
   <data name="UpdateAvailable_Info_NewVersion" xml:space="preserve">
     <value>New Version</value>
   </data>
-  <data name="UpdateAvailable_Info_NewVersionBeta" xml:space="preserve">
+  <data name="UpdateAvailable_Info_VersionBeta" xml:space="preserve">
     <value>{0} (BETA)</value>
     <comment>Arguments:
 version</comment>
@@ -6310,5 +6310,65 @@ version</comment>
   </data>
   <data name="UpdateCheck_UnknownError" xml:space="preserve">
     <value>An unknown error occurred</value>
+  </data>
+  <data name="AprilFoolsMessage" xml:space="preserve">
+    <value>APRIL FOOLS! The Rabbids have invaded the Rayman Control Panel! Can you find them all?</value>
+  </data>
+  <data name="AprilFoolsMessageHeader" xml:space="preserve">
+    <value>APRIL FOOLS</value>
+  </data>
+  <data name="GameDisplay_OpenPCGamingWikiPage" xml:space="preserve">
+    <value>Open PCGamingWiki page</value>
+  </data>
+  <data name="Config_MenuMusic" xml:space="preserve">
+    <value>Menu music</value>
+  </data>
+  <data name="Config_Volume" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="Lang_Japanese" xml:space="preserve">
+    <value>Japanese</value>
+  </data>
+  <data name="Lang_TraditionalChinese" xml:space="preserve">
+    <value>Chinese (Traditional)</value>
+  </data>
+  <data name="Lang_SimplifiedChinese" xml:space="preserve">
+    <value>Chinese (Simplified)</value>
+  </data>
+  <data name="Lang_BrazilianPortuguese" xml:space="preserve">
+    <value>Portuguese (Brazil)</value>
+  </data>
+  <data name="Config_JoypadRumbleRace" xml:space="preserve">
+    <value>Enable joypad rumble (race mode)</value>
+  </data>
+  <data name="Config_JoypadRumbleBattle" xml:space="preserve">
+    <value>Enable joypad rumble (battle mode)</value>
+  </data>
+  <data name="SetupGameAction_Rayman1FMVs_Header" xml:space="preserve">
+    <value>Install the Rayman FMVs mod</value>
+  </data>
+  <data name="SetupGameAction_Rayman1FMVs_Info" xml:space="preserve">
+    <value>Some versions of the game don't come with the intro and outro FMVs. By using the Rayman FMVs mod, alongside the per-level soundtrack tool, it allows the FMVs to be restored.</value>
+  </data>
+  <data name="SetupGameAction_GBCRemoveUbiKeyRequirement_Header" xml:space="preserve">
+    <value>Install the Remove Ubi Key Requirement mod</value>
+  </data>
+  <data name="SetupGameAction_GBCRemoveUbiKeyRequirement_Info" xml:space="preserve">
+    <value>There is a bonus level which can normally only be unlocked by linking the game to another supported title through the Ubi Key feature. The Remove Ubi Key Requirement mod by RayCarrot removes this requirements, allowing the level to be accessed without linking to another game.</value>
+  </data>
+  <data name="CloseGameError" xml:space="preserve">
+    <value>An error occured when closing the game</value>
+  </data>
+  <data name="GameHub_Close" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="Settings_CheckForRunningGames" xml:space="preserve">
+    <value>Check for and show if games are running</value>
+  </data>
+  <data name="Settings_UseDiscordRichPresence" xml:space="preserve">
+    <value>Enable Discord Rich Presence</value>
+  </data>
+  <data name="Settings_UseDiscordRichPresenceInfo" xml:space="preserve">
+    <value>If enabled then your Discord activity will show when you're using the Rayman Control Panel and the game's you're playing while it's running. Keep in mind that it currently doesn't work for emulated games. In some cases you need to restart the app for this to update.</value>
   </data>
 </root>

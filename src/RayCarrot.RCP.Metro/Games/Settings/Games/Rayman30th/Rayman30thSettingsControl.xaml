@@ -46,14 +46,12 @@
                    Text="{Resx Config_Sound}"
                    Margin="0 4 0 8" />
 
-        <!-- TODO-LOC -->
-        <CheckBox Content="Menu music"
+        <CheckBox Content="{Resx Config_MenuMusic}"
                   Style="{StaticResource RCP.Styles.CheckBox.Default}"
                   IsChecked="{Binding Path=IsMenuMusicEnabled}"
                   Margin="0 0 0 8" />
 
-        <!-- TODO-LOC -->
-        <TextBlock Text="Volume"
+        <TextBlock Text="{Resx Config_Volume}"
                    Margin="0 0 0 4" />
 
         <Slider Value="{Binding Path=Volume}"

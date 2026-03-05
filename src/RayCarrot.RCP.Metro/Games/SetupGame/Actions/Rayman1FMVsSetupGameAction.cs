@@ -7,9 +7,8 @@ public class Rayman1FMVsSetupGameAction : InstallModSetupGameAction
     protected override long GameBananaModId => 636650;
     protected override string[] ModIds => ["Rayman1.GameMod.FMVs"];
 
-    // TODO-LOC
-    public override LocalizedString Header => "Install the Rayman FMVs mod";
-    public override LocalizedString Info => "Some versions of the game don't come with the intro and outro FMVs. By using the Rayman FMVs mod, alongside the per-level soundtrack tool, it allows the FMVs to be restored.";
+    public override LocalizedString Header => new ResourceLocString(nameof(Resources.SetupGameAction_Rayman1FMVs_Header));
+    public override LocalizedString Info => new ResourceLocString(nameof(Resources.SetupGameAction_Rayman1FMVs_Info));
 
     public override SetupGameActionType Type => SetupGameActionType.Recommended;
 

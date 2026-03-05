@@ -42,8 +42,7 @@
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding Path=IsRunning}" Value="True">
                                 <Setter Property="rcp:Icon.Kind" Value="Stop" />
-                                <!-- TODO-LOC -->
-                                <Setter Property="Content" Value="Stop" />
+                                <Setter Property="Content" Value="{Resx GameHub_Close, ResxName={x:Static rcp:LocalizationManager.ResourcePath}}" />
                                 <Setter Property="Command" Value="{Binding Path=CloseRunningGameCommand, Mode=OneTime}" />
                             </DataTrigger>
                         </Style.Triggers>

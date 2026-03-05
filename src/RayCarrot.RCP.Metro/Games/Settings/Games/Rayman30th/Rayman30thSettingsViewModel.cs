@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.Windows;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -34,10 +33,10 @@ public class Rayman30thSettingsViewModel : GameSettingsViewModel
             new ResourceLocString(nameof(Resources.Lang_German)),
             new ResourceLocString(nameof(Resources.Lang_Italian)),
             new ResourceLocString(nameof(Resources.Lang_Spanish)),
-            "Japanese", // TODO-LOC
-            "Chinese (Traditional)", // TODO-LOC
-            "Chinese (Simplified)", // TODO-LOC
-            "Portuguese (Brazil)", // TODO-LOC
+            new ResourceLocString(nameof(Resources.Lang_Japanese)),
+            new ResourceLocString(nameof(Resources.Lang_TraditionalChinese)),
+            new ResourceLocString(nameof(Resources.Lang_SimplifiedChinese)),
+            new ResourceLocString(nameof(Resources.Lang_BrazilianPortuguese)),
         };
     }
 
