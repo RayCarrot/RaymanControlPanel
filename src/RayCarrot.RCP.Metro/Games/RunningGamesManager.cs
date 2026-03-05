@@ -74,8 +74,8 @@ public class RunningGamesManager
                             RunningGame runningGame = new(gameInstallation, process.Id, process.StartTime);
                             if (!RunningGames.Contains(runningGame))
                             {
-                                Messenger.Send(new GameRunningChangedMessage(gameInstallation, true));
                                 RunningGames.Add(runningGame);
+                                Messenger.Send(new GameRunningChangedMessage(gameInstallation, true));
                                 Logger.Info("The game {0} has been detected as running in process {1}", gameInstallation.InstallationId, process.Id);
                             }
                         }
@@ -90,8 +90,8 @@ public class RunningGamesManager
                     {
                         if (RunningGames.Any(x => x.GameInstallation == gameInstallation))
                         {
-                            Messenger.Send(new GameRunningChangedMessage(gameInstallation, false));
                             RunningGames.RemoveWhere(x => x.GameInstallation == gameInstallation);
+                            Messenger.Send(new GameRunningChangedMessage(gameInstallation, false));
                             Logger.Info("The game {0} has been detected as no longer running", gameInstallation.InstallationId);
                         }
                     }
@@ -119,6 +119,12 @@ public class RunningGamesManager
     {
         lock (RunningGames)
             return RunningGames.Any(x => x.GameInstallation == gameInstallation);
+    }
+
+    public GameInstallation[] GetRunningGames()
+    {
+        lock (RunningGames)
+            return RunningGames.Select(x => x.GameInstallation).Distinct().ToArray();
     }
 
     public void CloseGame(GameInstallation gameInstallation)

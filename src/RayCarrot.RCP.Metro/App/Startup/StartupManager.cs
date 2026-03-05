@@ -30,7 +30,8 @@ public class StartupManager
         GameClientsManager gameClientsManager, 
         IMessageUIManager messageUi, 
         AppUIManager ui,
-        RunningGamesManager runningGamesManager)
+        RunningGamesManager runningGamesManager,
+        DiscordManager discordManager)
     {
         Args = args ?? throw new ArgumentNullException(nameof(args));
         LoggerManager = loggerManager ?? throw new ArgumentNullException(nameof(loggerManager));
@@ -44,6 +45,7 @@ public class StartupManager
         MessageUI = messageUi ?? throw new ArgumentNullException(nameof(messageUi));
         UI = ui ?? throw new ArgumentNullException(nameof(ui));
         RunningGamesManager = runningGamesManager ?? throw new ArgumentNullException(nameof(runningGamesManager));
+        DiscordManager = discordManager ?? throw new ArgumentNullException(nameof(discordManager));
     }
 
     #endregion
@@ -68,7 +70,7 @@ public class StartupManager
     private IMessageUIManager MessageUI { get; }
     private AppUIManager UI { get; }
     private RunningGamesManager RunningGamesManager { get; }
-
+    private DiscordManager DiscordManager { get; }
 
     #endregion
 
@@ -607,6 +609,9 @@ public class StartupManager
 
             // Start checking for running games
             RunningGamesManager.Start();
+
+            // Initialize the Discord manager
+            DiscordManager.Initialize();
 
             ShowAppWindow<AppWindow>(createWindow, isFullStartup);
             Logger.Debug("Startup {0} ms: Showed app window", sw.ElapsedMilliseconds);

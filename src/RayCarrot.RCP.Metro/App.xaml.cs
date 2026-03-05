@@ -375,6 +375,9 @@ public partial class App : Application
                 // Stop checking for running games
                 ServiceProvider.GetRequiredService<RunningGamesManager>().Stop();
 
+                // Dispose the Discord manager
+                ServiceProvider.GetRequiredService<DiscordManager>().Dispose();
+
                 // Save all user data
                 ServiceProvider.GetRequiredService<AppDataManager>().Save();
 

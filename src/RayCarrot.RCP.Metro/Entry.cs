@@ -63,6 +63,7 @@ public static class Entry
         serviceCollection.AddSingleton<DeployableFilesManager>();
         serviceCollection.AddSingleton<AssociatedFileEditorsManager>();
         serviceCollection.AddSingleton<RunningGamesManager>();
+        serviceCollection.AddSingleton<DiscordManager>();
 
         // Using a WeakReferenceMessenger can be convenient and I was originally doing that,
         // but for performance reasons it's still better to always unregister (to avoid

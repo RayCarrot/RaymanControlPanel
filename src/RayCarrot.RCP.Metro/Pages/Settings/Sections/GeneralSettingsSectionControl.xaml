@@ -13,13 +13,19 @@
              d:Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" 
              d:DataContext="{d:DesignInstance sections:GeneralSettingsSectionViewModel}">
     <StackPanel>
-        <StackPanel DataContext="{Binding Path=Data}">
+        <StackPanel>
             <CheckBox Content="{Resx Settings_GeneralCloseOnLaunch}"
-                      IsChecked="{Binding Path=App_CloseAppOnGameLaunch}"
+                      IsChecked="{Binding Path=Data.App_CloseAppOnGameLaunch}"
+                      Margin="0 0 0 8" />
+
+            <!-- TODO-LOC -->
+            <CheckBox Content="Enable Discord Rich Presence"
+                      ToolTip="If enabled then your Discord activity will show when you're using the Rayman Control Panel and the game's you're playing while it's running. Keep in mind that it currently doesn't work for emulated games. In some cases you need to restart the app for this to update."
+                      IsChecked="{Binding Path=UseDiscordRichPresence}"
                       Margin="0 0 0 8" />
 
             <CheckBox Content="{Resx Settings_GetBetaUpdates}"
-                      IsChecked="{Binding Path=Update_GetBetaUpdates}"
+                      IsChecked="{Binding Path=Data.Update_GetBetaUpdates}"
                       rcp:UserLevelAssist.MinUserLevel="Technical"
                       Margin="0 0 0 8" />
 
@@ -35,12 +41,12 @@
                 </StackPanel>
 
                 <CheckBox Content="{Resx IsEnabled}" 
-                          IsChecked="{Binding Path=Binary_IsSerializationLogEnabled}"
+                          IsChecked="{Binding Path=Data.Binary_IsSerializationLogEnabled}"
                           Margin="0 0 0 4" />
 
-                <rcp:BrowseBox Visibility="{Binding Path=Binary_IsSerializationLogEnabled, Converter={rcp:BooleanToVisibilityConverter}}"
+                <rcp:BrowseBox Visibility="{Binding Path=Data.Binary_IsSerializationLogEnabled, Converter={rcp:BooleanToVisibilityConverter}}"
                                FileFilter="Txt (*.txt)|*.txt"
-                               SelectedPath="{Binding Path=Binary_BinarySerializationFileLogPath}"
+                               SelectedPath="{Binding Path=Data.Binary_BinarySerializationFileLogPath}"
                                BrowseType="SaveFile"
                                Margin="0 0 0 8" />
 

@@ -117,6 +117,7 @@
     <PackageReference Include="WPFTextBoxAutoComplete" Version="1.0.5" />
     <PackageReference Include="XamlAnimatedGif" Version="2.3.1" />
     <PackageReference Include="Octokit" Version="14.0.0" />
+    <PackageReference Include="DiscordRichPresence" Version="1.6.1.70" />
   </ItemGroup>
 
   <!-- Project references -->

@@ -34,6 +34,7 @@ public partial class AppUserData : BaseViewModel
         App_CachedNews = new List<AppNewsEntry>();
         App_LoadNews = true;
         App_LastYearShownAprilFoolsMessage = 0;
+        App_UseDiscordRichPresence = true;
 
         // UI
         UI_WindowState = null;
@@ -197,6 +198,11 @@ public partial class AppUserData : BaseViewModel
     /// The last year the April Fools' message was shown
     /// </summary>
     public int App_LastYearShownAprilFoolsMessage { get; set; }
+
+    /// <summary>
+    /// Indicates if Discord Rich Presence integration should be enabled
+    /// </summary>
+    public bool App_UseDiscordRichPresence { get; set; }
 
     #endregion
 
