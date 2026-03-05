@@ -164,6 +164,20 @@
 
         </StackPanel>
 
+        <!-- TODO-LOC -->
+        <CheckBox Content="Enable joypad rumble (race mode)"
+                  Style="{StaticResource RCP.Styles.CheckBox.Default}"
+                  IsChecked="{Binding Path=JoypadRumbleRace}"
+                  Visibility="{Binding Path=SaveFile, Converter={rcp:InvertedObjectNullToVisibilityConverter}}"
+                  Margin="0 0 0 8" />
+
+        <!-- TODO-LOC -->
+        <CheckBox Content="Enable joypad rumble (battle mode)"
+                  Style="{StaticResource RCP.Styles.CheckBox.Default}"
+                  IsChecked="{Binding Path=JoypadRumbleBattle}"
+                  Visibility="{Binding Path=SaveFile, Converter={rcp:InvertedObjectNullToVisibilityConverter}}"
+                  Margin="0 0 0 8" />
+
         <TextBlock Text="{Resx Config_ControllerVertical}"
                    Visibility="{Binding Path=HasControllerConfig, Converter={rcp:BooleanToVisibilityConverter}}"
                    Margin="0 0 0 4" />

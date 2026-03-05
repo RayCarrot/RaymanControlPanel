@@ -97,6 +97,8 @@ public class RaymanArenaSettingsViewModel : BaseRayman3MArenaSettingsViewModel<R
         CurrentLanguage = Enum.TryParse(AppDataManager.AppData.Language, out RaymanArenaLanguage lang) ? lang : RaymanArenaLanguage.English;
         ModemQualityIndex = AppDataManager.AppData.ModemQuality;
         IsTextures32Bit = AppDataManager.AppData.TexturesFile == "Tex32.cnt";
+
+        LoadMArenaSaveFile();
     }
 
     protected override void SaveAppData()
@@ -118,6 +120,8 @@ public class RaymanArenaSettingsViewModel : BaseRayman3MArenaSettingsViewModel<R
         AppDataManager.AppData.Language = CurrentLanguage.ToString();
         AppDataManager.AppData.ModemQuality = ModemQualityIndex;
         AppDataManager.AppData.TexturesFile = $"Tex{(IsTextures32Bit ? 32 : 16)}.cnt";
+
+        SaveMArenaSaveFile();
     }
 
     #endregion

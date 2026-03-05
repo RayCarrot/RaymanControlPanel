@@ -88,6 +88,8 @@ public class RaymanMSettingsViewModel : BaseRayman3MArenaSettingsViewModel<Rayma
         IsVideo32Bpp = AppDataManager.AppData.Video_BPP != 16;
         CurrentLanguage = Enum.TryParse(AppDataManager.AppData.Language, out RaymanMLanguage lang) ? lang : RaymanMLanguage.English;
         IsTextures32Bit = AppDataManager.AppData.TexturesFile == "Tex32.cnt";
+
+        LoadMArenaSaveFile();
     }
 
     protected override void SaveAppData()
@@ -108,6 +110,8 @@ public class RaymanMSettingsViewModel : BaseRayman3MArenaSettingsViewModel<Rayma
         AppDataManager.AppData.Video_BPP = IsVideo32Bpp ? 32 : 16;
         AppDataManager.AppData.Language = CurrentLanguage.ToString();
         AppDataManager.AppData.TexturesFile = $"Tex{(IsTextures32Bit ? 32 : 16)}.cnt";
+
+        SaveMArenaSaveFile();
     }
 
     #endregion

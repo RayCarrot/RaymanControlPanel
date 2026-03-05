@@ -1,4 +1,6 @@
 ﻿using System.IO;
+using BinarySerializer;
+using BinarySerializer.OpenSpace;
 using RayCarrot.RCP.Metro.Games.Structure;
 using RayCarrot.RCP.Metro.Ini;
 
@@ -83,6 +85,13 @@ public abstract class BaseRayman3MArenaSettingsViewModel<TAppData, TLanguage> : 
     public int VerticalAxis { get; set; }
     public int HorizontalAxis { get; set; }
     public int ModemQualityIndex { get; set; }
+
+    // Options from save file
+    public R3SaveFile? SaveFile { get; set; }
+    public string? SaveFileName { get; set; }
+    public Context? SaveFileContext { get; set; }
+    public bool JoypadRumbleRace { get; set; }
+    public bool JoypadRumbleBattle { get; set; }
 
     #endregion
 
@@ -316,12 +325,57 @@ public abstract class BaseRayman3MArenaSettingsViewModel<TAppData, TLanguage> : 
             nameof(CurrentLanguage) or
             nameof(ControllerSupport) or
             nameof(IsDiscCheckRemoved) or
+            nameof(JoypadRumbleRace) or
+            nameof(JoypadRumbleBattle) or
             nameof(VerticalAxis) or
             nameof(HorizontalAxis) or
             nameof(ModemQualityIndex))
         {
             UnsavedChanges = true;
         }
+    }
+
+    protected void LoadMArenaSaveFile()
+    {
+        FileSystemPath saveFileDir = GameInstallation.InstallLocation.Directory + "MENU" + "SaveGame";
+        const string saveFileName = "raymanm.sav";
+
+        // Make sure the save file exists
+        if (!(saveFileDir + saveFileName).FileExists)
+            return;
+
+        // Create the context to use
+        SaveFileContext = new RCPContext(saveFileDir);
+        SaveFileContext.Initialize(GameInstallation);
+        SaveFileName = saveFileName;
+        SaveFileContext.AddFile(new LinearFile(SaveFileContext, SaveFileName));
+
+        // Read the file
+        using (SaveFileContext)
+            SaveFile = FileFactory.Read<R3SaveFile>(SaveFileContext, SaveFileName);
+
+        // Get the settings
+        JoypadRumbleRace = SaveFile.Elements.FirstOrDefault(x => x.ElementName == "sg_iracepadrumble")?.Values?.FirstOrDefault()?.IntegerValue == 1;
+        JoypadRumbleBattle = SaveFile.Elements.FirstOrDefault(x => x.ElementName == "sg_ishootpadrumble")?.Values?.FirstOrDefault()?.IntegerValue == 1;
+    }
+
+    protected void SaveMArenaSaveFile()
+    {
+        if (SaveFileContext == null || SaveFileName == null || SaveFile == null)
+            return;
+
+        R3SaveElement? raceElement = SaveFile.Elements.FirstOrDefault(x => x.ElementName == "sg_iracepadrumble");
+        if (raceElement != null)
+            foreach (R3SaveValue value in raceElement.Values)
+                value.IntegerValue = (uint)(JoypadRumbleRace ? 1 : 0);
+
+        R3SaveElement? battleElement = SaveFile.Elements.FirstOrDefault(x => x.ElementName == "sg_ishootpadrumble");
+        if (battleElement != null)
+            foreach (R3SaveValue value in battleElement.Values)
+                value.IntegerValue = (uint)(JoypadRumbleBattle ? 1 : 0);
+
+        using (SaveFileContext)
+            FileFactory.Write(SaveFileContext, SaveFileName, SaveFile);
     }
 
     #endregion
