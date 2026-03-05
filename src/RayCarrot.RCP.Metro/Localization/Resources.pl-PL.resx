@@ -5522,7 +5522,7 @@ Komunikaty o błędach:
     <value>Domyślny</value>
   </data>
   <data name="PostUpdate_MigrateTPLS" xml:space="preserve">
-    <value>Narzędzie ścieżki dźwiękowej na poziom dla gry Rayman 1 zostało przerobione w tej wersji, aby nie polegało już na niestandardowej kompilacji DOSBox. Aby nadal z niego korzystać, należy zainstalować go ponownie. Poprzednia wersja została automatycznie odinstalowana.</value>
+    <value>Narzędzie ścieżki dźwiękowej na poziom dla gry Rayman 1 zostało przeniesione do modyfikacji dostępnej do pobrania w Mod Loader. Aby nadal z niego korzystać, należy pobrać go ponownie. Poprzednia wersja została automatycznie odinstalowana.</value>
   </data>
   <data name="PostUpdate_MigrateTPLSHeader" xml:space="preserve">
     <value>Powiadomienie o aktualizacji ścieżki dźwiękowej na poziom</value>
@@ -5998,5 +5998,89 @@ Zastosowanie modyfikacji bez nich może spowodować, że nie będzie ona działa
   </data>
   <data name="Platform_GameCube" xml:space="preserve">
     <value>GameCube</value>
+  </data>
+  <data name="ToolDownload_Status" xml:space="preserve">
+    <value>Pobieranie plików</value>
+  </data>
+  <data name="ToolDownload_Success" xml:space="preserve">
+    <value>Pliki zostały pomyślnie pobrane</value>
+  </data>
+  <data name="ToolDownload_Error" xml:space="preserve">
+    <value>Wystąpił błąd podczas pobierania plików</value>
+  </data>
+  <data name="Rayman1_Prototype_Jaguar_Title" xml:space="preserve">
+    <value>Rayman Prototype</value>
+  </data>
+  <data name="Rayman1_Demo_Jaguar_Title" xml:space="preserve">
+    <value>Rayman Demo</value>
+  </data>
+  <data name="Rayman30thAnniversaryEdition_Win32_Title" xml:space="preserve">
+    <value>Rayman 30th Anniversary Edition</value>
+  </data>
+  <data name="GameHub_PerLevelSoundtrackPanel_Download" xml:space="preserve">
+    <value>Pobierz mod</value>
+  </data>
+  <data name="Progression_RA_Skins" xml:space="preserve">
+    <value>Skórki</value>
+  </data>
+  <data name="Progression_RA_BeginnerLeague" xml:space="preserve">
+    <value>Beginner League Cups</value>
+  </data>
+  <data name="Progression_RA_ProLeague" xml:space="preserve">
+    <value>Pro League Cups</value>
+  </data>
+  <data name="Progression_RA_MasterLeague" xml:space="preserve">
+    <value>Ukończono Master Leagues</value>
+  </data>
+  <data name="Utilities_Converter_R1JaguarSaveHeader" xml:space="preserve">
+    <value>Rayman 1 (Atari Jaguar)</value>
+  </data>
+  <data name="Utilities_Converter_R2GbcSaveHeader" xml:space="preserve">
+    <value>Rayman 2 (GBC) Dane zapisu</value>
+  </data>
+  <data name="AddGames_ToggleDemosAndPrototypes" xml:space="preserve">
+    <value>Pokaż {0} dema/prototypy</value>
+  </data>
+  <data name="UpdateAvailable_Header" xml:space="preserve">
+    <value>Dostępna aktualizacja</value>
+  </data>
+  <data name="UpdateAvailable_ChangelogHeader" xml:space="preserve">
+    <value>Lista zmian</value>
+  </data>
+  <data name="UpdateAvailable_Cancel" xml:space="preserve">
+    <value>Przypomnij mi później</value>
+  </data>
+  <data name="UpdateAvailable_Confirm" xml:space="preserve">
+    <value>Zaktualizuj</value>
+  </data>
+  <data name="UpdateAvailable_Title" xml:space="preserve">
+    <value>Dostępna nowa aktualizacja</value>
+  </data>
+  <data name="UpdateAvailable_Info_CurrentVersion" xml:space="preserve">
+    <value>Aktualna wersja</value>
+  </data>
+  <data name="UpdateAvailable_Info_NewVersion" xml:space="preserve">
+    <value>Nowa wersja</value>
+  </data>
+  <data name="UpdateAvailable_Info_NewVersionBeta" xml:space="preserve">
+    <value>{0} (BETA)</value>
+  </data>
+  <data name="UpdateAvailable_Info_ReleaseDate" xml:space="preserve">
+    <value>Data wydania</value>
+  </data>
+  <data name="UpdateAvailable_Info_Size" xml:space="preserve">
+    <value>Rozmiar aktualizacji</value>
+  </data>
+  <data name="UpdateAvailable_Info_Url" xml:space="preserve">
+    <value>Aktualizuj adres URL</value>
+  </data>
+  <data name="UpdateCheck_NoReleaseFoundError" xml:space="preserve">
+    <value>Nie znaleziono prawidłowej wersji aplikacji</value>
+  </data>
+  <data name="UpdateCheck_ConnectionError" xml:space="preserve">
+    <value>Nie można połączyć się z serwerem. Sprawdź połączenie internetowe.</value>
+  </data>
+  <data name="UpdateCheck_UnknownError" xml:space="preserve">
+    <value>Wystąpił nieznany błąd</value>
   </data>
 </root>

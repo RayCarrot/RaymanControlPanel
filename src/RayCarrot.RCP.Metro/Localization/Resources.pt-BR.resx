@@ -5977,4 +5977,88 @@ Aplicar o mod sem estes pode impedir o seu funcionamento. Tem certeza de que des
   <data name="Platform_GameCube" xml:space="preserve">
     <value>GameCube</value>
   </data>
+  <data name="ToolDownload_Status" xml:space="preserve">
+    <value>Baixando arquivos</value>
+  </data>
+  <data name="ToolDownload_Success" xml:space="preserve">
+    <value>Os arquivos foram baixados com sucesso</value>
+  </data>
+  <data name="ToolDownload_Error" xml:space="preserve">
+    <value>Ocorreu um erro ao baixar os arquivos</value>
+  </data>
+  <data name="Rayman1_Prototype_Jaguar_Title" xml:space="preserve">
+    <value>Rayman Prototype</value>
+  </data>
+  <data name="Rayman1_Demo_Jaguar_Title" xml:space="preserve">
+    <value>Rayman Demo</value>
+  </data>
+  <data name="Rayman30thAnniversaryEdition_Win32_Title" xml:space="preserve">
+    <value>Rayman 30th Anniversary Edition</value>
+  </data>
+  <data name="GameHub_PerLevelSoundtrackPanel_Download" xml:space="preserve">
+    <value>Baixar Mod</value>
+  </data>
+  <data name="Progression_RA_Skins" xml:space="preserve">
+    <value>Skins</value>
+  </data>
+  <data name="Progression_RA_BeginnerLeague" xml:space="preserve">
+    <value>Copas da Liga Inicial</value>
+  </data>
+  <data name="Progression_RA_ProLeague" xml:space="preserve">
+    <value>Copas da Liga Profissional</value>
+  </data>
+  <data name="Progression_RA_MasterLeague" xml:space="preserve">
+    <value>Ligas Mestre Completadas</value>
+  </data>
+  <data name="Utilities_Converter_R1JaguarSaveHeader" xml:space="preserve">
+    <value>Rayman 1 (Atari Jaguar)</value>
+  </data>
+  <data name="Utilities_Converter_R2GbcSaveHeader" xml:space="preserve">
+    <value>Arquivo Salvo de Rayman 2 (GBC)</value>
+  </data>
+  <data name="AddGames_ToggleDemosAndPrototypes" xml:space="preserve">
+    <value>Mostrar {0} demos/protótipos</value>
+  </data>
+  <data name="UpdateAvailable_Header" xml:space="preserve">
+    <value>Atualização Disponível</value>
+  </data>
+  <data name="UpdateAvailable_ChangelogHeader" xml:space="preserve">
+    <value>Registro de Alterações</value>
+  </data>
+  <data name="UpdateAvailable_Cancel" xml:space="preserve">
+    <value>Lembre-me mais tarde</value>
+  </data>
+  <data name="UpdateAvailable_Confirm" xml:space="preserve">
+    <value>Atualizar</value>
+  </data>
+  <data name="UpdateAvailable_Title" xml:space="preserve">
+    <value>Nova atualização disponível</value>
+  </data>
+  <data name="UpdateAvailable_Info_CurrentVersion" xml:space="preserve">
+    <value>Versão Atual</value>
+  </data>
+  <data name="UpdateAvailable_Info_NewVersion" xml:space="preserve">
+    <value>Versão Nova</value>
+  </data>
+  <data name="UpdateAvailable_Info_NewVersionBeta" xml:space="preserve">
+    <value>{0} (BETA)</value>
+  </data>
+  <data name="UpdateAvailable_Info_ReleaseDate" xml:space="preserve">
+    <value>Data de Lançamento</value>
+  </data>
+  <data name="UpdateAvailable_Info_Size" xml:space="preserve">
+    <value>Tamanho da Atualização</value>
+  </data>
+  <data name="UpdateAvailable_Info_Url" xml:space="preserve">
+    <value>Url da Atualização</value>
+  </data>
+  <data name="UpdateCheck_NoReleaseFoundError" xml:space="preserve">
+    <value>Nenhuma versão válida do programa encontrada</value>
+  </data>
+  <data name="UpdateCheck_ConnectionError" xml:space="preserve">
+    <value>Não foi possível conectar ao servidor. Verifique sua conexão com a internet.</value>
+  </data>
+  <data name="UpdateCheck_UnknownError" xml:space="preserve">
+    <value>Ocorreu um erro desconhecido</value>
+  </data>
 </root>
