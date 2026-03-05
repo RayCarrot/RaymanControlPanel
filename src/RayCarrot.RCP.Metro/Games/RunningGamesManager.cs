@@ -141,7 +141,7 @@ public class RunningGamesManager
             return;
 
         CancellationTokenSource = new CancellationTokenSource();
-        GameCheckLoop(CancellationTokenSource.Token).WithoutAwait("Checking for running games");
+        Task.Run(() => GameCheckLoop(CancellationTokenSource.Token)).WithoutAwait("Checking for running games");
     }
 
     public void Stop()
