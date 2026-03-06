@@ -59,6 +59,7 @@ public abstract class ImageMagickImageFormat : ImageFormat
         OnEncode(img);
 
         img.Format = Format;
+        img.Strip();
         img.Write(outputStream);
         
         return GetMetadata(img);
@@ -73,6 +74,7 @@ public abstract class ImageMagickImageFormat : ImageFormat
             OnEncode(img);
 
             img.Format = outputMagickFormat.Format;
+            img.Strip();
             img.Write(outputStream);
 
             return GetMetadata(img);
