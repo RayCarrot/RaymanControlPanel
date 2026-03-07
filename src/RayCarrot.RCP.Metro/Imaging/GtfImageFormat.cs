@@ -26,32 +26,6 @@ public class GtfImageFormat : ImageFormat
         };
     }
 
-    // https://github.com/Zarh/ManaGunZ
-    private int GetSwizzleOffset(int x, int y, int log2Width, int log2Height)
-    {
-        int offset = 0;
-        int t = 0;
-
-        while (log2Width != 0 || log2Height != 0)
-        {
-            if (log2Width != 0)
-            {
-                offset |= (x & 0x01) << t;
-                x >>= 1;
-                ++t;
-                --log2Width;
-            }
-            if (log2Height != 0)
-            {
-                offset |= (y & 0x01) << t;
-                y >>= 1;
-                ++t;
-                --log2Height;
-            }
-        }
-
-        return offset;
-    }
 
     public override ImageMetadata GetMetadata(Stream inputStream)
     {
@@ -77,98 +51,43 @@ public class GtfImageFormat : ImageFormat
         if (texture.Cubemap || texture.Dimension != GTFDimension.Dimension2)
             throw new InvalidOperationException("Only 2D GTF textures are supported");
 
-        // TODO: Convert to a DDS file and use DDS format to decode. That way we can also keep the mipmaps.
+        ImageMetadata metadata = GetMetadata(texture);
+
         switch (texture.Format)
         {
-            // Unswizzle
             case GTFFormat.A8R8G8B8:
-                byte[] unswizzled = new byte[texture.Width * texture.Height * 4];
+                // Unswizzle
+                MortonSwizzle swizzle = new(texture.Width, texture.Height, 4);
+                imgData = swizzle.Unswizzle(imgData);
 
-                int log2Width = (int)Math.Log(texture.Width, 2);
-                int log2Height = (int)Math.Log(texture.Height, 2);
-
-                for (int y = 0; y < texture.Height; y++)
+                // Convert ARGB to BGRA
+                for (int i = 0; i < imgData.Length; i += 4)
                 {
-                    for (int x = 0; x < texture.Width; x++)
-                    {
-                        int offset = GetSwizzleOffset(x, y, log2Width, log2Height);
+                    byte a = imgData[i + 0];
+                    byte r = imgData[i + 1];
+                    byte g = imgData[i + 2];
+                    byte b = imgData[i + 3];
 
-                        unswizzled[(texture.Width * y + x) * 4 + 0] = imgData[offset * 4 + 0];
-                        unswizzled[(texture.Width * y + x) * 4 + 1] = imgData[offset * 4 + 1];
-                        unswizzled[(texture.Width * y + x) * 4 + 2] = imgData[offset * 4 + 2];
-                        unswizzled[(texture.Width * y + x) * 4 + 3] = imgData[offset * 4 + 3];
-                    }
+                    imgData[i + 0] = b;
+                    imgData[i + 1] = g;
+                    imgData[i + 2] = r;
+                    imgData[i + 3] = a;
                 }
 
-                imgData = unswizzled;
-                break;
+                return new RawImageData(imgData, RawImageDataPixelFormat.Bgra32, GetMetadata(texture));
 
-            // Decompress
             case GTFFormat.COMPRESSED_DXT1:
-            case GTFFormat.COMPRESSED_DXT23:
-            case GTFFormat.COMPRESSED_DXT45:
-                DDSParser.DDSStruct ddsHeader = new()
-                {
-                    pixelformat = new DDSParser.DDSStruct.pixelformatstruct() { rgbbitcount = 32 },
-                    width = texture.Width,
-                    height = texture.Height,
-                    depth = texture.Depth
-                };
+                return new RawImageData(imgData, RawImageDataCompressedFormat.DXT1, metadata);
 
-                imgData = texture.Format switch
-                {
-                    GTFFormat.COMPRESSED_DXT1 => DDSParser.DecompressDXT1(ddsHeader, imgData),
-                    GTFFormat.COMPRESSED_DXT23 => DDSParser.DecompressDXT3(ddsHeader, imgData),
-                    GTFFormat.COMPRESSED_DXT45 => DDSParser.DecompressDXT5(ddsHeader, imgData),
-                    _ => throw new ArgumentOutOfRangeException(nameof(texture.Format), texture.Format, null)
-                };
-                break;
+            case GTFFormat.COMPRESSED_DXT23:
+                return new RawImageData(imgData, RawImageDataCompressedFormat.DXT3, metadata);
+
+            case GTFFormat.COMPRESSED_DXT45:
+                return new RawImageData(imgData, RawImageDataCompressedFormat.DXT5, metadata);
 
             default:
                 throw new InvalidOperationException($"The GTF format {texture.Format} is not supported");
         }
-
-        // Remove mipmaps
-        Array.Resize(ref imgData, texture.Width * texture.Height * 4);
-
-        RawImageDataPixelFormat pixelFormat;
-
-        if (texture.Format == GTFFormat.A8R8G8B8)
-        {
-            // Convert ARGB to BGRA
-            pixelFormat = RawImageDataPixelFormat.Bgra32;
-            for (int i = 0; i < imgData.Length; i += 4)
-            {
-                byte a = imgData[i + 0];
-                byte r = imgData[i + 1];
-                byte g = imgData[i + 2];
-                byte b = imgData[i + 3];
-
-                imgData[i + 0] = b;
-                imgData[i + 1] = g;
-                imgData[i + 2] = r;
-                imgData[i + 3] = a;
-            }
-        }
-        else
-        {
-            // Convert RGBA to BGRA
-            pixelFormat = RawImageDataPixelFormat.Bgra32;
-            for (int i = 0; i < imgData.Length; i += 4)
-            {
-                byte r = imgData[i + 0];
-                byte g = imgData[i + 1];
-                byte b = imgData[i + 2];
-                byte a = imgData[i + 3];
-
-                imgData[i + 0] = b;
-                imgData[i + 1] = g;
-                imgData[i + 2] = r;
-                imgData[i + 3] = a;
-            }
-        }
-
-        return new RawImageData(imgData, pixelFormat, GetMetadata(texture));
     }
 
     public override ImageMetadata Encode(RawImageData data, Stream outputStream)

@@ -4,10 +4,67 @@ using System.Windows.Media.Imaging;
 
 namespace RayCarrot.RCP.Metro.Imaging;
 
+// TODO: Save mipmaps here too
 public class RawImageData
 {
+    public RawImageData(byte[] compressedData, RawImageDataCompressedFormat compressedFormat, ImageMetadata metadata)
+    {
+        CompressedData = compressedData;
+        CompressedFormat = compressedFormat;
+
+        switch (compressedFormat)
+        {
+            case RawImageDataCompressedFormat.None:
+                throw new ArgumentException("The data is not compressed", nameof(compressedFormat));
+            
+            case RawImageDataCompressedFormat.DXT1:
+            case RawImageDataCompressedFormat.DXT3:
+            case RawImageDataCompressedFormat.DXT5:
+                // TODO-UPDATE: Replace with native DDS call or better DXT code, use rgb24 for DXT1
+                DDSParser.DDSStruct ddsHeader = new()
+                {
+                    pixelformat = new DDSParser.DDSStruct.pixelformatstruct() { rgbbitcount = 32 },
+                    width = (uint)metadata.Width,
+                    height = (uint)metadata.Height,
+                    depth = 1
+                };
+
+                byte[] imgData = compressedFormat switch
+                {
+                    RawImageDataCompressedFormat.DXT1 => DDSParser.DecompressDXT1(ddsHeader, compressedData),
+                    RawImageDataCompressedFormat.DXT3 => DDSParser.DecompressDXT3(ddsHeader, compressedData),
+                    RawImageDataCompressedFormat.DXT5 => DDSParser.DecompressDXT5(ddsHeader, compressedData),
+                    _ => throw new ArgumentOutOfRangeException(nameof(compressedFormat), compressedFormat, null)
+                };
+
+                // Convert RGBA to BGRA
+                for (int i = 0; i < imgData.Length; i += 4)
+                {
+                    byte r = imgData[i + 0];
+                    byte g = imgData[i + 1];
+                    byte b = imgData[i + 2];
+                    byte a = imgData[i + 3];
+
+                    imgData[i + 0] = b;
+                    imgData[i + 1] = g;
+                    imgData[i + 2] = r;
+                    imgData[i + 3] = a;
+                }
+
+                RawData = imgData;
+                PixelFormat = RawImageDataPixelFormat.Bgra32;
+                break;
+            
+            default:
+                throw new ArgumentOutOfRangeException(nameof(compressedFormat), compressedFormat, null);
+        }
+        Metadata = metadata;
+    }
+
     public RawImageData(byte[] rawData, RawImageDataPixelFormat pixelFormat, ImageMetadata metadata)
     {
+        CompressedData = null;
+        CompressedFormat = RawImageDataCompressedFormat.None;
         RawData = rawData;
         PixelFormat = pixelFormat;
         Metadata = metadata;
@@ -17,7 +74,8 @@ public class RawImageData
     {
         using BitmapLock bmpLock = new(bmp);
 
-        Metadata = new ImageMetadata(bmp.Width, bmp.Height);
+        CompressedData = null;
+        CompressedFormat = RawImageDataCompressedFormat.None;
         RawData = bmpLock.Pixels;
         PixelFormat = bmp.PixelFormat switch
         {
@@ -25,10 +83,16 @@ public class RawImageData
             System.Drawing.Imaging.PixelFormat.Format32bppArgb => RawImageDataPixelFormat.Bgra32,
             _ => throw new InvalidOperationException("Unsupported pixel format")
         };
+        Metadata = new ImageMetadata(bmp.Width, bmp.Height);
     }
+
+    // TODO-UPDATE: Use this when converting if it's to a format which supports compressed data to avoid re-compressing it
+    public byte[]? CompressedData { get; }
+    public RawImageDataCompressedFormat CompressedFormat { get; }
 
     public byte[] RawData { get; }
     public RawImageDataPixelFormat PixelFormat { get; }
+
     public ImageMetadata Metadata { get; }
 
     public int GetBitsPerPixel()

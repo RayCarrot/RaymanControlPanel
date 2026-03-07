@@ -32,79 +32,49 @@ public class Xbox360D3DTextureImageFormat : ImageFormat
     {
         // Read the header
         using Context context = new RCPContext(String.Empty);
-        D3DTexture header = context.ReadStreamData<D3DTexture>(inputStream, endian: Endian.Big, mode: VirtualFileMode.DoNotClose, maintainPosition: true);
-        bool isCompressed = header.DataFormat != D3DTexture.GPUTEXTUREFORMAT.GPUTEXTUREFORMAT_8_8_8_8;
+        D3DTexture texture = context.ReadStreamData<D3DTexture>(inputStream, endian: Endian.Big, mode: VirtualFileMode.DoNotClose, maintainPosition: true);
 
         // TODO: Can we determine the length from the header instead?
         // Read the raw image data
         byte[] imgData = new byte[inputStream.Length - inputStream.Position];
         inputStream.Read(imgData, 0, imgData.Length);
 
-        // Untiled the image data
-        imgData = header.Untile(imgData, swapBytes: isCompressed);
+        // Untile the image data
+        imgData = texture.Untile(imgData);
 
-        // TODO: Convert to a DDS file and use DDS format to decode. That way we can also keep the mipmaps.
-        // Decompress
-        if (isCompressed)
+        ImageMetadata metadata = GetMetadata(texture);
+
+        switch (texture.DataFormat)
         {
-            DDSParser.DDSStruct ddsHeader = new()
-            {
-                pixelformat = new DDSParser.DDSStruct.pixelformatstruct() { rgbbitcount = 32 },
-                width = (uint)header.ActualWidth,
-                height = (uint)header.ActualHeight,
-                depth = 1
-            };
+            case D3DTexture.GPUTEXTUREFORMAT.GPUTEXTUREFORMAT_8_8_8_8:
+                // Convert ARGB to BGRA
+                for (int i = 0; i < imgData.Length; i += 4)
+                {
+                    byte a = imgData[i + 0];
+                    byte r = imgData[i + 1];
+                    byte g = imgData[i + 2];
+                    byte b = imgData[i + 3];
 
-            imgData = header.DataFormat switch
-            {
-                D3DTexture.GPUTEXTUREFORMAT.GPUTEXTUREFORMAT_DXT1 => DDSParser.DecompressDXT1(ddsHeader, imgData),
-                D3DTexture.GPUTEXTUREFORMAT.GPUTEXTUREFORMAT_DXT2_3 => DDSParser.DecompressDXT3(ddsHeader, imgData),
-                D3DTexture.GPUTEXTUREFORMAT.GPUTEXTUREFORMAT_DXT4_5 => DDSParser.DecompressDXT5(ddsHeader, imgData),
-                _ => throw new ArgumentOutOfRangeException(nameof(header.DataFormat), header.DataFormat, null)
-            };
+                    imgData[i + 0] = b;
+                    imgData[i + 1] = g;
+                    imgData[i + 2] = r;
+                    imgData[i + 3] = a;
+                }
+
+                return new RawImageData(imgData, RawImageDataPixelFormat.Bgra32, GetMetadata(texture));
+
+            case D3DTexture.GPUTEXTUREFORMAT.GPUTEXTUREFORMAT_DXT1:
+                return new RawImageData(imgData, RawImageDataCompressedFormat.DXT1, metadata);
+
+            case D3DTexture.GPUTEXTUREFORMAT.GPUTEXTUREFORMAT_DXT2_3:
+                return new RawImageData(imgData, RawImageDataCompressedFormat.DXT3, metadata);
+
+            case D3DTexture.GPUTEXTUREFORMAT.GPUTEXTUREFORMAT_DXT4_5:
+                return new RawImageData(imgData, RawImageDataCompressedFormat.DXT5, metadata);
+
+            default:
+                throw new InvalidOperationException($"The GTF format {texture.DataFormat} is not supported");
         }
-
-        // Remove mipmaps
-        Array.Resize(ref imgData, header.ActualWidth * header.ActualHeight * 4);
-
-        RawImageDataPixelFormat pixelFormat;
-
-        if (header.DataFormat == D3DTexture.GPUTEXTUREFORMAT.GPUTEXTUREFORMAT_8_8_8_8)
-        {
-            // Convert ARGB to BGRA
-            pixelFormat = RawImageDataPixelFormat.Bgra32;
-            for (int i = 0; i < imgData.Length; i += 4)
-            {
-                byte a = imgData[i + 0];
-                byte r = imgData[i + 1];
-                byte g = imgData[i + 2];
-                byte b = imgData[i + 3];
-
-                imgData[i + 0] = b;
-                imgData[i + 1] = g;
-                imgData[i + 2] = r;
-                imgData[i + 3] = a;
-            }
-        }
-        else
-        {
-            // Convert RGBA to BGRA
-            pixelFormat = RawImageDataPixelFormat.Bgra32;
-            for (int i = 0; i < imgData.Length; i += 4)
-            {
-                byte r = imgData[i + 0];
-                byte g = imgData[i + 1];
-                byte b = imgData[i + 2];
-                byte a = imgData[i + 3];
-
-                imgData[i + 0] = b;
-                imgData[i + 1] = g;
-                imgData[i + 2] = r;
-                imgData[i + 3] = a;
-            }
-        }
-
-        return new RawImageData(imgData, pixelFormat, GetMetadata(header));
     }
 
     public override ImageMetadata Encode(RawImageData data, Stream outputStream)
