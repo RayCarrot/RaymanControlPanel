@@ -61,7 +61,7 @@ public class Xbox360D3DTextureImageFormat : ImageFormat
                     imgData[i + 3] = a;
                 }
 
-                return new RawImageData(imgData, RawImageDataPixelFormat.Bgra32, GetMetadata(texture));
+                return new RawImageData(imgData, RawImageDataPixelFormat.Bgra32, metadata);
 
             case D3DTexture.GPUTEXTUREFORMAT.GPUTEXTUREFORMAT_DXT1:
                 return new RawImageData(imgData, RawImageDataCompressedFormat.DXT1, metadata);

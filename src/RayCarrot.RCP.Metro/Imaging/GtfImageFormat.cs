@@ -74,7 +74,7 @@ public class GtfImageFormat : ImageFormat
                     imgData[i + 3] = a;
                 }
 
-                return new RawImageData(imgData, RawImageDataPixelFormat.Bgra32, GetMetadata(texture));
+                return new RawImageData(imgData, RawImageDataPixelFormat.Bgra32, metadata);
 
             case GTFFormat.COMPRESSED_DXT1:
                 return new RawImageData(imgData, RawImageDataCompressedFormat.DXT1, metadata);
