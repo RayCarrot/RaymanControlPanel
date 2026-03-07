@@ -238,7 +238,7 @@ public class GameTitle : Control, IRecipient<ModifiedGamesMessage>
 
     #region Message Receivers
 
-    void IRecipient<ModifiedGamesMessage>.Receive(ModifiedGamesMessage message) => RefreshName();
+    void IRecipient<ModifiedGamesMessage>.Receive(ModifiedGamesMessage message) => Dispatcher.Invoke(RefreshName);
 
     #endregion
 }
