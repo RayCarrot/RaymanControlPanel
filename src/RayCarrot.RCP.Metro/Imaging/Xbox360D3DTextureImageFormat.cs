@@ -44,6 +44,20 @@ public class Xbox360D3DTextureImageFormat : ImageFormat
 
         ImageMetadata metadata = GetMetadata(texture);
 
+        // Remove mipmaps for now
+        Array.Resize(ref imgData, texture.DataFormat switch
+        {
+            D3DTexture.GPUTEXTUREFORMAT.GPUTEXTUREFORMAT_8_8_8_8 => 
+                texture.ActualWidth * texture.ActualHeight * 4,
+            D3DTexture.GPUTEXTUREFORMAT.GPUTEXTUREFORMAT_DXT1 => 
+                BlockCompressionHelpers.GetImageLength(RawImageDataCompressedFormat.DXT1, texture.ActualWidth, texture.ActualHeight),
+            D3DTexture.GPUTEXTUREFORMAT.GPUTEXTUREFORMAT_DXT2_3 => 
+                BlockCompressionHelpers.GetImageLength(RawImageDataCompressedFormat.DXT3, texture.ActualWidth, texture.ActualHeight),
+            D3DTexture.GPUTEXTUREFORMAT.GPUTEXTUREFORMAT_DXT4_5 => 
+                BlockCompressionHelpers.GetImageLength(RawImageDataCompressedFormat.DXT5, texture.ActualWidth, texture.ActualHeight),
+            _ => throw new InvalidOperationException($"The D3D format {texture.DataFormat} is not supported"),
+        });
+
         switch (texture.DataFormat)
         {
             case D3DTexture.GPUTEXTUREFORMAT.GPUTEXTUREFORMAT_8_8_8_8:
@@ -73,7 +87,7 @@ public class Xbox360D3DTextureImageFormat : ImageFormat
                 return new RawImageData(imgData, RawImageDataCompressedFormat.DXT5, metadata);
 
             default:
-                throw new InvalidOperationException($"The GTF format {texture.DataFormat} is not supported");
+                throw new InvalidOperationException($"The D3D format {texture.DataFormat} is not supported");
         }
     }
 

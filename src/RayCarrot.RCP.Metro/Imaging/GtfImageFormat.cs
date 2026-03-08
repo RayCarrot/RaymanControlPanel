@@ -53,6 +53,16 @@ public class GtfImageFormat : ImageFormat
 
         ImageMetadata metadata = GetMetadata(texture);
 
+        // Remove mipmaps for now
+        Array.Resize(ref imgData, texture.Format switch
+        {
+            GTFFormat.A8R8G8B8 => texture.Width * texture.Height * 4,
+            GTFFormat.COMPRESSED_DXT1 => BlockCompressionHelpers.GetImageLength(RawImageDataCompressedFormat.DXT1, texture.Width, texture.Height),
+            GTFFormat.COMPRESSED_DXT23 => BlockCompressionHelpers.GetImageLength(RawImageDataCompressedFormat.DXT3, texture.Width, texture.Height),
+            GTFFormat.COMPRESSED_DXT45 => BlockCompressionHelpers.GetImageLength(RawImageDataCompressedFormat.DXT5, texture.Width, texture.Height),
+            _ => throw new InvalidOperationException($"The GTF format {texture.Format} is not supported"),
+        });
+
         switch (texture.Format)
         {
             case GTFFormat.A8R8G8B8:
