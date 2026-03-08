@@ -153,9 +153,9 @@ namespace RayCarrot.RCP.Metro {
         /// <summary>
         ///   Looks up a localized string similar to Portuguese (Portugal) program translation.
         /// </summary>
-        public static string About_Credits_HarukaTavares {
+        public static string About_Credits_Haruka_VII {
             get {
-                return ResourceManager.GetString("About_Credits_HarukaTavares", resourceCulture);
+                return ResourceManager.GetString("About_Credits_Haruka_VII", resourceCulture);
             }
         }
         
