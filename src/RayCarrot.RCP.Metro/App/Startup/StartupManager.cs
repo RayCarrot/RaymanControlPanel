@@ -347,6 +347,9 @@ public class StartupManager
             // Update the last version
             Data.App_LastVersion = AppViewModel.CurrentAppVersion;
 
+            // Save the app data
+            AppDataManager.Save();
+
             try
             {
                 // Clear the temp folder
