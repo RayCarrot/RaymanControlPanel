@@ -24,35 +24,6 @@ public class DdsImageFormat : ImageFormat
             return scratchImg.Convert(0, format, TEX_FILTER_FLAGS.DEFAULT, 0.5f);
     }
 
-    private byte[] GetRawBytes(Image img)
-    {
-        int bytesPerPixel = TexHelper.Instance.BitsPerPixel(img.Format) / 8;
-        byte[] rawBytes = new byte[img.RowPitch * img.Height];
-
-        // Copy directly if no padding
-        if (img.RowPitch == img.Width * bytesPerPixel)
-        {
-            Marshal.Copy(
-                source: img.Pixels,
-                destination: rawBytes,
-                startIndex: 0,
-                length: rawBytes.Length);
-        }
-        // Copy row by row
-        else
-        {
-            for (int y = 0; y < img.Height; y++)
-            {
-                Marshal.Copy(
-                    source: img.Pixels + y * (int)img.RowPitch,
-                    destination: rawBytes,
-                    startIndex: y * img.Width * bytesPerPixel,
-                    length: img.Width * bytesPerPixel);
-            }
-        }
-
-        return rawBytes;
-    }
 
     public override FileExtension[] FileExtensions { get; } =
     {
@@ -95,6 +66,7 @@ public class DdsImageFormat : ImageFormat
         }
     }
 
+    // TODO-UPDATE: Don't decompress here!
     public override RawImageData Decode(Stream inputStream)
     {
         // TODO: Not great to determine the length like this. Maybe we should pass in byte array to Decode instead
@@ -119,7 +91,7 @@ public class DdsImageFormat : ImageFormat
             Image primaryImg = bgraScratchImg.GetImage(0);
 
             // Get the raw bytes
-            byte[] rawBytes = GetRawBytes(primaryImg);
+            byte[] rawBytes = primaryImg.GetRawBytes();
 
             return new RawImageData(rawBytes, RawImageDataPixelFormat.Bgra32, GetMetadata(scratchImg.GetMetadata()));
         }

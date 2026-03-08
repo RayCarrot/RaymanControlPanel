@@ -20,44 +20,14 @@ public class RawImageData
             case RawImageDataCompressedFormat.DXT1:
             case RawImageDataCompressedFormat.DXT3:
             case RawImageDataCompressedFormat.DXT5:
-                // TODO-UPDATE: Replace with native DDS call or better DXT code, use rgb24 for DXT1
-                DDSParser.DDSStruct ddsHeader = new()
-                {
-                    pixelformat = new DDSParser.DDSStruct.pixelformatstruct() { rgbbitcount = 32 },
-                    width = (uint)metadata.Width,
-                    height = (uint)metadata.Height,
-                    depth = 1
-                };
-
-                byte[] imgData = compressedFormat switch
-                {
-                    RawImageDataCompressedFormat.DXT1 => DDSParser.DecompressDXT1(ddsHeader, compressedData),
-                    RawImageDataCompressedFormat.DXT3 => DDSParser.DecompressDXT3(ddsHeader, compressedData),
-                    RawImageDataCompressedFormat.DXT5 => DDSParser.DecompressDXT5(ddsHeader, compressedData),
-                    _ => throw new ArgumentOutOfRangeException(nameof(compressedFormat), compressedFormat, null)
-                };
-
-                // Convert RGBA to BGRA
-                for (int i = 0; i < imgData.Length; i += 4)
-                {
-                    byte r = imgData[i + 0];
-                    byte g = imgData[i + 1];
-                    byte b = imgData[i + 2];
-                    byte a = imgData[i + 3];
-
-                    imgData[i + 0] = b;
-                    imgData[i + 1] = g;
-                    imgData[i + 2] = r;
-                    imgData[i + 3] = a;
-                }
-
-                RawData = imgData;
+                RawData = BlockCompressionHelpers.Decompress(compressedData, compressedFormat, metadata.Width, metadata.Height);
                 PixelFormat = RawImageDataPixelFormat.Bgra32;
                 break;
             
             default:
                 throw new ArgumentOutOfRangeException(nameof(compressedFormat), compressedFormat, null);
         }
+
         Metadata = metadata;
     }
 
