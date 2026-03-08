@@ -72,13 +72,8 @@
                     Margin="0 0 0 4" />
 
             <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
                 
-                <mah:ClipBorder Grid.Column="0"
-                                HorizontalAlignment="Left"
+                <mah:ClipBorder HorizontalAlignment="Left"
                                 CornerRadius="{StaticResource CornerRadius.Default}" 
                                 Height="250"
                                 Margin="0 0 0 4">
@@ -86,14 +81,13 @@
                            RenderOptions.BitmapScalingMode="HighQuality" />
                 </mah:ClipBorder>
 
-                <rcp:AprilFoolsGif Grid.Column="1"
-                                   RenderOptions.BitmapScalingMode="NearestNeighbor"
+                <rcp:AprilFoolsGif RenderOptions.BitmapScalingMode="NearestNeighbor"
                                    Asset="RabbidHelico"
                                    Height="100" 
-                                   Margin="100 0 0 0"
-                                   FlashMargin="104 -16 0 0"
+                                   Margin="0 0 20 0"
+                                   FlashMargin="0 -16 0 0"
                                    VerticalAlignment="Center" 
-                                   HorizontalAlignment="Left"
+                                   HorizontalAlignment="Right"
                                    RenderTransformOrigin="0.5,0.5">
                     <rcp:AprilFoolsGif.RenderTransform>
                         <ScaleTransform ScaleX="-1"/>
