@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Text;
 using System.Windows.Input;
 using RayCarrot.RCP.Metro.Games.Finder;
 using RayCarrot.RCP.Metro.Games.GameFileFinder;
@@ -208,7 +209,25 @@ public class AddGamesViewModel : BaseViewModel, IInitializable,
         {
             Logger.Info("The game file finder found {0} games", addedGames.Count);
 
-            await Services.MessageUI.DisplayMessageAsync($"{Resources.GameFileFinder_GamesFound}{Environment.NewLine}{Environment.NewLine}• {addedGames.Select(x => x.GetDisplayName()).JoinItems(Environment.NewLine + "• ")}", Resources.GameFileFinder_GamesFoundHeader, MessageType.Success);
+            StringBuilder sb = new();
+            sb.Append(Resources.GameFileFinder_GamesFound);
+            sb.AppendLine();
+
+            for (int i = 0; i < addedGames.Count; i++)
+            {
+                sb.AppendLine();
+
+                // Limit at 25
+                if (i >= 25)
+                {
+                    sb.Append("...");
+                    break;
+                }
+
+                sb.Append($"• {addedGames[i].GetDisplayName()}");
+            }
+
+            await Services.MessageUI.DisplayMessageAsync(sb.ToString(), Resources.GameFileFinder_GamesFoundHeader, MessageType.Success);
         }
         else
         {
