@@ -16,26 +16,24 @@ public sealed class CookedUbiArtTextureFileType : FileType
 
     public CookedUbiArtTextureFileType()
     {
-        SupportedFormats = new ImageFormat[]
-        {
+        ImageFormat[] defaultFormats =
+        [
             new PngImageFormat(),
             new JpgImageFormat(),
             new BmpImageFormat(),
             new TgaImageFormat(),
-            new DdsImageFormat(),
-        };
+            new DdsImageFormat()
+        ];
 
-        DdsSubType = new CookedUbiArtTextureSubFileType(new DdsImageFormat(), SupportedFormats);
-        Xbox360D3DTextureSubType = new CookedUbiArtTextureSubFileType(new Xbox360D3DTextureImageFormat(), SupportedFormats);
-        GtfImageFormat = new CookedUbiArtTextureSubFileType(new GtfImageFormat(), SupportedFormats);
-        PvrSubType = new CookedUbiArtTextureSubFileType(new PvrImageFormat(), SupportedFormats);
+        DdsSubType = new CookedUbiArtTextureSubFileType(new DdsImageFormat(), defaultFormats);
+        Xbox360D3DTextureSubType = new CookedUbiArtTextureSubFileType(new Xbox360D3DTextureImageFormat(), defaultFormats);
+        GtfImageFormat = new CookedUbiArtTextureSubFileType(new GtfImageFormat(), defaultFormats);
+        PvrSubType = new CookedUbiArtTextureSubFileType(new PvrImageFormat(), defaultFormats);
     }
 
     #endregion
 
     #region Private Properties
-
-    private ImageFormat[] SupportedFormats { get; }
 
     private CookedUbiArtTextureSubFileType DdsSubType { get; }
     private CookedUbiArtTextureSubFileType Xbox360D3DTextureSubType { get; }
@@ -154,8 +152,8 @@ public sealed class CookedUbiArtTextureFileType : FileType
     }
 
     // TODO-UPDATE: Issue with multiple extensions. If you import with multiple extensions (such as "File.tga.ckd.png") then this fails.
-    private ImageFormat GetImageFormat(FileExtension fileExtension) =>
-        SupportedFormats.First(x => x.FileExtensions.Contains(fileExtension));
+    private ImageFormat GetImageFormat(CookedUbiArtTextureSubFileType subType, FileExtension fileExtension) =>
+        subType.SupportedFormats.First(x => x.FileExtensions.Contains(fileExtension));
 
     #endregion
 
@@ -223,9 +221,12 @@ public sealed class CookedUbiArtTextureFileType : FileType
         // Read the header
         TextureCooked? header = ReadCookedHeader(inputStream, settings, manager);
 
+        // Get the sub-type
+        CookedUbiArtTextureSubFileType subType = GetSubType(settings, () => header);
+
         // Get the formats
-        ImageFormat inputImageFormat = GetSubType(settings, () => header).ImageFormat;
-        ImageFormat outputImageFormat = GetImageFormat(outputFormat);
+        ImageFormat inputImageFormat = subType.ImageFormat;
+        ImageFormat outputImageFormat = GetImageFormat(subType, outputFormat);
 
         // Convert manually if remapped
         if (header is { IsRemapped: true })
@@ -262,9 +263,12 @@ public sealed class CookedUbiArtTextureFileType : FileType
         // Read the header
         TextureCooked? header = ReadCookedHeader(currentFileStream, settings, manager);
 
+        // Get the sub-type
+        CookedUbiArtTextureSubFileType subType = GetSubType(settings, () => header);
+
         // Get the formats
-        ImageFormat inputImageFormat = GetImageFormat(inputFormat);
-        ImageFormat outputImageFormat = GetSubType(settings, () => header).ImageFormat;
+        ImageFormat inputImageFormat = GetImageFormat(subType, inputFormat);
+        ImageFormat outputImageFormat = subType.ImageFormat;
 
         // Skip the header since we right that last
         int dataOffset = (int)(header?.RawDataStartOffset ?? 0);
@@ -314,37 +318,59 @@ public sealed class CookedUbiArtTextureFileType : FileType
             : base(imageFormat.Name, GetImportFormats(imageFormat, supportedFormats), GetExportFormats(imageFormat, supportedFormats))
         {
             ImageFormat = imageFormat;
+            SupportedFormats = supportedFormats.Append(imageFormat).Distinct().ToArray();
         }
 
+        public ImageFormat[] SupportedFormats { get; }
         public ImageFormat ImageFormat { get; }
 
         private static FileExtension[] GetImportFormats(ImageFormat imageFormat, ImageFormat[] supportedFormats)
         {
+            // If the texture can be encoded then we have a lot of formats to choose between...
             if (imageFormat.CanEncode)
             {
-                return supportedFormats.
-                    Where(x => x.CanEncode).
-                    SelectMany(x => x.FileExtensions).
-                    ToArray();
+                List<FileExtension> extensions = new();
+
+                // Allow importing from the same format if we can decode it (we need to decode to update the cooked header)
+                if (imageFormat.CanDecode)
+                    extensions.AddRange(imageFormat.FileExtensions);
+
+                // Add the supported formats
+                extensions.AddRange(supportedFormats.Where(x => x.CanEncode).SelectMany(x => x.FileExtensions));
+                
+                // Return distinct ones (since supported formats might contain the main format)
+                return extensions.Distinct().ToArray();
             }
             else
             {
-                return Array.Empty<FileExtension>();
+                // If we can't encode, but we can decode, then we can import the same format (we need to decode to update the cooked header)
+                if (imageFormat.CanDecode)
+                    return imageFormat.FileExtensions;
+                else
+                    return Array.Empty<FileExtension>();
             }
         }
 
         private static FileExtension[] GetExportFormats(ImageFormat imageFormat, ImageFormat[] supportedFormats)
         {
+            // If the texture can be decoded then we have a lot of formats to choose between...
             if (imageFormat.CanDecode)
             {
-                return supportedFormats.
-                    Where(x => x.CanDecode).
-                    SelectMany(x => x.FileExtensions.Take(1)).
-                    ToArray();
+                List<FileExtension> extensions = new();
+
+                // Allow exporting from the same format
+                extensions.AddRange(imageFormat.FileExtensions.Take(1));
+
+                // Add the supported formats
+                extensions.AddRange(supportedFormats.Where(x => x.CanEncode).SelectMany(x => x.FileExtensions.Take(1)));
+
+                // Return distinct ones (since supported formats might contain the main format)
+                return extensions.Distinct().ToArray();
             }
             else
             {
-                return Array.Empty<FileExtension>();
+                // If we can't decode then we can always export as the main format itself
+                return imageFormat.FileExtensions.Take(1).ToArray();
             }
         }
     }
