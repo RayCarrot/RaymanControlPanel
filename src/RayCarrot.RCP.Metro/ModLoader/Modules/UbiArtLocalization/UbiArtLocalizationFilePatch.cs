@@ -7,16 +7,22 @@ namespace RayCarrot.RCP.Metro.ModLoader.Modules.UbiArtLocalization;
 public class UbiArtLocalizationFilePatch<UAString> : IFilePatch
     where UAString : UbiArtString, new()
 {
-    public UbiArtLocalizationFilePatch(GameInstallation gameInstallation, ModFilePath path, IReadOnlyCollection<LocaleFile> localeFiles)
+    public UbiArtLocalizationFilePatch(
+        GameInstallation gameInstallation, 
+        ModFilePath path, 
+        IReadOnlyCollection<LocaleFile> localeFiles, 
+        FileSystemPath? audioFile)
     {
         GameInstallation = gameInstallation;
         Path = path;
         LocaleFiles = localeFiles;
+        AudioFile = audioFile;
     }
 
     public GameInstallation GameInstallation { get; }
     public ModFilePath Path { get; }
     public IReadOnlyCollection<LocaleFile> LocaleFiles { get; }
+    public FileSystemPath? AudioFile { get; }
 
     public void PatchFile(Stream stream)
     {
@@ -65,6 +71,66 @@ public class UbiArtLocalizationFilePatch<UAString> : IFilePatch
             }
 
             loc.Strings.First(x => x.Key == localeFile.Id).Value = stringTable.ToArray();
+        }
+
+        if (AudioFile != null)
+        {
+            List<UbiArtKeyObjValuePair<int, LocAudio<UAString>>> audioTable = loc.Audio.ToList();
+
+            string[] lines = File.ReadAllLines(AudioFile);
+
+            foreach (string line in lines)
+            {
+                if (line.IsNullOrWhiteSpace())
+                    continue;
+
+                int separatorIndex = line.IndexOf('=');
+
+                if (separatorIndex == -1)
+                    continue;
+
+                string locIdString = line.Substring(0, separatorIndex);
+                if (!Int32.TryParse(locIdString, out int locId))
+                    continue;
+
+                string audioPath = line.Substring(separatorIndex + 1);
+
+                // Default to -10 since that's the most common value the game uses
+                float audioVolume = -10;
+
+                // Attempt to get the volume from the string
+                int volumeSeparatorIndex = audioPath.IndexOf('|');
+                if (volumeSeparatorIndex != -1)
+                {
+                    string volumeString = audioPath.Substring(volumeSeparatorIndex + 1);
+                    if (Single.TryParse(volumeString, out float parsedVolume))
+                        audioVolume = parsedVolume;
+
+                    audioPath = audioPath.Substring(0, volumeSeparatorIndex);
+                }
+
+                LocAudio<UAString> locAudio = new()
+                {
+                    LocalisationId = 0, // Always 0 in file
+                    AudioFile = new UAString() { Value = audioPath },
+                    AudioVolume = audioVolume
+                };
+
+                if (audioTable.FirstOrDefault(x => x.Key == locId) is { } pair)
+                {
+                    pair.Value = locAudio;
+                }
+                else
+                {
+                    audioTable.Add(new UbiArtKeyObjValuePair<int, LocAudio<UAString>>()
+                    {
+                        Key = locId,
+                        Value = locAudio,
+                    });
+                }
+            }
+
+            loc.Audio = audioTable.ToArray();
         }
 
         context.WriteStreamData(stream, loc, name: Path.FilePath, endian: Endian.Big, mode: VirtualFileMode.DoNotClose);

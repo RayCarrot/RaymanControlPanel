@@ -6,6 +6,8 @@ namespace RayCarrot.RCP.Metro.ModLoader.Modules.UbiArtLocalization;
 
 public class UbiArtLocalizationModule : ModModule
 {
+    public const string AudioFileName = "audio.txt";
+
     private static string[] Locales_OriginsPC { get; } = 
     { 
         "en-US",
@@ -74,7 +76,9 @@ public class UbiArtLocalizationModule : ModModule
         };
 
         List<LocaleFile> localeFiles = new();
+        FileSystemPath? audioFile = null;
 
+        // Locate the locale files
         foreach (FileSystemPath filePath in Directory.GetFiles(modulePath, "*.txt", SearchOption.TopDirectoryOnly))
         {
             string fileName = filePath.RemoveFileExtension().Name;
@@ -84,18 +88,22 @@ public class UbiArtLocalizationModule : ModModule
                 localeFiles.Add(new LocaleFile(localeId, filePath));
         }
 
-        if (localeFiles.Count == 0)
+        // Locate the audio file
+        if ((modulePath + AudioFileName).FileExists)
+            audioFile = modulePath + AudioFileName;
+
+        if (localeFiles.Count == 0 && audioFile == null)
             return Array.Empty<IFilePatch>();
 
         if (ubiArtSettings is { Game: BinarySerializer.UbiArt.Game.RaymanOrigins, Platform: Platform.PC })
         {
             ModFilePath locFilePath = new(@"localisation\localisation.loc", @"GameData\bundle_PC.ipk", UbiArtArchiveComponent.Id);
-            return new UbiArtLocalizationFilePatch<String16>(mod.GameInstallation, locFilePath, localeFiles).YieldToArray();
+            return new UbiArtLocalizationFilePatch<String16>(mod.GameInstallation, locFilePath, localeFiles, audioFile).YieldToArray();
         }
         else if (ubiArtSettings is { Game: BinarySerializer.UbiArt.Game.RaymanLegends, Platform: Platform.PC })
         {
             ModFilePath locFilePath = new(@"EngineData\Localisation\localisation.loc8");
-            return new UbiArtLocalizationFilePatch<String8>(mod.GameInstallation, locFilePath, localeFiles).YieldToArray();
+            return new UbiArtLocalizationFilePatch<String8>(mod.GameInstallation, locFilePath, localeFiles, audioFile).YieldToArray();
         }
         else
         {
