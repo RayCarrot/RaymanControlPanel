@@ -12,6 +12,11 @@ public class DdsImageFormat : ImageFormat
     public override bool CanDecode => true;
     public override bool CanEncode => true;
 
+    public override FileExtension[] FileExtensions { get; } =
+    {
+        new(".dds"),
+    };
+
     private ScratchImage ConvertAndDecompress(ScratchImage scratchImg, DXGI_FORMAT format)
     {
         DXGI_FORMAT currentFormat = scratchImg.GetMetadata().Format;
@@ -23,12 +28,6 @@ public class DdsImageFormat : ImageFormat
         else
             return scratchImg.Convert(0, format, TEX_FILTER_FLAGS.DEFAULT, 0.5f);
     }
-
-
-    public override FileExtension[] FileExtensions { get; } =
-    {
-        new(".dds"),
-    };
 
     private ImageMetadata GetMetadata(TexMetadata metadata)
     {
@@ -128,31 +127,53 @@ public class DdsImageFormat : ImageFormat
 
     public override ImageMetadata Encode(RawImageData data, Stream outputStream)
     {
-        byte[] rawData = data.PixelFormat switch
-        {
-            RawImageDataPixelFormat.Bgr24 => data.Convert(RawImageDataPixelFormat.Bgra32),
-            RawImageDataPixelFormat.Bgra32 => data.RawData,
-            _ => throw new ArgumentOutOfRangeException(nameof(data.PixelFormat), data.PixelFormat, null)
-        };
-
         int width = data.Metadata.Width;
         int height = data.Metadata.Height;
 
         if (!width.IsPowerOfTwo() || !height.IsPowerOfTwo())
             throw new Exception("In order to ensure full compatibility and to generate mipmaps the image must have dimensions which are a power of 2, such as 128, 256, 512, 1024 etc.");
 
-        int rowPitch = width * 4;
-        int slicePitch = width * height * 4;
+        // If the data is block compressed then we want to maintain that to avoid re-compressing it
+        DXGI_FORMAT sourceFormat;
+        byte[] sourceData;
+        bool shouldCompress;
+        if (data.IsBlockCompressed)
+        {
+            sourceFormat = data.CompressedFormat switch
+            {
+                RawImageDataCompressedFormat.DXT1 => DXGI_FORMAT.BC1_UNORM,
+                RawImageDataCompressedFormat.DXT3 => DXGI_FORMAT.BC2_UNORM,
+                RawImageDataCompressedFormat.DXT5 => DXGI_FORMAT.BC3_UNORM,
+                _ => throw new ArgumentException("The image is not block compressed", nameof(data.CompressedFormat))
+            };
+            sourceData = data.CompressedData;
+            shouldCompress = false;
+        }
+        else
+        {
+            sourceFormat = DXGI_FORMAT.B8G8R8A8_UNORM;
+            sourceData = data.PixelFormat switch
+            {
+                RawImageDataPixelFormat.Bgr24 => data.Convert(RawImageDataPixelFormat.Bgra32),
+                RawImageDataPixelFormat.Bgra32 => data.RawData,
+                _ => throw new ArgumentOutOfRangeException(nameof(data.PixelFormat), data.PixelFormat, null)
+            };
+            shouldCompress = true;
+        }
 
-        IntPtr rawDataPtr = Marshal.AllocHGlobal(slicePitch);
+        // Computer the row and slice pitch
+        TexHelper.Instance.ComputePitch(sourceFormat, width, height, out long rowPitch, out long slicePitch, CP_FLAGS.NONE);
+        
+        IntPtr rawDataPtr = Marshal.AllocHGlobal((int)slicePitch);
+        ScratchImage? scratchImage = null;
         try
         {
-            Marshal.Copy(rawData, 0, rawDataPtr, slicePitch);
+            Marshal.Copy(sourceData, 0, rawDataPtr, (int)slicePitch);
 
             Image img = new(
                 width: width,
                 height: height,
-                format: DXGI_FORMAT.B8G8R8A8_UNORM,
+                format: sourceFormat,
                 rowPitch: rowPitch,
                 slicePitch: slicePitch,
                 pixels: rawDataPtr,
@@ -169,29 +190,43 @@ public class DdsImageFormat : ImageFormat
                 format: img.Format,
                 dimension: TEX_DIMENSION.TEXTURE2D);
 
-            using ScratchImage scratchImage = TexHelper.Instance.InitializeTemporary(new[] { img }, texMetadata, null);
+            scratchImage = TexHelper.Instance.InitializeTemporary(new[] { img }, texMetadata, null);
 
-            // Separate alpha to avoid alpha blending issues for mipmaps
-            const TEX_FILTER_FLAGS filterFlags = TEX_FILTER_FLAGS.BOX | TEX_FILTER_FLAGS.SEPARATE_ALPHA;
-            const TEX_COMPRESS_FLAGS compFlags = TEX_COMPRESS_FLAGS.PARALLEL;
+            // Generate mipmaps if the format is not compressed
+            if (!TexHelper.Instance.IsCompressed(sourceFormat))
+            {
+                // Separate alpha to avoid alpha blending issues for mipmaps
+                const TEX_FILTER_FLAGS filterFlags = TEX_FILTER_FLAGS.BOX | TEX_FILTER_FLAGS.SEPARATE_ALPHA;
 
-            // Generate mipmaps for all level (0 does for all levels down to 1x1)
-            using ScratchImage mip = scratchImage.GenerateMipMaps(filterFlags, 0);
-            
-            // Compress to either DXT1 or DXT5
-            DXGI_FORMAT format = mip.IsAlphaAllOpaque() 
-                ? DXGI_FORMAT.BC1_UNORM  // DXT1
-                : DXGI_FORMAT.BC3_UNORM; // DXT5
-            using ScratchImage comp = mip.Compress(format, compFlags, 0.5f);
+                // Generate mipmaps for all level (0 does for all levels down to 1x1)
+                ScratchImage mip = scratchImage.GenerateMipMaps(filterFlags, 0);
+                scratchImage.Dispose();
+                scratchImage = mip;
+            }
 
-            UnmanagedMemoryStream ddsStream = comp.SaveToDDSMemory(DDS_FLAGS.NONE);
+            // Optionally compress
+            if (shouldCompress)
+            {
+                const TEX_COMPRESS_FLAGS compFlags = TEX_COMPRESS_FLAGS.PARALLEL;
+
+                // Compress to either DXT1 or DXT5
+                DXGI_FORMAT format = scratchImage.IsAlphaAllOpaque()
+                    ? DXGI_FORMAT.BC1_UNORM  // DXT1
+                    : DXGI_FORMAT.BC3_UNORM; // DXT5
+                ScratchImage comp = scratchImage.Compress(format, compFlags, 0.5f);
+                scratchImage.Dispose();
+                scratchImage = comp;
+            }
+
+            UnmanagedMemoryStream ddsStream = scratchImage.SaveToDDSMemory(DDS_FLAGS.NONE);
             ddsStream.CopyToEx(outputStream);
 
-            return GetMetadata(comp.GetMetadata());
+            return GetMetadata(scratchImage.GetMetadata());
         }
         finally
         {
             Marshal.FreeHGlobal(rawDataPtr);
+            scratchImage?.Dispose();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -66,9 +67,17 @@ public class RawImageData
         Metadata = new ImageMetadata(bmp.Width, bmp.Height);
     }
 
-    // TODO-UPDATE: Use this when converting if it's to a format which supports compressed data to avoid re-compressing it
     public byte[]? CompressedData { get; }
     public RawImageDataCompressedFormat CompressedFormat { get; }
+
+    [MemberNotNullWhen(true, nameof(CompressedData))]
+    public bool IsCompressed => CompressedFormat != RawImageDataCompressedFormat.None;
+
+    [MemberNotNullWhen(true, nameof(CompressedData))]
+    public bool IsBlockCompressed => CompressedFormat is 
+        RawImageDataCompressedFormat.DXT1 or 
+        RawImageDataCompressedFormat.DXT3 or 
+        RawImageDataCompressedFormat.DXT5;
 
     public byte[] RawData { get; }
     public RawImageDataPixelFormat PixelFormat { get; }
