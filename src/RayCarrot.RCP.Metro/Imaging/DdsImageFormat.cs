@@ -19,18 +19,6 @@ public class DdsImageFormat : ImageFormat
         new(".dds"),
     };
 
-    private static ScratchImage ConvertAndDecompress(ScratchImage scratchImg, DXGI_FORMAT format)
-    {
-        DXGI_FORMAT currentFormat = scratchImg.GetMetadata().Format;
-
-        if (currentFormat == format)
-            return scratchImg;
-        else if (TexHelper.Instance.IsCompressed(currentFormat))
-            return scratchImg.Decompress(0, format);
-        else
-            return scratchImg.Convert(0, format, TEX_FILTER_FLAGS.DEFAULT, 0.5f);
-    }
-
     private static ScratchImage Compress(ScratchImage scratchImage)
     {
         const TEX_COMPRESS_FLAGS compFlags = TEX_COMPRESS_FLAGS.PARALLEL;
@@ -40,6 +28,19 @@ public class DdsImageFormat : ImageFormat
             ? DXGI_FORMAT.BC1_UNORM  // DXT1
             : DXGI_FORMAT.BC3_UNORM; // DXT5
         return scratchImage.Compress(format, compFlags, 0.5f);
+    }
+
+    private static MipmapImage[] GetMipmapImages(ScratchImage scratchImage)
+    {
+        int mipmapLevels = scratchImage.GetMetadata().MipLevels;
+        MipmapImage[] mipmaps = new MipmapImage[mipmapLevels];
+        for (int i = 0; i < mipmapLevels; i++)
+        {
+            Image image = scratchImage.GetImage(i);
+            byte[] rawData = image.GetRawBytes();
+            mipmaps[i] = new MipmapImage(rawData, image.Width, image.Height);
+        }
+        return mipmaps;
     }
 
     private static ScratchImage GenerateMipmaps(ScratchImage scratchImage)
@@ -155,11 +156,10 @@ public class DdsImageFormat : ImageFormat
                     minUserLevel: UserLevel.Technical)
             ];
 
-            // If block compressed...
+            // If it's block compressed
             if (metadata.Format is DXGI_FORMAT.BC1_UNORM or DXGI_FORMAT.BC2_UNORM or DXGI_FORMAT.BC3_UNORM)
             {
-                // Get the compressed data
-                byte[] compressedData = scratchImg.GetImage(0).GetRawBytes();
+                MipmapImage[] compressedMipmaps = GetMipmapImages(scratchImg);
 
                 RawImageDataCompressedFormat compressedFormat = metadata.Format switch
                 {
@@ -169,28 +169,38 @@ public class DdsImageFormat : ImageFormat
                     _ => throw new ArgumentException("The image is not block compressed", nameof(metadata.Format))
                 };
 
-                // Decompress to BGRA32
-                using ScratchImage bgraScratchImg = ConvertAndDecompress(scratchImg, DXGI_FORMAT.B8G8R8A8_UNORM);
-
-                // Get the raw bytes
-                byte[] rawData = bgraScratchImg.GetImage(0).GetRawBytes();
-
-                // TODO-UPDATE: Pass in mipmaps
-                return new RawImageData([new MipmapImage(compressedData, metadata.Width, metadata.Height)], compressedFormat, [new MipmapImage(rawData, metadata.Width, metadata.Height)], RawImageDataPixelFormat.Bgra32)
+                return new RawImageData(compressedMipmaps, compressedFormat)
                 {
                     CustomInfoItemsFactory = customInfoItemsFactory
                 };
             }
+            // If it's already in the correct format
+            else if (metadata.Format == DXGI_FORMAT.B8G8R8A8_UNORM)
+            {
+                MipmapImage[] mipmaps = GetMipmapImages(scratchImg);
+
+                return new RawImageData(mipmaps, RawImageDataPixelFormat.Bgra32)
+                {
+                    CustomInfoItemsFactory = customInfoItemsFactory
+                };
+            }
+            // If in a different format
             else
             {
-                // Decompress to BGRA32
-                using ScratchImage bgraScratchImg = ConvertAndDecompress(scratchImg, DXGI_FORMAT.B8G8R8A8_UNORM);
+                int mipmapLevels = metadata.MipLevels;
+                MipmapImage[] mipmaps = new MipmapImage[mipmapLevels];
+                for (int i = 0; i < mipmapLevels; i++)
+                {
+                    using ScratchImage mipScratchImg = TexHelper.Instance.IsCompressed(metadata.Format) 
+                        ? scratchImg.Decompress(i, DXGI_FORMAT.B8G8R8A8_UNORM) 
+                        : scratchImg.Convert(i, DXGI_FORMAT.B8G8R8A8_UNORM, TEX_FILTER_FLAGS.DEFAULT, 0.5f);
 
-                // Get the raw bytes
-                byte[] rawData = bgraScratchImg.GetImage(0).GetRawBytes();
+                    Image image = mipScratchImg.GetImage(0);
+                    byte[] rawData = image.GetRawBytes();
+                    mipmaps[i] = new MipmapImage(rawData, image.Width, image.Height);
+                }
 
-                // TODO-UPDATE: Pass in mipmaps
-                return new RawImageData(rawData, RawImageDataPixelFormat.Bgra32, metadata.Width, metadata.Height)
+                return new RawImageData(mipmaps, RawImageDataPixelFormat.Bgra32)
                 {
                     CustomInfoItemsFactory = customInfoItemsFactory
                 };
