@@ -33,12 +33,12 @@ public abstract class ImageMagickImageFormat : ImageFormat
         if (img.HasAlpha)
         {
             byte[] rawData = pixels.ToByteArray("BGRA") ?? throw new Exception("Unable to get raw pixel bytes from image");
-            return new RawImageData(rawData, RawImageDataPixelFormat.Bgra32, GetMetadata(img));
+            return new RawImageData(rawData, RawImageDataPixelFormat.Bgra32, (int)img.Width, (int)img.Height);
         }
         else
         {
             byte[] rawData = pixels.ToByteArray("BGR") ?? throw new Exception("Unable to get raw pixel bytes from image");
-            return new RawImageData(rawData, RawImageDataPixelFormat.Bgr24, GetMetadata(img));
+            return new RawImageData(rawData, RawImageDataPixelFormat.Bgr24, (int)img.Width, (int)img.Height);
         }
     }
 
@@ -52,8 +52,8 @@ public abstract class ImageMagickImageFormat : ImageFormat
                 RawImageDataPixelFormat.Bgra32 => MagickFormat.Bgra,
                 _ => throw new ArgumentOutOfRangeException()
             },
-            Width = (uint)data.Metadata.Width,
-            Height = (uint)data.Metadata.Height,
+            Width = (uint)data.Width,
+            Height = (uint)data.Height,
         });
 
         OnEncode(img);

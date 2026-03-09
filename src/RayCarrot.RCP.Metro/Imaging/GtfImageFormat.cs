@@ -19,13 +19,8 @@ public class GtfImageFormat : ImageFormat
 
     private ImageMetadata GetMetadata(GTFTexture tex)
     {
-        return new ImageMetadata(tex.Width, tex.Height)
-        {
-            MipmapsCount = tex.MipmapLevels,
-            Encoding = tex.Format.ToString(),
-        };
+        return new ImageMetadata(tex.Width, tex.Height);
     }
-
 
     public override ImageMetadata GetMetadata(Stream inputStream)
     {
@@ -51,7 +46,13 @@ public class GtfImageFormat : ImageFormat
         if (texture.Cubemap || texture.Dimension != GTFDimension.Dimension2)
             throw new InvalidOperationException("Only 2D GTF textures are supported");
 
-        ImageMetadata metadata = GetMetadata(texture);
+        Func<DuoGridItemViewModel[]> customInfoItemsFactory = () =>
+        [
+            new DuoGridItemViewModel(
+                header: new ResourceLocString(nameof(Resources.Archive_FileInfo_Img_Encoding)),
+                text: texture.Format.ToString(),
+                minUserLevel: UserLevel.Technical)
+        ];
 
         // Remove mipmaps for now
         Array.Resize(ref imgData, texture.Format switch
@@ -85,16 +86,28 @@ public class GtfImageFormat : ImageFormat
                     imgData[i + 3] = a;
                 }
 
-                return new RawImageData(imgData, RawImageDataPixelFormat.Bgra32, metadata);
+                return new RawImageData(imgData, RawImageDataPixelFormat.Bgra32, texture.Width, texture.Height)
+                {
+                    CustomInfoItemsFactory = customInfoItemsFactory
+                };
 
             case GTFFormat.COMPRESSED_DXT1:
-                return new RawImageData(imgData, RawImageDataCompressedFormat.DXT1, metadata);
+                return new RawImageData(imgData, RawImageDataCompressedFormat.DXT1, texture.Width, texture.Height)
+                {
+                    CustomInfoItemsFactory = customInfoItemsFactory
+                };
 
             case GTFFormat.COMPRESSED_DXT23:
-                return new RawImageData(imgData, RawImageDataCompressedFormat.DXT3, metadata);
+                return new RawImageData(imgData, RawImageDataCompressedFormat.DXT3, texture.Width, texture.Height)
+                {
+                    CustomInfoItemsFactory = customInfoItemsFactory
+                };
 
             case GTFFormat.COMPRESSED_DXT45:
-                return new RawImageData(imgData, RawImageDataCompressedFormat.DXT5, metadata);
+                return new RawImageData(imgData, RawImageDataCompressedFormat.DXT5, texture.Width, texture.Height)
+                {
+                    CustomInfoItemsFactory = customInfoItemsFactory
+                };
 
             default:
                 throw new InvalidOperationException($"The GTF format {texture.Format} is not supported");

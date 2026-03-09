@@ -47,8 +47,8 @@ public class CpaGfImageFormat : ImageFormat
     {
         byte[] rawData = data.GetImageData(mipmapLevel);
 
-        int width = data.Metadata.Width;
-        int height = data.Metadata.Height;
+        int width = data.Width;
+        int height = data.Height;
 
         switch (gfFormat)
         {
@@ -122,11 +122,7 @@ public class CpaGfImageFormat : ImageFormat
 
     private ImageMetadata GetMetadata(GFFileHeader gfHeader)
     {
-        return new ImageMetadata(gfHeader.Width, gfHeader.Height)
-        {
-            MipmapsCount = gfHeader.MipmapLevels,
-            Encoding = gfHeader.PixelFormat.ToString(),
-        };
+        return new ImageMetadata(gfHeader.Width, gfHeader.Height);
     }
 
     public override ImageMetadata GetMetadata(Stream inputStream)
@@ -140,28 +136,38 @@ public class CpaGfImageFormat : ImageFormat
         // Read the file
         GFFile gf = ReadGraphicsFile(inputStream);
 
-        // Get the metadata
-        ImageMetadata metadata = GetMetadata(gf.Header);
-
         // Get the format
         GF_Format format = gf.Header.PixelFormat;
         int width = gf.Header.Width;
         int height = gf.Header.Height;
 
+        Func<DuoGridItemViewModel[]> customInfoItemsFactory = () =>
+        [
+            new DuoGridItemViewModel(
+                header: new ResourceLocString(nameof(Resources.Archive_FileInfo_Img_Encoding)),
+                text: gf.Header.PixelFormat.ToString(),
+                minUserLevel: UserLevel.Technical)
+        ];
         switch (format)
         {
             case GF_Format.BGRA_8888:
             {
                 byte[] rawImgData = new byte[width * height * 4];
                 FlipY(gf.ImgData, 0, rawImgData, 0, width, height, 4);
-                return new RawImageData(rawImgData, RawImageDataPixelFormat.Bgra32, metadata);
+                return new RawImageData(rawImgData, RawImageDataPixelFormat.Bgra32, width, height)
+                {
+                    CustomInfoItemsFactory = customInfoItemsFactory
+                };
             }
 
             case GF_Format.BGR_888:
             {
                 byte[] rawImgData = new byte[width * height * 3];
                 FlipY(gf.ImgData, 0, rawImgData, 0, width, height, 3);
-                return new RawImageData(rawImgData, RawImageDataPixelFormat.Bgr24, metadata);
+                return new RawImageData(rawImgData, RawImageDataPixelFormat.Bgr24, width, height)
+                {
+                    CustomInfoItemsFactory = customInfoItemsFactory
+                };
             }
 
             case GF_Format.GrayscaleAlpha_88:
@@ -179,7 +185,10 @@ public class CpaGfImageFormat : ImageFormat
                     }
                 }
 
-                return new RawImageData(rawImgData, RawImageDataPixelFormat.Bgra32, metadata);
+                return new RawImageData(rawImgData, RawImageDataPixelFormat.Bgra32, width, height)
+                {
+                    CustomInfoItemsFactory = customInfoItemsFactory
+                };
             }
 
             case GF_Format.BGRA_4444:
@@ -199,7 +208,10 @@ public class CpaGfImageFormat : ImageFormat
                     }
                 }
 
-                return new RawImageData(rawImgData, RawImageDataPixelFormat.Bgra32, metadata);
+                return new RawImageData(rawImgData, RawImageDataPixelFormat.Bgra32, width, height)
+                {
+                    CustomInfoItemsFactory = customInfoItemsFactory
+                };
             }
 
             case GF_Format.BGRA_1555:
@@ -219,7 +231,10 @@ public class CpaGfImageFormat : ImageFormat
                     }
                 }
 
-                return new RawImageData(rawImgData, RawImageDataPixelFormat.Bgra32, metadata);
+                return new RawImageData(rawImgData, RawImageDataPixelFormat.Bgra32, width, height)
+                {
+                    CustomInfoItemsFactory = customInfoItemsFactory
+                };
             }
 
             case GF_Format.BGR_565:
@@ -238,7 +253,10 @@ public class CpaGfImageFormat : ImageFormat
                     }
                 }
 
-                return new RawImageData(rawImgData, RawImageDataPixelFormat.Bgr24, metadata);
+                return new RawImageData(rawImgData, RawImageDataPixelFormat.Bgr24, width, height)
+                {
+                    CustomInfoItemsFactory = customInfoItemsFactory
+                };
             }
 
             case GF_Format.BGRA_Indexed:
@@ -258,7 +276,10 @@ public class CpaGfImageFormat : ImageFormat
                     }
                 }
 
-                return new RawImageData(rawImgData, RawImageDataPixelFormat.Bgra32, metadata);
+                return new RawImageData(rawImgData, RawImageDataPixelFormat.Bgra32, width, height)
+                {
+                    CustomInfoItemsFactory = customInfoItemsFactory
+                };
             }
 
             case GF_Format.BGR_Indexed:
@@ -277,7 +298,10 @@ public class CpaGfImageFormat : ImageFormat
                     }
                 }
 
-                return new RawImageData(rawImgData, RawImageDataPixelFormat.Bgr24, metadata);
+                return new RawImageData(rawImgData, RawImageDataPixelFormat.Bgr24, width, height)
+                {
+                    CustomInfoItemsFactory = customInfoItemsFactory
+                };
             }
 
             case GF_Format.Grayscale:
@@ -294,7 +318,10 @@ public class CpaGfImageFormat : ImageFormat
                     }
                 }
 
-                return new RawImageData(rawImgData, RawImageDataPixelFormat.Bgr24, metadata);
+                return new RawImageData(rawImgData, RawImageDataPixelFormat.Bgr24, width, height)
+                {
+                    CustomInfoItemsFactory = customInfoItemsFactory
+                };
             }
 
             default:
@@ -324,8 +351,8 @@ public class CpaGfImageFormat : ImageFormat
             Header = new GFFileHeader()
             {
                 PixelFormat = format,
-                Width = data.Metadata.Width,
-                Height = data.Metadata.Height,
+                Width = data.Width,
+                Height = data.Height,
             }
         };
 

@@ -200,7 +200,7 @@ public sealed class CookedUbiArtTextureFileType : FileType
             // Create an image source
             BitmapSource thumb = imgData.ToBitmapSource();
 
-            return new FileThumbnailData(thumb, imgData.Metadata.GetInfoItems().ToArray());
+            return new FileThumbnailData(thumb, imgData.GetInfoItems().ToArray());
         }
         else
         {
@@ -304,8 +304,8 @@ public sealed class CookedUbiArtTextureFileType : FileType
 
             uint dataSize = (uint)(outputStream.Stream.Length - dataOffset);
 
-            header.Width = (ushort)metadata.Width;
-            header.Height = (ushort)metadata.Height;
+            header.Width = (ushort)metadata.Value.Width;
+            header.Height = (ushort)metadata.Value.Height;
             header.RawDataSize = dataSize;
             header.MemorySize = dataSize;
             header.Remap = 0x00010203;

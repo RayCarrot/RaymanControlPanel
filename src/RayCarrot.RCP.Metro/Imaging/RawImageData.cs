@@ -11,8 +11,7 @@ public class RawImageData
         MipmapImage[] compressedMipmaps, 
         RawImageDataCompressedFormat compressedFormat, 
         MipmapImage[] mipmaps, 
-        RawImageDataPixelFormat pixelFormat, 
-        ImageMetadata metadata)
+        RawImageDataPixelFormat pixelFormat)
     {
         if (compressedMipmaps.Length != mipmaps.Length)
             throw new ArgumentException("The amount of mipmaps don't match between the compressed and raw image data");
@@ -21,18 +20,15 @@ public class RawImageData
         CompressedFormat = compressedFormat;
         Mipmaps = mipmaps;
         PixelFormat = pixelFormat;
-        MipmapSizes = GenerateMipmapSizes(metadata.Width, metadata.Height, mipmaps.Length);
-        Metadata = metadata;
     }
 
-    public RawImageData(byte[] compressedData, RawImageDataCompressedFormat compressedFormat, ImageMetadata metadata) :
-        this([new MipmapImage(compressedData)], compressedFormat, metadata) { }
+    public RawImageData(byte[] compressedData, RawImageDataCompressedFormat compressedFormat, int width, int height) :
+        this([new MipmapImage(compressedData, width, height)], compressedFormat) { }
 
-    public RawImageData(MipmapImage[] compressedMipmaps, RawImageDataCompressedFormat compressedFormat, ImageMetadata metadata)
+    public RawImageData(MipmapImage[] compressedMipmaps, RawImageDataCompressedFormat compressedFormat)
     {
         CompressedMipmaps = compressedMipmaps;
         CompressedFormat = compressedFormat;
-        MipmapSizes = GenerateMipmapSizes(metadata.Width, metadata.Height, compressedMipmaps.Length);
 
         switch (compressedFormat)
         {
@@ -46,9 +42,8 @@ public class RawImageData
                 Mipmaps = new MipmapImage[CompressedMipmaps.Length];
                 for (int i = 0; i < Mipmaps.Length; i++)
                 {
-                    byte[] imgData = compressedMipmaps[i].ImageData;
-                    Size size = MipmapSizes[i];
-                    Mipmaps[i] = new MipmapImage(BlockCompressionHelpers.Decompress(imgData, compressedFormat, size.Width, size.Height));
+                    MipmapImage img = compressedMipmaps[i];
+                    Mipmaps[i] = new MipmapImage(BlockCompressionHelpers.Decompress(img.ImageData, compressedFormat, img.Width, img.Height), img.Width, img.Height);
                 }
                 PixelFormat = RawImageDataPixelFormat.Bgra32;
                 break;
@@ -56,21 +51,17 @@ public class RawImageData
             default:
                 throw new ArgumentOutOfRangeException(nameof(compressedFormat), compressedFormat, null);
         }
-
-        Metadata = metadata;
     }
 
-    public RawImageData(byte[] rawData, RawImageDataPixelFormat pixelFormat, ImageMetadata metadata) :
-        this([new MipmapImage(rawData)], pixelFormat, metadata) { }
+    public RawImageData(byte[] rawData, RawImageDataPixelFormat pixelFormat, int width, int height) :
+        this([new MipmapImage(rawData, width, height)], pixelFormat) { }
 
-    public RawImageData(MipmapImage[] mipmaps, RawImageDataPixelFormat pixelFormat, ImageMetadata metadata)
+    public RawImageData(MipmapImage[] mipmaps, RawImageDataPixelFormat pixelFormat)
     {
         CompressedMipmaps = null;
         CompressedFormat = RawImageDataCompressedFormat.None;
         Mipmaps = mipmaps;
         PixelFormat = pixelFormat;
-        MipmapSizes = GenerateMipmapSizes(metadata.Width, metadata.Height, mipmaps.Length);
-        Metadata = metadata;
     }
 
     public RawImageData(Bitmap bmp)
@@ -79,15 +70,13 @@ public class RawImageData
 
         CompressedMipmaps = null;
         CompressedFormat = RawImageDataCompressedFormat.None;
-        Mipmaps = [new MipmapImage(bmpLock.Pixels)];
+        Mipmaps = [new MipmapImage(bmpLock.Pixels, bmp.Width, bmp.Height)];
         PixelFormat = bmp.PixelFormat switch
         {
             System.Drawing.Imaging.PixelFormat.Format24bppRgb => RawImageDataPixelFormat.Bgr24,
             System.Drawing.Imaging.PixelFormat.Format32bppArgb => RawImageDataPixelFormat.Bgra32,
             _ => throw new InvalidOperationException("Unsupported pixel format")
         };
-        MipmapSizes = GenerateMipmapSizes(bmp.Width, bmp.Height, 1);
-        Metadata = new ImageMetadata(bmp.Width, bmp.Height);
     }
 
     public MipmapImage[]? CompressedMipmaps { get; }
@@ -105,11 +94,13 @@ public class RawImageData
     public MipmapImage[] Mipmaps { get; }
     public RawImageDataPixelFormat PixelFormat { get; }
 
-    public Size[] MipmapSizes { get; }
-    public bool HasMipmaps => MipmapLevels > 1;
-    public int MipmapLevels => MipmapSizes.Length;
+    public int Width => GetImageSize(0).Width;
+    public int Height => GetImageSize(0).Height;
 
-    public ImageMetadata Metadata { get; }
+    public bool HasMipmaps => MipmapLevels > 1;
+    public int MipmapLevels => Mipmaps.Length;
+
+    public Func<DuoGridItemViewModel[]>? CustomInfoItemsFactory { private get; init; }
 
     private static Size[] GenerateMipmapSizes(int width, int height, int mipmapLevels)
     {
@@ -139,6 +130,12 @@ public class RawImageData
         return CompressedMipmaps[mipmapLevel].ImageData;
     }
 
+    public Size GetImageSize(int mipmapLevel)
+    {
+        MipmapImage img = Mipmaps[mipmapLevel];
+        return new Size(img.Width, img.Height);
+    }
+
     public int GetBitsPerPixel()
     {
         return PixelFormat switch
@@ -153,7 +150,7 @@ public class RawImageData
     {
         int bpp = GetBitsPerPixel();
         int step = bpp / 8;
-        return Metadata.Width * step;
+        return Width * step;
     }
 
     public PixelFormat GetWindowsPixelFormat()
@@ -177,14 +174,14 @@ public class RawImageData
         {
             case RawImageDataPixelFormat.Bgr24 when newPixelFormat is RawImageDataPixelFormat.Bgra32:
             {
-                byte[] convertedData = new byte[Metadata.Width * Metadata.Height * 4];
+                byte[] convertedData = new byte[Width * Height * 4];
 
                 int originalIndex = 0;
                 int convertedIndex = 0;
 
-                for (int y = 0; y < Metadata.Height; y++)
+                for (int y = 0; y < Height; y++)
                 {
-                    for (int x = 0; x < Metadata.Width; x++)
+                    for (int x = 0; x < Width; x++)
                     {
                         convertedData[convertedIndex + 0] = imgData[originalIndex + 0];
                         convertedData[convertedIndex + 1] = imgData[originalIndex + 1];
@@ -217,11 +214,11 @@ public class RawImageData
         switch (PixelFormat)
         {
             case RawImageDataPixelFormat.Bgra32:
-                for (int y = 0; y < Metadata.Height; y++)
+                for (int y = 0; y < Height; y++)
                 {
-                    for (int x = 0; x < Metadata.Width; x++)
+                    for (int x = 0; x < Width; x++)
                     {
-                        if (imgData[(y * Metadata.Width + x) * 4 + 3] != Byte.MaxValue)
+                        if (imgData[(y * Width + x) * 4 + 3] != Byte.MaxValue)
                             return true;
                     }
                 }
@@ -241,7 +238,7 @@ public class RawImageData
         byte[] imgData = GetImageData(0);
 
         // Create the bitmap
-        Bitmap bmp = new(Metadata.Width, Metadata.Height, PixelFormat switch
+        Bitmap bmp = new(Width, Height, PixelFormat switch
         {
             // A bit confusing since it says RGB, but it's actually all BGR
             RawImageDataPixelFormat.Bgr24 => System.Drawing.Imaging.PixelFormat.Format24bppRgb,
@@ -264,11 +261,30 @@ public class RawImageData
         int stride = GetStride();
         PixelFormat format = GetWindowsPixelFormat();
 
-        return BitmapSource.Create(Metadata.Width, Metadata.Height, 96, 96, format, null, imgData, stride);
+        return BitmapSource.Create(Width, Height, 96, 96, format, null, imgData, stride);
     }
 
     public RawImageData WithoutCompressedData()
     {
-        return new RawImageData(Mipmaps, PixelFormat, Metadata);
+        return new RawImageData(Mipmaps, PixelFormat);
+    }
+
+    public IEnumerable<DuoGridItemViewModel> GetInfoItems()
+    {
+        yield return new DuoGridItemViewModel(
+            header: new ResourceLocString(nameof(Resources.Archive_FileInfo_Img_Size)),
+            text: $"{Width}x{Height}");
+
+        if (HasMipmaps)
+            yield return new DuoGridItemViewModel(
+                header: new ResourceLocString(nameof(Resources.Archive_FileInfo_Img_Mipmaps)),
+                text: MipmapLevels.ToString(),
+                minUserLevel: UserLevel.Technical);
+
+        if (CustomInfoItemsFactory != null)
+        {
+            foreach (DuoGridItemViewModel item in CustomInfoItemsFactory())
+                yield return item;
+        }
     }
 }

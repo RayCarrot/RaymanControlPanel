@@ -14,11 +14,7 @@ public class Xbox360D3DTextureImageFormat : ImageFormat
 
     private ImageMetadata GetMetadata(D3DTexture tex)
     {
-        return new ImageMetadata(tex.ActualWidth, tex.ActualHeight)
-        {
-            MipmapsCount = tex.MaxMipLevel,
-            Encoding = tex.DataFormat.ToString(),
-        };
+        return new ImageMetadata(tex.ActualWidth, tex.ActualHeight);
     }
 
     public override ImageMetadata GetMetadata(Stream inputStream)
@@ -42,7 +38,13 @@ public class Xbox360D3DTextureImageFormat : ImageFormat
         // Untile the image data
         imgData = texture.Untile(imgData);
 
-        ImageMetadata metadata = GetMetadata(texture);
+        Func<DuoGridItemViewModel[]> customInfoItemsFactory = () =>
+        [
+            new DuoGridItemViewModel(
+                header: new ResourceLocString(nameof(Resources.Archive_FileInfo_Img_Encoding)),
+                text: texture.DataFormat.ToString(),
+                minUserLevel: UserLevel.Technical)
+        ];
 
         // Remove mipmaps for now
         Array.Resize(ref imgData, texture.DataFormat switch
@@ -76,16 +78,28 @@ public class Xbox360D3DTextureImageFormat : ImageFormat
                     imgData[i + 3] = a;
                 }
 
-                return new RawImageData(imgData, RawImageDataPixelFormat.Bgra32, metadata);
+                return new RawImageData(imgData, RawImageDataPixelFormat.Bgra32, texture.ActualWidth, texture.ActualHeight)
+                {
+                    CustomInfoItemsFactory = customInfoItemsFactory
+                };
 
             case D3DTexture.GPUTEXTUREFORMAT.GPUTEXTUREFORMAT_DXT1:
-                return new RawImageData(imgData, RawImageDataCompressedFormat.DXT1, metadata);
+                return new RawImageData(imgData, RawImageDataCompressedFormat.DXT1, texture.ActualWidth, texture.ActualHeight)
+                {
+                    CustomInfoItemsFactory = customInfoItemsFactory
+                };
 
             case D3DTexture.GPUTEXTUREFORMAT.GPUTEXTUREFORMAT_DXT2_3:
-                return new RawImageData(imgData, RawImageDataCompressedFormat.DXT3, metadata);
+                return new RawImageData(imgData, RawImageDataCompressedFormat.DXT3, texture.ActualWidth, texture.ActualHeight)
+                {
+                    CustomInfoItemsFactory = customInfoItemsFactory
+                };
 
             case D3DTexture.GPUTEXTUREFORMAT.GPUTEXTUREFORMAT_DXT4_5:
-                return new RawImageData(imgData, RawImageDataCompressedFormat.DXT5, metadata);
+                return new RawImageData(imgData, RawImageDataCompressedFormat.DXT5, texture.ActualWidth, texture.ActualHeight)
+                {
+                    CustomInfoItemsFactory = customInfoItemsFactory
+                };
 
             default:
                 throw new InvalidOperationException($"The D3D format {texture.DataFormat} is not supported");

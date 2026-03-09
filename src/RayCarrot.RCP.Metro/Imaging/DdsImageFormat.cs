@@ -1,6 +1,8 @@
-﻿using System.IO;
+﻿using System.Drawing;
+using System.IO;
 using System.Runtime.InteropServices;
 using DirectXTexNet;
+using Image = DirectXTexNet.Image;
 
 namespace RayCarrot.RCP.Metro.Imaging;
 
@@ -49,8 +51,11 @@ public class DdsImageFormat : ImageFormat
         return scratchImage.GenerateMipMaps(filterFlags, 0);
     }
 
-    private static UnmanagedData<Image> CreateImage(RawImageData data, int mipmapLevel, int width, int height)
+    private static UnmanagedData<Image> CreateImage(RawImageData data, int mipmapLevel)
     {
+        // Get the size
+        Size size = data.GetImageSize(mipmapLevel);
+
         // If the data is block compressed then we want to maintain that to avoid re-compressing it
         DXGI_FORMAT sourceFormat;
         byte[] sourceData;
@@ -77,11 +82,11 @@ public class DdsImageFormat : ImageFormat
         }
 
         // Compute the row and slice pitch
-        TexHelper.Instance.ComputePitch(sourceFormat, width, height, out long rowPitch, out long slicePitch, CP_FLAGS.NONE);
+        TexHelper.Instance.ComputePitch(sourceFormat, size.Width, size.Height, out long rowPitch, out long slicePitch, CP_FLAGS.NONE);
 
         return new UnmanagedData<Image>(sourceData, ptr => new Image(
-            width: width,
-            height: height,
+            width: size.Width,
+            height: size.Height,
             format: sourceFormat,
             rowPitch: rowPitch,
             slicePitch: slicePitch,
@@ -91,11 +96,7 @@ public class DdsImageFormat : ImageFormat
 
     private static ImageMetadata GetMetadata(TexMetadata metadata)
     {
-        return new ImageMetadata(metadata.Width, metadata.Height)
-        {
-            MipmapsCount = metadata.MipLevels,
-            Encoding = metadata.Format.ToString(),
-        };
+        return new ImageMetadata(metadata.Width, metadata.Height);
     }
 
     public override ImageMetadata GetMetadata(Stream inputStream)
@@ -146,6 +147,14 @@ public class DdsImageFormat : ImageFormat
 
             TexMetadata metadata = scratchImg.GetMetadata();
 
+            Func<DuoGridItemViewModel[]> customInfoItemsFactory = () =>
+            [
+                new DuoGridItemViewModel(
+                    header: new ResourceLocString(nameof(Resources.Archive_FileInfo_Img_Encoding)),
+                    text: metadata.Format.ToString(),
+                    minUserLevel: UserLevel.Technical)
+            ];
+
             // If block compressed...
             if (metadata.Format is DXGI_FORMAT.BC1_UNORM or DXGI_FORMAT.BC2_UNORM or DXGI_FORMAT.BC3_UNORM)
             {
@@ -167,7 +176,10 @@ public class DdsImageFormat : ImageFormat
                 byte[] rawData = bgraScratchImg.GetImage(0).GetRawBytes();
 
                 // TODO-UPDATE: Pass in mipmaps
-                return new RawImageData([new MipmapImage(compressedData)], compressedFormat, [new MipmapImage(rawData)], RawImageDataPixelFormat.Bgra32, GetMetadata(metadata));
+                return new RawImageData([new MipmapImage(compressedData, metadata.Width, metadata.Height)], compressedFormat, [new MipmapImage(rawData, metadata.Width, metadata.Height)], RawImageDataPixelFormat.Bgra32)
+                {
+                    CustomInfoItemsFactory = customInfoItemsFactory
+                };
             }
             else
             {
@@ -178,7 +190,10 @@ public class DdsImageFormat : ImageFormat
                 byte[] rawData = bgraScratchImg.GetImage(0).GetRawBytes();
 
                 // TODO-UPDATE: Pass in mipmaps
-                return new RawImageData(rawData, RawImageDataPixelFormat.Bgra32, GetMetadata(metadata));
+                return new RawImageData(rawData, RawImageDataPixelFormat.Bgra32, metadata.Width, metadata.Height)
+                {
+                    CustomInfoItemsFactory = customInfoItemsFactory
+                };
             }
         }
         finally
@@ -189,8 +204,8 @@ public class DdsImageFormat : ImageFormat
 
     public override ImageMetadata Encode(RawImageData data, Stream outputStream)
     {
-        int width = data.Metadata.Width;
-        int height = data.Metadata.Height;
+        int width = data.Width;
+        int height = data.Height;
 
         if (!width.IsPowerOfTwo() || !height.IsPowerOfTwo())
             throw new Exception("In order to ensure full compatibility and to generate mipmaps the image must have dimensions which are a power of 2, such as 128, 256, 512, 1024 etc.");
@@ -201,7 +216,7 @@ public class DdsImageFormat : ImageFormat
         {
             // Create an image for every mipmap
             for (int i = 0; i < data.MipmapLevels; i++)
-                mipmapImages.Add(CreateImage(data, i, data.MipmapSizes[i].Width, data.MipmapSizes[i].Height));
+                mipmapImages.Add(CreateImage(data, i));
 
             // Get the format from the first image
             DXGI_FORMAT format = mipmapImages[0].Resource.Format;
