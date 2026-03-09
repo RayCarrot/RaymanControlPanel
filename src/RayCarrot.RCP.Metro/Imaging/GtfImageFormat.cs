@@ -41,7 +41,6 @@ public class GtfImageFormat : ImageFormat
             throw new InvalidOperationException("GTF files with more than 1 texture are not supported");
 
         GTFTexture texture = gtf.Textures[0];
-        byte[] imgData = texture.TextureData;
 
         if (texture.Cubemap || texture.Dimension != GTFDimension.Dimension2)
             throw new InvalidOperationException("Only 2D GTF textures are supported");
@@ -54,57 +53,77 @@ public class GtfImageFormat : ImageFormat
                 minUserLevel: UserLevel.Technical)
         ];
 
-        // Remove mipmaps for now
-        Array.Resize(ref imgData, texture.Format switch
+        MipmapImage[] mipmaps = new MipmapImage[texture.MipmapLevels];
+        int imgOffset = 0;
+        int mipmapWidth = texture.Width;
+        int mipmapHeight = texture.Height;
+        for (int i = 0; i < texture.MipmapLevels; i++)
         {
-            GTFFormat.A8R8G8B8 => texture.Width * texture.Height * 4,
-            GTFFormat.COMPRESSED_DXT1 => BlockCompressionHelpers.GetImageLength(RawImageDataCompressedFormat.DXT1, texture.Width, texture.Height),
-            GTFFormat.COMPRESSED_DXT23 => BlockCompressionHelpers.GetImageLength(RawImageDataCompressedFormat.DXT3, texture.Width, texture.Height),
-            GTFFormat.COMPRESSED_DXT45 => BlockCompressionHelpers.GetImageLength(RawImageDataCompressedFormat.DXT5, texture.Width, texture.Height),
-            _ => throw new InvalidOperationException($"The GTF format {texture.Format} is not supported"),
-        });
+            int mipmapImgLength = texture.Format switch
+            {
+                GTFFormat.A8R8G8B8 => mipmapWidth * texture.Height * 4,
+                GTFFormat.COMPRESSED_DXT1 => BlockCompressionHelpers.GetImageLength(RawImageDataCompressedFormat.DXT1, mipmapWidth, mipmapHeight),
+                GTFFormat.COMPRESSED_DXT23 => BlockCompressionHelpers.GetImageLength(RawImageDataCompressedFormat.DXT3, mipmapWidth, mipmapHeight),
+                GTFFormat.COMPRESSED_DXT45 => BlockCompressionHelpers.GetImageLength(RawImageDataCompressedFormat.DXT5, mipmapWidth, mipmapHeight),
+                _ => throw new InvalidOperationException($"The GTF format {texture.Format} is not supported"),
+            };
 
-        // TODO-UPDATE: Pass in mipmaps
+            byte[] mipmapImgData = new byte[mipmapImgLength];
+            Array.Copy(texture.TextureData, imgOffset, mipmapImgData, 0, mipmapImgLength);
+
+            // Unswizzle
+            if (texture.Format == GTFFormat.A8R8G8B8)
+            {
+                MortonSwizzle swizzle = new(texture.Width, texture.Height, 4);
+                mipmapImgData = swizzle.Unswizzle(mipmapImgData);
+            }
+
+            mipmaps[i] = new MipmapImage(mipmapImgData, mipmapWidth, mipmapHeight);
+
+            imgOffset += mipmapImgLength;
+            mipmapWidth = Math.Max(1, mipmapWidth >> 1);
+            mipmapHeight = Math.Max(1, mipmapHeight >> 1);
+        }
+
         switch (texture.Format)
         {
             case GTFFormat.A8R8G8B8:
-                // Unswizzle
-                MortonSwizzle swizzle = new(texture.Width, texture.Height, 4);
-                imgData = swizzle.Unswizzle(imgData);
-
                 // Convert ARGB to BGRA
-                for (int i = 0; i < imgData.Length; i += 4)
+                foreach (MipmapImage mipmapImage in mipmaps)
                 {
-                    byte a = imgData[i + 0];
-                    byte r = imgData[i + 1];
-                    byte g = imgData[i + 2];
-                    byte b = imgData[i + 3];
+                    for (int i = 0; i < mipmapImage.ImageData.Length; i += 4)
+                    {
+                        byte a = mipmapImage.ImageData[i + 0];
+                        byte r = mipmapImage.ImageData[i + 1];
+                        byte g = mipmapImage.ImageData[i + 2];
+                        byte b = mipmapImage.ImageData[i + 3];
 
-                    imgData[i + 0] = b;
-                    imgData[i + 1] = g;
-                    imgData[i + 2] = r;
-                    imgData[i + 3] = a;
+                        mipmapImage.ImageData[i + 0] = b;
+                        mipmapImage.ImageData[i + 1] = g;
+                        mipmapImage.ImageData[i + 2] = r;
+                        mipmapImage.ImageData[i + 3] = a;
+                    }
                 }
 
-                return new RawImageData(imgData, RawImageDataPixelFormat.Bgra32, texture.Width, texture.Height)
+                return new RawImageData(mipmaps, RawImageDataPixelFormat.Bgra32)
                 {
                     CustomInfoItemsFactory = customInfoItemsFactory
                 };
 
             case GTFFormat.COMPRESSED_DXT1:
-                return new RawImageData(imgData, RawImageDataCompressedFormat.DXT1, texture.Width, texture.Height)
+                return new RawImageData(mipmaps, RawImageDataCompressedFormat.DXT1)
                 {
                     CustomInfoItemsFactory = customInfoItemsFactory
                 };
 
             case GTFFormat.COMPRESSED_DXT23:
-                return new RawImageData(imgData, RawImageDataCompressedFormat.DXT3, texture.Width, texture.Height)
+                return new RawImageData(mipmaps, RawImageDataCompressedFormat.DXT3)
                 {
                     CustomInfoItemsFactory = customInfoItemsFactory
                 };
 
             case GTFFormat.COMPRESSED_DXT45:
-                return new RawImageData(imgData, RawImageDataCompressedFormat.DXT5, texture.Width, texture.Height)
+                return new RawImageData(mipmaps, RawImageDataCompressedFormat.DXT5)
                 {
                     CustomInfoItemsFactory = customInfoItemsFactory
                 };
