@@ -59,14 +59,16 @@ public sealed class ImageFileType : FileType
     public override FileThumbnailData LoadThumbnail(
         ArchiveFileStream inputStream, 
         FileExtension fileExtension, 
-        IArchiveDataManager manager)
+        IArchiveDataManager manager,
+        int requestedWidth,
+        int requestedHeight)
     {
         ImageFormat imageFormat = GetSubType(fileExtension).ImageFormat;
 
         if (imageFormat.CanDecode)
         {
             RawImageData imgData = imageFormat.Decode(inputStream.Stream);
-            BitmapSource thumb = imgData.ToBitmapSource();
+            BitmapSource thumb = imgData.ToBitmapSource(requestedWidth, requestedHeight);
 
             return new FileThumbnailData(thumb, imgData.GetInfoItems().ToArray());
         }

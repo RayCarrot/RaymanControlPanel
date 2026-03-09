@@ -57,11 +57,15 @@ public abstract class FileType
     /// <param name="inputStream">The file data stream</param>
     /// <param name="fileExtension">The file extension</param>
     /// <param name="manager">The manager</param>
+    /// <param name="requestedWidth">The requested width</param>
+    /// <param name="requestedHeight">The requested height</param>
     /// <returns>The thumbnail data</returns>
     public virtual FileThumbnailData LoadThumbnail(
         ArchiveFileStream inputStream, 
         FileExtension fileExtension, 
-        IArchiveDataManager manager) 
+        IArchiveDataManager manager,
+        int requestedWidth,
+        int requestedHeight) 
         => new(null, Array.Empty<DuoGridItemViewModel>());
 
     /// <summary>

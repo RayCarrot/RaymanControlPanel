@@ -206,7 +206,7 @@ public class FileViewModel : BaseViewModel, IDisposable, IArchiveFileSystemEntry
                 throw new Exception("Can not load a thumbnail when the file type has not been set");
 
             // Load the thumbnail
-            thumb = FileType.LoadThumbnail(fileStream, FileExtension, Manager);
+            thumb = FileType.LoadThumbnail(fileStream, FileExtension, Manager, 64, 64);
 
             // Cache the thumbnail
             Archive.ThumbnailCache.AddToCache(this, thumb);

@@ -178,7 +178,9 @@ public sealed class CookedUbiArtTextureFileType : FileType
     public override FileThumbnailData LoadThumbnail(
         ArchiveFileStream inputStream, 
         FileExtension fileExtension, 
-        IArchiveDataManager manager)
+        IArchiveDataManager manager,
+        int requestedWidth,
+        int requestedHeight)
     {
         // Get the settings
         UbiArtSettings settings = manager.Context!.GetRequiredSettings<UbiArtSettings>();
@@ -198,7 +200,7 @@ public sealed class CookedUbiArtTextureFileType : FileType
                 RemapChannels(imgData, header, 0);
 
             // Create an image source
-            BitmapSource thumb = imgData.ToBitmapSource();
+            BitmapSource thumb = imgData.ToBitmapSource(requestedWidth, requestedHeight);
 
             return new FileThumbnailData(thumb, imgData.GetInfoItems().ToArray());
         }

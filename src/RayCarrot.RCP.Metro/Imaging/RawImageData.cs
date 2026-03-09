@@ -102,19 +102,30 @@ public class RawImageData
 
     public Func<DuoGridItemViewModel[]>? CustomInfoItemsFactory { private get; init; }
 
-    private static Size[] GenerateMipmapSizes(int width, int height, int mipmapLevels)
+    private int GetClosestMipmapLevel(int requestedWidth, int requestedHeight)
     {
-        Size[] sizes = new Size[mipmapLevels];
+        if (requestedWidth <= 0 || requestedHeight <= 0)
+            return 0;
 
-        for (int i = 0; i < mipmapLevels; i++)
+        int mipmapLevel = 0;
+        int bestDist = Int32.MaxValue;
+
+        for (int i = 0; i < MipmapLevels; i++)
         {
-            sizes[i] = new Size(width, height);
+            Size size = GetImageSize(i);
+            
+            int dw = size.Width - requestedWidth;
+            int dh = size.Height - requestedHeight;
+            int dist = dw * dw + dh * dh;
 
-            width = Math.Max(1, width >> 1);
-            height = Math.Max(1, height >> 1);
+            if (dist < bestDist)
+            {
+                bestDist = dist;
+                mipmapLevel = i;
+            }
         }
 
-        return sizes;
+        return mipmapLevel;
     }
 
     public byte[] GetImageData(int mipmapLevel)
@@ -146,11 +157,11 @@ public class RawImageData
         };
     }
 
-    public int GetStride()
+    public int GetStride(int mipmapLevel)
     {
         int bpp = GetBitsPerPixel();
         int step = bpp / 8;
-        return Width * step;
+        return GetImageSize(mipmapLevel).Width * step;
     }
 
     public PixelFormat GetWindowsPixelFormat()
@@ -254,14 +265,17 @@ public class RawImageData
         return bmp;
     }
 
-    public BitmapSource ToBitmapSource()
+    public BitmapSource ToBitmapSource(int requestedWidth, int requestedHeight)
     {
-        byte[] imgData = GetImageData(0);
+        int mipmapLevel = GetClosestMipmapLevel(requestedWidth, requestedHeight);
 
-        int stride = GetStride();
+        byte[] imgData = GetImageData(mipmapLevel);
+        Size size = GetImageSize(mipmapLevel);
+
+        int stride = GetStride(mipmapLevel);
         PixelFormat format = GetWindowsPixelFormat();
 
-        return BitmapSource.Create(Width, Height, 96, 96, format, null, imgData, stride);
+        return BitmapSource.Create(size.Width, size.Height, 96, 96, format, null, imgData, stride);
     }
 
     public RawImageData WithoutCompressedData()
