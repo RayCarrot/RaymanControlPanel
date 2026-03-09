@@ -66,7 +66,6 @@ public class DdsImageFormat : ImageFormat
         }
     }
 
-    // TODO-UPDATE: Don't decompress here!
     public override RawImageData Decode(Stream inputStream)
     {
         // TODO: Not great to determine the length like this. Maybe we should pass in byte array to Decode instead
@@ -85,15 +84,41 @@ public class DdsImageFormat : ImageFormat
                 length: imgData.Length);
 
             using ScratchImage scratchImg = TexHelper.Instance.LoadFromDDSMemory(imgDataPtr, imgData.Length, DDS_FLAGS.NONE);
-            using ScratchImage bgraScratchImg = ConvertAndDecompress(scratchImg, DXGI_FORMAT.B8G8R8A8_UNORM);
 
-            // Get the primary image
-            Image primaryImg = bgraScratchImg.GetImage(0);
+            TexMetadata metadata = scratchImg.GetMetadata();
 
-            // Get the raw bytes
-            byte[] rawBytes = primaryImg.GetRawBytes();
+            // If block compressed...
+            if (metadata.Format is DXGI_FORMAT.BC1_UNORM or DXGI_FORMAT.BC2_UNORM or DXGI_FORMAT.BC3_UNORM)
+            {
+                // Get the compressed data
+                byte[] compressedData = scratchImg.GetImage(0).GetRawBytes();
 
-            return new RawImageData(rawBytes, RawImageDataPixelFormat.Bgra32, GetMetadata(scratchImg.GetMetadata()));
+                RawImageDataCompressedFormat compressedFormat = metadata.Format switch
+                {
+                    DXGI_FORMAT.BC1_UNORM => RawImageDataCompressedFormat.DXT1,
+                    DXGI_FORMAT.BC2_UNORM => RawImageDataCompressedFormat.DXT3,
+                    DXGI_FORMAT.BC3_UNORM => RawImageDataCompressedFormat.DXT5,
+                    _ => throw new ArgumentException("The image is not block compressed", nameof(metadata.Format))
+                };
+
+                // Decompress to BGRA32
+                using ScratchImage bgraScratchImg = ConvertAndDecompress(scratchImg, DXGI_FORMAT.B8G8R8A8_UNORM);
+
+                // Get the raw bytes
+                byte[] rawData = bgraScratchImg.GetImage(0).GetRawBytes();
+
+                return new RawImageData(compressedData, compressedFormat, rawData, RawImageDataPixelFormat.Bgra32, GetMetadata(metadata));
+            }
+            else
+            {
+                // Decompress to BGRA32
+                using ScratchImage bgraScratchImg = ConvertAndDecompress(scratchImg, DXGI_FORMAT.B8G8R8A8_UNORM);
+
+                // Get the raw bytes
+                byte[] rawData = bgraScratchImg.GetImage(0).GetRawBytes();
+
+                return new RawImageData(rawData, RawImageDataPixelFormat.Bgra32, GetMetadata(metadata));
+            }
         }
         finally
         {

@@ -7,6 +7,15 @@ namespace RayCarrot.RCP.Metro.Imaging;
 // TODO: Save mipmaps here too
 public class RawImageData
 {
+    public RawImageData(byte[] compressedData, RawImageDataCompressedFormat compressedFormat, byte[] rawData, RawImageDataPixelFormat pixelFormat, ImageMetadata metadata)
+    {
+        CompressedData = compressedData;
+        CompressedFormat = compressedFormat;
+        RawData = rawData;
+        PixelFormat = pixelFormat;
+        Metadata = metadata;
+    }
+
     public RawImageData(byte[] compressedData, RawImageDataCompressedFormat compressedFormat, ImageMetadata metadata)
     {
         CompressedData = compressedData;
@@ -17,6 +26,7 @@ public class RawImageData
             case RawImageDataCompressedFormat.None:
                 throw new ArgumentException("The data is not compressed", nameof(compressedFormat));
             
+            // Block compression
             case RawImageDataCompressedFormat.DXT1:
             case RawImageDataCompressedFormat.DXT3:
             case RawImageDataCompressedFormat.DXT5:
