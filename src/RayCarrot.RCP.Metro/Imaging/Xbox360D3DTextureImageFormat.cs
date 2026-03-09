@@ -58,6 +58,7 @@ public class Xbox360D3DTextureImageFormat : ImageFormat
             _ => throw new InvalidOperationException($"The D3D format {texture.DataFormat} is not supported"),
         });
 
+        // TODO-UPDATE: Pass in mipmaps
         switch (texture.DataFormat)
         {
             case D3DTexture.GPUTEXTUREFORMAT.GPUTEXTUREFORMAT_8_8_8_8:

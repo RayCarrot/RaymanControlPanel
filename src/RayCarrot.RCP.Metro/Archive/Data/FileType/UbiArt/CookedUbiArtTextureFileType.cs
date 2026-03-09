@@ -51,9 +51,9 @@ public sealed class CookedUbiArtTextureFileType : FileType
 
     #region Private Methods
 
-    private void RemapChannels(RawImageData rawImageData, TextureCooked header)
+    private void RemapChannels(RawImageData rawImageData, TextureCooked header, int mipmapLevel)
     {
-        byte[] imgData = rawImageData.RawData;
+        byte[] imgData = rawImageData.GetImageData(mipmapLevel);
         byte[] colors = new byte[6];
         colors[0] = 0xFF;
         colors[4] = 0x00;
@@ -195,7 +195,7 @@ public sealed class CookedUbiArtTextureFileType : FileType
 
             // Remap if needed
             if (header is { IsRemapped: true })
-                RemapChannels(imgData, header);
+                RemapChannels(imgData, header, 0);
 
             // Create an image source
             BitmapSource thumb = imgData.ToBitmapSource();
@@ -232,7 +232,14 @@ public sealed class CookedUbiArtTextureFileType : FileType
         if (header is { IsRemapped: true })
         {
             RawImageData decodedData = inputImageFormat.Decode(inputStream.Stream);
-            RemapChannels(decodedData, header);
+
+            // Remove the compressed data since we can only remap the raw data
+            decodedData = decodedData.WithoutCompressedData();
+            
+            // Remap each mipmap level
+            for (int i = 0; i < decodedData.MipmapLevels; i++)
+                RemapChannels(decodedData, header, i);
+            
             outputImageFormat.Encode(decodedData, outputStream);
         }
         // Don't convert if it's the same format. For example if exporting as .dds on PC.

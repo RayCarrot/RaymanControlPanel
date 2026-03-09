@@ -44,7 +44,7 @@ public abstract class ImageMagickImageFormat : ImageFormat
 
     public override ImageMetadata Encode(RawImageData data, Stream outputStream)
     {
-        using MagickImage img = new(data.RawData, new MagickReadSettings
+        using MagickImage img = new(data.GetImageData(0), new MagickReadSettings
         {
             Format = data.PixelFormat switch
             {

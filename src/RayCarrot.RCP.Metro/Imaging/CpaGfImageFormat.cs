@@ -43,8 +43,10 @@ public class CpaGfImageFormat : ImageFormat
         return (byte)Math.Round(bitsValue * (Byte.MaxValue / (float)((1 << count) - 1)));
     }
 
-    private void EncodeImage(RawImageData data, GF_Format gfFormat, byte[] gfImgData, int offset)
+    private void EncodeImage(RawImageData data, int mipmapLevel, GF_Format gfFormat, byte[] gfImgData, int offset)
     {
+        byte[] rawData = data.GetImageData(mipmapLevel);
+
         int width = data.Metadata.Width;
         int height = data.Metadata.Height;
 
@@ -55,20 +57,20 @@ public class CpaGfImageFormat : ImageFormat
                 {
                     for (int x = 0; x < width; x++)
                     {
-                        gfImgData[offset + (y * width + x) * 4 + 0] = data.RawData[((height - y - 1) * width + x) * 3 + 0]; // B
-                        gfImgData[offset + (y * width + x) * 4 + 1] = data.RawData[((height - y - 1) * width + x) * 3 + 1]; // G
-                        gfImgData[offset + (y * width + x) * 4 + 2] = data.RawData[((height - y - 1) * width + x) * 3 + 2]; // R
+                        gfImgData[offset + (y * width + x) * 4 + 0] = rawData[((height - y - 1) * width + x) * 3 + 0]; // B
+                        gfImgData[offset + (y * width + x) * 4 + 1] = rawData[((height - y - 1) * width + x) * 3 + 1]; // G
+                        gfImgData[offset + (y * width + x) * 4 + 2] = rawData[((height - y - 1) * width + x) * 3 + 2]; // R
                         gfImgData[offset + (y * width + x) * 4 + 3] = 0xFF; // A
                     }
                 }
                 break;
 
             case GF_Format.BGRA_8888 when data.PixelFormat is RawImageDataPixelFormat.Bgra32:
-                FlipY(data.RawData, 0, gfImgData, offset, width, height, 4);
+                FlipY(rawData, 0, gfImgData, offset, width, height, 4);
                 break;
 
             case GF_Format.BGR_888 when data.PixelFormat is RawImageDataPixelFormat.Bgr24:
-                FlipY(data.RawData, 0, gfImgData, offset, width, height, 3);
+                FlipY(rawData, 0, gfImgData, offset, width, height, 3);
                 break;
 
             case GF_Format.BGR_888 when data.PixelFormat is RawImageDataPixelFormat.Bgra32:
@@ -76,9 +78,9 @@ public class CpaGfImageFormat : ImageFormat
                 {
                     for (int x = 0; x < width; x++)
                     {
-                        gfImgData[offset + (y * width + x) * 3 + 0] = data.RawData[((height - y - 1) * width + x) * 4 + 0]; // B
-                        gfImgData[offset + (y * width + x) * 3 + 1] = data.RawData[((height - y - 1) * width + x) * 4 + 1]; // G
-                        gfImgData[offset + (y * width + x) * 3 + 2] = data.RawData[((height - y - 1) * width + x) * 4 + 2]; // R
+                        gfImgData[offset + (y * width + x) * 3 + 0] = rawData[((height - y - 1) * width + x) * 4 + 0]; // B
+                        gfImgData[offset + (y * width + x) * 3 + 1] = rawData[((height - y - 1) * width + x) * 4 + 1]; // G
+                        gfImgData[offset + (y * width + x) * 3 + 2] = rawData[((height - y - 1) * width + x) * 4 + 2]; // R
                     }
                 }
                 break;
@@ -340,8 +342,9 @@ public class CpaGfImageFormat : ImageFormat
         gfFile.ImgData = new byte[gfFile.Header.BytesPerPixel * gfFile.Header.ImageSize];
 
         // Encode the main image
-        EncodeImage(data, gfFile.Header.PixelFormat, gfFile.ImgData, 0);
+        EncodeImage(data, 0, gfFile.Header.PixelFormat, gfFile.ImgData, 0);
 
+        // TODO-UPDATE: Normalize mipmap generation directly in RawImageData and use mipmaps from there if they exist
         // Encode mipmaps
         if (gfFile.Header.ExclusiveMipmapsCount > 0)
         {
@@ -358,7 +361,7 @@ public class CpaGfImageFormat : ImageFormat
                 using Bitmap resizedBitmap = bitmap.Resize(width, height);
 
                 // Encode the mipmap
-                EncodeImage(new RawImageData(resizedBitmap), gfFile.Header.PixelFormat, gfFile.ImgData, mipmapOffset);
+                EncodeImage(new RawImageData(resizedBitmap), 0, gfFile.Header.PixelFormat, gfFile.ImgData, mipmapOffset);
 
                 // Increase the index
                 mipmapOffset += height * width * gfFile.Header.BytesPerPixel;

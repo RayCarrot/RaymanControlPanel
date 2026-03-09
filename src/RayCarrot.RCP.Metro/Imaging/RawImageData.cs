@@ -5,22 +5,34 @@ using System.Windows.Media.Imaging;
 
 namespace RayCarrot.RCP.Metro.Imaging;
 
-// TODO: Save mipmaps here too
 public class RawImageData
 {
-    public RawImageData(byte[] compressedData, RawImageDataCompressedFormat compressedFormat, byte[] rawData, RawImageDataPixelFormat pixelFormat, ImageMetadata metadata)
+    public RawImageData(
+        MipmapImage[] compressedMipmaps, 
+        RawImageDataCompressedFormat compressedFormat, 
+        MipmapImage[] mipmaps, 
+        RawImageDataPixelFormat pixelFormat, 
+        ImageMetadata metadata)
     {
-        CompressedData = compressedData;
+        if (compressedMipmaps.Length != mipmaps.Length)
+            throw new ArgumentException("The amount of mipmaps don't match between the compressed and raw image data");
+
+        CompressedMipmaps = compressedMipmaps;
         CompressedFormat = compressedFormat;
-        RawData = rawData;
+        Mipmaps = mipmaps;
         PixelFormat = pixelFormat;
+        MipmapSizes = GenerateMipmapSizes(metadata.Width, metadata.Height, mipmaps.Length);
         Metadata = metadata;
     }
 
-    public RawImageData(byte[] compressedData, RawImageDataCompressedFormat compressedFormat, ImageMetadata metadata)
+    public RawImageData(byte[] compressedData, RawImageDataCompressedFormat compressedFormat, ImageMetadata metadata) :
+        this([new MipmapImage(compressedData)], compressedFormat, metadata) { }
+
+    public RawImageData(MipmapImage[] compressedMipmaps, RawImageDataCompressedFormat compressedFormat, ImageMetadata metadata)
     {
-        CompressedData = compressedData;
+        CompressedMipmaps = compressedMipmaps;
         CompressedFormat = compressedFormat;
+        MipmapSizes = GenerateMipmapSizes(metadata.Width, metadata.Height, compressedMipmaps.Length);
 
         switch (compressedFormat)
         {
@@ -31,7 +43,13 @@ public class RawImageData
             case RawImageDataCompressedFormat.DXT1:
             case RawImageDataCompressedFormat.DXT3:
             case RawImageDataCompressedFormat.DXT5:
-                RawData = BlockCompressionHelpers.Decompress(compressedData, compressedFormat, metadata.Width, metadata.Height);
+                Mipmaps = new MipmapImage[CompressedMipmaps.Length];
+                for (int i = 0; i < Mipmaps.Length; i++)
+                {
+                    byte[] imgData = compressedMipmaps[i].ImageData;
+                    Size size = MipmapSizes[i];
+                    Mipmaps[i] = new MipmapImage(BlockCompressionHelpers.Decompress(imgData, compressedFormat, size.Width, size.Height));
+                }
                 PixelFormat = RawImageDataPixelFormat.Bgra32;
                 break;
             
@@ -42,12 +60,16 @@ public class RawImageData
         Metadata = metadata;
     }
 
-    public RawImageData(byte[] rawData, RawImageDataPixelFormat pixelFormat, ImageMetadata metadata)
+    public RawImageData(byte[] rawData, RawImageDataPixelFormat pixelFormat, ImageMetadata metadata) :
+        this([new MipmapImage(rawData)], pixelFormat, metadata) { }
+
+    public RawImageData(MipmapImage[] mipmaps, RawImageDataPixelFormat pixelFormat, ImageMetadata metadata)
     {
-        CompressedData = null;
+        CompressedMipmaps = null;
         CompressedFormat = RawImageDataCompressedFormat.None;
-        RawData = rawData;
+        Mipmaps = mipmaps;
         PixelFormat = pixelFormat;
+        MipmapSizes = GenerateMipmapSizes(metadata.Width, metadata.Height, mipmaps.Length);
         Metadata = metadata;
     }
 
@@ -55,34 +77,67 @@ public class RawImageData
     {
         using BitmapLock bmpLock = new(bmp);
 
-        CompressedData = null;
+        CompressedMipmaps = null;
         CompressedFormat = RawImageDataCompressedFormat.None;
-        RawData = bmpLock.Pixels;
+        Mipmaps = [new MipmapImage(bmpLock.Pixels)];
         PixelFormat = bmp.PixelFormat switch
         {
             System.Drawing.Imaging.PixelFormat.Format24bppRgb => RawImageDataPixelFormat.Bgr24,
             System.Drawing.Imaging.PixelFormat.Format32bppArgb => RawImageDataPixelFormat.Bgra32,
             _ => throw new InvalidOperationException("Unsupported pixel format")
         };
+        MipmapSizes = GenerateMipmapSizes(bmp.Width, bmp.Height, 1);
         Metadata = new ImageMetadata(bmp.Width, bmp.Height);
     }
 
-    public byte[]? CompressedData { get; }
+    public MipmapImage[]? CompressedMipmaps { get; }
     public RawImageDataCompressedFormat CompressedFormat { get; }
 
-    [MemberNotNullWhen(true, nameof(CompressedData))]
+    [MemberNotNullWhen(true, nameof(CompressedMipmaps))]
     public bool IsCompressed => CompressedFormat != RawImageDataCompressedFormat.None;
 
-    [MemberNotNullWhen(true, nameof(CompressedData))]
+    [MemberNotNullWhen(true, nameof(CompressedMipmaps))]
     public bool IsBlockCompressed => CompressedFormat is 
         RawImageDataCompressedFormat.DXT1 or 
         RawImageDataCompressedFormat.DXT3 or 
         RawImageDataCompressedFormat.DXT5;
 
-    public byte[] RawData { get; }
+    public MipmapImage[] Mipmaps { get; }
     public RawImageDataPixelFormat PixelFormat { get; }
 
+    public Size[] MipmapSizes { get; }
+    public bool HasMipmaps => MipmapLevels > 1;
+    public int MipmapLevels => MipmapSizes.Length;
+
     public ImageMetadata Metadata { get; }
+
+    private static Size[] GenerateMipmapSizes(int width, int height, int mipmapLevels)
+    {
+        Size[] sizes = new Size[mipmapLevels];
+
+        for (int i = 0; i < mipmapLevels; i++)
+        {
+            sizes[i] = new Size(width, height);
+
+            width = Math.Max(1, width >> 1);
+            height = Math.Max(1, height >> 1);
+        }
+
+        return sizes;
+    }
+
+    public byte[] GetImageData(int mipmapLevel)
+    {
+        return Mipmaps[mipmapLevel].ImageData;
+    }
+
+    public byte[] GetCompressedImageData(int mipmapLevel)
+    {
+        if (!IsCompressed)
+            throw new InvalidOperationException("There is no compressed data");
+
+        return CompressedMipmaps[mipmapLevel].ImageData;
+    }
 
     public int GetBitsPerPixel()
     {
@@ -111,10 +166,12 @@ public class RawImageData
         };
     }
 
-    public byte[] Convert(RawImageDataPixelFormat newPixelFormat)
+    public byte[] Convert(RawImageDataPixelFormat newPixelFormat, int mipmapLevel)
     {
+        byte[] imgData = GetImageData(mipmapLevel);
+
         if (PixelFormat == newPixelFormat)
-            return RawData;
+            return Mipmaps[mipmapLevel].ImageData;
 
         switch (PixelFormat)
         {
@@ -129,9 +186,9 @@ public class RawImageData
                 {
                     for (int x = 0; x < Metadata.Width; x++)
                     {
-                        convertedData[convertedIndex + 0] = RawData[originalIndex + 0];
-                        convertedData[convertedIndex + 1] = RawData[originalIndex + 1];
-                        convertedData[convertedIndex + 2] = RawData[originalIndex + 2];
+                        convertedData[convertedIndex + 0] = imgData[originalIndex + 0];
+                        convertedData[convertedIndex + 1] = imgData[originalIndex + 1];
+                        convertedData[convertedIndex + 2] = imgData[originalIndex + 2];
                         convertedData[convertedIndex + 3] = 0xFF;
 
                         originalIndex += 3;
@@ -155,6 +212,8 @@ public class RawImageData
 
     public bool UtilizesAlpha()
     {
+        byte[] imgData = GetImageData(0);
+
         switch (PixelFormat)
         {
             case RawImageDataPixelFormat.Bgra32:
@@ -162,7 +221,7 @@ public class RawImageData
                 {
                     for (int x = 0; x < Metadata.Width; x++)
                     {
-                        if (RawData[(y * Metadata.Width + x) * 4 + 3] != Byte.MaxValue)
+                        if (imgData[(y * Metadata.Width + x) * 4 + 3] != Byte.MaxValue)
                             return true;
                     }
                 }
@@ -179,6 +238,8 @@ public class RawImageData
 
     public Bitmap ToBitmap()
     {
+        byte[] imgData = GetImageData(0);
+
         // Create the bitmap
         Bitmap bmp = new(Metadata.Width, Metadata.Height, PixelFormat switch
         {
@@ -190,7 +251,7 @@ public class RawImageData
 
         // Lock and update the pixels
         using var bmpLock = new BitmapLock(bmp);
-        bmpLock.Pixels = RawData;
+        bmpLock.Pixels = imgData;
 
         // Return the bitmap
         return bmp;
@@ -198,9 +259,16 @@ public class RawImageData
 
     public BitmapSource ToBitmapSource()
     {
+        byte[] imgData = GetImageData(0);
+
         int stride = GetStride();
         PixelFormat format = GetWindowsPixelFormat();
 
-        return BitmapSource.Create(Metadata.Width, Metadata.Height, 96, 96, format, null, RawData, stride);
+        return BitmapSource.Create(Metadata.Width, Metadata.Height, 96, 96, format, null, imgData, stride);
+    }
+
+    public RawImageData WithoutCompressedData()
+    {
+        return new RawImageData(Mipmaps, PixelFormat, Metadata);
     }
 }

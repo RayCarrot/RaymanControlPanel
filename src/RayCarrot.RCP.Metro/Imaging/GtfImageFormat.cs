@@ -63,6 +63,7 @@ public class GtfImageFormat : ImageFormat
             _ => throw new InvalidOperationException($"The GTF format {texture.Format} is not supported"),
         });
 
+        // TODO-UPDATE: Pass in mipmaps
         switch (texture.Format)
         {
             case GTFFormat.A8R8G8B8:
