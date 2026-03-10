@@ -149,14 +149,16 @@ public class CpaGfImageFormat : ImageFormat
                 minUserLevel: UserLevel.Technical)
         ];
 
-        // TODO: Pass in mipmaps
+        // TODO: Pass in mipmaps and change to support mipmaps IF the game itself supports it
+        RawImageDataFeatures supportedFeatures = RawImageDataFeatures.None;
+
         switch (format)
         {
             case GF_Format.BGRA_8888:
             {
                 byte[] rawImgData = new byte[width * height * 4];
                 FlipY(gf.ImgData, 0, rawImgData, 0, width, height, 4);
-                return new RawImageData(rawImgData, RawImageDataPixelFormat.Bgra32, width, height)
+                return new RawImageData(this, rawImgData, RawImageDataPixelFormat.Bgra32, width, height, supportedFeatures)
                 {
                     CustomInfoItemsFactory = customInfoItemsFactory
                 };
@@ -166,7 +168,7 @@ public class CpaGfImageFormat : ImageFormat
             {
                 byte[] rawImgData = new byte[width * height * 3];
                 FlipY(gf.ImgData, 0, rawImgData, 0, width, height, 3);
-                return new RawImageData(rawImgData, RawImageDataPixelFormat.Bgr24, width, height)
+                return new RawImageData(this, rawImgData, RawImageDataPixelFormat.Bgr24, width, height, supportedFeatures)
                 {
                     CustomInfoItemsFactory = customInfoItemsFactory
                 };
@@ -187,7 +189,7 @@ public class CpaGfImageFormat : ImageFormat
                     }
                 }
 
-                return new RawImageData(rawImgData, RawImageDataPixelFormat.Bgra32, width, height)
+                return new RawImageData(this, rawImgData, RawImageDataPixelFormat.Bgra32, width, height, supportedFeatures)
                 {
                     CustomInfoItemsFactory = customInfoItemsFactory
                 };
@@ -210,7 +212,7 @@ public class CpaGfImageFormat : ImageFormat
                     }
                 }
 
-                return new RawImageData(rawImgData, RawImageDataPixelFormat.Bgra32, width, height)
+                return new RawImageData(this, rawImgData, RawImageDataPixelFormat.Bgra32, width, height, supportedFeatures)
                 {
                     CustomInfoItemsFactory = customInfoItemsFactory
                 };
@@ -233,7 +235,7 @@ public class CpaGfImageFormat : ImageFormat
                     }
                 }
 
-                return new RawImageData(rawImgData, RawImageDataPixelFormat.Bgra32, width, height)
+                return new RawImageData(this, rawImgData, RawImageDataPixelFormat.Bgra32, width, height, supportedFeatures)
                 {
                     CustomInfoItemsFactory = customInfoItemsFactory
                 };
@@ -255,7 +257,7 @@ public class CpaGfImageFormat : ImageFormat
                     }
                 }
 
-                return new RawImageData(rawImgData, RawImageDataPixelFormat.Bgr24, width, height)
+                return new RawImageData(this, rawImgData, RawImageDataPixelFormat.Bgr24, width, height, supportedFeatures)
                 {
                     CustomInfoItemsFactory = customInfoItemsFactory
                 };
@@ -278,7 +280,7 @@ public class CpaGfImageFormat : ImageFormat
                     }
                 }
 
-                return new RawImageData(rawImgData, RawImageDataPixelFormat.Bgra32, width, height)
+                return new RawImageData(this, rawImgData, RawImageDataPixelFormat.Bgra32, width, height, supportedFeatures)
                 {
                     CustomInfoItemsFactory = customInfoItemsFactory
                 };
@@ -300,7 +302,7 @@ public class CpaGfImageFormat : ImageFormat
                     }
                 }
 
-                return new RawImageData(rawImgData, RawImageDataPixelFormat.Bgr24, width, height)
+                return new RawImageData(this, rawImgData, RawImageDataPixelFormat.Bgr24, width, height, supportedFeatures)
                 {
                     CustomInfoItemsFactory = customInfoItemsFactory
                 };
@@ -320,7 +322,7 @@ public class CpaGfImageFormat : ImageFormat
                     }
                 }
 
-                return new RawImageData(rawImgData, RawImageDataPixelFormat.Bgr24, width, height)
+                return new RawImageData(this, rawImgData, RawImageDataPixelFormat.Bgr24, width, height, supportedFeatures)
                 {
                     CustomInfoItemsFactory = customInfoItemsFactory
                 };
@@ -390,7 +392,7 @@ public class CpaGfImageFormat : ImageFormat
                 using Bitmap resizedBitmap = bitmap.Resize(width, height);
 
                 // Encode the mipmap
-                EncodeImage(new RawImageData(resizedBitmap), 0, gfFile.Header.PixelFormat, gfFile.ImgData, mipmapOffset);
+                EncodeImage(new RawImageData(this, resizedBitmap, RawImageDataFeatures.None), 0, gfFile.Header.PixelFormat, gfFile.ImgData, mipmapOffset);
 
                 // Increase the index
                 mipmapOffset += height * width * gfFile.Header.BytesPerPixel;

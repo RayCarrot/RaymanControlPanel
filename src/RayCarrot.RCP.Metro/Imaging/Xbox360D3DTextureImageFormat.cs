@@ -61,7 +61,9 @@ public class Xbox360D3DTextureImageFormat : ImageFormat
             _ => throw new InvalidOperationException($"The D3D format {texture.DataFormat} is not supported"),
         });
 
-        // TODO: Pass in mipmaps
+        // TODO: Pass in mipmaps and change to support mipmaps
+        RawImageDataFeatures supportedFeatures = RawImageDataFeatures.BlockCompression;
+
         switch (texture.DataFormat)
         {
             case D3DTexture.GPUTEXTUREFORMAT.GPUTEXTUREFORMAT_8_8_8_8:
@@ -79,25 +81,25 @@ public class Xbox360D3DTextureImageFormat : ImageFormat
                     imgData[i + 3] = a;
                 }
 
-                return new RawImageData(imgData, RawImageDataPixelFormat.Bgra32, texture.ActualWidth, texture.ActualHeight)
+                return new RawImageData(this, imgData, RawImageDataPixelFormat.Bgra32, texture.ActualWidth, texture.ActualHeight, supportedFeatures)
                 {
                     CustomInfoItemsFactory = customInfoItemsFactory
                 };
 
             case D3DTexture.GPUTEXTUREFORMAT.GPUTEXTUREFORMAT_DXT1:
-                return new RawImageData(imgData, RawImageDataCompressedFormat.DXT1, texture.ActualWidth, texture.ActualHeight)
+                return new RawImageData(this, imgData, RawImageDataCompressedFormat.DXT1, texture.ActualWidth, texture.ActualHeight, supportedFeatures)
                 {
                     CustomInfoItemsFactory = customInfoItemsFactory
                 };
 
             case D3DTexture.GPUTEXTUREFORMAT.GPUTEXTUREFORMAT_DXT2_3:
-                return new RawImageData(imgData, RawImageDataCompressedFormat.DXT3, texture.ActualWidth, texture.ActualHeight)
+                return new RawImageData(this, imgData, RawImageDataCompressedFormat.DXT3, texture.ActualWidth, texture.ActualHeight, supportedFeatures)
                 {
                     CustomInfoItemsFactory = customInfoItemsFactory
                 };
 
             case D3DTexture.GPUTEXTUREFORMAT.GPUTEXTUREFORMAT_DXT4_5:
-                return new RawImageData(imgData, RawImageDataCompressedFormat.DXT5, texture.ActualWidth, texture.ActualHeight)
+                return new RawImageData(this, imgData, RawImageDataCompressedFormat.DXT5, texture.ActualWidth, texture.ActualHeight, supportedFeatures)
                 {
                     CustomInfoItemsFactory = customInfoItemsFactory
                 };

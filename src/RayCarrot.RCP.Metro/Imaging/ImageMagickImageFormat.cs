@@ -30,15 +30,18 @@ public abstract class ImageMagickImageFormat : ImageFormat
         using MagickImage img = new(inputStream, Format);
         using IUnsafePixelCollection<byte> pixels = img.GetPixelsUnsafe();
 
+        // NOTE: Technically it supports mipmaps and block compression for certain formats, but we haven't implemented managing those here
+        RawImageDataFeatures supportedFeatures = RawImageDataFeatures.None;
+
         if (img.HasAlpha)
         {
             byte[] rawData = pixels.ToByteArray("BGRA") ?? throw new Exception("Unable to get raw pixel bytes from image");
-            return new RawImageData(rawData, RawImageDataPixelFormat.Bgra32, (int)img.Width, (int)img.Height);
+            return new RawImageData(this, rawData, RawImageDataPixelFormat.Bgra32, (int)img.Width, (int)img.Height, supportedFeatures);
         }
         else
         {
             byte[] rawData = pixels.ToByteArray("BGR") ?? throw new Exception("Unable to get raw pixel bytes from image");
-            return new RawImageData(rawData, RawImageDataPixelFormat.Bgr24, (int)img.Width, (int)img.Height);
+            return new RawImageData(this, rawData, RawImageDataPixelFormat.Bgr24, (int)img.Width, (int)img.Height, supportedFeatures);
         }
     }
 

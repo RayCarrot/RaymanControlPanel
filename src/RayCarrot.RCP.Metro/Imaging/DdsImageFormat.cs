@@ -129,6 +129,8 @@ public class DdsImageFormat : ImageFormat
         byte[] imgData = new byte[inputStream.Length - inputStream.Position];
         inputStream.Read(imgData, 0, imgData.Length);
 
+        RawImageDataFeatures supportedFeatures = RawImageDataFeatures.Mipmaps | RawImageDataFeatures.BlockCompression;
+
         // Allocate and get pointer
         IntPtr imgDataPtr = Marshal.AllocHGlobal(imgData.Length);
         try
@@ -164,7 +166,7 @@ public class DdsImageFormat : ImageFormat
                     _ => throw new ArgumentException("The image is not block compressed", nameof(metadata.Format))
                 };
 
-                return new RawImageData(compressedMipmaps, compressedFormat)
+                return new RawImageData(this, compressedMipmaps, compressedFormat, supportedFeatures)
                 {
                     CustomInfoItemsFactory = customInfoItemsFactory
                 };
@@ -174,7 +176,7 @@ public class DdsImageFormat : ImageFormat
             {
                 MipmapImage[] mipmaps = GetMipmapImages(scratchImg);
 
-                return new RawImageData(mipmaps, RawImageDataPixelFormat.Bgra32)
+                return new RawImageData(this, mipmaps, RawImageDataPixelFormat.Bgra32, supportedFeatures)
                 {
                     CustomInfoItemsFactory = customInfoItemsFactory
                 };
@@ -195,7 +197,7 @@ public class DdsImageFormat : ImageFormat
                     mipmaps[i] = new MipmapImage(rawData, image.Width, image.Height);
                 }
 
-                return new RawImageData(mipmaps, RawImageDataPixelFormat.Bgra32)
+                return new RawImageData(this, mipmaps, RawImageDataPixelFormat.Bgra32, supportedFeatures)
                 {
                     CustomInfoItemsFactory = customInfoItemsFactory
                 };
@@ -241,16 +243,16 @@ public class DdsImageFormat : ImageFormat
 
             bool isCompressed = TexHelper.Instance.IsCompressed(format);
 
-            // Generate mipmaps if the format is not compressed and we don't already have mipmaps
-            if (!isCompressed && mipmapImages.Count == 1)
+            // Generate mipmaps if the format is not compressed, we don't already have mipmaps and the original didn't support mipmaps
+            if (!isCompressed && mipmapImages.Count == 1 && !data.SupportsFeature(RawImageDataFeatures.Mipmaps))
             {
                 ScratchImage mip = GenerateMipmaps(scratchImage);
                 scratchImage.Dispose();
                 scratchImage = mip;
             }
 
-            // Compress if not already compressed
-            if (!isCompressed)
+            // Compress if not already compressed and the original data didn't support block compression
+            if (!isCompressed && !data.SupportsFeature(RawImageDataFeatures.BlockCompression))
             {
                 // Compress to either DXT1 or DXT5
                 bool isTransparent = data.UtilizesAlpha();

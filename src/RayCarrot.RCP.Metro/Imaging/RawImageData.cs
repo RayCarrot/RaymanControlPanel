@@ -8,49 +8,82 @@ namespace RayCarrot.RCP.Metro.Imaging;
 public class RawImageData
 {
     public RawImageData(
+        ImageFormat? sourceImageFormat,
         MipmapImage[] compressedMipmaps, 
         RawImageDataCompressedFormat compressedFormat, 
         MipmapImage[] mipmaps, 
-        RawImageDataPixelFormat pixelFormat)
+        RawImageDataPixelFormat pixelFormat,
+        RawImageDataFeatures supportedFeatures)
     {
         if (compressedMipmaps.Length != mipmaps.Length)
             throw new ArgumentException("The amount of mipmaps don't match between the compressed and raw image data");
 
+        SourceImageFormat = sourceImageFormat;
+        SupportedFeatures = supportedFeatures;
         CompressedMipmaps = compressedMipmaps;
         CompressedFormat = compressedFormat;
         Mipmaps = mipmaps;
         PixelFormat = pixelFormat;
     }
 
-    public RawImageData(byte[] compressedData, RawImageDataCompressedFormat compressedFormat, int width, int height) :
-        this([new MipmapImage(compressedData, width, height)], compressedFormat) { }
+    public RawImageData(
+        ImageFormat? sourceImageFormat, 
+        byte[] compressedData, 
+        RawImageDataCompressedFormat compressedFormat, 
+        int width, 
+        int height, 
+        RawImageDataFeatures supportedFeatures) :
+        this(sourceImageFormat, [new MipmapImage(compressedData, width, height)], compressedFormat, supportedFeatures) { }
 
-    public RawImageData(MipmapImage[] compressedMipmaps, RawImageDataCompressedFormat compressedFormat)
+    public RawImageData(
+        ImageFormat? sourceImageFormat, 
+        MipmapImage[] compressedMipmaps, 
+        RawImageDataCompressedFormat compressedFormat,
+        RawImageDataFeatures supportedFeatures)
     {
         if (compressedFormat == RawImageDataCompressedFormat.None)
             throw new ArgumentException("The data is not compressed", nameof(compressedFormat));
 
+        SourceImageFormat = sourceImageFormat;
+        SupportedFeatures = supportedFeatures;
         CompressedMipmaps = compressedMipmaps;
         CompressedFormat = compressedFormat;
         Mipmaps = new MipmapImage[CompressedMipmaps.Length];
         PixelFormat = RawImageDataPixelFormat.Bgra32;
     }
 
-    public RawImageData(byte[] rawData, RawImageDataPixelFormat pixelFormat, int width, int height) :
-        this([new MipmapImage(rawData, width, height)], pixelFormat) { }
+    public RawImageData(
+        ImageFormat? sourceImageFormat, 
+        byte[] rawData, 
+        RawImageDataPixelFormat pixelFormat, 
+        int width, 
+        int height,
+        RawImageDataFeatures supportedFeatures) :
+        this(sourceImageFormat, [new MipmapImage(rawData, width, height)], pixelFormat, supportedFeatures) { }
 
-    public RawImageData(MipmapImage[] mipmaps, RawImageDataPixelFormat pixelFormat)
+    public RawImageData(
+        ImageFormat? sourceImageFormat, 
+        MipmapImage[] mipmaps, 
+        RawImageDataPixelFormat pixelFormat,
+        RawImageDataFeatures supportedFeatures)
     {
+        SourceImageFormat = sourceImageFormat;
+        SupportedFeatures = supportedFeatures;
         CompressedMipmaps = null;
         CompressedFormat = RawImageDataCompressedFormat.None;
         Mipmaps = mipmaps;
         PixelFormat = pixelFormat;
     }
 
-    public RawImageData(Bitmap bmp)
+    public RawImageData(
+        ImageFormat? sourceImageFormat, 
+        Bitmap bmp,
+        RawImageDataFeatures supportedFeatures)
     {
         using BitmapLock bmpLock = new(bmp);
 
+        SourceImageFormat = sourceImageFormat;
+        SupportedFeatures = supportedFeatures;
         CompressedMipmaps = null;
         CompressedFormat = RawImageDataCompressedFormat.None;
         Mipmaps = [new MipmapImage(bmpLock.Pixels, bmp.Width, bmp.Height)];
@@ -61,6 +94,9 @@ public class RawImageData
             _ => throw new InvalidOperationException("Unsupported pixel format")
         };
     }
+
+    public ImageFormat? SourceImageFormat { get; }
+    public RawImageDataFeatures SupportedFeatures { get; }
 
     private MipmapImage[]? CompressedMipmaps { get; }
     private MipmapImage?[] Mipmaps { get; }
@@ -84,6 +120,11 @@ public class RawImageData
     public int MipmapLevels => Mipmaps.Length;
 
     public Func<DuoGridItemViewModel[]>? CustomInfoItemsFactory { private get; init; }
+
+    public bool SupportsFeature(RawImageDataFeatures feature)
+    {
+        return (SupportedFeatures & feature) == feature;
+    }
 
     private MipmapImage GetMipmapImage(int mipmapLevel)
     {
@@ -322,11 +363,12 @@ public class RawImageData
 
     public RawImageData WithoutCompressedData()
     {
+        // Get the raw mipmaps (decompresses if needed)
         MipmapImage[] mipmaps = new MipmapImage[Mipmaps.Length];
         for (int i = 0; i < mipmaps.Length; i++)
             mipmaps[i] = GetMipmapImage(i);
 
-        return new RawImageData(mipmaps, PixelFormat);
+        return new RawImageData(SourceImageFormat, mipmaps, PixelFormat, SupportedFeatures);
     }
 
     public IEnumerable<DuoGridItemViewModel> GetInfoItems()

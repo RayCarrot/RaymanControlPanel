@@ -53,6 +53,8 @@ public class GtfImageFormat : ImageFormat
                 minUserLevel: UserLevel.Technical)
         ];
 
+        RawImageDataFeatures supportedFeatures = RawImageDataFeatures.Mipmaps | RawImageDataFeatures.BlockCompression;
+
         MipmapImage[] mipmaps = new MipmapImage[texture.MipmapLevels];
         int imgOffset = 0;
         int mipmapWidth = texture.Width;
@@ -105,25 +107,25 @@ public class GtfImageFormat : ImageFormat
                     }
                 }
 
-                return new RawImageData(mipmaps, RawImageDataPixelFormat.Bgra32)
+                return new RawImageData(this, mipmaps, RawImageDataPixelFormat.Bgra32, supportedFeatures)
                 {
                     CustomInfoItemsFactory = customInfoItemsFactory
                 };
 
             case GTFFormat.COMPRESSED_DXT1:
-                return new RawImageData(mipmaps, RawImageDataCompressedFormat.DXT1)
+                return new RawImageData(this, mipmaps, RawImageDataCompressedFormat.DXT1, supportedFeatures)
                 {
                     CustomInfoItemsFactory = customInfoItemsFactory
                 };
 
             case GTFFormat.COMPRESSED_DXT23:
-                return new RawImageData(mipmaps, RawImageDataCompressedFormat.DXT3)
+                return new RawImageData(this, mipmaps, RawImageDataCompressedFormat.DXT3, supportedFeatures)
                 {
                     CustomInfoItemsFactory = customInfoItemsFactory
                 };
 
             case GTFFormat.COMPRESSED_DXT45:
-                return new RawImageData(mipmaps, RawImageDataCompressedFormat.DXT5)
+                return new RawImageData(this, mipmaps, RawImageDataCompressedFormat.DXT5, supportedFeatures)
                 {
                     CustomInfoItemsFactory = customInfoItemsFactory
                 };
