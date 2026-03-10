@@ -19,14 +19,9 @@ public class DdsImageFormat : ImageFormat
         new(".dds"),
     };
 
-    private static ScratchImage Compress(ScratchImage scratchImage)
+    private static ScratchImage Compress(ScratchImage scratchImage, DXGI_FORMAT format)
     {
         const TEX_COMPRESS_FLAGS compFlags = TEX_COMPRESS_FLAGS.PARALLEL;
-
-        // Compress to either DXT1 or DXT5
-        DXGI_FORMAT format = scratchImage.IsAlphaAllOpaque()
-            ? DXGI_FORMAT.BC1_UNORM  // DXT1
-            : DXGI_FORMAT.BC3_UNORM; // DXT5
         return scratchImage.Compress(format, compFlags, 0.5f);
     }
 
@@ -257,7 +252,13 @@ public class DdsImageFormat : ImageFormat
             // Compress if not already compressed
             if (!isCompressed)
             {
-                ScratchImage comp = Compress(scratchImage);
+                // Compress to either DXT1 or DXT5
+                bool isTransparent = data.UtilizesAlpha();
+                DXGI_FORMAT compressedFormat = !isTransparent
+                    ? DXGI_FORMAT.BC1_UNORM  // DXT1
+                    : DXGI_FORMAT.BC3_UNORM; // DXT5
+
+                ScratchImage comp = Compress(scratchImage, compressedFormat);
                 scratchImage.Dispose();
                 scratchImage = comp;
             }
