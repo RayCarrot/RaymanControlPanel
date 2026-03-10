@@ -4975,6 +4975,15 @@ namespace RayCarrot.RCP.Metro {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Default.
+        /// </summary>
+        public static string GameOptions_GraphicsApi_Default {
+            get {
+                return ResourceManager.GetString("GameOptions_GraphicsApi_Default", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Information.
         /// </summary>
         public static string GameOptions_Info {
@@ -12588,47 +12597,38 @@ namespace RayCarrot.RCP.Metro {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Default.
-        /// </summary>
-        public static string R2ROptions_GraphicsApi_Default {
-            get {
-                return ResourceManager.GetString("R2ROptions_GraphicsApi_Default", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to DirectX 11.
         /// </summary>
-        public static string R2ROptions_GraphicsApi_DX11 {
+        public static string GameOptions_GraphicsApi_DX11 {
             get {
-                return ResourceManager.GetString("R2ROptions_GraphicsApi_DX11", resourceCulture);
+                return ResourceManager.GetString("GameOptions_GraphicsApi_DX11", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to DirectX 12.
         /// </summary>
-        public static string R2ROptions_GraphicsApi_DX12 {
+        public static string GameOptions_GraphicsApi_DX12 {
             get {
-                return ResourceManager.GetString("R2ROptions_GraphicsApi_DX12", resourceCulture);
+                return ResourceManager.GetString("GameOptions_GraphicsApi_DX12", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Vulkan.
         /// </summary>
-        public static string R2ROptions_GraphicsApi_Vulkan {
+        public static string GameOptions_GraphicsApi_Vulkan {
             get {
-                return ResourceManager.GetString("R2ROptions_GraphicsApi_Vulkan", resourceCulture);
+                return ResourceManager.GetString("GameOptions_GraphicsApi_Vulkan", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Graphics API.
         /// </summary>
-        public static string R2ROptions_GraphicsApiHeader {
+        public static string GameOptions_GraphicsApiHeader {
             get {
-                return ResourceManager.GetString("R2ROptions_GraphicsApiHeader", resourceCulture);
+                return ResourceManager.GetString("GameOptions_GraphicsApiHeader", resourceCulture);
             }
         }
         

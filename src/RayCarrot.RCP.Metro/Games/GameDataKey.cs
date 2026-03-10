@@ -31,4 +31,5 @@ public static class GameDataKey
     public const string RGH_LaunchData = "RGH_LaunchData";
     public const string UbiArt_CommandArgs = "UbiArt_CommandArgs";
     public const string R2R_GraphicsApi = "R2R_GraphicsAPI";
+    public const string R30th_GraphicsApi = "R30th_GraphicsApi";
 }

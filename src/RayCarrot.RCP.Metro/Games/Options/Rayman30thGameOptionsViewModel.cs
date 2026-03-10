@@ -1,33 +1,35 @@
 ﻿namespace RayCarrot.RCP.Metro.Games.Options;
 
 /// <summary>
-/// View model for Rayman 2: Redreamed game options
+/// View model for Rayman 30th Anniversary Edition game options
 /// </summary>
-public class Rayman2RedreamedGameOptionsViewModel : GameOptionsViewModel
+public class Rayman30thGameOptionsViewModel : GameOptionsViewModel
 {
-    public Rayman2RedreamedGameOptionsViewModel(GameInstallation gameInstallation) : base(gameInstallation)
+    public Rayman30thGameOptionsViewModel(GameInstallation gameInstallation) : base(gameInstallation)
     {
         AvailableGraphicsApis =
         [
             new GraphicsApi(null, new ResourceLocString(nameof(Resources.GameOptions_GraphicsApi_Default))),
-            new GraphicsApi("d3d11", new ResourceLocString(nameof(Resources.GameOptions_GraphicsApi_DX11))),
-            new GraphicsApi("d3d12", new ResourceLocString(nameof(Resources.GameOptions_GraphicsApi_DX12))),
-            new GraphicsApi("vulkan", new ResourceLocString(nameof(Resources.GameOptions_GraphicsApi_Vulkan)))
+            new GraphicsApi("dx11", new ResourceLocString(nameof(Resources.GameOptions_GraphicsApi_DX11))),
+            new GraphicsApi("dx12", new ResourceLocString(nameof(Resources.GameOptions_GraphicsApi_DX12))),
+            new GraphicsApi("opengl", new ResourceLocString("OpenGL")) // TODO-LOC
         ];
+        IsAvailable = gameInstallation.GetComponent<LaunchGameComponent>()?.SupportsLaunchArguments == true;
     }
 
     public ObservableCollection<GraphicsApi> AvailableGraphicsApis { get; }
+    public bool IsAvailable { get; }
 
     public GraphicsApi SelectedGraphicsApi
     {
         get
         {
-            string? id = GameInstallation.GetValue<string>(GameDataKey.R2R_GraphicsApi);
+            string? id = GameInstallation.GetValue<string>(GameDataKey.R30th_GraphicsApi);
             return AvailableGraphicsApis.First(x => x.Id == id); 
         }
         set
         {
-            GameInstallation.SetValue(GameDataKey.R2R_GraphicsApi, value.Id);
+            GameInstallation.SetValue(GameDataKey.R30th_GraphicsApi, value.Id);
             Services.Messenger.Send(new ModifiedGamesMessage(GameInstallation));
         }
     }

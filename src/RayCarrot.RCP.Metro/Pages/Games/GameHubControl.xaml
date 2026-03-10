@@ -217,6 +217,9 @@
                                                 <DataTemplate DataType="{x:Type options:Rayman2RedreamedGameOptionsViewModel}">
                                                     <options:Rayman2RedreamedGameOptionsControl />
                                                 </DataTemplate>
+                                                <DataTemplate DataType="{x:Type options:Rayman30thGameOptionsViewModel}">
+                                                    <options:Rayman30thGameOptionsControl />
+                                                </DataTemplate>
                                                 <DataTemplate DataType="{x:Type options:GameClientSelectionGameOptionsViewModel}">
                                                     <options:GameClientSelectionGameOptionsControl />
                                                 </DataTemplate>

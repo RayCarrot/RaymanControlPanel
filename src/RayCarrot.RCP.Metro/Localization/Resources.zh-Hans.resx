@@ -5640,19 +5640,19 @@ Back：穿墙模式
   <data name="GameLink_TTFix" xml:space="preserve">
     <value>麻烦大了修复</value>
   </data>
-  <data name="R2ROptions_GraphicsApiHeader" xml:space="preserve">
+  <data name="GameOptions_GraphicsApiHeader" xml:space="preserve">
     <value>图像API</value>
   </data>
-  <data name="R2ROptions_GraphicsApi_Default" xml:space="preserve">
+  <data name="GameOptions_GraphicsApi_Default" xml:space="preserve">
     <value>默认</value>
   </data>
-  <data name="R2ROptions_GraphicsApi_DX11" xml:space="preserve">
+  <data name="GameOptions_GraphicsApi_DX11" xml:space="preserve">
     <value>DirectX 11</value>
   </data>
-  <data name="R2ROptions_GraphicsApi_DX12" xml:space="preserve">
+  <data name="GameOptions_GraphicsApi_DX12" xml:space="preserve">
     <value>DirectX 12</value>
   </data>
-  <data name="R2ROptions_GraphicsApi_Vulkan" xml:space="preserve">
+  <data name="GameOptions_GraphicsApi_Vulkan" xml:space="preserve">
     <value>Vulkan</value>
   </data>
   <data name="Progression_TT_Thermometers" xml:space="preserve">

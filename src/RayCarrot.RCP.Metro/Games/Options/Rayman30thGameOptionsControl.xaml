@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="RayCarrot.RCP.Metro.Games.Options.Rayman2RedreamedGameOptionsControl"
+﻿<UserControl x:Class="RayCarrot.RCP.Metro.Games.Options.Rayman30thGameOptionsControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              d:Background="{DynamicResource MahApps.Brushes.ThemeBackground}"
              d:Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"
-             d:DataContext="{d:DesignInstance options:Rayman2RedreamedGameOptionsViewModel}">
+             d:DataContext="{d:DesignInstance options:Rayman30thGameOptionsViewModel}">
     <StackPanel Margin="6">
 
         <TextBlock Style="{StaticResource RCP.Styles.TextBlock.Header}"
@@ -20,6 +20,7 @@
                  SelectedItem="{Binding Path=SelectedGraphicsApi}"
                  ItemContainerStyle="{StaticResource RCP.Styles.ListBoxItem.RadioButton}"
                  Margin="0 0 0 -4"
+                 IsEnabled="{Binding Path=IsAvailable, Mode=OneTime}"
                  Background="Transparent">
             <ListBox.ItemTemplate>
                 <DataTemplate>
