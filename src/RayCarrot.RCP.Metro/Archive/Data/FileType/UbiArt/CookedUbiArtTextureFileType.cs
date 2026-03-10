@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Windows.Media.Imaging;
 using BinarySerializer;
+using BinarySerializer.Nintendo.Switch;
 using BinarySerializer.UbiArt;
 using MahApps.Metro.IconPacks;
 using RayCarrot.RCP.Metro.Imaging;
@@ -28,6 +29,7 @@ public sealed class CookedUbiArtTextureFileType : FileType
         DdsSubType = new CookedUbiArtTextureSubFileType(new DdsImageFormat(), defaultFormats);
         Xbox360D3DTextureSubType = new CookedUbiArtTextureSubFileType(new Xbox360D3DTextureImageFormat(), defaultFormats);
         GtfImageFormat = new CookedUbiArtTextureSubFileType(new GtfImageFormat(), defaultFormats);
+        XtxImageFormat = new CookedUbiArtTextureSubFileType(new XtxImageFormat(), defaultFormats);
         PvrSubType = new CookedUbiArtTextureSubFileType(new PvrImageFormat(), defaultFormats);
     }
 
@@ -38,6 +40,7 @@ public sealed class CookedUbiArtTextureFileType : FileType
     private CookedUbiArtTextureSubFileType DdsSubType { get; }
     private CookedUbiArtTextureSubFileType Xbox360D3DTextureSubType { get; }
     private CookedUbiArtTextureSubFileType GtfImageFormat { get; }
+    private CookedUbiArtTextureSubFileType XtxImageFormat { get; }
     private CookedUbiArtTextureSubFileType PvrSubType { get; }
 
     #endregion
@@ -131,7 +134,8 @@ public sealed class CookedUbiArtTextureFileType : FileType
         return settings.Platform is 
             Platform.PC or 
             Platform.Xbox360 or 
-            Platform.PlayStation3 or 
+            Platform.PlayStation3 or
+            Platform.NintendoSwitch or
             Platform.iOS or 
             Platform.Android or
             Platform.Mac;
@@ -144,6 +148,7 @@ public sealed class CookedUbiArtTextureFileType : FileType
             Platform.PC => DdsSubType,
             Platform.Xbox360 => Xbox360D3DTextureSubType,
             Platform.PlayStation3 => GtfImageFormat,
+            Platform.NintendoSwitch => XtxImageFormat,
             Platform.iOS => getHeaderFunc()?.Type is TextureType.BackLightEmmissive or (TextureType)3 ? PvrSubType : DdsSubType,
             Platform.Android => DdsSubType,
             Platform.Mac => DdsSubType,
