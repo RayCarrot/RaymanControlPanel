@@ -35,6 +35,7 @@ public class Xbox360D3DTextureImageFormat : ImageFormat
         byte[] imgData = new byte[inputStream.Length - inputStream.Position];
         inputStream.Read(imgData, 0, imgData.Length);
 
+        // TODO: Use this code instead: https://github.com/xenia-project/xenia/blob/master/src/xenia/gpu/texture_util.cc
         // Untile the image data
         imgData = texture.Untile(imgData);
 
