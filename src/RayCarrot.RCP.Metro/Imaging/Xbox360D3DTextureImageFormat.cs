@@ -20,7 +20,7 @@ public class Xbox360D3DTextureImageFormat : ImageFormat
     public override ImageMetadata GetMetadata(Stream inputStream)
     {
         using Context context = new RCPContext(String.Empty);
-        D3DTexture header = context.ReadStreamData<D3DTexture>(inputStream, mode: VirtualFileMode.DoNotClose);
+        D3DTexture header = context.ReadStreamData<D3DTexture>(inputStream, endian: Endian.Big, mode: VirtualFileMode.DoNotClose, maintainPosition: true);
         return GetMetadata(header);
     }
 
@@ -60,7 +60,7 @@ public class Xbox360D3DTextureImageFormat : ImageFormat
             _ => throw new InvalidOperationException($"The D3D format {texture.DataFormat} is not supported"),
         });
 
-        // TODO-UPDATE: Pass in mipmaps
+        // TODO: Pass in mipmaps
         switch (texture.DataFormat)
         {
             case D3DTexture.GPUTEXTUREFORMAT.GPUTEXTUREFORMAT_8_8_8_8:

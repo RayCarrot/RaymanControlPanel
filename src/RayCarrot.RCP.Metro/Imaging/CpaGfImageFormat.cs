@@ -148,6 +148,8 @@ public class CpaGfImageFormat : ImageFormat
                 text: gf.Header.PixelFormat.ToString(),
                 minUserLevel: UserLevel.Technical)
         ];
+
+        // TODO: Pass in mipmaps
         switch (format)
         {
             case GF_Format.BGRA_8888:
@@ -371,7 +373,7 @@ public class CpaGfImageFormat : ImageFormat
         // Encode the main image
         EncodeImage(data, 0, gfFile.Header.PixelFormat, gfFile.ImgData, 0);
 
-        // TODO-UPDATE: Normalize mipmap generation directly in RawImageData and use mipmaps from there if they exist
+        // TODO: Normalize mipmap generation directly in RawImageData and use mipmaps from there if they exist
         // Encode mipmaps
         if (gfFile.Header.ExclusiveMipmapsCount > 0)
         {

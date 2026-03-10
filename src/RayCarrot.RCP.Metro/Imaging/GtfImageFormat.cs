@@ -42,7 +42,7 @@ public class GtfImageFormat : ImageFormat
 
         GTFTexture texture = gtf.Textures[0];
 
-        if (texture.Cubemap || texture.Dimension != GTFDimension.Dimension2)
+        if (texture.Depth != 1 || texture.Cubemap || texture.Dimension != GTFDimension.Dimension2)
             throw new InvalidOperationException("Only 2D GTF textures are supported");
 
         Func<DuoGridItemViewModel[]> customInfoItemsFactory = () =>
@@ -61,7 +61,7 @@ public class GtfImageFormat : ImageFormat
         {
             int mipmapImgLength = texture.Format switch
             {
-                GTFFormat.A8R8G8B8 => mipmapWidth * texture.Height * 4,
+                GTFFormat.A8R8G8B8 => mipmapWidth * mipmapHeight * 4,
                 GTFFormat.COMPRESSED_DXT1 => BlockCompressionHelpers.GetImageLength(RawImageDataCompressedFormat.DXT1, mipmapWidth, mipmapHeight),
                 GTFFormat.COMPRESSED_DXT23 => BlockCompressionHelpers.GetImageLength(RawImageDataCompressedFormat.DXT3, mipmapWidth, mipmapHeight),
                 GTFFormat.COMPRESSED_DXT45 => BlockCompressionHelpers.GetImageLength(RawImageDataCompressedFormat.DXT5, mipmapWidth, mipmapHeight),
@@ -74,7 +74,7 @@ public class GtfImageFormat : ImageFormat
             // Unswizzle
             if (texture.Format == GTFFormat.A8R8G8B8)
             {
-                MortonSwizzle swizzle = new(texture.Width, texture.Height, 4);
+                MortonSwizzle swizzle = new(mipmapWidth, mipmapHeight, 4);
                 mipmapImgData = swizzle.Unswizzle(mipmapImgData);
             }
 

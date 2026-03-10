@@ -179,20 +179,24 @@ public class RawImageData
         byte[] imgData = GetImageData(mipmapLevel);
 
         if (PixelFormat == newPixelFormat)
-            return Mipmaps[mipmapLevel].ImageData;
+            return imgData;
+
+        Size size = GetImageSize(mipmapLevel);
+        int width = size.Width;
+        int height = size.Height;
 
         switch (PixelFormat)
         {
             case RawImageDataPixelFormat.Bgr24 when newPixelFormat is RawImageDataPixelFormat.Bgra32:
             {
-                byte[] convertedData = new byte[Width * Height * 4];
+                byte[] convertedData = new byte[width * height * 4];
 
                 int originalIndex = 0;
                 int convertedIndex = 0;
 
-                for (int y = 0; y < Height; y++)
+                for (int y = 0; y < height; y++)
                 {
-                    for (int x = 0; x < Width; x++)
+                    for (int x = 0; x < width; x++)
                     {
                         convertedData[convertedIndex + 0] = imgData[originalIndex + 0];
                         convertedData[convertedIndex + 1] = imgData[originalIndex + 1];
@@ -248,8 +252,12 @@ public class RawImageData
     {
         byte[] imgData = GetImageData(0);
 
+        Size size = GetImageSize(0);
+        int width = size.Width;
+        int height = size.Height;
+
         // Create the bitmap
-        Bitmap bmp = new(Width, Height, PixelFormat switch
+        Bitmap bmp = new(width, height, PixelFormat switch
         {
             // A bit confusing since it says RGB, but it's actually all BGR
             RawImageDataPixelFormat.Bgr24 => System.Drawing.Imaging.PixelFormat.Format24bppRgb,
