@@ -77,7 +77,8 @@ public sealed class CpaGfFileType : FileType
     {
         CpaGfImageFormat imageFormat = GetImageFormat(manager);
         RawImageData imgData = imageFormat.Decode(inputStream.Stream);
-        BitmapSource thumb = imgData.ToBitmapSource(requestedWidth, requestedHeight);
+        int mipmapLevel = imgData.GetClosestMipmapLevel(requestedWidth, requestedHeight);
+        BitmapSource thumb = imgData.ToBitmapSource(mipmapLevel);
 
         return new FileThumbnailData(thumb, imgData.GetInfoItems().ToArray());
     }

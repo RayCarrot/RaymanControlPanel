@@ -85,32 +85,6 @@ public class RawImageData
 
     public Func<DuoGridItemViewModel[]>? CustomInfoItemsFactory { private get; init; }
 
-    private int GetClosestMipmapLevel(int requestedWidth, int requestedHeight)
-    {
-        if (requestedWidth <= 0 || requestedHeight <= 0)
-            return 0;
-
-        int mipmapLevel = 0;
-        int bestDist = Int32.MaxValue;
-
-        for (int i = 0; i < MipmapLevels; i++)
-        {
-            Size size = GetImageSize(i);
-            
-            int dw = size.Width - requestedWidth;
-            int dh = size.Height - requestedHeight;
-            int dist = dw * dw + dh * dh;
-
-            if (dist < bestDist)
-            {
-                bestDist = dist;
-                mipmapLevel = i;
-            }
-        }
-
-        return mipmapLevel;
-    }
-
     private MipmapImage GetMipmapImage(int mipmapLevel)
     {
         // Get the image
@@ -284,6 +258,32 @@ public class RawImageData
         }
     }
 
+    public int GetClosestMipmapLevel(int requestedWidth, int requestedHeight)
+    {
+        if (requestedWidth <= 0 || requestedHeight <= 0)
+            return 0;
+
+        int mipmapLevel = 0;
+        int bestDist = Int32.MaxValue;
+
+        for (int i = 0; i < MipmapLevels; i++)
+        {
+            Size size = GetImageSize(i);
+
+            int dw = size.Width - requestedWidth;
+            int dh = size.Height - requestedHeight;
+            int dist = dw * dw + dh * dh;
+
+            if (dist < bestDist)
+            {
+                bestDist = dist;
+                mipmapLevel = i;
+            }
+        }
+
+        return mipmapLevel;
+    }
+
     public Bitmap ToBitmap()
     {
         byte[] imgData = GetImageData(0);
@@ -309,10 +309,8 @@ public class RawImageData
         return bmp;
     }
 
-    public BitmapSource ToBitmapSource(int requestedWidth, int requestedHeight)
+    public BitmapSource ToBitmapSource(int mipmapLevel)
     {
-        int mipmapLevel = GetClosestMipmapLevel(requestedWidth, requestedHeight);
-
         byte[] imgData = GetImageData(mipmapLevel);
         Size size = GetImageSize(mipmapLevel);
 

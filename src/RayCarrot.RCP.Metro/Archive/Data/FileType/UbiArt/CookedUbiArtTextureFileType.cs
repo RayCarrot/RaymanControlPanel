@@ -195,12 +195,14 @@ public sealed class CookedUbiArtTextureFileType : FileType
         {
             RawImageData imgData = imageFormat.Decode(inputStream.Stream);
 
+            int mipmapLevel = imgData.GetClosestMipmapLevel(requestedWidth, requestedHeight);
+
             // Remap if needed
             if (header is { IsRemapped: true })
-                RemapChannels(imgData, header, 0);
+                RemapChannels(imgData, header, mipmapLevel);
 
             // Create an image source
-            BitmapSource thumb = imgData.ToBitmapSource(requestedWidth, requestedHeight);
+            BitmapSource thumb = imgData.ToBitmapSource(mipmapLevel);
 
             return new FileThumbnailData(thumb, imgData.GetInfoItems().ToArray());
         }

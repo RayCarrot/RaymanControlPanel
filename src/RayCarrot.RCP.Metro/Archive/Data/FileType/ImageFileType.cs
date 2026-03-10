@@ -68,7 +68,8 @@ public sealed class ImageFileType : FileType
         if (imageFormat.CanDecode)
         {
             RawImageData imgData = imageFormat.Decode(inputStream.Stream);
-            BitmapSource thumb = imgData.ToBitmapSource(requestedWidth, requestedHeight);
+            int mipmapLevel = imgData.GetClosestMipmapLevel(requestedWidth, requestedHeight);
+            BitmapSource thumb = imgData.ToBitmapSource(mipmapLevel);
 
             return new FileThumbnailData(thumb, imgData.GetInfoItems().ToArray());
         }
