@@ -27,30 +27,13 @@ public class RawImageData
 
     public RawImageData(MipmapImage[] compressedMipmaps, RawImageDataCompressedFormat compressedFormat)
     {
+        if (compressedFormat == RawImageDataCompressedFormat.None)
+            throw new ArgumentException("The data is not compressed", nameof(compressedFormat));
+
         CompressedMipmaps = compressedMipmaps;
         CompressedFormat = compressedFormat;
-
-        switch (compressedFormat)
-        {
-            case RawImageDataCompressedFormat.None:
-                throw new ArgumentException("The data is not compressed", nameof(compressedFormat));
-            
-            // Block compression
-            case RawImageDataCompressedFormat.DXT1:
-            case RawImageDataCompressedFormat.DXT3:
-            case RawImageDataCompressedFormat.DXT5:
-                Mipmaps = new MipmapImage[CompressedMipmaps.Length];
-                for (int i = 0; i < Mipmaps.Length; i++)
-                {
-                    MipmapImage img = compressedMipmaps[i];
-                    Mipmaps[i] = new MipmapImage(BlockCompressionHelpers.Decompress(img.ImageData, compressedFormat, img.Width, img.Height), img.Width, img.Height);
-                }
-                PixelFormat = RawImageDataPixelFormat.Bgra32;
-                break;
-            
-            default:
-                throw new ArgumentOutOfRangeException(nameof(compressedFormat), compressedFormat, null);
-        }
+        Mipmaps = new MipmapImage[CompressedMipmaps.Length];
+        PixelFormat = RawImageDataPixelFormat.Bgra32;
     }
 
     public RawImageData(byte[] rawData, RawImageDataPixelFormat pixelFormat, int width, int height) :
@@ -79,8 +62,11 @@ public class RawImageData
         };
     }
 
-    public MipmapImage[]? CompressedMipmaps { get; }
+    private MipmapImage[]? CompressedMipmaps { get; }
+    private MipmapImage?[] Mipmaps { get; }
+
     public RawImageDataCompressedFormat CompressedFormat { get; }
+    public RawImageDataPixelFormat PixelFormat { get; }
 
     [MemberNotNullWhen(true, nameof(CompressedMipmaps))]
     public bool IsCompressed => CompressedFormat != RawImageDataCompressedFormat.None;
@@ -90,9 +76,6 @@ public class RawImageData
         RawImageDataCompressedFormat.DXT1 or 
         RawImageDataCompressedFormat.DXT3 or 
         RawImageDataCompressedFormat.DXT5;
-
-    public MipmapImage[] Mipmaps { get; }
-    public RawImageDataPixelFormat PixelFormat { get; }
 
     public int Width => GetImageSize(0).Width;
     public int Height => GetImageSize(0).Height;
@@ -128,9 +111,57 @@ public class RawImageData
         return mipmapLevel;
     }
 
+    private MipmapImage GetMipmapImage(int mipmapLevel)
+    {
+        // Get the image
+        MipmapImage? img = Mipmaps[mipmapLevel];
+
+        // If it's null then it hasn't been decompressed yet
+        if (img == null)
+        {
+            if (!IsCompressed)
+                throw new Exception("The data is not compressed");
+
+            // Decompress the image
+            switch (CompressedFormat)
+            {
+                case RawImageDataCompressedFormat.None:
+                    throw new ArgumentException("The data is not compressed", nameof(CompressedFormat));
+
+                // Block compression
+                case RawImageDataCompressedFormat.DXT1:
+                case RawImageDataCompressedFormat.DXT3:
+                case RawImageDataCompressedFormat.DXT5:
+                    MipmapImage compressedImg = CompressedMipmaps[mipmapLevel];
+                    int width = compressedImg.Width;
+                    int height = compressedImg.Height;
+                    byte[] decompressedData = BlockCompressionHelpers.Decompress(compressedImg.ImageData, CompressedFormat, width, height);
+                    img = new MipmapImage(decompressedData, width, height);
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(CompressedFormat), CompressedFormat, null);
+            }
+
+            // Save the decompressed image
+            Mipmaps[mipmapLevel] = img;
+        }
+
+        return img;
+    }
+
+    private MipmapImage GetCompressedMipmapImage(int mipmapLevel)
+    {
+        if (!IsCompressed)
+            throw new InvalidOperationException("There is no compressed data");
+
+        return CompressedMipmaps[mipmapLevel];
+    }
+
     public byte[] GetImageData(int mipmapLevel)
     {
-        return Mipmaps[mipmapLevel].ImageData;
+        MipmapImage img = GetMipmapImage(mipmapLevel);
+        return img.ImageData;
     }
 
     public byte[] GetCompressedImageData(int mipmapLevel)
@@ -143,7 +174,12 @@ public class RawImageData
 
     public Size GetImageSize(int mipmapLevel)
     {
-        MipmapImage img = Mipmaps[mipmapLevel];
+        // Get the size from the compressed image if available to avoid having to decompress it
+        MipmapImage img;
+        if (IsCompressed)
+            img = GetCompressedMipmapImage(mipmapLevel);
+        else
+            img = GetMipmapImage(mipmapLevel);
         return new Size(img.Width, img.Height);
     }
 
@@ -288,7 +324,11 @@ public class RawImageData
 
     public RawImageData WithoutCompressedData()
     {
-        return new RawImageData(Mipmaps, PixelFormat);
+        MipmapImage[] mipmaps = new MipmapImage[Mipmaps.Length];
+        for (int i = 0; i < mipmaps.Length; i++)
+            mipmaps[i] = GetMipmapImage(i);
+
+        return new RawImageData(mipmaps, PixelFormat);
     }
 
     public IEnumerable<DuoGridItemViewModel> GetInfoItems()
