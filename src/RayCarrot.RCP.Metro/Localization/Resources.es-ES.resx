@@ -5741,4 +5741,7 @@ ADVERTENCIA: Cargar directamente un mapa con esto omitirá la carga de tu archiv
   <data name="Platform_GameCube" xml:space="preserve">
     <value>GameCube</value>
   </data>
+  <data name="GameOptions_GraphicsApi_OpenGL" xml:space="preserve">
+    <value>OpenGL</value>
+  </data>
 </root>

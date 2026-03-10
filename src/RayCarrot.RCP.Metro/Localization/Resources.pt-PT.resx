@@ -5981,4 +5981,153 @@ Aplicar a modificação sem elas pode fazer com que ela não funcione corretamen
   <data name="Platform_GameCube" xml:space="preserve">
     <value>GameCube</value>
   </data>
+  <data name="ToolDownload_Status" xml:space="preserve">
+    <value>A descarregar ficheiros</value>
+  </data>
+  <data name="ToolDownload_Success" xml:space="preserve">
+    <value>Os ficheiros foram descarregados com sucesso</value>
+  </data>
+  <data name="ToolDownload_Error" xml:space="preserve">
+    <value>Ocorreu um erro ao descarregar os ficheiros</value>
+  </data>
+  <data name="Rayman1_Prototype_Jaguar_Title" xml:space="preserve">
+    <value>Protótipo Rayman</value>
+  </data>
+  <data name="Rayman1_Demo_Jaguar_Title" xml:space="preserve">
+    <value>Demo Rayman</value>
+  </data>
+  <data name="Rayman30thAnniversaryEdition_Win32_Title" xml:space="preserve">
+    <value>Rayman 30th Anniversary Edition</value>
+  </data>
+  <data name="GameHub_PerLevelSoundtrackPanel_Download" xml:space="preserve">
+    <value>Descarregar modificação</value>
+  </data>
+  <data name="Progression_RA_Skins" xml:space="preserve">
+    <value>Skins</value>
+  </data>
+  <data name="Progression_RA_BeginnerLeague" xml:space="preserve">
+    <value>Taças da Liga Principiante</value>
+  </data>
+  <data name="Progression_RA_ProLeague" xml:space="preserve">
+    <value>Taças da Liga Avançada</value>
+  </data>
+  <data name="Progression_RA_MasterLeague" xml:space="preserve">
+    <value>Taças da Liga Mestre</value>
+  </data>
+  <data name="Utilities_Converter_R1JaguarSaveHeader" xml:space="preserve">
+    <value>Rayman 1 (Atari Jaguar)</value>
+  </data>
+  <data name="Utilities_Converter_R2GbcSaveHeader" xml:space="preserve">
+    <value>Dados de Progressão Rayman 2 (GBC)</value>
+  </data>
+  <data name="AddGames_ToggleDemosAndPrototypes" xml:space="preserve">
+    <value>Exibir {0} demos/protótipos</value>
+  </data>
+  <data name="UpdateAvailable_Header" xml:space="preserve">
+    <value>Actualização Disponível</value>
+  </data>
+  <data name="UpdateAvailable_ChangelogHeader" xml:space="preserve">
+    <value>Changelog</value>
+  </data>
+  <data name="UpdateAvailable_Cancel" xml:space="preserve">
+    <value>Lembrar-me mais tarde</value>
+  </data>
+  <data name="UpdateAvailable_Confirm" xml:space="preserve">
+    <value>Actualização</value>
+  </data>
+  <data name="UpdateAvailable_Title" xml:space="preserve">
+    <value>Nova actualização disponível</value>
+  </data>
+  <data name="UpdateAvailable_Info_CurrentVersion" xml:space="preserve">
+    <value>Versão Actual</value>
+  </data>
+  <data name="UpdateAvailable_Info_NewVersion" xml:space="preserve">
+    <value>Nova Versão</value>
+  </data>
+  <data name="UpdateAvailable_Info_VersionBeta" xml:space="preserve">
+    <value>{0} (BETA)</value>
+  </data>
+  <data name="UpdateAvailable_Info_ReleaseDate" xml:space="preserve">
+    <value>Data de Lançamento</value>
+  </data>
+  <data name="UpdateAvailable_Info_Size" xml:space="preserve">
+    <value>Tamanho da Actualização</value>
+  </data>
+  <data name="UpdateAvailable_Info_Url" xml:space="preserve">
+    <value>URL da Actualização
+</value>
+  </data>
+  <data name="UpdateCheck_NoReleaseFoundError" xml:space="preserve">
+    <value>Nenhuma versão válida da aplicação encontrada</value>
+  </data>
+  <data name="UpdateCheck_ConnectionError" xml:space="preserve">
+    <value>Não é possível estabelecer ligação com o servidor. Verifica a tua ligação à Internet.</value>
+  </data>
+  <data name="UpdateCheck_UnknownError" xml:space="preserve">
+    <value>Ocorreu um erro desconhecido</value>
+  </data>
+  <data name="AprilFoolsMessage" xml:space="preserve">
+    <value>DIA DAS MENTIRAS! Os Rabbids invadiram o Rayman Control Panel! Consegues encontrá-los a todos?</value>
+  </data>
+  <data name="AprilFoolsMessageHeader" xml:space="preserve">
+    <value>DIA DAS MENTIRAS</value>
+  </data>
+  <data name="GameDisplay_OpenPCGamingWikiPage" xml:space="preserve">
+    <value>Abrir página PCGamingWiki</value>
+  </data>
+  <data name="Config_MenuMusic" xml:space="preserve">
+    <value>Menu da música</value>
+  </data>
+  <data name="Config_Volume" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="Lang_Japanese" xml:space="preserve">
+    <value>Japonês</value>
+  </data>
+  <data name="Lang_TraditionalChinese" xml:space="preserve">
+    <value>Chinês (Tradicional)
+</value>
+  </data>
+  <data name="Lang_SimplifiedChinese" xml:space="preserve">
+    <value>Chinês (Simplificado)</value>
+  </data>
+  <data name="Lang_BrazilianPortuguese" xml:space="preserve">
+    <value>Português (Brasil)</value>
+  </data>
+  <data name="Config_JoypadRumbleRace" xml:space="preserve">
+    <value>Activar vibração joypad (Modo corrida)</value>
+  </data>
+  <data name="Config_JoypadRumbleBattle" xml:space="preserve">
+    <value>Activar vibração joypad (Modo batalha)</value>
+  </data>
+  <data name="SetupGameAction_Rayman1FMVs_Header" xml:space="preserve">
+    <value>Instalar a modificação FMVs Rayman</value>
+  </data>
+  <data name="SetupGameAction_Rayman1FMVs_Info" xml:space="preserve">
+    <value>Algumas versões do jogo não vêm com os FMVs de introdução e encerramento. Ao usar a modificação FMVs Rayman, juntamente com a ferramenta de bnada sonora por nível, é possível restaurar os FMVs.</value>
+  </data>
+  <data name="SetupGameAction_GBCRemoveUbiKeyRequirement_Header" xml:space="preserve">
+    <value>Instalar a modificação Requirimento de Remoção Ubi Key</value>
+  </data>
+  <data name="SetupGameAction_GBCRemoveUbiKeyRequirement_Info" xml:space="preserve">
+    <value>Existe um nível bónus que normalmente só pode ser desbloqueado ligando o jogo a outro título compatível através da funcionalidade Ubi Key. A modificação Requerimento de Remoção Ubi Key, da autoria de RayCarrot, elimina este requisito, permitindo aceder ao nível sem ligar a outro jogo.</value>
+  </data>
+  <data name="CloseGameError" xml:space="preserve">
+    <value>Ocorreu um erro ao encerrar o jogo</value>
+  </data>
+  <data name="GameHub_Close" xml:space="preserve">
+    <value>Parar</value>
+  </data>
+  <data name="Settings_CheckForRunningGames" xml:space="preserve">
+    <value>Verificar e mostrar se os jogos estão a executar</value>
+  </data>
+  <data name="Settings_UseDiscordRichPresence" xml:space="preserve">
+    <value>Activar a Discord Rich Presence</value>
+  </data>
+  <data name="Settings_UseDiscordRichPresenceInfo" xml:space="preserve">
+    <value>Se activado, a tua actividade no Discord será exibida quando estiveres a utilizar o Rayman Control Panel e os jogos que estiveres a jogar enquanto ele estiver em execução. Tem em mente que, actualmente, não funciona para jogos emulados. Em alguns casos, é necessário reiniciar a aplicação para que isso seja actualizado.</value>
+  </data>
+  <data name="GameOptions_GraphicsApi_OpenGL" xml:space="preserve">
+    <value>OpenGL</value>
+  </data>
 </root>

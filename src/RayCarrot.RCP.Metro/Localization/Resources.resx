@@ -6371,4 +6371,7 @@ version</comment>
   <data name="Settings_UseDiscordRichPresenceInfo" xml:space="preserve">
     <value>If enabled then your Discord activity will show when you're using the Rayman Control Panel and the game's you're playing while it's running. Keep in mind that it currently doesn't work for emulated games. In some cases you need to restart the app for this to update.</value>
   </data>
+  <data name="GameOptions_GraphicsApi_OpenGL" xml:space="preserve">
+    <value>OpenGL</value>
+  </data>
 </root>

@@ -6083,4 +6083,7 @@ Zastosowanie modyfikacji bez nich może spowodować, że nie będzie ona działa
   <data name="UpdateCheck_UnknownError" xml:space="preserve">
     <value>Wystąpił nieznany błąd</value>
   </data>
+  <data name="GameOptions_GraphicsApi_OpenGL" xml:space="preserve">
+    <value>OpenGL</value>
+  </data>
 </root>

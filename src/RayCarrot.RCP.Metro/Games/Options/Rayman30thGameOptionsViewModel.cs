@@ -12,7 +12,7 @@ public class Rayman30thGameOptionsViewModel : GameOptionsViewModel
             new GraphicsApi(null, new ResourceLocString(nameof(Resources.GameOptions_GraphicsApi_Default))),
             new GraphicsApi("dx11", new ResourceLocString(nameof(Resources.GameOptions_GraphicsApi_DX11))),
             new GraphicsApi("dx12", new ResourceLocString(nameof(Resources.GameOptions_GraphicsApi_DX12))),
-            new GraphicsApi("opengl", new ResourceLocString("OpenGL")) // TODO-LOC
+            new GraphicsApi("opengl", new ResourceLocString(nameof(Resources.GameOptions_GraphicsApi_OpenGL)))
         ];
         IsAvailable = gameInstallation.GetComponent<LaunchGameComponent>()?.SupportsLaunchArguments == true;
     }

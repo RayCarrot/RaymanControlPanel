@@ -5496,7 +5496,7 @@ WAARSCHUWING: Direct laden binnen een map via deze weg zorgt ervoor dat de save 
     <value>Standaard</value>
   </data>
   <data name="PostUpdate_MigrateTPLS" xml:space="preserve">
-    <value>Het Per-level Soundtrack hulpprogramma voor Rayman 1 is zodanig herwerkt in deze versie dat deze niet meer afhankelijk is van een aangepaste DOSBox build. Om deze te kunnen blijven gebruiken, dien je deze opnieuw te installeren. De vorige versie is automatisch gede-installeerd.</value>
+    <value>Het Per-level Soundtrack hulpprogramma voor Rayman 1 is verplaatst naar een te downloaden mod in de Mod Loader. Om deze te kunnen blijven gebruiken, dien je deze opnieuw te downloaden. De vorige versie is automatisch gede-installeerd.</value>
   </data>
   <data name="PostUpdate_MigrateTPLSHeader" xml:space="preserve">
     <value>Per-level Soundtrack Update Aankondiging</value>
@@ -5970,5 +5970,8 @@ Het toepassen van de mod zonder de andere kan ervoor zorgen dat deze niet juist 
   </data>
   <data name="Platform_GameCube" xml:space="preserve">
     <value>GameCube</value>
+  </data>
+  <data name="GameOptions_GraphicsApi_OpenGL" xml:space="preserve">
+    <value>OpenGL</value>
   </data>
 </root>

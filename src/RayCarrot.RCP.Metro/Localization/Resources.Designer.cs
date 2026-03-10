@@ -4984,6 +4984,51 @@ namespace RayCarrot.RCP.Metro {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to DirectX 11.
+        /// </summary>
+        public static string GameOptions_GraphicsApi_DX11 {
+            get {
+                return ResourceManager.GetString("GameOptions_GraphicsApi_DX11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DirectX 12.
+        /// </summary>
+        public static string GameOptions_GraphicsApi_DX12 {
+            get {
+                return ResourceManager.GetString("GameOptions_GraphicsApi_DX12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OpenGL.
+        /// </summary>
+        public static string GameOptions_GraphicsApi_OpenGL {
+            get {
+                return ResourceManager.GetString("GameOptions_GraphicsApi_OpenGL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vulkan.
+        /// </summary>
+        public static string GameOptions_GraphicsApi_Vulkan {
+            get {
+                return ResourceManager.GetString("GameOptions_GraphicsApi_Vulkan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Graphics API.
+        /// </summary>
+        public static string GameOptions_GraphicsApiHeader {
+            get {
+                return ResourceManager.GetString("GameOptions_GraphicsApiHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Information.
         /// </summary>
         public static string GameOptions_Info {
@@ -12593,42 +12638,6 @@ namespace RayCarrot.RCP.Metro {
         public static string R2HotKeyValidation_ModifierKeysUsed {
             get {
                 return ResourceManager.GetString("R2HotKeyValidation_ModifierKeysUsed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to DirectX 11.
-        /// </summary>
-        public static string GameOptions_GraphicsApi_DX11 {
-            get {
-                return ResourceManager.GetString("GameOptions_GraphicsApi_DX11", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to DirectX 12.
-        /// </summary>
-        public static string GameOptions_GraphicsApi_DX12 {
-            get {
-                return ResourceManager.GetString("GameOptions_GraphicsApi_DX12", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Vulkan.
-        /// </summary>
-        public static string GameOptions_GraphicsApi_Vulkan {
-            get {
-                return ResourceManager.GetString("GameOptions_GraphicsApi_Vulkan", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Graphics API.
-        /// </summary>
-        public static string GameOptions_GraphicsApiHeader {
-            get {
-                return ResourceManager.GetString("GameOptions_GraphicsApiHeader", resourceCulture);
             }
         }
         

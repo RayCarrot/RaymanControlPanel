@@ -6061,4 +6061,67 @@ Aplicar o mod sem estes pode impedir o seu funcionamento. Tem certeza de que des
   <data name="UpdateCheck_UnknownError" xml:space="preserve">
     <value>Ocorreu um erro desconhecido</value>
   </data>
+  <data name="AprilFoolsMessage" xml:space="preserve">
+    <value>PRIMEIRO DE ABRIL! Os Rabbids invadiram o Rayman Control Panel! Você consegue encontrar todos?</value>
+  </data>
+  <data name="AprilFoolsMessageHeader" xml:space="preserve">
+    <value>PRIMEIRO DE ABRIL</value>
+  </data>
+  <data name="GameDisplay_OpenPCGamingWikiPage" xml:space="preserve">
+    <value>Abrir página da PCGamingWiki</value>
+  </data>
+  <data name="Config_MenuMusic" xml:space="preserve">
+    <value>Música do menu</value>
+  </data>
+  <data name="Config_Volume" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="Lang_Japanese" xml:space="preserve">
+    <value>Japonês</value>
+  </data>
+  <data name="Lang_TraditionalChinese" xml:space="preserve">
+    <value>Chinês (Tradicional)</value>
+  </data>
+  <data name="Lang_SimplifiedChinese" xml:space="preserve">
+    <value>Chinês (Simplificado)</value>
+  </data>
+  <data name="Lang_BrazilianPortuguese" xml:space="preserve">
+    <value>Português (Brasil)</value>
+  </data>
+  <data name="Config_JoypadRumbleRace" xml:space="preserve">
+    <value>Habilitar vibração do joypad (modo corrida)</value>
+  </data>
+  <data name="Config_JoypadRumbleBattle" xml:space="preserve">
+    <value>Habilitar vibração do joypad (modo batalha)</value>
+  </data>
+  <data name="SetupGameAction_Rayman1FMVs_Header" xml:space="preserve">
+    <value>Instalar o mod Rayman FMVs</value>
+  </data>
+  <data name="SetupGameAction_Rayman1FMVs_Info" xml:space="preserve">
+    <value>Algumas versões do jogo não incluem os FMVs de introdução e encerramento. Usando o mod Rayman FMVs, juntamente com a ferramenta de trilha sonora por fase, é possível restaurá-los.</value>
+  </data>
+  <data name="SetupGameAction_GBCRemoveUbiKeyRequirement_Header" xml:space="preserve">
+    <value>Instalar o mod Remove Ubi Key Requirement</value>
+  </data>
+  <data name="SetupGameAction_GBCRemoveUbiKeyRequirement_Info" xml:space="preserve">
+    <value>Há uma fase bônus que normalmente só pode ser desbloqueada vinculando o jogo a outro título compatível através do recurso Ubi Key. O mod Remove Ubi Key Requirement, criado por RayCarrot, remove essa exigência, permitindo o acesso à fase sem a necessidade de vincular o jogo a outro.</value>
+  </data>
+  <data name="CloseGameError" xml:space="preserve">
+    <value>Ocorreu um erro ao fechar o jogo</value>
+  </data>
+  <data name="GameHub_Close" xml:space="preserve">
+    <value>Parar</value>
+  </data>
+  <data name="Settings_CheckForRunningGames" xml:space="preserve">
+    <value>Verificar e mostrar se jogos estão sendo executados</value>
+  </data>
+  <data name="Settings_UseDiscordRichPresence" xml:space="preserve">
+    <value>Habilitar Presença no Discord</value>
+  </data>
+  <data name="Settings_UseDiscordRichPresenceInfo" xml:space="preserve">
+    <value>Se ativada, sua atividade no Discord será exibida quando você estiver usando o Rayman Control Panel e os jogos que você estiver jogando enquanto ele estiver sendo executado. Lembre-se de que, atualmente, essa função não funciona com jogos emulados. Em alguns casos, pode ser necessário reiniciar o programa para que seja aplicada.</value>
+  </data>
+  <data name="GameOptions_GraphicsApi_OpenGL" xml:space="preserve">
+    <value>OpenGL</value>
+  </data>
 </root>

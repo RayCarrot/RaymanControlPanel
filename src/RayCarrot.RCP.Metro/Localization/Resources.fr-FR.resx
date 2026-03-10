@@ -5738,4 +5738,7 @@ Voulez-vous désinstaller le patch ?</value>
   <data name="Platform_GameCube" xml:space="preserve">
     <value>GameCube</value>
   </data>
+  <data name="GameOptions_GraphicsApi_OpenGL" xml:space="preserve">
+    <value>OpenGL</value>
+  </data>
 </root>
