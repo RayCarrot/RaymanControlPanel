@@ -59,6 +59,7 @@ public sealed class GameDescriptor_Rayman30thAnniversaryEdition_Win32 : Win32Gam
         builder.Register(new UbisoftConnectGameClientComponent(UbisoftConnectGameId, UbisoftConnectProductId));
         
         // TODO: Add progression
+        builder.Register(new RayMapComponent(RayMapComponent.RayMapViewer.Ray1Map, "RaymanPS1US", "r1/ps1_us"));
         builder.Register(new GameOptionsComponent(x => new Rayman30thGameOptionsViewModel(x)));
         builder.Register(new LaunchArgumentsComponent(GetLaunchArgs));
         builder.Register(new GameSettingsComponent(x => new Rayman30thSettingsViewModel(x)));
