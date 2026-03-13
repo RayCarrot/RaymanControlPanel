@@ -16251,7 +16251,7 @@ namespace RayCarrot.RCP.Metro {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If enabled then your Discord activity will show when you&apos;re using the Rayman Control Panel and the game&apos;s you&apos;re playing while it&apos;s running. Keep in mind that it currently doesn&apos;t work for emulated games. In some cases you need to restart the app for this to update..
+        ///   Looks up a localized string similar to If enabled then your Discord activity will show when you&apos;re using the Rayman Control Panel and the games you&apos;re playing while it&apos;s running. Keep in mind that it currently doesn&apos;t work for emulated games. In some cases you need to restart the app for this to update..
         /// </summary>
         public static string Settings_UseDiscordRichPresenceInfo {
             get {
@@ -16575,7 +16575,7 @@ namespace RayCarrot.RCP.Metro {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There is a bonus level which can normally only be unlocked by linking the game to another supported title through the Ubi Key feature. The Remove Ubi Key Requirement mod by RayCarrot removes this requirements, allowing the level to be accessed without linking to another game..
+        ///   Looks up a localized string similar to There is a bonus level which can normally only be unlocked by linking the game to another supported title through the Ubi Key feature. The Remove Ubi Key Requirement mod by RayCarrot removes this requirement, allowing the level to be accessed without linking to another game..
         /// </summary>
         public static string SetupGameAction_GBCRemoveUbiKeyRequirement_Info {
             get {
@@ -17215,7 +17215,7 @@ namespace RayCarrot.RCP.Metro {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update Url.
+        ///   Looks up a localized string similar to Update URL.
         /// </summary>
         public static string UpdateAvailable_Info_Url {
             get {

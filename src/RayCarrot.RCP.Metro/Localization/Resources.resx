@@ -6300,7 +6300,7 @@ version</comment>
     <value>Update Size</value>
   </data>
   <data name="UpdateAvailable_Info_Url" xml:space="preserve">
-    <value>Update Url</value>
+    <value>Update URL</value>
   </data>
   <data name="UpdateCheck_NoReleaseFoundError" xml:space="preserve">
     <value>No valid app version found</value>
@@ -6354,7 +6354,7 @@ version</comment>
     <value>Install the Remove Ubi Key Requirement mod</value>
   </data>
   <data name="SetupGameAction_GBCRemoveUbiKeyRequirement_Info" xml:space="preserve">
-    <value>There is a bonus level which can normally only be unlocked by linking the game to another supported title through the Ubi Key feature. The Remove Ubi Key Requirement mod by RayCarrot removes this requirements, allowing the level to be accessed without linking to another game.</value>
+    <value>There is a bonus level which can normally only be unlocked by linking the game to another supported title through the Ubi Key feature. The Remove Ubi Key Requirement mod by RayCarrot removes this requirement, allowing the level to be accessed without linking to another game.</value>
   </data>
   <data name="CloseGameError" xml:space="preserve">
     <value>An error occured when closing the game</value>
@@ -6369,7 +6369,7 @@ version</comment>
     <value>Enable Discord Rich Presence</value>
   </data>
   <data name="Settings_UseDiscordRichPresenceInfo" xml:space="preserve">
-    <value>If enabled then your Discord activity will show when you're using the Rayman Control Panel and the game's you're playing while it's running. Keep in mind that it currently doesn't work for emulated games. In some cases you need to restart the app for this to update.</value>
+    <value>If enabled then your Discord activity will show when you're using the Rayman Control Panel and the games you're playing while it's running. Keep in mind that it currently doesn't work for emulated games. In some cases you need to restart the app for this to update.</value>
   </data>
   <data name="GameOptions_GraphicsApi_OpenGL" xml:space="preserve">
     <value>OpenGL</value>

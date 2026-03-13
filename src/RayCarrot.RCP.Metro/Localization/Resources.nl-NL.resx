@@ -5974,4 +5974,148 @@ Het toepassen van de mod zonder de andere kan ervoor zorgen dat deze niet juist 
   <data name="GameOptions_GraphicsApi_OpenGL" xml:space="preserve">
     <value>OpenGL</value>
   </data>
+  <data name="ToolDownload_Status" xml:space="preserve">
+    <value>Downloaden bestanden</value>
+  </data>
+  <data name="ToolDownload_Success" xml:space="preserve">
+    <value>De bestanden zijn succesvol gedownload</value>
+  </data>
+  <data name="ToolDownload_Error" xml:space="preserve">
+    <value>Er heeft een fout plaatsgevonden tijdens het downloaden van de bestanden</value>
+  </data>
+  <data name="Rayman1_Prototype_Jaguar_Title" xml:space="preserve">
+    <value>Rayman Prototype</value>
+  </data>
+  <data name="Rayman1_Demo_Jaguar_Title" xml:space="preserve">
+    <value>Rayman Demo</value>
+  </data>
+  <data name="Rayman30thAnniversaryEdition_Win32_Title" xml:space="preserve">
+    <value>Rayman 30th Anniversary Edition</value>
+  </data>
+  <data name="GameHub_PerLevelSoundtrackPanel_Download" xml:space="preserve">
+    <value>Downloaden Mod</value>
+  </data>
+  <data name="Progression_RA_Skins" xml:space="preserve">
+    <value>Skins</value>
+  </data>
+  <data name="Progression_RA_BeginnerLeague" xml:space="preserve">
+    <value>Beginner League Cups</value>
+  </data>
+  <data name="Progression_RA_ProLeague" xml:space="preserve">
+    <value>Pro League Cups</value>
+  </data>
+  <data name="Progression_RA_MasterLeague" xml:space="preserve">
+    <value>Master Leagues Voltooid</value>
+  </data>
+  <data name="Utilities_Converter_R1JaguarSaveHeader" xml:space="preserve">
+    <value>Rayman 1 (Atari Jaguar)</value>
+  </data>
+  <data name="Utilities_Converter_R2GbcSaveHeader" xml:space="preserve">
+    <value>Rayman 2 (GBC) Save Bestanden</value>
+  </data>
+  <data name="AddGames_ToggleDemosAndPrototypes" xml:space="preserve">
+    <value>Weergave {0} demo's/prototypes</value>
+  </data>
+  <data name="UpdateAvailable_Header" xml:space="preserve">
+    <value>Update Beschikbaar</value>
+  </data>
+  <data name="UpdateAvailable_ChangelogHeader" xml:space="preserve">
+    <value>Wijzigingslogboek</value>
+  </data>
+  <data name="UpdateAvailable_Cancel" xml:space="preserve">
+    <value>Later herinneren</value>
+  </data>
+  <data name="UpdateAvailable_Confirm" xml:space="preserve">
+    <value>Updaten</value>
+  </data>
+  <data name="UpdateAvailable_Title" xml:space="preserve">
+    <value>Nieuwe update beschikbaar</value>
+  </data>
+  <data name="UpdateAvailable_Info_CurrentVersion" xml:space="preserve">
+    <value>Huidige Versie</value>
+  </data>
+  <data name="UpdateAvailable_Info_NewVersion" xml:space="preserve">
+    <value>Nieuwe Versie</value>
+  </data>
+  <data name="UpdateAvailable_Info_VersionBeta" xml:space="preserve">
+    <value>{0} (BETA)</value>
+  </data>
+  <data name="UpdateAvailable_Info_ReleaseDate" xml:space="preserve">
+    <value>Releasedatum</value>
+  </data>
+  <data name="UpdateAvailable_Info_Size" xml:space="preserve">
+    <value>Updategrootte</value>
+  </data>
+  <data name="UpdateAvailable_Info_Url" xml:space="preserve">
+    <value>Update URL</value>
+  </data>
+  <data name="UpdateCheck_NoReleaseFoundError" xml:space="preserve">
+    <value>Geen geldige appversie gevonden</value>
+  </data>
+  <data name="UpdateCheck_ConnectionError" xml:space="preserve">
+    <value>Verbinden met de server niet mogelijk. Controleer a.u.b. je internetverbinding.</value>
+  </data>
+  <data name="UpdateCheck_UnknownError" xml:space="preserve">
+    <value>Er heeft een onbekende fout plaatsgevonden</value>
+  </data>
+  <data name="AprilFoolsMessage" xml:space="preserve">
+    <value>1-APRILGRAP! De Rabbids zijn het Rayman Control Panel binnengedrongen. Kun je ze allemaal vinden?</value>
+  </data>
+  <data name="AprilFoolsMessageHeader" xml:space="preserve">
+    <value>1-APRILGRAP</value>
+  </data>
+  <data name="GameDisplay_OpenPCGamingWikiPage" xml:space="preserve">
+    <value>Open PCGamingWiki pagina</value>
+  </data>
+  <data name="Config_MenuMusic" xml:space="preserve">
+    <value>Menumuziek</value>
+  </data>
+  <data name="Config_Volume" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="Lang_Japanese" xml:space="preserve">
+    <value>Japans</value>
+  </data>
+  <data name="Lang_TraditionalChinese" xml:space="preserve">
+    <value>Chinees (Traditioneel)</value>
+  </data>
+  <data name="Lang_SimplifiedChinese" xml:space="preserve">
+    <value>Chinees (Vereenvoudigd)</value>
+  </data>
+  <data name="Lang_BrazilianPortuguese" xml:space="preserve">
+    <value>Portugees (Brazilië)</value>
+  </data>
+  <data name="Config_JoypadRumbleRace" xml:space="preserve">
+    <value>Inschakelen joypad vibratie (Racemodus)</value>
+  </data>
+  <data name="Config_JoypadRumbleBattle" xml:space="preserve">
+    <value>Inschakelen joypad vibratie (Gevechtsmodus)</value>
+  </data>
+  <data name="SetupGameAction_Rayman1FMVs_Header" xml:space="preserve">
+    <value>Installeren Rayman FMV's mod</value>
+  </data>
+  <data name="SetupGameAction_Rayman1FMVs_Info" xml:space="preserve">
+    <value>Sommige versies van het spel worden niet gelevered met de intro en outro FMV's. Door gebruik te maken van de Rayman FMV's mod, naast het per-level soundtrack hulpprogramma, kunnen de FMV's hersteld worden.</value>
+  </data>
+  <data name="SetupGameAction_GBCRemoveUbiKeyRequirement_Header" xml:space="preserve">
+    <value>Installeren 'Verwijder Ubi Key Vereiste'-mod</value>
+  </data>
+  <data name="SetupGameAction_GBCRemoveUbiKeyRequirement_Info" xml:space="preserve">
+    <value>Er is een bonuslevel dat normaal alleen ontgrendeld kan worden door het spel te koppelen aan een andere, ondersteunende titel via de Ubi Key feature. De 'Verwijder Ubi Key Vereiste'-mod, door RayCarrot, verwijdert deze vereiste, waarna het bonuslevel toegankelijk is zonder koppeling met een ander spel.</value>
+  </data>
+  <data name="CloseGameError" xml:space="preserve">
+    <value>Er heeft een fout plaatsgevonden tijden het afsluiten van het spel</value>
+  </data>
+  <data name="GameHub_Close" xml:space="preserve">
+    <value>Stoppen</value>
+  </data>
+  <data name="Settings_CheckForRunningGames" xml:space="preserve">
+    <value>Controleren op, en weergeven als spellen uitgevoerd worden</value>
+  </data>
+  <data name="Settings_UseDiscordRichPresence" xml:space="preserve">
+    <value>Inschakelen Discord Rich Presence</value>
+  </data>
+  <data name="Settings_UseDiscordRichPresenceInfo" xml:space="preserve">
+    <value>Indien ingeschakeld, zal je Discord-activiteit worden weergegeven tijdens het gebruik van het Rayman Control Panel, tezamen met de spellen die gespeeld worden. Let wel: momenteel werkt deze feature niet voor geëmuleerde spellen. In sommige gevallen dien je de app te herstarten voor deze update.</value>
+  </data>
 </root>
