@@ -3,7 +3,7 @@
     <img src="img/main_artwork.png" width="400">
 </p>
 
-Rayman Control Panel is an open source community project created by [RayCarrot](https://github.com/RayCarrot). It acts as a launcher for your Rayman games, and also aims to unify existing game patches and fixes, as well as allowing extended configurations. It also provides a modding environment for modifying game files and creating and downloading mods. This program does not come with any games and requires the user to have them installed. For certain games it is possible installing them through the program using a game disc.
+Rayman Control Panel is an open source community project created by [RayCarrot](https://github.com/RayCarrot). It acts as a launcher for your Rayman games, and also aims to unify existing game patches and fixes, as well as allowing extended configurations. It also provides a modding environment for modifying game files and creating and downloading mods. This program does not come with any games and requires the user to have them installed.
 
 Check out the [wiki](https://github.com/RayCarrot/RayCarrot.RCP.Metro/wiki) for documentation on the project and its features.
 
@@ -23,7 +23,7 @@ Main features:
 - Game tools, such as allowing per-level soundtrack in Rayman 1 and restoring prototype features in Rayman Raving Rabbids
 - Save data viewing and editing, along with backup/restore options
 - Disc installers to install select games from discs
-- Options to modify game files, such as editing the .ipk or .cnt archives
+- Options to modify game files, such as editing the UBIArt .ipk or CPA .cnt archives
 
 ## Mod Loader
 ![Mods](img/example_modloader_r2.png)
@@ -62,54 +62,6 @@ Select games also support runtime modifications, which allows certain data in th
 ![Progression](img/example_progression.png)
 
 Detailed game save progression can be viewed, along with options to edit the data as serialized JSON and create/restore backups. 
-
-# Dependencies
-The Rayman Control Panel uses these main dependencies:
-
-### BinarySerializer (sub-modules)
-- [BinarySerializer](https://github.com/BinarySerializer/BinarySerializer)
-- [BinarySerializer.Audio](https://github.com/BinarySerializer/BinarySerializer.Audio)
-- [BinarySerializer.Disk](https://github.com/BinarySerializer/BinarySerializer.Disk)
-- [BinarySerializer.Nintendo](https://github.com/BinarySerializer/BinarySerializer.Nintendo)
-- [BinarySerializer.PlayStation](https://github.com/BinarySerializer/BinarySerializer.PlayStation)
-- [BinarySerializer.Ray1](https://github.com/BinarySerializer/BinarySerializer.Ray1)
-- [BinarySerializer.OpenSpace](https://github.com/BinarySerializer/BinarySerializer.OpenSpace)
-- [BinarySerializer.UbiArt](https://github.com/BinarySerializer/BinarySerializer.UbiArt)
-
-### WPF
-- [MahApps.Metro](https://github.com/MahApps/MahApps.Metro)
-- [MahApps.Metro.SimpleChildWindow](https://github.com/punker76/MahApps.Metro.SimpleChildWindow)
-- [MahApps.Metro.IconPacks.Material](https://github.com/MahApps/MahApps.Metro.IconPacks)
-- [Infralution.Localization.Wpf](https://www.codeproject.com/Articles/35159/WPF-Localization-Using-RESX-Files)
-- [gong-wpf-dragdrop](https://github.com/punker76/gong-wpf-dragdrop)
-- [Microsoft.Xaml.Behaviors.Wpf](https://github.com/Microsoft/XamlBehaviorsWpf)
-- [XamlAnimatedGif](https://github.com/XamlAnimatedGif/XamlAnimatedGif)
-- [AutoCompleteTextBox](https://github.com/quicoli/WPF-AutoComplete-TextBox)
-- [WPFTextBoxAutoComplete](https://github.com/Nimgoble/WPFTextBoxAutoComplete)
-
-### Other
-- [CommunityToolkit.Mvvm](https://github.com/CommunityToolkit/dotnet)
-- [Costura.Fody](https://github.com/Fody/Costura)
-- [DirectXTexNet](https://github.com/deng0/DirectXTexNet)
-- [Magick.NET](https://github.com/dlemstra/Magick.NET)
-- [Microsoft.Windows.SDK.Contracts](https://www.nuget.org/packages/Microsoft.Windows.SDK.Contracts)
-- [Microsoft-WindowsAPICodePack-Shell](https://github.com/contre/Windows-API-Code-Pack-1.1)
-- [Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json)
-- [Nito.AsyncEx](https://github.com/StephenCleary/AsyncEx)
-- [NLog](https://github.com/NLog/NLog)
-- [PropertyChanged.Fody](https://github.com/Fody/PropertyChanged)
-- [Resource.Embedder](https://github.com/MarcStan/Resource.Embedder)
-- [SharpCompress](https://github.com/adamhathcock/sharpcompress)
-
-# Localization
-From version 4.1.0 the Rayman Control Panel supports localized strings. For more information and information on how to contribute with translations, check out the Steam discussion page:
-[Rayman Control Panel - Localization](https://steamcommunity.com/groups/RaymanControlPanel/discussions/0/1812044473314212117/)
-
-# Contact
-You can contact me on the following places:
-
-- [Bluesky](https://bsky.app/profile/raycarrot.bsky.social)
-- [Email](mailto:RayCarrotMaster@gmail.com)
 
 # License
 
