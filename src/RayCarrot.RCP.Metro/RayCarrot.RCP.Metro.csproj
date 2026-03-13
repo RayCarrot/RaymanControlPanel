@@ -89,15 +89,15 @@
     <PackageReference Include="DirectXTexNet" Version="1.0.1" />
     <PackageReference Include="gong-wpf-dragdrop" Version="4.0.0" />
     <PackageReference Include="HtmlAgilityPack" Version="1.12.4" />
-    <PackageReference Include="Magick.NET-Q8-x64" Version="14.10.3" />
-    <PackageReference Include="Magick.NET.SystemWindowsMedia" Version="8.0.16" />
+    <PackageReference Include="Magick.NET-Q8-x64" Version="14.10.4" />
+    <PackageReference Include="Magick.NET.SystemWindowsMedia" Version="8.0.17" />
     <PackageReference Include="MahApps.Metro" Version="2.4.11" />
     <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="6.2.1" />
     <PackageReference Include="MahApps.Metro.SimpleChildWindow" Version="2.2.1" />
     <PackageReference Include="Microsoft-WindowsAPICodePack-Shell" Version="1.1.5" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.3" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="10.0.3" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.5" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="10.0.5" />
     <PackageReference Include="Microsoft.Windows.SDK.Contracts" Version="10.0.26100.7705" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.142" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
