@@ -1,5 +1,11 @@
 [
     {
+        "date": "March 13, 2026",
+        "icon": "main",
+        "header": "Version 14.4 is now available!",
+        "text": "Another new update is now available, adding support for the recently released Rayman 30th Anniversary Edition as well both Atari Jaguar and GameCube games! It now also features optional Discord Rich Presence support, showing when you're using the app as well as which Rayman game's you're currently playing. Besides this there are also as usual various other improvements and fixes."
+    },
+    {
         "date": "February 13, 2026",
         "icon": "rayman",
         "header": "Rayman 30th Anniversary Edition available today",
