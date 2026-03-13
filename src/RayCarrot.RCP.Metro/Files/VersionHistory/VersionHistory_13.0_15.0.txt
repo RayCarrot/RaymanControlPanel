@@ -1,4 +1,4 @@
-﻿-----   Version 14.4.0 - March ??, 2026   -----
+﻿-----   Version 14.4.0 - March 13, 2026   -----
 • Added support for Rayman 30th Anniversary Edition
 • Added support for Atari Jaguar games:
     • Rayman
