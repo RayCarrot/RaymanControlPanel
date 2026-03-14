@@ -37,13 +37,21 @@
                 <Button.Style>
                     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource RCP.Styles.Button.Flat}">
                         <Setter Property="rcp:Icon.Kind" Value="Play" />
-                        <Setter Property="Content" Value="{Resx GameHub_Play, ResxName={x:Static rcp:LocalizationManager.ResourcePath}}" />
+                        <Setter Property="Content">
+                            <Setter.Value>
+                                <TextBlock Text="{Resx GameHub_Play, ResxName={x:Static rcp:LocalizationManager.ResourcePath}}" />
+                            </Setter.Value>
+                        </Setter>
                         <Setter Property="Command" Value="{Binding Path=LaunchCommand, Mode=OneTime}" />
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding Path=IsRunning}" Value="True">
                                 <Setter Property="rcp:Icon.Kind" Value="Stop" />
                                 <Setter Property="rcp:Icon.Size" Value="16" />
-                                <Setter Property="Content" Value="{Resx GameHub_Close, ResxName={x:Static rcp:LocalizationManager.ResourcePath}}" />
+                                <Setter Property="Content">
+                                    <Setter.Value>
+                                        <TextBlock Text="{Resx GameHub_Close, ResxName={x:Static rcp:LocalizationManager.ResourcePath}}" />
+                                    </Setter.Value>
+                                </Setter>
                                 <Setter Property="Command" Value="{Binding Path=CloseRunningGameCommand, Mode=OneTime}" />
                             </DataTrigger>
                         </Style.Triggers>
