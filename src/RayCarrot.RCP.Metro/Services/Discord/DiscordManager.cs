@@ -54,7 +54,7 @@ public class DiscordManager : IDisposable, IRecipient<GameRunningChangedMessage>
 
     #region Public Properties
 
-    public TimeSpan RichPresenceCheckInterval { get; set; } = TimeSpan.FromSeconds(2);
+    public TimeSpan RichPresenceCheckInterval { get; set; } = TimeSpan.FromSeconds(5);
     public bool IsInitialized => DiscordClient.IsInitialized;
 
     #endregion
@@ -71,12 +71,13 @@ public class DiscordManager : IDisposable, IRecipient<GameRunningChangedMessage>
                 await Task.Delay(RichPresenceCheckInterval, cancellationToken);
 
                 // Make sure the game is still running
-                if (RunningGameRichPresenceManager == null || RunningGameRichPresenceManager.Process.HasExited)
+                GameRichPresenceManager? manager = RunningGameRichPresenceManager;
+                if (manager == null || manager.Process.HasExited)
                     return;
 
                 // TODO-UPDATE: Handle exceptions
                 // Get the current game presence
-                string? presence = RunningGameRichPresenceManager?.GetPresence();
+                string? presence = manager?.GetPresence();
 
                 // Update the presence if it has changed
                 if (DiscordClient.CurrentPresence.State != presence)
@@ -188,10 +189,11 @@ public class DiscordManager : IDisposable, IRecipient<GameRunningChangedMessage>
             RunningGameRichPresenceManager = richPresenceComponent.CreateObject(process);
             
             // Create a cancellation token source for this loop
-            CancellationTokenSource = new CancellationTokenSource();
+            CancellationTokenSource tokenSource = new();
+            CancellationTokenSource = tokenSource;
 
             // Start the loop
-            Task.Run(() => GameRichPresenceLoop(CancellationTokenSource.Token)).WithoutAwait("Updating game rich presence");
+            Task.Run(() => GameRichPresenceLoop(tokenSource.Token)).WithoutAwait("Updating game rich presence");
         }
         else
         {
@@ -210,7 +212,7 @@ public class DiscordManager : IDisposable, IRecipient<GameRunningChangedMessage>
         // Set the idle presence
         DiscordClient.SetPresence(new RichPresence()
         {
-            // TODO-UPDATE: Only get this once - also might throw exception
+            // TODO-UPDATE: Only get this once and dispose - also might throw exception
             Timestamps = new Timestamps(Process.GetCurrentProcess().StartTime.ToUniversalTime())
         });
 
@@ -233,6 +235,7 @@ public class DiscordManager : IDisposable, IRecipient<GameRunningChangedMessage>
         if (DiscordClient.IsInitialized)
             DiscordClient.ClearPresence();
         DiscordClient.Dispose();
+        Messenger.UnregisterAll(this);
     }
 
     #endregion
