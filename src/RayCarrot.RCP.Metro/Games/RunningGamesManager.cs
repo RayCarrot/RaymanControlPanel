@@ -150,6 +150,7 @@ public class RunningGamesManager
             return;
 
         CancellationTokenSource.Cancel();
+        CancellationTokenSource.Dispose();
         CancellationTokenSource = null;
     }
 
