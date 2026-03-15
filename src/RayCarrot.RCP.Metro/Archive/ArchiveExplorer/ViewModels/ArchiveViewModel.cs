@@ -244,16 +244,28 @@ public class ArchiveViewModel : DirectoryViewModel
         Logger.Info("The archive {0} is being repacked", DisplayName);
 
         // Make sure we can repack the archive by checking if the file is locked
-        Process[] lockProcesses = WindowsHelpers.GetProcessesLockingFile(FilePath);
-        int currentId = Process.GetCurrentProcess().Id;
-        if (lockProcesses.Any(x => x.Id != currentId))
+        Process[]? lockProcesses = null;
+        Process? currentProcess = null;
+        try
         {
-            await Services.MessageUI.DisplayMessageAsync(String.Format(Resources.Archive_RepackLocked, 
-                lockProcesses.
-                    Where(x => x.Id != currentId).
-                    Select(x => $"- {x.ProcessName} ({x.MainModule?.ModuleName})").
-                    JoinItems(Environment.NewLine)), MessageType.Error);
-            return;
+            lockProcesses = WindowsHelpers.GetProcessesLockingFile(FilePath);
+            currentProcess = Process.GetCurrentProcess();
+            int currentId = currentProcess.Id;
+
+            if (lockProcesses.Any(x => x.Id != currentId))
+            {
+                await Services.MessageUI.DisplayMessageAsync(String.Format(Resources.Archive_RepackLocked,
+                    lockProcesses.
+                        Where(x => x.Id != currentId).
+                        Select(x => $"- {x.ProcessName} ({x.MainModule?.ModuleName})").
+                        JoinItems(Environment.NewLine)), MessageType.Error);
+                return;
+            }
+        }
+        finally
+        {
+            lockProcesses?.DisposeAll();
+            currentProcess?.Dispose();
         }
 
         // Run as a load operation
@@ -263,8 +275,8 @@ public class ArchiveViewModel : DirectoryViewModel
             using (await Archive.ArchiveLock.LockAsync())
             {
                 // Find the selected item path
-                string? selectedDirAddr = ExplorerDialogViewModel.SelectedDir == null 
-                    ? null 
+                string? selectedDirAddr = ExplorerDialogViewModel.SelectedDir == null
+                    ? null
                     : ExplorerDialogViewModel.GetDirectoryAddress(ExplorerDialogViewModel.SelectedDir);
 
                 // Run as a task
@@ -315,7 +327,7 @@ public class ArchiveViewModel : DirectoryViewModel
 
                         // On repack
                         await Manager.OnRepackedArchivesAsync(
-                            archiveFilePaths: new[] { FilePath }, 
+                            archiveFilePaths: new[] { FilePath },
                             repackResults: new[] { repackResult },
                             loadState: new PartialProgressLoadState(state, x => currentProgress.Add(x, onRepackedProgress)));
 
