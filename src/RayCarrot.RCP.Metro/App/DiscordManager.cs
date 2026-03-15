@@ -56,6 +56,7 @@ public class DiscordManager : IDisposable, IRecipient<GameRunningChangedMessage>
     {
         if (DiscordClient.IsInitialized)
         {
+            DiscordClient.ClearPresence();
             DiscordClient.Deinitialize();
             Logger.Info("Uninitialized Discord Rich Presence");
         }
@@ -106,6 +107,8 @@ public class DiscordManager : IDisposable, IRecipient<GameRunningChangedMessage>
     public void Dispose()
     {
         CancellationTokenSource.Cancel();
+        if (DiscordClient.IsInitialized)
+            DiscordClient.ClearPresence();
         DiscordClient.Dispose();
     }
 
