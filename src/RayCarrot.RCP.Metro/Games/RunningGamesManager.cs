@@ -191,5 +191,19 @@ public class RunningGamesManager
         }
     }
 
+    public int GetProcessId(GameInstallation gameInstallation)
+    {
+        lock (RunningGames)
+        {
+            foreach (RunningGame game in RunningGames)
+            {
+                if (game.GameInstallation == gameInstallation)
+                    return game.ProcessId;
+            }
+
+            return -1;
+        }
+    }
+
     private readonly record struct RunningGame(GameInstallation GameInstallation, int ProcessId, DateTime ProcessStartTime);
 }

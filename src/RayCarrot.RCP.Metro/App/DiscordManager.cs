@@ -1,4 +1,5 @@
-﻿using DiscordRPC;
+﻿using System.Diagnostics;
+using DiscordRPC;
 using RayCarrot.RCP.Metro.Games.Components;
 
 namespace RayCarrot.RCP.Metro;
@@ -73,6 +74,9 @@ public class DiscordManager : IDisposable, IRecipient<GameRunningChangedMessage>
             return;
         }
 
+        int pid = RunningGamesManager.GetProcessId(gameInstallation);
+        using Process process = Process.GetProcessById(pid); // TODO-UPDATE: This might throw an exception
+
         DiscordClient.SetPresence(new RichPresence()
         {
             Details = $"Playing {component.DisplayName}",
@@ -81,6 +85,7 @@ public class DiscordManager : IDisposable, IRecipient<GameRunningChangedMessage>
                 LargeImageKey = component.ImageKey,
                 SmallImageKey = MainSmallImageKey,
             },
+            Timestamps = new Timestamps(process.StartTime.ToUniversalTime())
         });
 
         RunningGameInstallationId = gameInstallation.InstallationId;
@@ -90,8 +95,12 @@ public class DiscordManager : IDisposable, IRecipient<GameRunningChangedMessage>
 
     public void SetIdlePresence()
     {
-        DiscordClient.SetPresence(new RichPresence());
         RunningGameInstallationId = null;
+        
+        DiscordClient.SetPresence(new RichPresence()
+        {
+            Timestamps = new Timestamps(Process.GetCurrentProcess().StartTime.ToUniversalTime())
+        });
         Logger.Info("Set the idle Discord Rich Presence");
     }
 
