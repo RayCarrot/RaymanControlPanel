@@ -9,6 +9,7 @@
     <UseWPF>true</UseWPF>
     <Nullable>enable</Nullable>
     <PlatformTarget>x64</PlatformTarget>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <!-- <Prefer32Bit>false</Prefer32Bit> -->
     <!-- Appears to be required when using framework earlier than net5 -->
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>

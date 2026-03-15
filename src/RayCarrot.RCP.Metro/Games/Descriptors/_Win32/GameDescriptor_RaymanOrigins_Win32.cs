@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using RayCarrot.RCP.Metro.Games.Components;
 using RayCarrot.RCP.Metro.Games.Finder;
+using RayCarrot.RCP.Metro.Games.RichPresence;
 using RayCarrot.RCP.Metro.Games.Settings;
 using RayCarrot.RCP.Metro.Games.SetupGame;
 using RayCarrot.RCP.Metro.Games.Structure;
@@ -67,6 +68,7 @@ public sealed class GameDescriptor_RaymanOrigins_Win32 : Win32GameDescriptor
         builder.Register(new ModModuleComponent(_ => new UbiArtLocalizationModule()));
 
         builder.Register(new DiscordRichPresenceComponent("Rayman Origins", "rayman_origins"));
+        builder.Register(new RichPresenceManagerComponent((g, p) => new GameRichPresenceManager_RaymanOrigins_Win32(g, p)));
 
         builder.Register(new SetupGameActionComponent(_ => new RaymanOriginsCrashDumpsSetupGameAction()));
         builder.Register(new SetupGameActionComponent(_ => new HighQualityRaymanOriginsVideosSetupGameAction()));

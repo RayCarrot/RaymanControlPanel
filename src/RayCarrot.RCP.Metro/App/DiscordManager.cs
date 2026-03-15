@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using DiscordRPC;
 using RayCarrot.RCP.Metro.Games.Components;
+using RayCarrot.RCP.Metro.Games.RichPresence;
 
 namespace RayCarrot.RCP.Metro;
 
@@ -27,8 +28,49 @@ public class DiscordManager : IDisposable, IRecipient<GameRunningChangedMessage>
     private RunningGamesManager RunningGamesManager { get; }
     private AppUserData Data { get; }
     private DiscordRpcClient DiscordClient { get; }
-    private CancellationTokenSource CancellationTokenSource { get; }
+    private CancellationTokenSource? CancellationTokenSource { get; set; }
     private string? RunningGameInstallationId { get; set; }
+    private GameRichPresenceManager? RunningGameRichPresenceManager { get; set; }
+
+    public TimeSpan RichPresenceCheckInterval { get; set; } = TimeSpan.FromSeconds(2);
+
+    private async Task GameRichPresenceLoop(CancellationToken cancellationToken)
+    {
+        try
+        {
+            while (!cancellationToken.IsCancellationRequested)
+            {
+                // Wait between each check
+                await Task.Delay(RichPresenceCheckInterval, cancellationToken);
+
+                // Make sure the game is still running
+                if (RunningGameRichPresenceManager == null || RunningGameRichPresenceManager.Process.HasExited)
+                    return;
+
+                // TODO-UPDATE: Handle exceptions
+                // Get the current game presence
+                string? presence = RunningGameRichPresenceManager?.GetPresence();
+
+                // Update the presence if it has changed
+                if (DiscordClient.CurrentPresence.State != presence)
+                    DiscordClient.UpdateState(presence);
+            }
+        }
+        catch (TaskCanceledException)
+        {
+            // Do nothing
+        }
+    }
+
+    private void StopCurrentGameRichPresenceLoop()
+    {
+        RunningGameRichPresenceManager?.Dispose();
+        RunningGameRichPresenceManager = null;
+
+        CancellationTokenSource?.Cancel();
+        CancellationTokenSource?.Dispose();
+        CancellationTokenSource = null;
+    }
 
     public void Initialize()
     {
@@ -57,6 +99,7 @@ public class DiscordManager : IDisposable, IRecipient<GameRunningChangedMessage>
     {
         if (DiscordClient.IsInitialized)
         {
+            StopCurrentGameRichPresenceLoop();
             DiscordClient.ClearPresence();
             DiscordClient.Deinitialize();
             Logger.Info("Uninitialized Discord Rich Presence");
@@ -74,6 +117,9 @@ public class DiscordManager : IDisposable, IRecipient<GameRunningChangedMessage>
             return;
         }
 
+        StopCurrentGameRichPresenceLoop();
+        RunningGameInstallationId = gameInstallation.InstallationId;
+
         int pid = RunningGamesManager.GetProcessId(gameInstallation);
         using Process process = Process.GetProcessById(pid); // TODO-UPDATE: This might throw an exception
 
@@ -88,17 +134,25 @@ public class DiscordManager : IDisposable, IRecipient<GameRunningChangedMessage>
             Timestamps = new Timestamps(process.StartTime.ToUniversalTime())
         });
 
-        RunningGameInstallationId = gameInstallation.InstallationId;
+        RichPresenceManagerComponent? richPresenceComponent = gameInstallation.GetComponent<RichPresenceManagerComponent>();
+        if (richPresenceComponent != null)
+        {
+            RunningGameRichPresenceManager = richPresenceComponent.CreateObject(process);
+            CancellationTokenSource = new CancellationTokenSource();
+            Task.Run(() => GameRichPresenceLoop(CancellationTokenSource.Token)).WithoutAwait("Updating game rich presence");
+        }
 
         Logger.Info("Set Discord Rich Presence for game {0}", gameInstallation.FullId);
     }
 
     public void SetIdlePresence()
     {
+        StopCurrentGameRichPresenceLoop();
         RunningGameInstallationId = null;
         
         DiscordClient.SetPresence(new RichPresence()
         {
+            // TODO-UPDATE: Only get this once - also might throw exception
             Timestamps = new Timestamps(Process.GetCurrentProcess().StartTime.ToUniversalTime())
         });
         Logger.Info("Set the idle Discord Rich Presence");
@@ -115,7 +169,7 @@ public class DiscordManager : IDisposable, IRecipient<GameRunningChangedMessage>
 
     public void Dispose()
     {
-        CancellationTokenSource.Cancel();
+        StopCurrentGameRichPresenceLoop();
         if (DiscordClient.IsInitialized)
             DiscordClient.ClearPresence();
         DiscordClient.Dispose();
