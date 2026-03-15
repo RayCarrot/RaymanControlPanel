@@ -114,6 +114,9 @@ public class DiscordManager : IDisposable, IRecipient<GameRunningChangedMessage>
 
     void IRecipient<GameRunningChangedMessage>.Receive(GameRunningChangedMessage message)
     {
+        if (!Data.App_UseDiscordRichPresence)
+            return;
+
         // Started running
         if (message.IsRunning)
         {
