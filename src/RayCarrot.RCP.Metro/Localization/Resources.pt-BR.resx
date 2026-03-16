@@ -6050,7 +6050,7 @@ Aplicar o mod sem estes pode impedir o seu funcionamento. Tem certeza de que des
     <value>Tamanho da Atualização</value>
   </data>
   <data name="UpdateAvailable_Info_Url" xml:space="preserve">
-    <value>Url da Atualização</value>
+    <value>URL da Atualização</value>
   </data>
   <data name="UpdateCheck_NoReleaseFoundError" xml:space="preserve">
     <value>Nenhuma versão válida do programa encontrada</value>

@@ -6086,4 +6086,66 @@ Zastosowanie modyfikacji bez nich może spowodować, że nie będzie ona działa
   <data name="GameOptions_GraphicsApi_OpenGL" xml:space="preserve">
     <value>OpenGL</value>
   </data>
+  <data name="AprilFoolsMessage" xml:space="preserve">
+    <value>PRIMA APRILIS! Kórliki zaatakowały Rayman Control Panel! Czy uda ci się je wszystkie znaleźć?</value>
+  </data>
+  <data name="AprilFoolsMessageHeader" xml:space="preserve">
+    <value>PRIMA APRILIS</value>
+  </data>
+  <data name="GameDisplay_OpenPCGamingWikiPage" xml:space="preserve">
+    <value>Otwórz stronę PCGamingWiki</value>
+  </data>
+  <data name="Config_MenuMusic" xml:space="preserve">
+    <value>Muzyka menu</value>
+  </data>
+  <data name="Config_Volume" xml:space="preserve">
+    <value>Głośność</value>
+  </data>
+  <data name="Lang_Japanese" xml:space="preserve">
+    <value>Japoński</value>
+  </data>
+  <data name="Lang_TraditionalChinese" xml:space="preserve">
+    <value>Chiński (Tradycyjny)</value>
+  </data>
+  <data name="Lang_SimplifiedChinese" xml:space="preserve">
+    <value>Chiński (Uproszczony)</value>
+  </data>
+  <data name="Lang_BrazilianPortuguese" xml:space="preserve">
+    <value>Portugalski (Brazylia)</value>
+  </data>
+  <data name="Config_JoypadRumbleRace" xml:space="preserve">
+    <value>Włącz wibracje joypada (tryb wyścigu)</value>
+  </data>
+  <data name="Config_JoypadRumbleBattle" xml:space="preserve">
+    <value>Włącz wibracje joypada (tryb bitwy)</value>
+  </data>
+  <data name="SetupGameAction_Rayman1FMVs_Header" xml:space="preserve">
+    <value>Zainstaluj mod Rayman FMVs</value>
+  </data>
+  <data name="SetupGameAction_Rayman1FMVs_Info" xml:space="preserve">
+    <value>Niektóre wersje gry nie zawierają filmików wprowadzających i końcowych. Dzięki modowi Rayman FMVs oraz narzędziu do tworzenia ścieżek dźwiękowych dla poszczególnych poziomów można przywrócić pliki FMV.
+</value>
+  </data>
+  <data name="SetupGameAction_GBCRemoveUbiKeyRequirement_Header" xml:space="preserve">
+    <value>Zainstaluj mod "Remove Ubi Key Requirement"</value>
+  </data>
+  <data name="SetupGameAction_GBCRemoveUbiKeyRequirement_Info" xml:space="preserve">
+    <value>Istnieje poziom bonusowy, który zazwyczaj można odblokować jedynie poprzez połączenie gry z innym obsługiwanym tytułem za pomocą funkcji Ubi Key. Modyfikacja Remove Ubi Key Requirement autorstwa RayCarrot usuwa ten wymóg, dzięki czemu dostęp do poziomu jest możliwy bez łączenia się z inną grą.
+</value>
+  </data>
+  <data name="CloseGameError" xml:space="preserve">
+    <value>Wystąpił błąd podczas zamykania gry</value>
+  </data>
+  <data name="GameHub_Close" xml:space="preserve">
+    <value>Zatrzymaj</value>
+  </data>
+  <data name="Settings_CheckForRunningGames" xml:space="preserve">
+    <value>Sprawdź i pokaż, czy gry są uruchomione</value>
+  </data>
+  <data name="Settings_UseDiscordRichPresence" xml:space="preserve">
+    <value>Włącz Discord Rich Presence</value>
+  </data>
+  <data name="Settings_UseDiscordRichPresenceInfo" xml:space="preserve">
+    <value>Jeśli ta opcja jest włączona, twoja aktywność na Discordzie będzie wyświetlana podczas używania Rayman Control Panel i gier, w które grasz. Pamiętaj, że obecnie funkcja ta nie działa w przypadku gier uruchamianych w emulatorze. W niektórych przypadkach konieczne jest ponowne uruchomienie aplikacji, aby zmiany zostały wprowadzone.</value>
+  </data>
 </root>

@@ -5504,7 +5504,7 @@ AVISO: Carregar diretamente para um mapa usando esta opção irá saltar o carre
     <value>Padrão</value>
   </data>
   <data name="PostUpdate_MigrateTPLS" xml:space="preserve">
-    <value>O utilitário de banda sonora por.nível para Rayman 1 foi reformulado nesta versão para não depender mais de uma compilação personalizada do DOSBox. Para continuar a usá-lo, é preciso instalá-lo novamente. A versão anterior foi automaticamente desinstalada.</value>
+    <value>A ferramenta «Per-level Soundtrack» para o Rayman 1 foi transferida para uma modificação disponível para descarga no Mod Loader. Para continuar a utilizá-la, terás de a descarregar novamente. A versão anterior foi desinstalada automaticamente.</value>
   </data>
   <data name="PostUpdate_MigrateTPLSHeader" xml:space="preserve">
     <value>Aviso de atualização da banda sonora por-nível</value>

@@ -759,7 +759,7 @@ Voulez vous réessayer ?</value>
     <value>Une hauteur valide doit être spécifiée</value>
   </data>
   <data name="Config_SaveSuccess" xml:space="preserve">
-    <value>Les changements ont été sauvegardés</value>
+    <value>Les modifications ont été sauvegardés</value>
   </data>
   <data name="SecretCodes_Konami" xml:space="preserve">
     <value>Vous venez d'entrer le Konami Code ! Profitez de ce nouveau thème rouge.</value>
@@ -852,7 +852,7 @@ Voulez vous réessayer ?</value>
     <value>Mod de bande-son par niveau de Rayman 1</value>
   </data>
   <data name="About_Credits_Haruka_VII" xml:space="preserve">
-    <value>Programme de traduction portugaise (Portugal)</value>
+    <value>Traduction du programme en portugais (Portugal)</value>
   </data>
   <data name="R1U_CompleteOSTReplaceError" xml:space="preserve">
     <value>Changement de musique échoué</value>
@@ -885,7 +885,7 @@ Voulez vous réessayer ?</value>
     <value>Bienvenue dans le Rayman Control Panel</value>
   </data>
   <data name="FirstLaunchInfo_Text" xml:space="preserve">
-    <value>Ce programme est un projet communautaire open source créé par RayCarrot. Il permet un accès rapide et facile à tous les jeux Rayman sur votre PC, avec des fonctionnalités supplémentaires comme un meilleur support des configurations, des utilitaires, de la gestion de backups de fichiers de sauvegarde, de la modification de texture et plus encore. Les jeux supportés peuvent être installés directement depuis leur disque via ce programme. Pour commencer, choisissez les paramètres que vous voulez ci-dessous et cliquez sur "Continuer". Les paramètres peuvent être changés à tout moment depuis la page des paramètres.</value>
+    <value>Ce programme est un projet communautaire open source créé par RayCarrot. Il permet un accès rapide et facile à tous les jeux Rayman sur votre PC, avec des fonctionnalités supplémentaires comme un meilleur support des configurations, des utilitaires, de la gestion de backups de fichiers de sauvegarde, de la modification de texture et plus encore. Les jeux supportés peuvent être installés directement depuis leur disque via ce programme. Pour commencer, choisissez les paramètres que vous voulez ci-dessous et cliquez sur "Continuer". Les paramètres peuvent être modifiés à tout moment depuis la page des paramètres.</value>
   </data>
   <data name="GameOptions_CreateShortcut" xml:space="preserve">
     <value>Créer un raccourci</value>
@@ -945,7 +945,7 @@ Voulez vous réessayer ?</value>
     <value>Mod de bande-son par niveau pour Rayman 1, retrait de la vérification de disque de Rayman M/Arena</value>
   </data>
   <data name="About_Credits_432Hz" xml:space="preserve">
-    <value>Programme de traduction en Néerlandais, test de programme</value>
+    <value>Traduction du programme en néerlandais, test du programme</value>
   </data>
   <data name="BrowseBox_Browse" xml:space="preserve">
     <value>Chercher</value>
@@ -1648,7 +1648,7 @@ Message d'erreur : {1}</value>
     <value>Fichiers Encodés Tonic Trouble (.sna/.dsb)</value>
   </data>
   <data name="About_Credits_Fabiosek" xml:space="preserve">
-    <value>Traduction polonaise (pologne) du programme</value>
+    <value>Traduction du programme en polonais (Pologne)</value>
   </data>
   <data name="Utilities_Converter_RMSaveHeader" xml:space="preserve">
     <value>Fichiers de Sauvegarde de Rayman M/Arena (.sav)</value>
@@ -3201,7 +3201,7 @@ Start : Pause</value>
     <value>Sauvegardé</value>
   </data>
   <data name="Progression_BackupStatus_Outdated" xml:space="preserve">
-    <value>Les nouveaux changements ne sont pas sauvegardés</value>
+    <value>Les nouvelles modifications ne sont pas sauvegardées</value>
   </data>
   <data name="Progression_EditSlot" xml:space="preserve">
     <value>Editer</value>
@@ -3665,10 +3665,10 @@ Les menus multijoueur eux-mêmes ne sont pas complets étant donné que cette fo
     <value>Rayman 3 (PC)</value>
   </data>
   <data name="UnsavedChangesQuestion" xml:space="preserve">
-    <value>Il y a des changements non sauvegardés. Voulez-vous continuer et les ignorer ?</value>
+    <value>Des modification ne sont pas encore sauvegardées. Voulez-vous les ignorer et continuer ?</value>
   </data>
   <data name="UnsavedChangesQuestionHeader" xml:space="preserve">
-    <value>Ignorer les changements</value>
+    <value>Ignorer les modifications</value>
   </data>
   <data name="Archive_AutoSyncCPATextures" xml:space="preserve">
     <value>Voulez-vous automatiquement synchroniser les textures de jeu quand une archive de texture est recompilée ? Synchroniser est requis pour que les textures de plus haute résolution fonctionnent dans certains niveaux. Ceci peut être changé à tout moment dans la page des paramètres.</value>
@@ -4555,7 +4555,7 @@ Les menus multijoueur eux-mêmes ne sont pas complets étant donné que cette fo
     <value>Mods installés</value>
   </data>
   <data name="ModLoader_InstalledInfo" xml:space="preserve">
-    <value>Des mods peuvent être installés afin de modifier certaines parties d'un jeu. La majorité des mods marchent en remplaçant certains fichiers du jeu. Le mod ne prendra pas effet tant qu'il n'est pas activé et que ses changement soient appliqués, ce qui permet de facilement les activer et désactiver. Il n'est pas recommandé de modifier manuellement les fichier de vos jeux qu'un mod modifie au risque de perdre certains changements.</value>
+    <value>Des mods peuvent être installés afin de modifier certaines parties d'un jeu. Le principe de la majorité des mods et de remplacer certains fichiers du jeu. Le mod ne prendra pas effet tant qu'il n'est pas activé et que ses modifications soient appliqués, ce qui permet de facilement les activer et désactiver. Il n'est pas recommandé de modifier manuellement les fichier de vos jeux qu'un mod modifie au risque de perdre certains changements.</value>
   </data>
   <data name="ModLoader_InstalledEmpty" xml:space="preserve">
     <value>Pas de mods installés</value>
@@ -4567,7 +4567,7 @@ Les menus multijoueur eux-mêmes ne sont pas complets étant donné que cette fo
     <value>Vérifier les mises à jour</value>
   </data>
   <data name="ModLoader_ViewModifications" xml:space="preserve">
-    <value>Voir tous les changements</value>
+    <value>Voir toutes le modifications</value>
   </data>
   <data name="ModLoader_ShowModificationsAsList" xml:space="preserve">
     <value>Montrer les fichiers en tant que liste</value>
@@ -4683,7 +4683,7 @@ Les menus multijoueur eux-mêmes ne sont pas complets étant donné que cette fo
     <value>Les mods ont été appliqués avec succès</value>
   </data>
   <data name="ModLoader_ApplyError" xml:space="preserve">
-    <value>Une erreur est survenue lors de l'application des mods. Tous les changements n'ont pas pu être appliqués et certaines données ont peut-être été perdues. Assurez-vous de ne pas avoir de fichiers du jeu ouvert pendant que vous appliquez des mods.</value>
+    <value>Une erreur est survenue lors de l'application des mods. Toutes les modifications n'ont pas pu être appliquées et certaines données ont peut-être été perdues. Assurez-vous de ne pas avoir de fichiers du jeu ouvert pendant que vous appliquez des mods.</value>
   </data>
   <data name="ModLoader_ModInfo_InstallSource" xml:space="preserve">
     <value>Source d'installation :</value>
@@ -5281,7 +5281,7 @@ Messages d'erreur :
     <value>Installer le mod Minimum Loading Times</value>
   </data>
   <data name="SetupGameAction_MinimumRaymanOriginsLoadingTimes_Info" xml:space="preserve">
-    <value>Le mod Minimum Loading Times a été créé par RayCarrot, il change le temps de chargement minimal de 4 à 0 secondes, rendant les chargements plus rapides.</value>
+    <value>Le mod Minimum Loading Times a été créé par RayCarrot. Celui-ci change le temps de chargement minimal de 4 à 0 secondes, rendant les chargements instantanés. À la place, vous pouvez utiliser le mod Loadless Origins aussi par RayCarrot qui retire complètement les écrans de chargement.</value>
   </data>
   <data name="SetupGameAction_MissingMapperConfig_Header" xml:space="preserve">
     <value>Le fichier de configuration du Mapper est manquant ou invalide</value>
@@ -5501,7 +5501,7 @@ ATTENTION : Charger directement une carte de cette manière ignorera le chargeme
     <value>Par défaut</value>
   </data>
   <data name="PostUpdate_MigrateTPLS" xml:space="preserve">
-    <value>L'utilitaire de bande-son par niveau pour Rayman 1 a été retravaillé dans cette version afin de ne plus dépendre d'un build personnalisé de DOSBox. Veuillez réinstaller l'utilitaire pour continuer à l'utiliser. L'ancienne version a été automatiquement désinstallée.</value>
+    <value>L'utilitaire de bande-son par niveau pour Rayman 1 a été changé en mod téléchargeable dans le Mod Loader. Pour continuer à l'utiliser, veuillez le re-télécharger. L'ancienne version a été automatiquement désinstallée.</value>
   </data>
   <data name="PostUpdate_MigrateTPLSHeader" xml:space="preserve">
     <value>Avis de mise à jour de la bande-son par niveau</value>
@@ -5740,5 +5740,395 @@ Voulez-vous désinstaller le patch ?</value>
   </data>
   <data name="GameOptions_GraphicsApi_OpenGL" xml:space="preserve">
     <value>OpenGL</value>
+  </data>
+  <data name="SecretCodes_Guests" xml:space="preserve">
+    <value>Vous venez d'entrer le code Jacquouille Legends ! Profitez bien de votre nouvelle bannière pour le jeu !
+</value>
+  </data>
+  <data name="Rayman2Redreamed_Demo_Win32_Title" xml:space="preserve">
+    <value>Démo Rayman 2: Redreamed</value>
+  </data>
+  <data name="Game_Rayman2Redreamed_Title" xml:space="preserve">
+    <value>Rayman 2: Redreamed</value>
+  </data>
+  <data name="Rayman3HavocReignited_Win32_Title" xml:space="preserve">
+    <value>Rayman 3 Havoc Reignited</value>
+  </data>
+  <data name="Game_Rayman3HavocReignited_Title" xml:space="preserve">
+    <value>Démo Rayman 3 Havoc Reignited</value>
+  </data>
+  <data name="RaymanLumoGrams_Demo_Win32_Title" xml:space="preserve">
+    <value>Démo Rayman Lum'o'Grams</value>
+  </data>
+  <data name="Game_RaymanLumoGrams_Title" xml:space="preserve">
+    <value>Rayman Lum'o'Grams</value>
+  </data>
+  <data name="GameDisplay_DownloadWebsite" xml:space="preserve">
+    <value>Télécharger depuis site web</value>
+  </data>
+  <data name="GameLink_TTFix" xml:space="preserve">
+    <value>Correction Tonic Trouble</value>
+  </data>
+  <data name="GameOptions_GraphicsApiHeader" xml:space="preserve">
+    <value>API graphique</value>
+  </data>
+  <data name="GameOptions_GraphicsApi_Default" xml:space="preserve">
+    <value>Défaut</value>
+  </data>
+  <data name="Progression_TT_Thermometers" xml:space="preserve">
+    <value>Thermomètres</value>
+  </data>
+  <data name="Progression_TT_BonusPoints" xml:space="preserve">
+    <value>Points bonus</value>
+  </data>
+  <data name="Progression_TT_Springs" xml:space="preserve">
+    <value>Ressorts</value>
+  </data>
+  <data name="Progression_TT_PropellerBlades" xml:space="preserve">
+    <value>Hélices</value>
+  </data>
+  <data name="Progression_TT_JumpingStones" xml:space="preserve">
+    <value>Cailloux sauteurs</value>
+  </data>
+  <data name="Progression_TT_Feathers" xml:space="preserve">
+    <value>Plumes</value>
+  </data>
+  <data name="Progression_TT_Dominoes" xml:space="preserve">
+    <value>Dominos</value>
+  </data>
+  <data name="Progression_TT_WildPiggybanks" xml:space="preserve">
+    <value>Cochons-tirelires</value>
+  </data>
+  <data name="SetupGameAction_LevelTransparencyFixes_Header" xml:space="preserve">
+    <value>Installer le mod de correction de transparence de niveau</value>
+  </data>
+  <data name="SetupGameAction_LevelTransparencyFixes_Info" xml:space="preserve">
+    <value>Le mod de correction de transparence de niveau est un mod créé par Droolie et ICUP321 qui corrige la transparence des objets dans certains niveaux.</value>
+  </data>
+  <data name="ModLoader_FilesModule_AutoCreatePathsInfo" xml:space="preserve">
+    <value>Spécifiez ici les répertoires que vous voulez créer automatiquement. Séparez chacun d'entre eux par une nouvelle ligne. Vous pouvez toujours manuellement créer les répertoires plus tard.</value>
+  </data>
+  <data name="ModLoader_FilesModule_AutoCreatePathsHint" xml:space="preserve">
+    <value>Exemple : {0}</value>
+  </data>
+  <data name="ModLoader_GameBanana_ArchivedFilesToggle" xml:space="preserve">
+    <value>Montrer le fichiers archivés</value>
+  </data>
+  <data name="About_Credits_Dr_st" xml:space="preserve">
+    <value>Fonctionnalités du programme et corrections</value>
+  </data>
+  <data name="Settings_ModLoader_IncludeNsfwMods" xml:space="preserve">
+    <value>Afficher les mods téléchargeables marqués comme NSFW</value>
+  </data>
+  <data name="Settings_ModLoader_IncludeNsfwModsInfo" xml:space="preserve">
+    <value>Indique si les mods avec une classification de contenu, telles que la nudité ou la violence, sont affichés dans la liste des mods téléchargeables.</value>
+  </data>
+  <data name="Utilities_Converter_TTSaveHeader" xml:space="preserve">
+    <value>Fichiers de Sauvegarde Tonic Trouble (.sav)
+</value>
+  </data>
+  <data name="ModLoader_LoadDownloadableModError" xml:space="preserve">
+    <value>Une erreur est survenue lors du chargement du mod</value>
+  </data>
+  <data name="ModLoader_CancelDownload" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="ModLoader_NoSelectedMod" xml:space="preserve">
+    <value>Aucun mod selectionné</value>
+  </data>
+  <data name="ModLoader_OpenModDownloadPage" xml:space="preserve">
+    <value>Ouvrir la page de téléchargement</value>
+  </data>
+  <data name="ModLoader_ActiveDownloadsError" xml:space="preserve">
+    <value>Des mods sont toujours en cours de téléchagement.  Veuillez attendre que les mods finissent de se télécharger avant d'appliquer les modifications.</value>
+  </data>
+  <data name="ModLoader_ActiveDownloadsErrorHeader" xml:space="preserve">
+    <value>Mods en cours de téléchargement</value>
+  </data>
+  <data name="ModLoader_InstallState_Downloading" xml:space="preserve">
+    <value>Téléchargement...</value>
+  </data>
+  <data name="ModLoader_InstallState_Extracting" xml:space="preserve">
+    <value>Extraction...</value>
+  </data>
+  <data name="ModLoader_DownloadPageBack" xml:space="preserve">
+    <value>Retour</value>
+  </data>
+  <data name="ModLoader_GameBanana_Credits" xml:space="preserve">
+    <value>Crédits</value>
+  </data>
+  <data name="ModLoader_GameBanana_Downloads" xml:space="preserve">
+    <value>Téléchargements</value>
+  </data>
+  <data name="ModLoader_GameBanana_DownloadsEmpty" xml:space="preserve">
+    <value>Pas de fichiers compatibles</value>
+  </data>
+  <data name="ModLoader_GameBanana_FileDownloaded" xml:space="preserve">
+    <value>Ajouté à la librairie</value>
+  </data>
+  <data name="ModLoader_GameBanana_UpdateInfo" xml:space="preserve">
+    <value>Mis à jour le {0}</value>
+  </data>
+  <data name="ModLoader_GameBanana_Version" xml:space="preserve">
+    <value>Version {0}</value>
+  </data>
+  <data name="About_Credits_Clef" xml:space="preserve">
+    <value>Traduction du programme en chinois (Chine)
+</value>
+  </data>
+  <data name="Settings_ModLoader_ShowEssentialMods" xml:space="preserve">
+    <value>Montrer les mods essentiels en premier</value>
+  </data>
+  <data name="Settings_ModLoader_MarkUnseenMods" xml:space="preserve">
+    <value>Marquer les mods non vus</value>
+  </data>
+  <data name="ModLoader_DownloadModError" xml:space="preserve">
+    <value>Une erreur est survenue lors du téléchargement du mod {0}</value>
+  </data>
+  <data name="ModLoader_CategoryAndSortFeedInfo" xml:space="preserve">
+    <value>Montrer les mods dans la catégorie "{0}" avec le tri "{1}"</value>
+  </data>
+  <data name="SetupGameAction_RaymanOriginsCrashDumps_Header" xml:space="preserve">
+    <value>Retirer les rapports de plantage</value>
+  </data>
+  <data name="SetupGameAction_RaymanOriginsCrashDumps_Info" xml:space="preserve">
+    <value>À chaque fois que le jeu plante, un rapport de plantage est créé. Ceux-ci pèsent environ 200 Mo chacun et donc occupent de l'espace de stockage inutilement. Ils peuvent être retirés en toute sécurité pour libérer de l'espace sur votre ordinateur.</value>
+  </data>
+  <data name="SetupGameAction_RaymanOriginsCrashDumps_Success" xml:space="preserve">
+    <value>{0} de rapports de plantage ont été retirés avec succès</value>
+  </data>
+  <data name="SetupGameAction_RaymanOriginsCrashDumps_Error" xml:space="preserve">
+    <value>Une erreur est survenue lors du retrait des rapports de plantage</value>
+  </data>
+  <data name="ExternalLinkWarning" xml:space="preserve">
+    <value>Vous êtes sur le point d'être redirigé vers "{0}". Continuer uniquement si vous faites confiance à ce site.</value>
+  </data>
+  <data name="ExternalLinkWarningHeader" xml:space="preserve">
+    <value>Avertissement lien externe</value>
+  </data>
+  <data name="ModLoader_DependenciesHeader" xml:space="preserve">
+    <value>Dépendances</value>
+  </data>
+  <data name="ModLoader_DependencyState_Enabled" xml:space="preserve">
+    <value>Téléchargé et activé</value>
+  </data>
+  <data name="ModLoader_DependencyState_SortedTooHigh" xml:space="preserve">
+    <value>Ordonné trop haut
+</value>
+  </data>
+  <data name="ModLoader_DependencyState_SortedTooLow" xml:space="preserve">
+    <value>Ordonné trop bas
+</value>
+  </data>
+  <data name="ModLoader_DependencyState_NotDownloaded" xml:space="preserve">
+    <value>Non téléchargé</value>
+  </data>
+  <data name="ModLoader_DownloadDependencies" xml:space="preserve">
+    <value>Le mod {0} requiert que les mods ci-dessous soient installés. Voulez-vous les télécharger ?
+
+{1}</value>
+  </data>
+  <data name="ModLoader_DownloadDependenciesHeader" xml:space="preserve">
+    <value>Dépendances de mod détectées</value>
+  </data>
+  <data name="ModLoader_DownloadDependenciesError" xml:space="preserve">
+    <value>Un erreur est survenue lors du téléchargement des dépendances du mod</value>
+  </data>
+  <data name="ModLoader_MissingDependenciesWarning" xml:space="preserve">
+    <value>Les mods suivants, requis par {0}, soit ne sont pas installés, pas activés ou sont mal ordonnés :
+
+{1}
+
+Appliquer le mod sans ceux-ci pourraient l'empêcher de fonctionner correctement. Êtes-vous certain de vouloir continuer ?</value>
+  </data>
+  <data name="ModLoader_UninstallModWithDependantsWarning" xml:space="preserve">
+    <value>Au moins un autre mod requiert que ce mod soit installé pour fonctionner. Le désinstaller pourraient empêcher d'autres mods de fonctionner correctement. Êtes-vous certain de vouloir continuer ?</value>
+  </data>
+  <data name="ModLoader_GameBanana_SelectDependencyFileHeader" xml:space="preserve">
+    <value>Sélection du fichier de GameBanana à utiliser pour le mod {0}</value>
+  </data>
+  <data name="ModLoader_GameBanana_SelectDependencyFileTitle" xml:space="preserve">
+    <value>Sélection du fichier de mod</value>
+  </data>
+  <data name="ModLoader_GameTargetNotAddedError" xml:space="preserve">
+    <value>Impossible d'ouvrir le mod, car aucun des jeux ciblés suivants n'ont été ajoutés :
+
+{0}</value>
+  </data>
+  <data name="ModLoader_UnsupportedModVersionError" xml:space="preserve">
+    <value>Le mod {0} n'a pas pu être installé car il a été créé pour une version plus récente du Rayman Control Panel.</value>
+  </data>
+  <data name="R1GBCPasswords_Worldmap" xml:space="preserve">
+    <value>Carte du monde débloquée</value>
+  </data>
+  <data name="R1GBCPasswords_Level" xml:space="preserve">
+    <value>Niveau</value>
+  </data>
+  <data name="R1GBC_LevelName_32" xml:space="preserve">
+    <value>Unused 1</value>
+  </data>
+  <data name="R1GBC_LevelName_33" xml:space="preserve">
+    <value>Unused 2</value>
+  </data>
+  <data name="GameLink_DirectX" xml:space="preserve">
+    <value>Configuration DirectX</value>
+  </data>
+  <data name="GameHub_ModLoaderPanel_AppliedModsSingle" xml:space="preserve">
+    <value>{0}/{1} mod appliqué</value>
+  </data>
+  <data name="GameHub_ModLoaderPanel_AppliedModsMultiple" xml:space="preserve">
+    <value>{0}/{1} mods appliqués
+</value>
+  </data>
+  <data name="GameHub_ModLoaderPanel_DownloadableModsSingle" xml:space="preserve">
+    <value>{0} mod téléchargeable trouvé</value>
+  </data>
+  <data name="GameHub_ModLoaderPanel_DownloadableModsMultiple" xml:space="preserve">
+    <value>{0} mods téléchargeables trouvés
+</value>
+  </data>
+  <data name="ToolDownload_Status" xml:space="preserve">
+    <value>Téléchagement des fichiers</value>
+  </data>
+  <data name="ToolDownload_Success" xml:space="preserve">
+    <value>Les fichiers ont été téléchargés avec succès</value>
+  </data>
+  <data name="ToolDownload_Error" xml:space="preserve">
+    <value>Une erreur est survenue pendant le téléchargement</value>
+  </data>
+  <data name="Rayman1_Prototype_Jaguar_Title" xml:space="preserve">
+    <value>Prototype de Rayman</value>
+  </data>
+  <data name="Rayman1_Demo_Jaguar_Title" xml:space="preserve">
+    <value>Démo Rayman</value>
+  </data>
+  <data name="Rayman30thAnniversaryEdition_Win32_Title" xml:space="preserve">
+    <value>Rayman: 30th Anniversary Edition</value>
+  </data>
+  <data name="GameHub_PerLevelSoundtrackPanel_Download" xml:space="preserve">
+    <value>Télécharger le mod</value>
+  </data>
+  <data name="Progression_RA_Skins" xml:space="preserve">
+    <value>Apparences</value>
+  </data>
+  <data name="Progression_RA_BeginnerLeague" xml:space="preserve">
+    <value>Coupes Ligue Débutant</value>
+  </data>
+  <data name="Progression_RA_ProLeague" xml:space="preserve">
+    <value>Coupes Ligue Pro</value>
+  </data>
+  <data name="Progression_RA_MasterLeague" xml:space="preserve">
+    <value>Ligues Maître Complétées</value>
+  </data>
+  <data name="Utilities_Converter_R1JaguarSaveHeader" xml:space="preserve">
+    <value>Rayman 1 (Atari Jaguar)</value>
+  </data>
+  <data name="Utilities_Converter_R2GbcSaveHeader" xml:space="preserve">
+    <value>Données de Sauvegarde Rayman 2 (GBC)</value>
+  </data>
+  <data name="AddGames_ToggleDemosAndPrototypes" xml:space="preserve">
+    <value>Montrer {0} démos/prototypes</value>
+  </data>
+  <data name="UpdateAvailable_Header" xml:space="preserve">
+    <value>Mise à jour disponible</value>
+  </data>
+  <data name="UpdateAvailable_ChangelogHeader" xml:space="preserve">
+    <value>Journal des modifications</value>
+  </data>
+  <data name="UpdateAvailable_Cancel" xml:space="preserve">
+    <value>Me le rappeler plus tard</value>
+  </data>
+  <data name="UpdateAvailable_Confirm" xml:space="preserve">
+    <value>Mise à jour</value>
+  </data>
+  <data name="UpdateAvailable_Title" xml:space="preserve">
+    <value>Nouvelle mise à jour disponible</value>
+  </data>
+  <data name="UpdateAvailable_Info_CurrentVersion" xml:space="preserve">
+    <value>Version actuelle</value>
+  </data>
+  <data name="UpdateAvailable_Info_NewVersion" xml:space="preserve">
+    <value>Nouvelle version</value>
+  </data>
+  <data name="UpdateAvailable_Info_VersionBeta" xml:space="preserve">
+    <value>{0} (BETA)</value>
+  </data>
+  <data name="UpdateAvailable_Info_ReleaseDate" xml:space="preserve">
+    <value>Date de sortie</value>
+  </data>
+  <data name="UpdateAvailable_Info_Size" xml:space="preserve">
+    <value>Taille de la mise à jour</value>
+  </data>
+  <data name="UpdateAvailable_Info_Url" xml:space="preserve">
+    <value>URL de la mise à jour</value>
+  </data>
+  <data name="UpdateCheck_NoReleaseFoundError" xml:space="preserve">
+    <value>Pas de version d'application valide détectée</value>
+  </data>
+  <data name="UpdateCheck_ConnectionError" xml:space="preserve">
+    <value>Impossible de se connecter au serveur. Veuillez vérifier votre connexion internet.</value>
+  </data>
+  <data name="UpdateCheck_UnknownError" xml:space="preserve">
+    <value>Une erreur inconnue est survenue</value>
+  </data>
+  <data name="AprilFoolsMessage" xml:space="preserve">
+    <value>POISSON D'AVRIL ! Les Lapins Crétins ont envahi le Rayman Control Panel ! Est-ce que vous arriverez à tous les trouver ?</value>
+  </data>
+  <data name="AprilFoolsMessageHeader" xml:space="preserve">
+    <value>POISSON D'AVRIL</value>
+  </data>
+  <data name="GameDisplay_OpenPCGamingWikiPage" xml:space="preserve">
+    <value>Ouvrir la page PCGamingWiki</value>
+  </data>
+  <data name="Config_MenuMusic" xml:space="preserve">
+    <value>Musique du menu</value>
+  </data>
+  <data name="Config_Volume" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="Lang_Japanese" xml:space="preserve">
+    <value>Japonais</value>
+  </data>
+  <data name="Lang_TraditionalChinese" xml:space="preserve">
+    <value>Chinois (Traditionnel)</value>
+  </data>
+  <data name="Lang_SimplifiedChinese" xml:space="preserve">
+    <value>Chinois (Simplifié)</value>
+  </data>
+  <data name="Lang_BrazilianPortuguese" xml:space="preserve">
+    <value>Portuguais (Brésil)</value>
+  </data>
+  <data name="Config_JoypadRumbleRace" xml:space="preserve">
+    <value>Activer la vibration de la manette (Mode Course)</value>
+  </data>
+  <data name="Config_JoypadRumbleBattle" xml:space="preserve">
+    <value>Activer la vibration de la manette (Mode Combat)</value>
+  </data>
+  <data name="SetupGameAction_Rayman1FMVs_Header" xml:space="preserve">
+    <value>Installer le mod "Rayman FMVs"</value>
+  </data>
+  <data name="SetupGameAction_Rayman1FMVs_Info" xml:space="preserve">
+    <value>Les cinématiques d'intro et de fin sont manquantes sur certaines versions. Utiliser le mod "Rayman FMVs", en parallèle du mod "Bande-son par niveau" permet de restorer les cinématiques.</value>
+  </data>
+  <data name="SetupGameAction_GBCRemoveUbiKeyRequirement_Header" xml:space="preserve">
+    <value>Installer le mod "Retirer le prérequis Ubi Key"</value>
+  </data>
+  <data name="SetupGameAction_GBCRemoveUbiKeyRequirement_Info" xml:space="preserve">
+    <value>Il existe un niveau bonus uniquement accessible en connectant le jeu à un autre titre compatible via la fonctionnalité Ubi Key. Ce mod par RayCarrot permet de retirer ce prérequis, ce qui permet d'accéder au niveau sans avoir besoin du lien avec un autre jeu.</value>
+  </data>
+  <data name="CloseGameError" xml:space="preserve">
+    <value>Une erreur est survenue en fermant le jeu</value>
+  </data>
+  <data name="GameHub_Close" xml:space="preserve">
+    <value>Arrêter</value>
+  </data>
+  <data name="Settings_CheckForRunningGames" xml:space="preserve">
+    <value>Vérifie si des jeux sont ouverts et les montre</value>
+  </data>
+  <data name="Settings_UseDiscordRichPresence" xml:space="preserve">
+    <value>Activer Discord Rich Presence</value>
+  </data>
+  <data name="Settings_UseDiscordRichPresenceInfo" xml:space="preserve">
+    <value>Si cette option est activée, votre activité Discord montrera lorsque vous utilisez le Rayman Control Panel et les jeux auxquels vous jouez durant son utilisation. Gardez à l'esprit que cette option n'est pas encore fonctionnelle pour les jeux émulés. Dans certains cas, vous aurez besoin de redémarrer l'application pour que le statut se mette à jour.</value>
   </data>
 </root>
