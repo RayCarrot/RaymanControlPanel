@@ -1,4 +1,12 @@
-﻿-----   Version 14.4.0 - March 13, 2026   -----
+﻿-----   Version 14.4.1 - March 16, 2026   -----
+• The Discord Rich Presence for running games now shows the current level you're in for Rayman 2, Rayman 3, Rayman Origins and Rayman Legends
+• The play time shown for the Discord Rich Presence now reflects when the app or game launched rather than when the presence itself was updated
+• Minor improvements and fixes when searching for running games and updating Discord Rich Presence
+• Minor localization fixes
+• Bug fixes
+
+
+-----   Version 14.4.0 - March 13, 2026   -----
 • Added support for Rayman 30th Anniversary Edition
 • Added support for Atari Jaguar games:
     • Rayman
