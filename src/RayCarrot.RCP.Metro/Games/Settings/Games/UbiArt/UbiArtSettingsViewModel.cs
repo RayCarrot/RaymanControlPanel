@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 
 namespace RayCarrot.RCP.Metro.Games.Settings;
 
@@ -20,7 +19,9 @@ public class UbiArtSettingsViewModel : GameSettingsViewModel
         CommandArgsViewModel = new UbiArtCommandArgsViewModel(gameInstallation);
         CommandArgsViewModel.PropertyChanged += (_, e) =>
         {
-            if (e.PropertyName == nameof(UbiArtCommandArgsViewModel.Text))
+            if (e.PropertyName is 
+                nameof(UbiArtCommandArgsViewModel.Source) or 
+                nameof(UbiArtCommandArgsViewModel.Text))
                 UnsavedChanges = true;
         };
     }
