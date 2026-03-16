@@ -173,7 +173,7 @@ public class GameRichPresenceManager_RaymanLegends_Win32 : GameRichPresenceManag
 
     #region Data Types
 
-    public enum GameScreenId : uint
+    private enum GameScreenId : uint
     {
         RO2_GS_AdversarialGoldenPotato = 0x46B080AC,
         RO2_GS_AdversarialSoccer = 0x002B90F4,
@@ -191,7 +191,7 @@ public class GameRichPresenceManager_RaymanLegends_Win32 : GameRichPresenceManag
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct ITFString
+    private struct ITFString
     {
         public uint StringPtr;
         public uint Uint_04;
@@ -201,7 +201,7 @@ public class GameRichPresenceManager_RaymanLegends_Win32 : GameRichPresenceManag
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct Map
+    private struct Map
     {
         public uint Uint_00;
         public uint Uint_04;

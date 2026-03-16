@@ -174,7 +174,7 @@ public class GameRichPresenceManager_RaymanOrigins_Win32 : GameRichPresenceManag
 
     #region Data Types
 
-    public enum GameScreenId : uint
+    private enum GameScreenId : uint
     {
         Initial = 0xA8C2D2D6,
         Framework = 0xCB76E58A,
@@ -187,7 +187,7 @@ public class GameRichPresenceManager_RaymanOrigins_Win32 : GameRichPresenceManag
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct ITFString
+    private struct ITFString
     {
         public uint String8Ptr;
         public uint String16Ptr;
@@ -197,7 +197,7 @@ public class GameRichPresenceManager_RaymanOrigins_Win32 : GameRichPresenceManag
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct Map
+    private struct Map
     {
         public uint Uint_00;
         public uint HeaderNodePtr;
