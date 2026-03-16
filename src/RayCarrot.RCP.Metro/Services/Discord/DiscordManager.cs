@@ -22,6 +22,20 @@ public class DiscordManager : IDisposable, IRecipient<GameRunningChangedMessage>
         // Create properties
         DiscordClient = new DiscordRpcClient(AppId, logger: new DiscordLogger());
         CancellationTokenSource = new CancellationTokenSource();
+
+        try
+        {
+            // Try and get the current process start time
+            using Process currentProcess = Process.GetCurrentProcess();
+            IdleStartTime = currentProcess.StartTime.ToUniversalTime();
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex, "Getting current process start time");
+
+            // Fallback to the current time
+            IdleStartTime = DateTime.UtcNow;
+        }
     }
 
     #endregion
@@ -45,6 +59,7 @@ public class DiscordManager : IDisposable, IRecipient<GameRunningChangedMessage>
     private RunningGamesManager RunningGamesManager { get; }
     private AppUserData Data { get; }
     private DiscordRpcClient DiscordClient { get; }
+    private DateTime IdleStartTime { get; }
 
     private CancellationTokenSource? CancellationTokenSource { get; set; }
     private string? RunningGameInstallationId { get; set; }
@@ -65,6 +80,8 @@ public class DiscordManager : IDisposable, IRecipient<GameRunningChangedMessage>
     {
         try
         {
+            int retryCount = 0;
+
             while (!cancellationToken.IsCancellationRequested)
             {
                 // Wait between each check
@@ -75,13 +92,26 @@ public class DiscordManager : IDisposable, IRecipient<GameRunningChangedMessage>
                 if (manager == null || manager.Process.HasExited)
                     return;
 
-                // TODO-UPDATE: Handle exceptions
-                // Get the current game presence
-                string? presence = manager?.GetPresence();
+                try
+                {
+                    // Get the current game presence
+                    string? presence = manager.GetPresence();
 
-                // Update the presence if it has changed
-                if (DiscordClient.CurrentPresence.State != presence)
-                    DiscordClient.UpdateState(presence);
+                    // Update the presence if it has changed
+                    if (DiscordClient.CurrentPresence.State != presence)
+                        DiscordClient.UpdateState(presence);
+
+                    retryCount = 0;
+                }
+                catch (Exception ex)
+                {
+                    Logger.Warn(ex, "Getting game presence");
+                    retryCount++;
+
+                    // Don't retry more than 10 times
+                    if (retryCount > 10)
+                        return;
+                }
             }
         }
         catch (TaskCanceledException)
@@ -100,6 +130,8 @@ public class DiscordManager : IDisposable, IRecipient<GameRunningChangedMessage>
         // Dispose and remove the manager
         RunningGameRichPresenceManager?.Dispose();
         RunningGameRichPresenceManager = null;
+
+        Logger.Info("Stopped the current game rich presence loop");
     }
 
     #endregion
@@ -167,8 +199,18 @@ public class DiscordManager : IDisposable, IRecipient<GameRunningChangedMessage>
 
         // Get the game process
         int pid = RunningGamesManager.GetProcessId(gameInstallation);
-        Process process = Process.GetProcessById(pid); // TODO-UPDATE: This might throw an exception
-
+        Process? process = null;
+        DateTime startTime = DateTime.UtcNow;
+        try
+        {
+            process = Process.GetProcessById(pid);
+            startTime = process.StartTime.ToUniversalTime();
+        }
+        catch (Exception ex)
+        {
+            Logger.Warn(ex, "Getting game process");
+        }
+        
         // Set the game presence
         DiscordClient.SetPresence(new RichPresence()
         {
@@ -178,12 +220,12 @@ public class DiscordManager : IDisposable, IRecipient<GameRunningChangedMessage>
                 LargeImageKey = component.ImageKey,
                 SmallImageKey = MainSmallImageKey,
             },
-            Timestamps = new Timestamps(process.StartTime.ToUniversalTime())
+            Timestamps = new Timestamps(startTime)
         });
 
         // Try and get a rich presence manager for showing the current game context, like the level you're in
         RichPresenceManagerComponent? richPresenceComponent = gameInstallation.GetComponent<RichPresenceManagerComponent>();
-        if (richPresenceComponent != null)
+        if (process != null && richPresenceComponent != null)
         {
             // Create a new manager instance
             RunningGameRichPresenceManager = richPresenceComponent.CreateObject(process);
@@ -194,10 +236,12 @@ public class DiscordManager : IDisposable, IRecipient<GameRunningChangedMessage>
 
             // Start the loop
             Task.Run(() => GameRichPresenceLoop(tokenSource.Token)).WithoutAwait("Updating game rich presence");
+
+            Logger.Info("Started the game rich presence loop");
         }
         else
         {
-            process.Dispose();
+            process?.Dispose();
         }
 
         Logger.Info("Set Discord Rich Presence for game {0}", gameInstallation.FullId);
@@ -212,8 +256,7 @@ public class DiscordManager : IDisposable, IRecipient<GameRunningChangedMessage>
         // Set the idle presence
         DiscordClient.SetPresence(new RichPresence()
         {
-            // TODO-UPDATE: Only get this once and dispose - also might throw exception
-            Timestamps = new Timestamps(Process.GetCurrentProcess().StartTime.ToUniversalTime())
+            Timestamps = new Timestamps(IdleStartTime)
         });
 
         Logger.Info("Set the idle Discord Rich Presence");
