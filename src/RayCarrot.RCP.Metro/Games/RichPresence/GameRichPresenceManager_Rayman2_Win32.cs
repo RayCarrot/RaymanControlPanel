@@ -15,7 +15,7 @@ public class GameRichPresenceManager_Rayman2_Win32 : GameRichPresenceManager
     #region Private Properties
 
     // Names from raymap
-    private Dictionary<string, string> LevelDisplayNames { get; } = new()
+    private Dictionary<string, string> LevelDisplayNames { get; } = new(StringComparer.OrdinalIgnoreCase)
     {
         ["Menu"] = "Main Menu",
         ["Jail_10"] = "Prologue (Stormy Seas)",

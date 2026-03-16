@@ -2,6 +2,7 @@
 using RayCarrot.RCP.Metro.Archive.CPA;
 using RayCarrot.RCP.Metro.Games.Components;
 using RayCarrot.RCP.Metro.Games.Finder;
+using RayCarrot.RCP.Metro.Games.RichPresence;
 using RayCarrot.RCP.Metro.Games.Settings;
 using RayCarrot.RCP.Metro.Games.SetupGame;
 using RayCarrot.RCP.Metro.Games.Structure;
@@ -74,6 +75,7 @@ public sealed class GameDescriptor_Rayman3_Win32 : Win32GameDescriptor
         }));
 
         builder.Register(new DiscordRichPresenceComponent("Rayman 3", "rayman_3"));
+        builder.Register(new RichPresenceManagerComponent((g, p) => new GameRichPresenceManager_Rayman3_Win32(g, p)));
         builder.Register(new RuntimeModificationsGameManagersComponent(EmulatedPlatform.None, _ =>
             new[]
             {
