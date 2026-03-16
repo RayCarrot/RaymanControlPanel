@@ -63,6 +63,11 @@ Select games also support runtime modifications, which allows certain data in th
 
 Detailed game save progression can be viewed, along with options to edit the data as serialized JSON and create/restore backups. 
 
+# Linux
+Currently the app can only run natively on Windows due it using WPF which is not cross-platform. Long-term I would like to migrate the app over to Avalonia UI to allow for true cross-platform, but it would require a lot of work. If anyone would like to help then please let me know! You can also up-vote the request for a native Linux version [here](https://github.com/RayCarrot/RaymanControlPanel/issues/44).
+
+In the meantime the best way to get it to work on Linux is through Wine or Proton. In order to get the mod loader to work you might also need to grant write permission to the games folders by right-click on it, going to the Properties, then to the Permissions and then set the groups to "Can View & Modify Content". There might still be other issues which are being looked into [here](https://github.com/RayCarrot/RaymanControlPanel/issues/70).
+
 # License
 
 [MIT License (MIT)](./LICENSE)
