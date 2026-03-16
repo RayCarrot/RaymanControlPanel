@@ -4,12 +4,19 @@ using System.Text;
 
 namespace RayCarrot.RCP.Metro.Games.RichPresence;
 
-// TODO-UPDATE: Support Ubisoft Connect version (validate version by checking for some constant value in memory?)
 public class GameRichPresenceManager_RaymanLegends_Win32 : GameRichPresenceManager
 {
     #region Constructor
 
     public GameRichPresenceManager_RaymanLegends_Win32(GameInstallation gameInstallation, Process process) : base(gameInstallation, process) { }
+
+    #endregion
+
+    #region Constant Fields
+
+    private const long GameManagerAddress = 0xAE483C;
+    private const long GameDataManagerAddress = 0xAEB750;
+    private const long LocalisationManagerAddress = 0xA461D0;
 
     #endregion
 
@@ -45,7 +52,7 @@ public class GameRichPresenceManager_RaymanLegends_Win32 : GameRichPresenceManag
     private string? GetLocalizedText(uint locId)
     {
         // Read the pointer to the singleton LocalisationManager instance
-        long localisationManagerPtr = Reader.ReadPointer(Reader.BaseAddress + 0xa461d0);
+        long localisationManagerPtr = Reader.ReadPointer(Reader.BaseAddress + LocalisationManagerAddress);
 
         // Get the current language (text for other languages is sadly not loaded)
         int language = Reader.Read<int>(localisationManagerPtr);
@@ -99,7 +106,7 @@ public class GameRichPresenceManager_RaymanLegends_Win32 : GameRichPresenceManag
     private string? GetCurrentLevelName(long gameManagerPtr)
     {
         // Read the GameDataManager instance
-        long gameDataManagerPtr = Reader.ReadPointer(Reader.BaseAddress + 0xaeb750);
+        long gameDataManagerPtr = Reader.ReadPointer(Reader.BaseAddress + GameDataManagerAddress);
 
         // Read the current level tag from the game data
         uint currentLevelTag = Reader.Read<uint>(gameDataManagerPtr + 0x8);
@@ -128,7 +135,7 @@ public class GameRichPresenceManager_RaymanLegends_Win32 : GameRichPresenceManag
     public override string? GetPresence()
     {
         // Read the GameManager instance
-        long gameManagerPtr = Reader.ReadPointer(Reader.BaseAddress + 0xae483c);
+        long gameManagerPtr = Reader.ReadPointer(Reader.BaseAddress + GameManagerAddress);
 
         // Make sure it's not null (might happen during startup)
         if (gameManagerPtr == 0)

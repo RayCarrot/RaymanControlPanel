@@ -4,12 +4,18 @@ using System.Text;
 
 namespace RayCarrot.RCP.Metro.Games.RichPresence;
 
-// TODO-UPDATE: Support Ubisoft Connect version (validate version by checking for some constant value in memory?)
 public class GameRichPresenceManager_RaymanOrigins_Win32 : GameRichPresenceManager
 {
     #region Constructor
 
     public GameRichPresenceManager_RaymanOrigins_Win32(GameInstallation gameInstallation, Process process) : base(gameInstallation, process) { }
+
+    #endregion
+
+    #region Constant Fields
+
+    private const long GameManagerAddress = 0x6FAEBC;
+    private const long LocalisationManagerAddress = 0x68A9D0;
 
     #endregion
 
@@ -45,7 +51,7 @@ public class GameRichPresenceManager_RaymanOrigins_Win32 : GameRichPresenceManag
     private string? GetLocalizedText(uint locId)
     {
         // Read the pointer to the singleton LocalisationManager instance
-        long localisationManagerPtr = Reader.ReadPointer(Reader.BaseAddress + 0x68a9d0);
+        long localisationManagerPtr = Reader.ReadPointer(Reader.BaseAddress + LocalisationManagerAddress);
 
         // Get the current language (text for other languages is sadly not loaded)
         int language = Reader.Read<int>(localisationManagerPtr);
@@ -140,7 +146,7 @@ public class GameRichPresenceManager_RaymanOrigins_Win32 : GameRichPresenceManag
     public override string? GetPresence()
     {
         // Read the GameManager instance
-        long gameManagerPtr = Reader.ReadPointer(Reader.BaseAddress + 0x6faebc);
+        long gameManagerPtr = Reader.ReadPointer(Reader.BaseAddress + GameManagerAddress);
 
         // Make sure it's not null (might happen during startup)
         if (gameManagerPtr == 0)

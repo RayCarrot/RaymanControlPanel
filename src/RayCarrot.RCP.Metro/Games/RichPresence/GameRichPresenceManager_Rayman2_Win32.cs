@@ -12,6 +12,12 @@ public class GameRichPresenceManager_Rayman2_Win32 : GameRichPresenceManager
 
     #endregion
 
+    #region Constant Fields
+
+    private const long EngineStructureAddress = 0x100380;
+
+    #endregion
+
     #region Private Properties
 
     // Names from raymap
@@ -96,7 +102,7 @@ public class GameRichPresenceManager_Rayman2_Win32 : GameRichPresenceManager
     public override unsafe string? GetPresence()
     {
         // Read the EngineStructure instance
-        GAM_tdstEngineStructure engineStructure = Reader.Read<GAM_tdstEngineStructure>(Reader.BaseAddress + 0x100380);
+        GAM_tdstEngineStructure engineStructure = Reader.Read<GAM_tdstEngineStructure>(Reader.BaseAddress + EngineStructureAddress);
 
         // Get the current level name
         string levelName = Encoding.ASCII.GetString(engineStructure.szLevelName, MAX_NAME_LEVEL);
