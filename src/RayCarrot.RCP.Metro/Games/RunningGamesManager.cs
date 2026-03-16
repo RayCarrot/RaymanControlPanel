@@ -18,6 +18,7 @@ public class RunningGamesManager
     private IMessenger Messenger { get; }
     private List<RunningGame> RunningGames { get; } = new();
     private CancellationTokenSource? CancellationTokenSource { get; set; }
+    private Dictionary<string, List<Process>> ProcessesDictionary { get; } = new(StringComparer.OrdinalIgnoreCase);
 
     public TimeSpan CheckInterval { get; set; } = TimeSpan.FromSeconds(2);
 
@@ -53,51 +54,76 @@ public class RunningGamesManager
 
     private void CheckGames()
     {
-        foreach (GameInstallation gameInstallation in GamesManager.GetInstalledGames())
+        foreach (Process process in Process.GetProcesses())
         {
-            try
+            string name = process.ProcessName;
+            if (!ProcessesDictionary.TryGetValue(name, out List<Process> processList))
             {
-                bool isRunning = false;
+                processList = new List<Process>(1);
+                ProcessesDictionary.Add(name, processList);
+            }
 
-                // Get the primary exe file path
-                FileSystemPath primaryExeFilePath;
-                if (gameInstallation.InstallLocation.HasFile)
-                    primaryExeFilePath = gameInstallation.InstallLocation.FilePath;
-                else if (gameInstallation.GameDescriptor.Structure is DirectoryProgramInstallationStructure dirStructure)
-                    primaryExeFilePath = dirStructure.FileSystem.GetAbsolutePath(gameInstallation, ProgramPathType.PrimaryExe);
-                else
-                    continue;
+            processList.Add(process);
+        }
 
-                if (CheckGameExe(gameInstallation, primaryExeFilePath))
-                    isRunning = true;
-
-                // Check the other exe files
-                if (gameInstallation.GameDescriptor.Structure is DirectoryProgramInstallationStructure structure)
+        try
+        {
+            foreach (GameInstallation gameInstallation in GamesManager.GetInstalledGames())
+            {
+                try
                 {
-                    foreach (FileSystemPath otherExeFilePath in structure.FileSystem.GetAbsolutePaths(gameInstallation, ProgramPathType.OtherExe))
-                    {
-                        if (CheckGameExe(gameInstallation, otherExeFilePath))
-                            isRunning = true;
-                    }
-                }
+                    bool isRunning = false;
 
-                if (!isRunning)
-                {
-                    lock (RunningGames)
+                    // Get the primary exe file path
+                    FileSystemPath primaryExeFilePath;
+                    if (gameInstallation.InstallLocation.HasFile)
+                        primaryExeFilePath = gameInstallation.InstallLocation.FilePath;
+                    else if (gameInstallation.GameDescriptor.Structure is DirectoryProgramInstallationStructure dirStructure)
+                        primaryExeFilePath = dirStructure.FileSystem.GetAbsolutePath(gameInstallation, ProgramPathType.PrimaryExe);
+                    else
+                        continue;
+
+                    if (CheckGameExe(gameInstallation, primaryExeFilePath))
+                        isRunning = true;
+
+                    // Check the other exe files
+                    if (gameInstallation.GameDescriptor.Structure is DirectoryProgramInstallationStructure structure)
                     {
-                        if (RunningGames.Any(x => x.GameInstallation == gameInstallation))
+                        foreach (FileSystemPath otherExeFilePath in structure.FileSystem.GetAbsolutePaths(gameInstallation, ProgramPathType.OtherExe))
                         {
-                            RunningGames.RemoveWhere(x => x.GameInstallation == gameInstallation);
-                            Messenger.Send(new GameRunningChangedMessage(gameInstallation, false));
-                            Logger.Info("The game {0} has been detected as no longer running", gameInstallation.InstallationId);
+                            if (CheckGameExe(gameInstallation, otherExeFilePath))
+                                isRunning = true;
+                        }
+                    }
+
+                    if (!isRunning)
+                    {
+                        lock (RunningGames)
+                        {
+                            if (RunningGames.Any(x => x.GameInstallation == gameInstallation))
+                            {
+                                RunningGames.RemoveWhere(x => x.GameInstallation == gameInstallation);
+                                Messenger.Send(new GameRunningChangedMessage(gameInstallation, false));
+                                Logger.Info("The game {0} has been detected as no longer running", gameInstallation.InstallationId);
+                            }
                         }
                     }
                 }
+                catch
+                {
+                    // Don't log since then it'd log too often
+                }
             }
-            catch
+        }
+        finally
+        {
+            foreach (List<Process> processList in ProcessesDictionary.Values)
             {
-                // Don't log since then it'd log too often
+                foreach (Process process in processList)
+                    process.Dispose();
             }
+
+            ProcessesDictionary.Clear();
         }
     }
 
@@ -108,14 +134,22 @@ public class RunningGamesManager
         // Get the process name
         string processName = Path.GetFileNameWithoutExtension(exeFilePath);
 
-        // Enumerate every process with that name
-        foreach (Process process in Process.GetProcessesByName(processName))
+        // Try and find the matching process list
+        if (ProcessesDictionary.TryGetValue(processName, out List<Process> processList))
         {
-            using (process)
+            // Enumerate every process with that name
+            foreach (Process process in processList)
             {
-                // Verify the path matches
-                if (process.MainModule?.FileName.Equals(exeFilePath.FullPath, StringComparison.OrdinalIgnoreCase) != true)
+                try
+                {
+                    // Verify the path matches
+                    if (process.MainModule?.FileName.Equals(exeFilePath.FullPath, StringComparison.OrdinalIgnoreCase) != true)
+                        continue;
+                }
+                catch
+                {
                     continue;
+                }
 
                 lock (RunningGames)
                 {
