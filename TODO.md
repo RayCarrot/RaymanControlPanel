@@ -83,6 +83,8 @@ Open with (external) ->
 - Allow exporting textures as DDS if it's DXT compressed and thus retaining the same DXT compression. Useful for converting textures between platforms without needing to re-compress them.
 - When repacking, instead of creating the temp archive file in user temp folder we should create it in the same directory as the archive to avoid slowdown when moving the file if it's on a different drive
 - Add tooltips for import/replace options to clarify what they do
+- Add tooltip info item for cooked UbiArt textures to show if it's color-remapped
+- Add support for cooked UbiArt textures from more platforms (Wii U, Switch, PS Vita, 3DS etc.). Biggest issue is the swizzles. Code for some of them can be found [here](https://github.com/FanTranslatorsInternational/Kuriimu2/tree/imgui/src/lib/Kanvas/Swizzle).
 
 ## 🎮 Games
 
@@ -100,6 +102,7 @@ Open with (external) ->
 - Add setup game actions for the Rayman 2 Beta
 - Add setup game action for Rayman 2 which shows issue if DEP conflicts with the game since it can cause crashes (is there a way to check this though?)
 - Add recommended setup game action for fan-games if there is an update available (don't auto-update, but link to latest version)
+- Show the folder size of a game (separate size for game and .rcp_mods folder)
 
 ## 🎮 Game Clients & Emulators
 - Add emulator options - for example launch mGBA in fullscreen with `-f` launch argument
@@ -109,6 +112,13 @@ Open with (external) ->
 - Allow launching through Steam even if it's not a native Steam game. The user might have added the game as a non-Steam game.
 - Rewrite DOSBox config. Have all values needed to run well. Include scaler, output and joystick options. Add info for each on what they do. Also explain how the autoexecute commands work. Don't use 3-way checkboxes cause it's confusing. Instead have some better way to do it?
 - Find fan-games if they have been installed through the GameJolt client
+- Sometimes a game might be incorrectly set to launch through a client which is not associated with the game, for example launching Rayman Forever through Ubisoft Connect when you have the GOG version. There should be some proper detection for which game version it is and only allow the valid clients to be used.
+- Add support for more platforms and emulators. The following is a list of the upcoming platforms in roughly their priority order:
+    - Sega Saturn
+    - Nintendo DS
+    - Nintendo 64
+    - Sega Dreamcast
+    - Nintendo Wii
 
 ## ⚒️ Game Settings
 - Have settings which replace a file, such as the controller fixes, apply it through a mod in the mod loader rather than just manually replacing the file
@@ -142,3 +152,4 @@ Open with (external) ->
 - Use a service like [Weblate](https://weblate.org/) for localization
 - Add `folder settings` to the app settings where the user specifies the folder RCP uses for storing data the different types of data
 - Add serializers for Ubisoft Connect saves
+- The git repo has become really big, and one of the reasons is because some dll and exe files are bundled in. Ideally these should be auto-generated on compile rather than pre-bundled.
