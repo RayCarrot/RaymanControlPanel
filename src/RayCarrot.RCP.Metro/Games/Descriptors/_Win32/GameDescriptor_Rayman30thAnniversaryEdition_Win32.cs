@@ -60,6 +60,8 @@ public sealed class GameDescriptor_Rayman30thAnniversaryEdition_Win32 : Win32Gam
         
         // TODO: Add progression
         builder.Register(new RayMapComponent(RayMapComponent.RayMapViewer.Ray1Map, "RaymanPS1US", "r1/ps1_us"));
+        builder.Register(new BakesaleGameKeyComponent(0x64DA7B23));
+        builder.Register<ArchiveComponent, BakesaleArchiveComponent>();
         builder.Register(new GameOptionsComponent(x => new Rayman30thGameOptionsViewModel(x)));
         builder.Register(new LaunchArgumentsComponent(GetLaunchArgs));
         builder.Register(new GameSettingsComponent(x => new Rayman30thSettingsViewModel(x)));
