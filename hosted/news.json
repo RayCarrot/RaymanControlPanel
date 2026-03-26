@@ -1,5 +1,11 @@
 [
     {
+        "date": "March 26, 2026",
+        "icon": "rayman",
+        "header": "Rayman 30th Anniversary Edition is getting a patch",
+        "text": "As announced yesterday, the Rayman 30th Anniversary Edition is getting a patch (version 1.1) early to mid-April. It will fix various issues with saving, input lag, sounds and more. I will also be releasing a new Rayman Control Panel update, hopefully around the same time, with full modding support through the Archive Explorer, alongside some mods to improve various aspects of the game which the patch does not cover."
+    },
+    {
         "date": "March 13, 2026",
         "icon": "main",
         "header": "Version 14.4 is now available!",
