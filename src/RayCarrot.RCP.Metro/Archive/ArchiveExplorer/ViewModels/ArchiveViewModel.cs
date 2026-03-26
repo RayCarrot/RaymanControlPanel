@@ -196,6 +196,10 @@ public class ArchiveViewModel : DirectoryViewModel
         ModifiedFilesCount = 0;
         HasModifiedFiles = false;
 
+        // Dispose the current archive data
+        if (ArchiveData is IDisposable disposable)
+            disposable.Dispose();
+
         // Load the archive data
         ArchiveData = Manager.LoadArchive(ArchiveFileStream, Name);
 
@@ -320,6 +324,8 @@ public class ArchiveViewModel : DirectoryViewModel
                         // Dispose the archive file stream
                         ArchiveFileStream.Dispose();
 
+                        if (ArchiveData is IDisposable disposable)
+                            disposable.Dispose();
                         ArchiveData = null;
 
                         // If the operation succeeded, replace the archive file with the temporary output
@@ -418,6 +424,10 @@ public class ArchiveViewModel : DirectoryViewModel
 
         // Dispose every directory
         ClearAndDisposeItems();
+
+        // Dispose the archive data
+        if (ArchiveData is IDisposable disposable)
+            disposable.Dispose();
 
         // Dispose the generator
         ArchiveFileGenerator?.Dispose();

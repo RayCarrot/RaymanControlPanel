@@ -108,8 +108,8 @@ public class FileLocationModifications
         using (FileStream archiveStream = File.OpenRead(archiveFilePath))
         {
             string archiveFileName = archiveFilePath.Name;
-            object archive = manager.LoadArchive(archiveStream, archiveFileName);
 
+            object? archive = null;
             ArchiveData? archiveData = null;
 
             // Files to be repacked
@@ -117,6 +117,7 @@ public class FileLocationModifications
 
             try
             {
+                archive = manager.LoadArchive(archiveStream, archiveFileName);
                 archiveData = manager.LoadArchiveData(archive, archiveStream, archiveFileName);
 
                 Logger.Info("Modifying archive");
@@ -237,6 +238,9 @@ public class FileLocationModifications
             }
             finally
             {
+                if (archive is IDisposable disposable)
+                    disposable.Dispose();
+
                 archiveData?.Generator.Dispose();
                 archiveFiles.DisposeAll();
             }
