@@ -4,6 +4,10 @@ using BinarySerializer;
 
 namespace RayCarrot.RCP.Metro.Archive.Bakesale;
 
+// NOTE: A PIE archive is a ZIP file where every file has to use STORE for compression. Using anything else, such as DEFLATE, causes
+//       the game to crash. Inside if the archive is another archive, the dreamm.ifs file. This is yet another zip, but this time
+//       it is allowed to be compressed with DEFLATE. It is however picky about the order of directories and files.
+
 /// <summary>
 /// Archive data manager for a Bakesale .pie file
 /// </summary>
@@ -15,6 +19,13 @@ public class BakesalePieArchiveDataManager : IArchiveDataManager
     {
         GameKey = gameKey;
     }
+
+    #endregion
+
+    #region Constant Fields
+
+    // The PIE archive has a "dreamm.ifs" file in it which is another archive, so we need special support for it
+    private const string IfsFileExtension = ".ifs";
 
     #endregion
 
@@ -76,8 +87,12 @@ public class BakesalePieArchiveDataManager : IArchiveDataManager
     {
         Logger.Info("A PIE archive is being repacked...");
 
-        // Create a new zip file
-        using ZipArchive mainZipArchive = new(new EncryptedPieStream(outputFileStream.Stream, GameKey), ZipArchiveMode.Create, leaveOpen: true);
+        // Wrap the stream in an encrypted steam
+        EncryptedPieStream outputStream = new(outputFileStream.Stream, GameKey);
+
+        // NOTE: We have to write the zip ourselves since the .NET zip API does not support STORE compression (it always uses DEFLATE)
+        // Create a zip writer
+        using ZipWriter zipWriter = new(outputStream);
 
         // Keep track of the ifs files and handle those last
         Dictionary<string, List<(FileItem File, string FilePath)>> ifsFiles = new();
@@ -91,21 +106,21 @@ public class BakesalePieArchiveDataManager : IArchiveDataManager
             loadState.CancellationToken.ThrowIfCancellationRequested();
 
             // If it's within an ifs folder then we store it for later
-            if (file.Directory.EndsWith(".ifs", StringComparison.InvariantCulture) || 
-                file.Directory.Contains($".ifs{PathSeparatorCharacter}", StringComparison.InvariantCulture))
+            if (file.Directory.EndsWith(IfsFileExtension, StringComparison.InvariantCulture) || 
+                file.Directory.Contains(IfsFileExtension + PathSeparatorCharacter, StringComparison.InvariantCulture))
             {
                 string ifsFilePath;
                 string filePath;
-                if (file.Directory.EndsWith(".ifs"))
+                if (file.Directory.EndsWith(IfsFileExtension))
                 {
                     ifsFilePath = file.Directory;
                     filePath = file.FileName;
                 }
                 else
                 {
-                    int ifsIndex = file.Directory.IndexOf($".ifs{PathSeparatorCharacter}", StringComparison.InvariantCulture);
-                    ifsFilePath = file.Directory[..(ifsIndex + 4)];
-                    filePath = file.Directory[(ifsIndex + 5)..] + PathSeparatorCharacter + file.FileName;
+                    int ifsIndex = file.Directory.IndexOf(IfsFileExtension + PathSeparatorCharacter, StringComparison.InvariantCulture);
+                    ifsFilePath = file.Directory[..(ifsIndex + IfsFileExtension.Length)];
+                    filePath = file.Directory[(ifsIndex + IfsFileExtension.Length + 1)..] + PathSeparatorCharacter + file.FileName;
                 }
 
                 if (!ifsFiles.TryGetValue(ifsFilePath, out List<(FileItem, string)> ifsFilesList))
@@ -124,14 +139,22 @@ public class BakesalePieArchiveDataManager : IArchiveDataManager
                 else
                     filePath = file.FileName;
 
-                // Create a new file entry
-                ZipArchiveEntry entry = mainZipArchive.CreateEntry(filePath, CompressionLevel.NoCompression);
-                entry.LastWriteTime = ((PieFileEntry)file.ArchiveEntry).LastWriteTime;
+                // Get the stream to write
+                using ArchiveFileStream fileStream = file.GetFileData(generator);
 
-                // Copy over the file data
-                using Stream newEntryStream = entry.Open();
-                using Stream originalFileStream = file.GetFileData(generator).Stream;
-                originalFileStream.CopyToEx(newEntryStream);
+                // Get the length
+                uint fileLength = (uint)fileStream.Stream.Length;
+
+                // Calculate the CRC-32
+                fileStream.SeekToBeginning();
+                uint crc = zipWriter.CalculateCrc32(fileStream.Stream);
+
+                // Write the file entry
+                zipWriter.WriteEntry(filePath, fileLength, crc, ((PieFileEntry)file.ArchiveEntry).LastWriteTime, true);
+
+                // Write the file data
+                fileStream.SeekToBeginning();
+                fileStream.Stream.CopyToEx(outputStream);
 
                 progress++;
             }
@@ -143,6 +166,8 @@ public class BakesalePieArchiveDataManager : IArchiveDataManager
         // Add the ifs zips
         foreach (string ifsFilePath in ifsFiles.Keys)
         {
+            loadState.CancellationToken.ThrowIfCancellationRequested();
+
             // Get the files to add to the ifs zip
             List<(FileItem File, string FilePath)> ifsFilesList = ifsFiles[ifsFilePath];
 
@@ -171,15 +196,23 @@ public class BakesalePieArchiveDataManager : IArchiveDataManager
                 }
             }
 
-            tempFileStream.Position = 0;
+            // Get the length of the ifs zip
+            uint fileLength = (uint)tempFileStream.Length;
 
-            // Create a new file entry to the main zip for the ifs zip
-            ZipArchiveEntry ifsZipEntry = mainZipArchive.CreateEntry(ifsFilePath, CompressionLevel.NoCompression);
-            
-            // Copy over the file data
-            using Stream newIfsZipEntryStream = ifsZipEntry.Open();
-            tempFileStream.CopyToEx(newIfsZipEntryStream);
+            // Calculate the CRC-32
+            tempFileStream.Position = 0;
+            uint crc = zipWriter.CalculateCrc32(tempFileStream);
+
+            // Write the file entry to the main zip
+            zipWriter.WriteEntry(ifsFilePath, fileLength, crc, DateTimeOffset.Now, true);
+
+            // Write the file data
+            tempFileStream.Position = 0;
+            tempFileStream.CopyToEx(outputStream);
         }
+
+        // Write the central directory
+        zipWriter.WriteCentralDirectory();
 
         Logger.Info("The PIE archive has been repacked");
 
@@ -207,38 +240,43 @@ public class BakesalePieArchiveDataManager : IArchiveDataManager
         Dictionary<string, List<FileItem>> dirs = new();
         foreach (ZipArchiveEntry entry in data.MainZipArchive.Entries)
         {
-            if (entry.Name != String.Empty)
+            // The dreamm.ifs file is another zip, so we unzip it and treat it as a directory
+            if (entry.Name.EndsWith(IfsFileExtension, StringComparison.InvariantCulture))
             {
-                // The dreamm.ifs file is another zip, so we unzip it and treat it as a directory
-                if (entry.Name.EndsWith(".ifs", StringComparison.InvariantCulture))
-                {
-                    // Open as a new archive
-                    ZipArchive ifsArchive = new(entry.Open(), ZipArchiveMode.Read);
-                    data.SubArchives.Add(ifsArchive);
+                // Open as a new archive
+                ZipArchive ifsArchive = new(entry.Open(), ZipArchiveMode.Read);
+                data.SubArchives.Add(ifsArchive);
 
-                    // Add files relative to the archive
-                    string basePath = entry.FullName;
-                    foreach (ZipArchiveEntry ifsEntry in ifsArchive.Entries)
-                    {
-                        if (ifsEntry.Name != String.Empty)
-                            addFile(basePath, ifsEntry);
-                    }
-                }
-                else
-                {
-                    addFile(null, entry);
-                }
+                // Add files relative to the archive
+                string basePath = entry.FullName;
+                foreach (ZipArchiveEntry ifsEntry in ifsArchive.Entries)
+                    addEntry(basePath, ifsEntry);
+            }
+            else
+            {
+                addEntry(null, entry);
             }
         }
 
         // Helper for adding a file
-        void addFile(string? basePath, ZipArchiveEntry entry)
+        void addEntry(string? basePath, ZipArchiveEntry entry)
         {
-            // Get the directory path
-            int lastSeparatorIndex = entry.FullName.LastIndexOf(PathSeparatorCharacter);
-            string dir = lastSeparatorIndex != -1
-                ? entry.FullName[..lastSeparatorIndex]
-                : String.Empty;
+            string dir;
+
+            // File
+            if (entry.Name != String.Empty)
+            {
+                // Get the directory path
+                int lastSeparatorIndex = entry.FullName.LastIndexOf(PathSeparatorCharacter);
+                dir = lastSeparatorIndex != -1
+                    ? entry.FullName[..lastSeparatorIndex]
+                    : String.Empty;
+            }
+            // Directory
+            else
+            {
+                dir = entry.FullName.TrimEnd(PathSeparatorCharacter);
+            }
 
             // Combine if needed
             if (basePath != null)
@@ -250,7 +288,9 @@ public class BakesalePieArchiveDataManager : IArchiveDataManager
                 dirs[dir] = list;
             }
 
-            list.Add(new FileItem(this, entry.Name, dir, new PieFileEntry(entry)));
+            // Add file if it's not a directory entry
+            if (entry.Name != String.Empty)
+                list.Add(new FileItem(this, entry.Name, dir, new PieFileEntry(entry)));
         }
 
         // Return the data
