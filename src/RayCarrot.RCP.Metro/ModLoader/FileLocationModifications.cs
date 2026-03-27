@@ -119,18 +119,19 @@ public class FileLocationModifications
             {
                 archive = manager.LoadArchive(archiveStream, archiveFileName);
                 archiveData = manager.LoadArchiveData(archive, archiveStream, archiveFileName);
+                List<ArchiveDirectory> archiveDirectories = archiveData.Directories.ToList();
 
                 Logger.Info("Modifying archive");
 
                 Stopwatch sw = Stopwatch.StartNew();
 
                 int initialModificationsCount = _fileModifications.Count;
-                int totalFilesMax = archiveData.Directories.Sum(x => x.Files.Length) + initialModificationsCount;
+                int totalFilesMax = archiveDirectories.Sum(x => x.Files.Length) + initialModificationsCount;
                 totalFilesMax *= 2; // 0-50%
                 int totalFilesIndex = 0;
 
                 // Replace or remove existing files
-                foreach (ArchiveDirectory dir in archiveData.Directories)
+                foreach (ArchiveDirectory dir in archiveDirectories)
                 {
                     foreach (FileItem file in dir.Files)
                     {
