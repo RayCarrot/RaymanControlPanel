@@ -56,6 +56,9 @@ public class UbiArtLocalizationFilePatch<UAString> : IFilePatch
 
                 string locValue = line.Substring(separatorIndex + 1);
 
+                // Replace \n with a linebreak
+                locValue = locValue.Replace(@"\n", "\n");
+
                 if (stringTable.FirstOrDefault(x => x.Key == locId) is { } pair)
                 {
                     pair.Value = new UAString { Value = locValue };
