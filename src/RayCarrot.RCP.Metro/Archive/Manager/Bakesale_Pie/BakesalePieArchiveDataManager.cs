@@ -6,7 +6,9 @@ namespace RayCarrot.RCP.Metro.Archive.Bakesale;
 
 // NOTE: A PIE archive is a ZIP file where every file has to use STORE for compression. Using anything else, such as DEFLATE, causes
 //       the game to crash. Inside if the archive is another archive, the dreamm.ifs file. This is yet another zip, but this time
-//       it is allowed to be compressed with DEFLATE. It is however picky about the order of directories and files.
+//       it is allowed to be compressed with DEFLATE. It is however picky about the order of directories and files. For example adding
+//       all directories before the files makes it not find the files. But skipping adding the directories entirely works fine. So
+//       that's what we do for both of the zips. Only downside is empty directories (like the models folder) get lost on repack.
 
 /// <summary>
 /// Archive data manager for a Bakesale .pie file
@@ -97,6 +99,7 @@ public class BakesalePieArchiveDataManager : IArchiveDataManager
         // Keep track of the ifs files and handle those last
         Dictionary<string, List<(FileItem File, string FilePath)>> ifsFiles = new();
 
+        // NOTE: We do not add directories, which is fine, but it means empty directories get lost here
         // Add the files
         FileItem[] filesArray = files.ToArray();
         int maxProgress = filesArray.Length;
@@ -105,10 +108,11 @@ public class BakesalePieArchiveDataManager : IArchiveDataManager
         {
             loadState.CancellationToken.ThrowIfCancellationRequested();
 
-            // If it's within an ifs folder then we store it for later
+            // If it's within an ifs folder then we save it for later
             if (file.Directory.EndsWith(IfsFileExtension, StringComparison.InvariantCulture) || 
                 file.Directory.Contains(IfsFileExtension + PathSeparatorCharacter, StringComparison.InvariantCulture))
             {
+                // Get the relative file path
                 string ifsFilePath;
                 string filePath;
                 if (file.Directory.EndsWith(IfsFileExtension))
@@ -163,7 +167,7 @@ public class BakesalePieArchiveDataManager : IArchiveDataManager
             loadState.SetProgress(new Progress(progress, maxProgress));
         }
 
-        // Add the ifs zips
+        // Add the ifs zips last
         foreach (string ifsFilePath in ifsFiles.Keys)
         {
             loadState.CancellationToken.ThrowIfCancellationRequested();
@@ -171,11 +175,12 @@ public class BakesalePieArchiveDataManager : IArchiveDataManager
             // Get the files to add to the ifs zip
             List<(FileItem File, string FilePath)> ifsFilesList = ifsFiles[ifsFilePath];
 
-            // Create a temp file for packing the ifs zip
+            // Create a temp file for packing the ifs zip (don't want to do it in memory since it can be pretty big)
             using TempFile tempFile = new(false);
             using FileStream tempFileStream = File.Create(tempFile.TempPath);
 
-            // Add the files to the ifs zip
+            // Add the files to the ifs zip. We can use the .NET ZipArchive here instead of our own writer
+            // since the ifs zip supports DEFLATE compression.
             using (ZipArchive ifsZipArchive = new(tempFileStream, ZipArchiveMode.Create, leaveOpen: true))
             {
                 foreach ((FileItem File, string FilePath) fileValue in ifsFilesList)
@@ -203,7 +208,8 @@ public class BakesalePieArchiveDataManager : IArchiveDataManager
             tempFileStream.Position = 0;
             uint crc = zipWriter.CalculateCrc32(tempFileStream);
 
-            // Write the file entry to the main zip
+            // Write the file entry to the main zip. Since it's not treated as a file in the Archive Explorer we
+            // lost the timestamp, so we reset it. But this also makes more sense since we're repacking it anyway.
             zipWriter.WriteEntry(ifsFilePath, fileLength, crc, DateTimeOffset.Now, true);
 
             // Write the file data
