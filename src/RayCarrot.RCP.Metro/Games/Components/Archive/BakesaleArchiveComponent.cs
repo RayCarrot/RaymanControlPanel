@@ -3,7 +3,7 @@ using RayCarrot.RCP.Metro.Archive.Bakesale;
 
 namespace RayCarrot.RCP.Metro.Games.Components;
 
-[RequiredGameComponents(typeof(BakesaleGameKeyComponent))]
+[RequiredGameComponents(typeof(BinaryGameModeComponent))]
 public class BakesaleArchiveComponent : ArchiveComponent
 {
     public BakesaleArchiveComponent() : base(GetArchiveManager, GetArchiveFilePaths, Id) { }
@@ -12,7 +12,11 @@ public class BakesaleArchiveComponent : ArchiveComponent
 
     private static IArchiveDataManager GetArchiveManager(GameInstallation gameInstallation)
     {
-        uint gameKey = gameInstallation.GetRequiredComponent<BakesaleGameKeyComponent>().GameKey;
+        uint gameKey = gameInstallation.
+            GetRequiredComponent<BinaryGameModeComponent, BakesaleGameModeComponent>().
+            GameMode.
+            GetRequiredAttribute<BakesaleGameModeInfoAttribute>().
+            GameKey;
         return new BakesalePieArchiveDataManager(gameKey);
     }
 

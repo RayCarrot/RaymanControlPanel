@@ -1,5 +1,6 @@
 ﻿using System.Windows.Input;
 using RayCarrot.RCP.Metro.Archive;
+using RayCarrot.RCP.Metro.Archive.Bakesale;
 using RayCarrot.RCP.Metro.Archive.CPA;
 using RayCarrot.RCP.Metro.Archive.Ray1;
 using RayCarrot.RCP.Metro.Archive.UbiArt;
@@ -94,6 +95,16 @@ public class ArchivesUtilityViewModel : UtilityViewModel
                     UbiArtGameMode.JustDance_2020_Switch,
                     UbiArtGameMode.JustDance_2021_Switch,
                     UbiArtGameMode.JustDance_2022_Switch,
+                })),
+
+            new ArchivesUtilityTypeViewModel(
+                name: "Bakesale archives (.pie)", // TODO-LOC
+                fileExtension: new FileExtension(".pie"),
+                getManagerFunc: (data, mode) => new BakesalePieArchiveDataManager(
+                    gameKey: data.GetRequiredAttribute<BakesaleGameModeInfoAttribute>().GameKey),
+                modes: new EnumSelectionViewModel<Enum>(BakesaleGameMode.Rayman30thAnniversaryEdition_PC, new Enum[]
+                {
+                    BakesaleGameMode.Rayman30thAnniversaryEdition_PC,
                 })),
         };
         SelectedType = Types.First();

@@ -114,4 +114,10 @@ public static class EnumExtensions
         // Return the first attribute
         return attributes.FirstOrDefault();
     }
+
+    public static T GetRequiredAttribute<T>(this Enum value)
+        where T : Attribute
+    {
+        return value.GetAttribute<T>() ?? throw new Exception($"The attribute of type {typeof(T)} was not found on the value {value}");
+    }
 }
