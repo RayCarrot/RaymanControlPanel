@@ -1,10 +1,8 @@
-using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
 using System.Windows.Input;
 using Newtonsoft.Json.Linq;
 using RayCarrot.RCP.Metro.Games.Components;
-using RayCarrot.RCP.Metro.Games.Structure;
 using RayCarrot.RCP.Metro.ModLoader.Extractors;
 using RayCarrot.RCP.Metro.ModLoader.Library;
 using RayCarrot.RCP.Metro.ModLoader.Metadata;
@@ -1012,27 +1010,11 @@ public class ModLoaderViewModel : BaseViewModel, IDisposable
                 return null;
         }
 
-        // Verify the game is not running if Win32
-        if (GameInstallation.GameDescriptor is { Platform: GamePlatform.Win32, Structure: DirectoryProgramInstallationStructure structure })
+        // Verify the game is not running
+        if (Services.RunningGamesManager.IsGameRunning(GameInstallation))
         {
-            FileSystemPath exeFilePath = structure.FileSystem.GetAbsolutePath(GameInstallation, ProgramPathType.PrimaryExe);
-
-            if (exeFilePath.FileExists)
-            {
-                try
-                {
-                    Process[] processes = Process.GetProcessesByName(exeFilePath.RemoveFileExtension().Name);
-                    if (processes.Any(x => x.MainModule?.FileName == exeFilePath))
-                    {
-                        await Services.MessageUI.DisplayMessageAsync(Resources.ModLoader_GameRunningError, Resources.ModLoader_GameRunningErrorHeader, MessageType.Error);
-                        return null;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Logger.Warn(ex, "Checking if game is running");
-                }
-            }
+            await Services.MessageUI.DisplayMessageAsync(Resources.ModLoader_GameRunningError, Resources.ModLoader_GameRunningErrorHeader, MessageType.Error);
+            return null;
         }
 
         // Verify the user has enough space left
