@@ -81,7 +81,7 @@
   <!-- Package references -->
   <ItemGroup>
     <PackageReference Include="AutoCompleteTextBox" Version="1.2.0" />
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
     <PackageReference Include="Costura.Fody" Version="5.7.0">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
@@ -90,8 +90,8 @@
     <PackageReference Include="DirectXTexNet" Version="1.0.1" />
     <PackageReference Include="gong-wpf-dragdrop" Version="4.0.0" />
     <PackageReference Include="HtmlAgilityPack" Version="1.12.4" />
-    <PackageReference Include="Magick.NET-Q8-x64" Version="14.10.4" />
-    <PackageReference Include="Magick.NET.SystemWindowsMedia" Version="8.0.17" />
+    <PackageReference Include="Magick.NET-Q8-x64" Version="14.11.1" />
+    <PackageReference Include="Magick.NET.SystemWindowsMedia" Version="8.0.19" />
     <PackageReference Include="MahApps.Metro" Version="2.4.11" />
     <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="6.2.1" />
     <PackageReference Include="MahApps.Metro.SimpleChildWindow" Version="2.2.1" />
