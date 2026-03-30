@@ -55,7 +55,7 @@ public sealed class GameDescriptor_Rayman30thAnniversaryEdition_Win32 : Win32Gam
     {
         base.RegisterComponents(builder);
 
-        builder.Register(new SteamGameClientComponent(SteamId));
+        builder.Register(new SteamGameClientComponent(SteamId, usesSteamStubDrm: true));
         builder.Register(new UbisoftConnectGameClientComponent(UbisoftConnectGameId, UbisoftConnectProductId));
         
         // TODO: Add progression

@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Windows.Input;
 using Newtonsoft.Json.Linq;
 using RayCarrot.RCP.Metro.Games.Components;
+using RayCarrot.RCP.Metro.Games.Structure;
 using RayCarrot.RCP.Metro.ModLoader.Extractors;
 using RayCarrot.RCP.Metro.ModLoader.Library;
 using RayCarrot.RCP.Metro.ModLoader.Metadata;
@@ -557,6 +558,27 @@ public class ModLoaderViewModel : BaseViewModel, IDisposable
         }
     }
 
+    private bool IsFilePatched(string filePath, IEnumerable<ModViewModel> mods)
+    {
+        foreach (ModViewModel modViewModel in mods)
+        {
+            if (modViewModel.IsDownloaded &&
+                modViewModel.IsEnabled &&
+                modViewModel.InstallState != ModViewModel.ModInstallState.PendingUninstall)
+            {
+                foreach (IFilePatch filePatch in modViewModel.DownloadedMod.Mod.GetPatchedFiles())
+                {
+                    if (!filePatch.Path.HasLocation && filePatch.Path.FilePath.Equals(filePath, StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
     #endregion
 
     #region Public Static Methods
@@ -1044,6 +1066,34 @@ public class ModLoaderViewModel : BaseViewModel, IDisposable
         catch (Exception ex)
         {
             Logger.Warn(ex, "Checking available space on drive");
+        }
+
+        // Verify that a mod isn't trying to patch an exe with the SteamStub DRM
+        if (GameInstallation.GetComponent<SteamGameClientComponent>()?.UsesSteamStubDrm == true &&
+            GameInstallation.GameDescriptor.Structure is DirectoryProgramInstallationStructure structure)
+        {
+            string exeFilePath = structure.FileSystem.GetLocalPath(ProgramPathType.PrimaryExe);
+
+            if (IsFilePatched(exeFilePath, mods))
+            {
+                try
+                {
+                    using FileStream exeFileStream = File.OpenRead(GameInstallation.InstallLocation.Directory + exeFilePath);
+                    if (SteamHelpers.IsSteamStubDrmApplied(exeFileStream))
+                    {
+                        // TODO-LOC
+                        await Services.MessageUI.DisplayMessageAsync(
+                            $"At least one of the selected mods requires the game's executable file to have its DRM removed for it to be correctly patched.\n\nIn order to remove the DRM you can use a tool such as \"Steamless\". Then run it on the {Path.GetFileName(exeFilePath)} file and replace it with the unpacked file that it creates.",
+                            "SteamStub DRM detected",
+                            MessageType.Error);
+                        return null;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.Warn(ex, "Checking for SteamStub DRM");   
+                }
+            }
         }
 
         using (LoaderLoadState state = await LoaderViewModel.RunAsync(Resources.ModLoader_ApplyStatus))

@@ -6,10 +6,12 @@
 [GameComponentBase(SingleInstance = true)]
 public class SteamGameClientComponent : GameComponent
 {
-    public SteamGameClientComponent(string steamId)
+    public SteamGameClientComponent(string steamId, bool usesSteamStubDrm = false)
     {
         SteamId = steamId;
+        UsesSteamStubDrm = usesSteamStubDrm;
     }
 
     public string SteamId { get; }
+    public bool UsesSteamStubDrm { get; }
 }
