@@ -15,8 +15,8 @@
     <Grid x:Name="RootGrid">
         <!-- Game banner image -->
         <Image x:Name="GameBannerImage" 
-               Source="{Binding Path=GameBanner, Converter={rcp:AssetEnumToImageSourceConverter}}" 
-               d:Source="pack://application:,,,/RayCarrot.RCP.Metro;component/Img/GameBanners/Rayman 2.png" 
+               Source="{Binding Path=GameBanner}" 
+               d:Source="pack://application:,,,/RayCarrot.RCP.Metro;component/Assets/GameBanners/Rayman 2.png" 
                Stretch="Uniform" 
                StretchDirection="UpOnly" 
                HorizontalAlignment="Stretch" 
@@ -266,6 +266,18 @@
                                                 </Style>
                                             </Button.Style>
                                         </Button>
+                                        <!-- TODO-LOC -->
+                                        <Button Content="Replace banner image"
+                                                Command="{Binding Path=ReplaceBannerImageCommand, Mode=OneTime}"
+                                                rcp:Icon.Kind="ImageOutline"
+                                                rcp:Icon.Brush="{StaticResource RCP.Brushes.Info}"
+                                                HorizontalContentAlignment="Stretch" />
+                                        <Button Content="Remove custom banner image"
+                                                Command="{Binding Path=RemoveCustomBannerImageCommand, Mode=OneTime}"
+                                                Visibility="{Binding Path=HasCustomGameBanner, Converter={rcp:BooleanToVisibilityConverter}}"
+                                                rcp:Icon.Kind="ImageRemoveOutline"
+                                                rcp:Icon.Brush="{StaticResource RCP.Brushes.Info}"
+                                                HorizontalContentAlignment="Stretch" />
                                         <Button Command="{Binding Path=RenameCommand, Mode=OneTime}"
                                                 rcp:Icon.Kind="PencilOutline"
                                                 rcp:Icon.Brush="{StaticResource RCP.Brushes.Info}"

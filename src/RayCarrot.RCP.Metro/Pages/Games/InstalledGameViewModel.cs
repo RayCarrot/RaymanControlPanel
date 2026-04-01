@@ -22,7 +22,7 @@ public class InstalledGameViewModel : BaseViewModel
         GameCategory = gameCategory;
         GameGroup = gameGroup;
         DisplayName = gameInstallation.GetDisplayName();
-        GameBanner = gameInstallation.GameDescriptor.Banner;
+        RefreshGameBanner();
 
         // Get and set platform info
         GamePlatformInfoAttribute platformInfo = gameInstallation.GameDescriptor.Platform.GetInfo();
@@ -50,6 +50,8 @@ public class InstalledGameViewModel : BaseViewModel
         UninstallCommand = new AsyncRelayCommand(UninstallAsync);
         CreateShortcutCommand = new AsyncRelayCommand(CreateShortcutAsync);
         ToggleFavoriteCommand = new RelayCommand(ToggleFavorite);
+        ReplaceBannerImageCommand = new AsyncRelayCommand(ReplaceBannerImageAsync);
+        RemoveCustomBannerImageCommand = new RelayCommand(RemoveCustomBannerImage);
         OpenGameDebugCommand = new AsyncRelayCommand(OpenGameDebugAsync);
     }
 
@@ -81,6 +83,8 @@ public class InstalledGameViewModel : BaseViewModel
     public ICommand UninstallCommand { get; }
     public ICommand CreateShortcutCommand { get; }
     public ICommand ToggleFavoriteCommand { get; }
+    public ICommand ReplaceBannerImageCommand { get; }
+    public ICommand RemoveCustomBannerImageCommand { get; }
     public ICommand OpenGameDebugCommand { get; }
 
     #endregion
@@ -101,7 +105,8 @@ public class InstalledGameViewModel : BaseViewModel
 
     public GameIconAsset Icon => GameDescriptor.Icon;
     public GameType Type => GameDescriptor.Type;
-    public GameBannerAsset GameBanner { get; set; }
+    public string GameBanner { get; set; }
+    public bool HasCustomGameBanner { get; set; }
 
     public ObservableCollection<GamePanelViewModel> GamePanels { get; }
     public ObservableActionItemsCollection AdditionalLaunchActions { get; }
@@ -335,6 +340,20 @@ public class InstalledGameViewModel : BaseViewModel
         }
     }
 
+    private void RefreshGameBanner()
+    {
+        if (GameInstallation.GetValue<string?>(GameDataKey.RCP_BannerImage) is { } bannerImage && File.Exists(bannerImage))
+        {
+            GameBanner = bannerImage;
+            HasCustomGameBanner = true;
+        }
+        else
+        {
+            GameBanner = GameInstallation.GameDescriptor.Banner.GetAssetPath();
+            HasCustomGameBanner = false;
+        }
+    }
+
     #endregion
 
     #region Public Methods
@@ -549,6 +568,28 @@ public class InstalledGameViewModel : BaseViewModel
     {
         IsFavorite = !GameInstallation.GetValue<bool>(GameDataKey.RCP_IsFavorite);
         GameInstallation.SetValue(GameDataKey.RCP_IsFavorite, IsFavorite);
+    }
+
+    public async Task ReplaceBannerImageAsync()
+    {
+        // TODO-LOC
+        FileBrowserResult result = await Services.BrowseUI.BrowseFileAsync(new FileBrowserViewModel()
+        {
+            Title = "Select banner image",
+            ExtensionFilter = "Image files|*.png;*.jpg;*.jpeg;*.bmp"
+        });
+
+        if (result.CanceledByUser)
+            return;
+
+        GameInstallation.SetValue<string>(GameDataKey.RCP_BannerImage, result.SelectedFile);
+        RefreshGameBanner();
+    }
+
+    public void RemoveCustomBannerImage()
+    {
+        GameInstallation.SetValue<string?>(GameDataKey.RCP_BannerImage, null);
+        RefreshGameBanner();
     }
 
     public Task OpenGameDebugAsync() => Services.UI.ShowGameDebugAsync(GameInstallation);

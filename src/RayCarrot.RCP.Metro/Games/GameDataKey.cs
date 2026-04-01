@@ -9,6 +9,7 @@ public static class GameDataKey
     public const string RCP_CustomName = "RCP_CustomName";
     public const string RCP_LastPlayed = "RCP_LastPlayed";
     public const string RCP_IsFavorite = "RCP_IsFavorite";
+    public const string RCP_BannerImage = "RCP_BannerImage";
 
     // Win32
     public const string Win32_RunAsAdmin = "Win32_RunAsAdmin";

@@ -470,7 +470,7 @@ public class GamesPageViewModel : BasePageViewModel,
                 {
                     if (installedGame.GameDescriptor.Game == Game.RaymanLegends)
                     {
-                        installedGame.GameBanner = GameBannerAsset.JacquouilleLegends;
+                        installedGame.GameBanner = GameBannerAsset.JacquouilleLegends.GetAssetPath();
                     }
                 }
             }
