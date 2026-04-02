@@ -3,6 +3,7 @@ using RayCarrot.RCP.Metro.Games.Finder;
 using RayCarrot.RCP.Metro.Games.Options;
 using RayCarrot.RCP.Metro.Games.Settings;
 using RayCarrot.RCP.Metro.Games.Structure;
+using RayCarrot.RCP.Metro.ModLoader.Modules.Rayman30thMsDosMusic;
 
 namespace RayCarrot.RCP.Metro;
 
@@ -68,6 +69,8 @@ public sealed class GameDescriptor_Rayman30thAnniversaryEdition_Win32 : Win32Gam
         builder.Register<OnGameAddedComponent, AddToJumpListOnGameAddedComponent>();
 
         builder.Register(new PCGamingWikiComponent("Rayman:_30th_Anniversary_Edition"));
+
+        builder.Register(new ModModuleComponent(_ => new Rayman30thMsDosMusicModule()));
 
         builder.Register(new DiscordRichPresenceComponent("Rayman 30th Anniversary Edition", "rayman_30th_anniversary_edition"));
     }

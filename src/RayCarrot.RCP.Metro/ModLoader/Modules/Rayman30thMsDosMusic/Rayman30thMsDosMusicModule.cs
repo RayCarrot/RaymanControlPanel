@@ -1,0 +1,85 @@
+﻿using System.IO;
+using RayCarrot.RCP.Metro.Games.Components;
+using RayCarrot.RCP.Metro.ModLoader.Resource;
+
+namespace RayCarrot.RCP.Metro.ModLoader.Modules.Rayman30thMsDosMusic;
+
+// TODO-UPDATE: Add documentation to wiki
+public class Rayman30thMsDosMusicModule : ModModule
+{
+    public override string Id => "30th-dos-music";
+    public override LocalizedString Description => "This allows replacing the MP3 audio tracks in the MS-DOS versions, automatically updating the boot save-states with the new audio track sizes."; // TODO-LOC
+
+    public Rayman30thMsDosMusicModuleGame[] Games { get; } =
+    [
+        // TODO-UPDATE: Support the spin-offs too
+        new("rayman", 0x15FBB0),
+        // new("raykit", ),
+        // new("rayfan", ),
+        // new("ray60", ),
+    ];
+
+    public override IReadOnlyCollection<IModFileResource> GetAddedFiles(Mod mod, FileSystemPath modulePath)
+    {
+        List<IModFileResource> files = [];
+
+        // Check each MS-DOS game
+        foreach (Rayman30thMsDosMusicModuleGame game in Games)
+        {
+            FileSystemPath dir = modulePath + game.Name;
+
+            if (!dir.DirectoryExists)
+                continue;
+
+            // Add the tracks
+            foreach (string trackFilePath in Directory.GetFiles(dir, "*.mp3"))
+            {
+                string fileName = Path.GetFileName(trackFilePath);
+                files.Add(new PhysicalModFileResource(
+                    path: new ModFilePath($@"roms\DOS\dreamm.ifs\install\rayman\{game.Name}\~mp3music\{fileName}", "assets.pie", BakesaleArchiveComponent.Id),
+                    filePath: trackFilePath));
+            }
+        }
+
+        return files.AsReadOnly();
+    }
+
+    public override IReadOnlyCollection<IFilePatch> GetPatchedFiles(Mod mod, FileSystemPath modulePath)
+    {
+        List<IFilePatch> patches = [];
+
+        // Check each MS-DOS game
+        foreach (Rayman30thMsDosMusicModuleGame game in Games)
+        {
+            FileSystemPath dir = modulePath + game.Name;
+
+            if (!dir.DirectoryExists)
+                continue;
+
+            // Get the tracks
+            List<Rayman30thMsDosMusicModuleTrack> tracks = [];
+            foreach (string trackFilePath in Directory.GetFiles(dir, "*.mp3"))
+            {
+                const string prefix = "track";
+                string fileName = Path.GetFileNameWithoutExtension(trackFilePath);
+                if (fileName.Length == prefix.Length + 2 &&
+                    fileName.StartsWith(prefix) &&
+                    Int32.TryParse(fileName[prefix.Length..], out int track))
+                {
+                    tracks.Add(new Rayman30thMsDosMusicModuleTrack(trackFilePath, track));
+                }
+            }
+
+            // Add a patch to the .boot file if any tracks were found
+            if (tracks.Any())
+            {
+                patches.Add(new Rayman30thMsDosMusicFilePatch(
+                    path: new ModFilePath(@"save_states\rayman.boot", "assets.pie", BakesaleArchiveComponent.Id),
+                    game: game,
+                    tracks: tracks));
+            }
+        }
+
+        return patches.AsReadOnly();
+    }
+}

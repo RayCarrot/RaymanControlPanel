@@ -119,6 +119,7 @@
     <PackageReference Include="XamlAnimatedGif" Version="2.3.1" />
     <PackageReference Include="Octokit" Version="14.0.0" />
     <PackageReference Include="DiscordRichPresence" Version="1.6.1.70" />
+    <PackageReference Include="NAudio" Version="2.3.0" />
   </ItemGroup>
 
   <!-- Project references -->
