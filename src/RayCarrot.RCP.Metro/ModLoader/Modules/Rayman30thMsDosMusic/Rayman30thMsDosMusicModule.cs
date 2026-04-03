@@ -12,11 +12,10 @@ public class Rayman30thMsDosMusicModule : ModModule
 
     public Rayman30thMsDosMusicModuleGame[] Games { get; } =
     [
-        // TODO-UPDATE: Support the spin-offs too
         new("rayman", 0x15FBB0),
-        // new("raykit", ),
-        // new("rayfan", ),
-        // new("ray60", ),
+        new("raykit", 0x145801),
+        new("rayfan", 0x456F5),
+        new("ray60", 0x144716),
     ];
 
     public override IReadOnlyCollection<IModFileResource> GetAddedFiles(Mod mod, FileSystemPath modulePath)
@@ -74,7 +73,7 @@ public class Rayman30thMsDosMusicModule : ModModule
             if (tracks.Any())
             {
                 patches.Add(new Rayman30thMsDosMusicFilePatch(
-                    path: new ModFilePath(@"save_states\rayman.boot", "assets.pie", BakesaleArchiveComponent.Id),
+                    path: new ModFilePath($@"save_states\{game.Name}.boot", "assets.pie", BakesaleArchiveComponent.Id),
                     game: game,
                     tracks: tracks));
             }
