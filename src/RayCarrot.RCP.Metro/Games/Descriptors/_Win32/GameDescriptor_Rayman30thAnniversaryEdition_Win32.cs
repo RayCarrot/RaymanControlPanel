@@ -70,6 +70,7 @@ public sealed class GameDescriptor_Rayman30thAnniversaryEdition_Win32 : Win32Gam
 
         builder.Register(new PCGamingWikiComponent("Rayman:_30th_Anniversary_Edition"));
 
+        builder.Register(new GameBananaGameComponent(24267));
         builder.Register(new ModModuleComponent(_ => new Rayman30thMsDosMusicModule()));
 
         builder.Register(new DiscordRichPresenceComponent("Rayman 30th Anniversary Edition", "rayman_30th_anniversary_edition"));
