@@ -8,6 +8,7 @@ public class SteamGameClientDescriptor : GameClientDescriptor
     #region Public Properties
 
     public override string GameClientId => "Steam";
+    public override bool RequiresAccountVerification => true;
     public override LocalizedString DisplayName => new ResourceLocString(nameof(Resources.GameClients_Steam));
     public override GameClientIconAsset Icon => GameClientIconAsset.Steam;
 

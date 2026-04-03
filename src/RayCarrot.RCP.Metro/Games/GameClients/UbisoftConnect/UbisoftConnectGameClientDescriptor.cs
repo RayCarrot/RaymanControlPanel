@@ -15,6 +15,7 @@ public class UbisoftConnectGameClientDescriptor : GameClientDescriptor
     #region Public Properties
 
     public override string GameClientId => "UbisoftConnect";
+    public override bool RequiresAccountVerification => true;
     public override LocalizedString DisplayName => new ResourceLocString(nameof(Resources.GameClients_UbisoftConnect));
     public override GameClientIconAsset Icon => GameClientIconAsset.UbisoftConnect;
 

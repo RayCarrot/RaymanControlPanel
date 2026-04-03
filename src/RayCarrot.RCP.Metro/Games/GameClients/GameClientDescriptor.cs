@@ -17,6 +17,14 @@ public abstract class GameClientDescriptor : IComparable<GameClientDescriptor>
     /// </summary>
     public virtual bool InstallationRequiresFile => false;
 
+    // TODO: In the future we should add a way to detect if the game can be played
+    //       with the client, such as if you have the game in your Steam or
+    //       Ubisoft Connect libraries.
+    /// <summary>
+    /// Indicates if the client requires account verification to run the game
+    /// </summary>
+    public abstract bool RequiresAccountVerification { get; }
+
     /// <summary>
     /// The game client's display name
     /// </summary>

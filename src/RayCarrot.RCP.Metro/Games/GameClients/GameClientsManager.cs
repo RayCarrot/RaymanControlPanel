@@ -436,8 +436,9 @@ public class GameClientsManager
     /// <returns>The first available game client or null if none was found</returns>
     public GameClientInstallation? GetFirstAvailableGameClient(GameInstallation gameInstallation)
     {
-        // Get the first available game client
-        return GetInstalledGameClients().FirstOrDefault(x => x.GameClientDescriptor.SupportsGame(gameInstallation, x));
+        // Get the first available game client which does not require account verification to run the game
+        return GetInstalledGameClients().FirstOrDefault(x => x.GameClientDescriptor.SupportsGame(gameInstallation, x) &&
+                                                             !x.GameClientDescriptor.RequiresAccountVerification);
     }
 
     /// <summary>

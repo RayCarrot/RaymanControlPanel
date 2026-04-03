@@ -2,6 +2,8 @@
 
 public abstract class EmulatorGameClientDescriptor : GameClientDescriptor
 {
+    public override bool RequiresAccountVerification => false;
+
     /// <summary>
     /// The game platforms which this emulator supports
     /// </summary>
