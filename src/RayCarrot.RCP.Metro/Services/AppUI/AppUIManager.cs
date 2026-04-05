@@ -119,6 +119,9 @@ public class AppUIManager
     public Task<GamesSelectionResult> SelectGamesAsync(GamesSelectionViewModel gamesSelectionViewModel) => 
         ShowDialogAsync(() => new GamesSelectionDialog(gamesSelectionViewModel));
 
+    public Task<ColorSelectionResult> SelectColorAsync(ColorSelectionViewModel colorSelectionViewModel) => 
+        ShowDialogAsync(() => new ColorSelectionDialog(colorSelectionViewModel));
+
     /// <summary>
     /// Allows the user to browse for a drive
     /// </summary>

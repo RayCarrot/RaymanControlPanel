@@ -129,7 +129,7 @@ public class StartupManager
     private void InitXAML()
     {
         // Set the theme
-        App.Current.SetTheme(Data.Theme_DarkMode, Data.Theme_SyncTheme);
+        App.Current.SetTheme(Data.Theme_DarkMode, Data.Theme_SyncTheme, Data.Theme_Color);
     }
 
     private void InitLocalization()

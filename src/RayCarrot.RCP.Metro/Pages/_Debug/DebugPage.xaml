@@ -287,22 +287,6 @@
                             <rcp:UnifiedMarginBehavior Margin="{StaticResource RCP.Thicknesses.VerticalSmall}" />
                         </i:Interaction.Behaviors>
 
-                        <TextBlock Text="Accent Color"
-                                   Style="{StaticResource RCP.Styles.TextBlock.HeaderLarge}" />
-
-                        <metro:ColorCanvas SelectedColor="{Binding Path=SelectedAccentColor}" />
-
-                        <Button Content="Apply"
-                                HorizontalAlignment="Left"
-                                Command="{Binding Path=UpdateThemeCommand, Mode=OneTime}"/>
-
-                    </StackPanel>
-
-                    <StackPanel>
-                        <i:Interaction.Behaviors>
-                            <rcp:UnifiedMarginBehavior Margin="{StaticResource RCP.Thicknesses.VerticalSmall}" />
-                        </i:Interaction.Behaviors>
-
                         <TextBlock Text="Options"
                                    Style="{StaticResource RCP.Styles.TextBlock.HeaderLarge}" />
 

@@ -39,7 +39,7 @@ public class SettingsPageViewModel : BasePageViewModel
         {
             new() { new LanguageSettingsSectionViewModel(Data, App), new UserLevelSettingsSectionViewModel(Data), },
             new() { new GeneralSettingsSectionViewModel(Data, ui, jumpListManager, discordManager, runningGamesManager), },
-            new() { new DesignSettingsSectionViewModel(Data), },
+            new() { new DesignSettingsSectionViewModel(Data, ui), },
             new() { new StartupSettingsSectionViewModel(Data), },
             new() { new FilesSettingsSectionViewModel(Data, ui, messageUi, associatedFileEditorsManager, messenger), },
             new() { new WindowsIntegrationSettingsSectionViewModel(Data, MessageUI), },

@@ -1,5 +1,7 @@
 #nullable disable
 using System.Reflection;
+using System.Windows.Media;
+using Newtonsoft.Json;
 using RayCarrot.RCP.Metro.Archive;
 using RayCarrot.RCP.Metro.Archive.CPA;
 using RayCarrot.RCP.Metro.Games.Clients;
@@ -51,6 +53,7 @@ public partial class AppUserData : BaseViewModel
         // Theme
         Theme_DarkMode = true;
         Theme_SyncTheme = false;
+        Theme_Color = null;
 
         // Game
         Game_GameInstallations = new List<GameInstallation>();
@@ -273,6 +276,12 @@ public partial class AppUserData : BaseViewModel
     /// </summary>
     public bool Theme_SyncTheme { get; set; }
 
+    /// <summary>
+    /// The accent color, or null to use the default color
+    /// </summary>
+    [JsonConverter(typeof(ColorHexConverter))]
+    public Color? Theme_Color { get; set; }
+    
     #endregion
 
     #region Game

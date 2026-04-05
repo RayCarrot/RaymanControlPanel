@@ -86,7 +86,8 @@ public class AppDataManager
             {
                 case nameof(AppUserData.Theme_DarkMode):
                 case nameof(AppUserData.Theme_SyncTheme):
-                    App.Current.SetTheme(Data.Theme_DarkMode, Data.Theme_SyncTheme);
+                case nameof(AppUserData.Theme_Color):
+                    App.Current.SetTheme(Data.Theme_DarkMode, Data.Theme_SyncTheme, Data.Theme_Color);
                     break;
 
                 case nameof(AppUserData.Backup_BackupLocation):

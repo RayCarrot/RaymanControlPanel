@@ -13,43 +13,62 @@
              d:Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" 
              d:DataContext="{d:DesignInstance sections:DesignSettingsSectionViewModel}">
 
-    <StackPanel DataContext="{Binding Path=Data}">
+    <StackPanel>
 
         <CheckBox Content="{Resx Settings_SyncTheme}"
                   ToolTip="{Resx Settings_SyncThemeInfo}"
-                  IsChecked="{Binding Path=Theme_SyncTheme}"
+                  IsChecked="{Binding Path=Data.Theme_SyncTheme}"
                   Margin="0 0 0 4" />
 
-        <mah:ToggleSwitch IsOn="{Binding Path=Theme_DarkMode}"
-                          IsEnabled="{Binding Path=Theme_SyncTheme, Converter={rcp:InvertedBooleanConverter}}"
+        <mah:ToggleSwitch IsOn="{Binding Path=Data.Theme_DarkMode}"
+                          IsEnabled="{Binding Path=Data.Theme_SyncTheme, Converter={rcp:InvertedBooleanConverter}}"
                           HorizontalAlignment="Left"
                           OnContent="{Resx Settings_DesignDark}"
                           OffContent="{Resx Settings_DesignLight}" 
-                          Margin="0 0 0 8" />
+                          Margin="0 0 0 4" />
+
+        <!-- TODO-LOC -->
+        <StackPanel Orientation="Horizontal"
+                    IsEnabled="{Binding Path=Data.Theme_SyncTheme, Converter={rcp:InvertedBooleanConverter}}"
+                    Margin="0 0 0 8">
+            <Button HorizontalContentAlignment="Left"
+                    Content="Change accent color"
+                    Command="{Binding Path=ChangeAccentColorCommand, Mode=OneTime}"
+                    rcp:Icon.Kind="BrushOutline" 
+                    Style="{StaticResource RCP.Styles.Button.Default}"
+                    Margin="0 0 4 0" />
+            <Button HorizontalContentAlignment="Left"
+                    Content="Reset accent color"
+                    Command="{Binding Path=ResetAccentColorCommand, Mode=OneTime}"
+                    IsEnabled="{Binding Path=Data.Theme_Color, Converter={rcp:IsNotNullConverter}}"
+                    rcp:Icon.Kind="BrushOff" 
+                    Style="{StaticResource RCP.Styles.Button.Default}"
+                    Margin="0 0 4 0" />
+        </StackPanel>
 
         <CheckBox Content="{Resx Settings_DesignAnimations}"
                   ToolTip="{Resx Settings_DesignAnimationsInfo}"
-                  IsChecked="{Binding Path=UI_EnableAnimations}" 
+                  IsChecked="{Binding Path=Data.UI_EnableAnimations}" 
                   Margin="0 0 0 8" />
 
         <CheckBox Content="{Resx Settings_DesignSuccessMessages}"
                   ToolTip="{Resx Settings_DesignSuccessMessagesInfo}"
-                  IsChecked="{Binding Path=App_ShowActionComplete}" 
+                  IsChecked="{Binding Path=Data.App_ShowActionComplete}" 
                   Margin="0 0 0 8" />
 
         <CheckBox Content="{Resx Settings_DesignShowTaskBarProgress}"
                   ToolTip="{Resx Settings_DesignShowTaskBarProgressInfo}"
-                  IsChecked="{Binding Path=UI_ShowProgressOnTaskBar}" 
+                  IsChecked="{Binding Path=Data.UI_ShowProgressOnTaskBar}" 
                   Margin="0 0 0 8" />
 
         <CheckBox Content="{Resx Settings_FlashWindowOnTaskBar}"
                   ToolTip="{Resx Settings_FlashWindowOnTaskBarInfo}"
-                  IsChecked="{Binding Path=UI_FlashWindowOnTaskBar}" 
+                  IsChecked="{Binding Path=Data.UI_FlashWindowOnTaskBar}" 
                   Margin="0 0 0 8" />
 
         <CheckBox Content="{Resx Settings_UseChildWindows}"
                   ToolTip="{Resx Settings_UseChildWindowsInfo}"
-                  IsChecked="{Binding Path=UI_UseChildWindows}"
+                  IsChecked="{Binding Path=Data.UI_UseChildWindows}"
                   Margin="0 0 0 8" />
 
     </StackPanel>

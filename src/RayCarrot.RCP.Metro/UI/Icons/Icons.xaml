@@ -35,6 +35,7 @@
     <iconPacks:PackIconMaterialKind x:Key="RCP.Icons.Download">DownloadOutline</iconPacks:PackIconMaterialKind>
     <iconPacks:PackIconMaterialKind x:Key="RCP.Icons.Disc">Disc</iconPacks:PackIconMaterialKind>
     <iconPacks:PackIconMaterialKind x:Key="RCP.Icons.Purchase">ShoppingOutline</iconPacks:PackIconMaterialKind>
+    <iconPacks:PackIconMaterialKind x:Key="RCP.Icons.Color">BrushOutline</iconPacks:PackIconMaterialKind>
     <iconPacks:PackIconMaterialKind x:Key="RCP.Icons.Edit">PencilOutline</iconPacks:PackIconMaterialKind>
     <iconPacks:PackIconMaterialKind x:Key="RCP.Icons.Program">ApplicationOutline</iconPacks:PackIconMaterialKind>
     <iconPacks:PackIconMaterialKind x:Key="RCP.Icons.News">TooltipTextOutline</iconPacks:PackIconMaterialKind>
@@ -235,6 +236,9 @@
     <local:GenericIcon x:Key="{x:Static local:GenericIconKind.Window_GamesSelection}" 
                        IconKind="{StaticResource RCP.Icons.Games}"
                        IconColor="{StaticResource RCP.Brushes.Games}" />
+    <local:GenericIcon x:Key="{x:Static local:GenericIconKind.Window_ColorSelection}" 
+                       IconKind="{StaticResource RCP.Icons.Color}"
+                       IconColor="{StaticResource RCP.Brushes.Info}" />
     <local:GenericIcon x:Key="{x:Static local:GenericIconKind.Window_JumpListEdit}" 
                        IconKind="{StaticResource RCP.Icons.EditJumpList}"
                        IconColor="{StaticResource RCP.Brushes.Info}" />

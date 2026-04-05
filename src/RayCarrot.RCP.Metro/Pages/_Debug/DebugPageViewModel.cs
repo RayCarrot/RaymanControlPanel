@@ -6,8 +6,6 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using ControlzEx.Theming;
 using RayCarrot.RCP.Metro.Games.Finder;
 
 namespace RayCarrot.RCP.Metro.Pages.Debug;
@@ -24,7 +22,6 @@ public class DebugPageViewModel : BasePageViewModel
     /// </summary>
     public DebugPageViewModel(
         AppViewModel app, 
-        AppUserData data, 
         AppUIManager ui,
         FileManager fileManager, 
         IBrowseUIManager browseUi, 
@@ -34,7 +31,6 @@ public class DebugPageViewModel : BasePageViewModel
         GamesManager gamesManager) : base(app)
     {
         // Set services
-        Data = data ?? throw new ArgumentNullException(nameof(data));
         UI = ui ?? throw new ArgumentNullException(nameof(ui));
         FileManager = fileManager ?? throw new ArgumentNullException(nameof(fileManager));
         BrowseUI = browseUi ?? throw new ArgumentNullException(nameof(browseUi));
@@ -53,7 +49,6 @@ public class DebugPageViewModel : BasePageViewModel
         ThrowUnhandledExceptionAsyncCommand = new AsyncRelayCommand(ThrowUnhandledAsyncException);
         RunInstallerCommand = new AsyncRelayCommand(RunInstallerAsync);
         ShutdownAppCommand = new AsyncRelayCommand(async () => await Task.Run(async () => await Metro.App.Current.ShutdownAppAsync(false)));
-        UpdateThemeCommand = new RelayCommand(UpdateTheme);
         RunLoadOperationCommand = new AsyncRelayCommand(RunLoadOperationAsync);
     }
 
@@ -76,7 +71,6 @@ public class DebugPageViewModel : BasePageViewModel
     public ICommand ThrowUnhandledExceptionAsyncCommand { get; }
     public ICommand RunInstallerCommand { get; }
     public ICommand ShutdownAppCommand { get; }
-    public ICommand UpdateThemeCommand { get; }
     public ICommand RunLoadOperationCommand { get; }
 
     #endregion
@@ -89,7 +83,6 @@ public class DebugPageViewModel : BasePageViewModel
 
     #region Services
 
-    private AppUserData Data { get; }
     private AppUIManager UI { get; }
     private FileManager FileManager { get; }
     private IBrowseUIManager BrowseUI { get; }
@@ -131,8 +124,6 @@ public class DebugPageViewModel : BasePageViewModel
     /// </summary>
     public GameDescriptor? SelectedInstaller { get; set; }
 
-    public Color SelectedAccentColor { get; set; }
-
     public bool ShowGridLines
     {
         get => _showGridLines;
@@ -172,7 +163,6 @@ public class DebugPageViewModel : BasePageViewModel
             Where(x => x.GetAddActions().OfType<DiscInstallGameAddAction>().Any()).
             ToObservableCollection();
         SelectedInstaller = AvailableInstallers.First();
-        SelectedAccentColor = ThemeManager.Current.DetectTheme(Metro.App.Current)?.PrimaryAccentColor ?? new Color();
 
         return Task.CompletedTask;
     }
@@ -504,11 +494,6 @@ public class DebugPageViewModel : BasePageViewModel
             await UI.InstallGameAsync(SelectedInstaller, SelectedInstaller.GetAddActions().OfType<DiscInstallGameAddAction>().First().InstallerInfo);
     }
 
-    public void UpdateTheme()
-    {
-        Metro.App.Current.SetTheme(Data.Theme_DarkMode, false, SelectedAccentColor);
-    }
-    
     public async Task RunLoadOperationAsync()
     {
         using (LoaderLoadState state = await App.LoaderViewModel.RunAsync("Debug load operation"))

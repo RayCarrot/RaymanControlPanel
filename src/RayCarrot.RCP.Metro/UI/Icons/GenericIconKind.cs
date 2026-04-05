@@ -60,6 +60,7 @@ public enum GenericIconKind
     Window_DriveSelection,
     Window_ItemSelection,
     Window_GamesSelection,
+    Window_ColorSelection,
     Window_JumpListEdit,
     Window_DialogMessage,
     Window_StringInput,
