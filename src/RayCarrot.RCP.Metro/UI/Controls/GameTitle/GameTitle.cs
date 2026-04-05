@@ -5,7 +5,7 @@ using static RayCarrot.RCP.Metro.GameIcon;
 
 namespace RayCarrot.RCP.Metro;
 
-public class GameTitle : Control, IRecipient<ModifiedGamesMessage>
+public class GameTitle : Control, IRecipient<ModifiedGamesMessage>, IRecipient<ModifiedGameIconMessage>
 {
     #region Constructor
 
@@ -36,7 +36,7 @@ public class GameTitle : Control, IRecipient<ModifiedGamesMessage>
         // If in design mode then App.Current is null and some things won't work. So we manually set some dummy data.
         if (DesignerProperties.GetIsInDesignMode(gameTitle))
         {
-            gameTitle.GameIcon = GameIconAsset.Rayman2;
+            gameTitle.GameIcon = GameIconAsset.Rayman2.GetAssetPath();
             gameTitle.GameType = GameType.Retail;
             gameTitle.GameDisplayName = "Rayman 2";
             gameTitle.PlatformIcon = GamePlatformIconAsset.Win32;
@@ -47,7 +47,7 @@ public class GameTitle : Control, IRecipient<ModifiedGamesMessage>
             GameDescriptor gameDescriptor = gameInstallation.GameDescriptor;
             GamePlatformInfoAttribute platformInfo = gameDescriptor.Platform.GetInfo();
 
-            gameTitle.GameIcon = gameDescriptor.Icon;
+            gameTitle.GameIcon = gameInstallation.GetIconAssetSource();
             gameTitle.GameType = gameDescriptor.Type;
             gameTitle.GameDisplayName = gameInstallation.GetDisplayName();
             gameTitle.PlatformIcon = platformInfo.Icon;
@@ -84,7 +84,7 @@ public class GameTitle : Control, IRecipient<ModifiedGamesMessage>
         // If in design mode then App.Current is null and some things won't work. So we manually set some dummy data.
         if (DesignerProperties.GetIsInDesignMode(gameTitle))
         {
-            gameTitle.GameIcon = GameIconAsset.Rayman2;
+            gameTitle.GameIcon = GameIconAsset.Rayman2.GetAssetPath();
             gameTitle.GameType = GameType.Retail;
             gameTitle.GameDisplayName = "Rayman 2";
             gameTitle.PlatformIcon = GamePlatformIconAsset.Win32;
@@ -94,7 +94,7 @@ public class GameTitle : Control, IRecipient<ModifiedGamesMessage>
         {
             GamePlatformInfoAttribute platformInfo = gameDescriptor.Platform.GetInfo();
 
-            gameTitle.GameIcon = gameDescriptor.Icon;
+            gameTitle.GameIcon = gameDescriptor.Icon.GetAssetPath();
             gameTitle.GameType = gameDescriptor.Type;
             gameTitle.GameDisplayName = gameDescriptor.DisplayName;
             gameTitle.PlatformIcon = platformInfo.Icon;
@@ -127,14 +127,14 @@ public class GameTitle : Control, IRecipient<ModifiedGamesMessage>
 
     #region GameIcon
 
-    public GameIconAsset? GameIcon
+    public string? GameIcon
     {
-        get => (GameIconAsset?)GetValue(GameIconProperty);
+        get => (string?)GetValue(GameIconProperty);
         private set => SetValue(GameIconPropertyKey, value);
     }
 
     private static readonly DependencyPropertyKey GameIconPropertyKey = 
-        DependencyProperty.RegisterReadOnly(nameof(GameIcon), typeof(GameIconAsset?), typeof(GameTitle), new FrameworkPropertyMetadata());
+        DependencyProperty.RegisterReadOnly(nameof(GameIcon), typeof(string), typeof(GameTitle), new FrameworkPropertyMetadata());
 
     public static readonly DependencyProperty GameIconProperty = GameIconPropertyKey.DependencyProperty;
 
@@ -204,10 +204,12 @@ public class GameTitle : Control, IRecipient<ModifiedGamesMessage>
 
     private void RefreshName()
     {
-        GameInstallation? gameInstallation = GameInstallation;
+        GameDisplayName = GameInstallation?.GetDisplayName();
+    }
 
-        if (gameInstallation != null)
-            GameDisplayName = gameInstallation.GetDisplayName();
+    private void RefreshIcon()
+    {
+        GameIcon = GameInstallation?.GetIconAssetSource();
     }
 
     #endregion
@@ -230,7 +232,9 @@ public class GameTitle : Control, IRecipient<ModifiedGamesMessage>
         if (Services.Messenger.IsRegistered<ModifiedGamesMessage>(this))
             return;
 
-        RefreshName(); // Name might have changed while the control was unloaded!
+        // Values might have changed while the control was unloaded!
+        RefreshName();
+        RefreshIcon();
         Services.Messenger.RegisterAll(this);
     }
 
@@ -239,6 +243,7 @@ public class GameTitle : Control, IRecipient<ModifiedGamesMessage>
     #region Message Receivers
 
     void IRecipient<ModifiedGamesMessage>.Receive(ModifiedGamesMessage message) => Dispatcher.Invoke(RefreshName);
+    void IRecipient<ModifiedGameIconMessage>.Receive(ModifiedGameIconMessage message) => Dispatcher.Invoke(RefreshIcon);
 
     #endregion
 }

@@ -5,7 +5,6 @@
               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
               xmlns:rcp="clr-namespace:RayCarrot.RCP.Metro"
               xmlns:games="clr-namespace:RayCarrot.RCP.Metro.Pages.Games"
-              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
               ResxExtension.DefaultResxName="{x:Static rcp:LocalizationManager.ResourcePath}"
               Background="{DynamicResource MahApps.Brushes.ThemeBackground}"
               Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"

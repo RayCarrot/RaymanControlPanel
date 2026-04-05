@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Windows.Input;
 using Nito.AsyncEx;
 using RayCarrot.RCP.Metro.Games.Components;
@@ -22,6 +23,7 @@ public class InstalledGameViewModel : BaseViewModel
         GameCategory = gameCategory;
         GameGroup = gameGroup;
         DisplayName = gameInstallation.GetDisplayName();
+        RefreshGameIcon();
         RefreshGameBanner();
 
         // Get and set platform info
@@ -50,6 +52,8 @@ public class InstalledGameViewModel : BaseViewModel
         UninstallCommand = new AsyncRelayCommand(UninstallAsync);
         CreateShortcutCommand = new AsyncRelayCommand(CreateShortcutAsync);
         ToggleFavoriteCommand = new RelayCommand(ToggleFavorite);
+        ReplaceIconImageCommand = new AsyncRelayCommand(ReplaceIconImageAsync);
+        RemoveCustomIconImageCommand = new RelayCommand(RemoveCustomIconImage);
         ReplaceBannerImageCommand = new AsyncRelayCommand(ReplaceBannerImageAsync);
         RemoveCustomBannerImageCommand = new RelayCommand(RemoveCustomBannerImage);
         OpenGameDebugCommand = new AsyncRelayCommand(OpenGameDebugAsync);
@@ -83,6 +87,8 @@ public class InstalledGameViewModel : BaseViewModel
     public ICommand UninstallCommand { get; }
     public ICommand CreateShortcutCommand { get; }
     public ICommand ToggleFavoriteCommand { get; }
+    public ICommand ReplaceIconImageCommand { get; }
+    public ICommand RemoveCustomIconImageCommand { get; }
     public ICommand ReplaceBannerImageCommand { get; }
     public ICommand RemoveCustomBannerImageCommand { get; }
     public ICommand OpenGameDebugCommand { get; }
@@ -103,8 +109,9 @@ public class InstalledGameViewModel : BaseViewModel
     public LocalizedString PlatformDisplayName { get; }
     public GamePlatformIconAsset PlatformIcon { get; }
 
-    public GameIconAsset Icon => GameDescriptor.Icon;
     public GameType Type => GameDescriptor.Type;
+    public string GameIcon { get; set; }
+    public bool HasCustomGameIcon { get; set; }
     public string GameBanner { get; set; }
     public bool HasCustomGameBanner { get; set; }
 
@@ -340,18 +347,18 @@ public class InstalledGameViewModel : BaseViewModel
         }
     }
 
+    [MemberNotNull(nameof(GameIcon))]
+    private void RefreshGameIcon()
+    {
+        GameIcon = GameInstallation.GetIconAssetSource();
+        HasCustomGameIcon = GameInstallation.GetValue<string?>(GameDataKey.RCP_IconImage) != null;
+    }
+
+    [MemberNotNull(nameof(GameBanner))]
     private void RefreshGameBanner()
     {
-        if (GameInstallation.GetValue<string?>(GameDataKey.RCP_BannerImage) is { } bannerImage && File.Exists(bannerImage))
-        {
-            GameBanner = bannerImage;
-            HasCustomGameBanner = true;
-        }
-        else
-        {
-            GameBanner = GameInstallation.GameDescriptor.Banner.GetAssetPath();
-            HasCustomGameBanner = false;
-        }
+        GameBanner = GameInstallation.GetBannerAssetSource();
+        HasCustomGameBanner = GameInstallation.GetValue<string?>(GameDataKey.RCP_BannerImage) != null;
     }
 
     #endregion
@@ -568,6 +575,30 @@ public class InstalledGameViewModel : BaseViewModel
     {
         IsFavorite = !GameInstallation.GetValue<bool>(GameDataKey.RCP_IsFavorite);
         GameInstallation.SetValue(GameDataKey.RCP_IsFavorite, IsFavorite);
+    }
+
+    public async Task ReplaceIconImageAsync()
+    {
+        // TODO-LOC
+        FileBrowserResult result = await Services.BrowseUI.BrowseFileAsync(new FileBrowserViewModel()
+        {
+            Title = "Select icon image",
+            ExtensionFilter = "Image files|*.png;*.jpg;*.jpeg;*.bmp"
+        });
+
+        if (result.CanceledByUser)
+            return;
+
+        GameInstallation.SetValue<string>(GameDataKey.RCP_IconImage, result.SelectedFile);
+        Services.Messenger.Send(new ModifiedGameIconMessage(GameInstallation));
+        RefreshGameIcon();
+    }
+
+    public void RemoveCustomIconImage()
+    {
+        GameInstallation.SetValue<string?>(GameDataKey.RCP_IconImage, null);
+        Services.Messenger.Send(new ModifiedGameIconMessage(GameInstallation));
+        RefreshGameIcon();
     }
 
     public async Task ReplaceBannerImageAsync()

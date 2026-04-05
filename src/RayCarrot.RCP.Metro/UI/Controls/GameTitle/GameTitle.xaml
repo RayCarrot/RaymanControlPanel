@@ -19,7 +19,7 @@
                         <local:GameIcon Grid.Column="0"
                                         IconSize="{TemplateBinding GameIconSize}"
                                         GameType="{TemplateBinding GameType}"
-                                        Source="{TemplateBinding GameIcon, Converter={local:AssetEnumToImageSourceConverter}}"
+                                        Source="{Binding Path=GameIcon, RelativeSource={RelativeSource TemplatedParent}}"
                                         Margin="0 0 8 0" />
 
                         <!-- Platform icon -->

@@ -1,4 +1,6 @@
-﻿namespace RayCarrot.RCP.Metro;
+﻿using System.IO;
+
+namespace RayCarrot.RCP.Metro;
 
 public static class GameInstallationExtensions
 {
@@ -13,5 +15,40 @@ public static class GameInstallationExtensions
         return customName != null
             ? new ConstLocString(customName)
             : gameInstallation.GameDescriptor.DisplayName;
+    }
+
+    public static string GetIconAssetSource(this GameInstallation gameInstallation)
+    {
+        // Get the custom icon image
+        if (gameInstallation.GetValue<string?>(GameDataKey.RCP_IconImage) is { } iconImage)
+        {
+            // Return if it exists
+            if (File.Exists(iconImage))
+                return iconImage;
+
+            // Remove if it does not exist
+            gameInstallation.SetValue<string?>(GameDataKey.RCP_IconImage, null);
+            Services.Messenger.Send(new ModifiedGameIconMessage(gameInstallation));
+        }
+
+        // Default to the default icon asset
+        return gameInstallation.GameDescriptor.Icon.GetAssetPath();
+    }
+
+    public static string GetBannerAssetSource(this GameInstallation gameInstallation)
+    {
+        // Get the custom banner image
+        if (gameInstallation.GetValue<string?>(GameDataKey.RCP_BannerImage) is { } bannerImage)
+        {
+            // Return if it exists
+            if (File.Exists(bannerImage))
+                return bannerImage;
+
+            // Remove if it does not exist
+            gameInstallation.SetValue<string?>(GameDataKey.RCP_BannerImage, null);
+        }
+
+        // Default to the default banner asset
+        return gameInstallation.GameDescriptor.Banner.GetAssetPath();
     }
 }

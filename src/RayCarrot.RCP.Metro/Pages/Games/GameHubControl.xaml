@@ -69,7 +69,7 @@
                                 VerticalAlignment="Top"
                                 Margin="0 -64 0 0">
                             <rcp:GameIcon x:Name="GameIcon"
-                                            Source="{Binding Path=Icon, Mode=OneTime, Converter={rcp:AssetEnumToImageSourceConverter}}"
+                                            Source="{Binding Path=GameIcon}"
                                             d:Source="{x:Static rcp:DesignData.GameIconSource}"
                                             GameType="{Binding Path=Type, Mode=OneTime}" 
                                             IconSize="Largest" />
@@ -267,6 +267,17 @@
                                             </Button.Style>
                                         </Button>
                                         <!-- TODO-LOC -->
+                                        <Button Content="Replace icon image"
+                                                Command="{Binding Path=ReplaceIconImageCommand, Mode=OneTime}"
+                                                rcp:Icon.Kind="ImageOutline"
+                                                rcp:Icon.Brush="{StaticResource RCP.Brushes.Info}"
+                                                HorizontalContentAlignment="Stretch" />
+                                        <Button Content="Remove custom icon image"
+                                                Command="{Binding Path=RemoveCustomIconImageCommand, Mode=OneTime}"
+                                                Visibility="{Binding Path=HasCustomGameIcon, Converter={rcp:BooleanToVisibilityConverter}}"
+                                                rcp:Icon.Kind="ImageRemoveOutline"
+                                                rcp:Icon.Brush="{StaticResource RCP.Brushes.Info}"
+                                                HorizontalContentAlignment="Stretch" />
                                         <Button Content="Replace banner image"
                                                 Command="{Binding Path=ReplaceBannerImageCommand, Mode=OneTime}"
                                                 rcp:Icon.Kind="ImageOutline"

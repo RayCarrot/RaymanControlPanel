@@ -7,7 +7,6 @@
              xmlns:games="clr-namespace:RayCarrot.RCP.Metro.Pages.Games"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-             xmlns:gif="https://github.com/XamlAnimatedGif/XamlAnimatedGif"
              mc:Ignorable="d" 
              d:DesignWidth="900" d:DesignHeight="600"
              d:DataContext="{d:DesignInstance games:GamesPageViewModel}"
@@ -35,7 +34,7 @@
                     <!-- Game icon -->
                     <rcp:GameIcon Grid.Row="0" 
                                   IconSize="Medium" 
-                                  Source="{Binding Path=Icon, Mode=OneTime, Converter={rcp:AssetEnumToImageSourceConverter}}"/>
+                                  Source="{Binding Path=GameIcon}"/>
 
                     <Grid Grid.Row="1" 
                           HorizontalAlignment="Center">
