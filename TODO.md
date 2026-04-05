@@ -49,7 +49,6 @@ Open with (external) ->
 - Potentially move to some other UI framework since a lot of the MahApps.Metro styles have been completely redone. Alternatives are [WPF UI](https://github.com/lepoco/wpfui) and [Material Design](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit). Both however have issues.
 - Use virtualizing more in ListBox and ItemsControl, such as the Games page and Archive Explorer. Look into https://github.com/sbaeumlisberger/VirtualizingWrapPanel
 - Look into better game banner resizing since Origins doesn't look great. Alternatively just manually edit the Origins banner to have different ratio?
-- Add option to change app accent color
 - Create new styles for combobox and textbox
 - Redesign remaining parts of the app to use new flat styles, such as the About page and some dialogs
 - Use new app icon by Nic? Twitter votes were very even.
