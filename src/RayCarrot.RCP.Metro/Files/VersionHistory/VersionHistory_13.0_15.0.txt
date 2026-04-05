@@ -1,4 +1,14 @@
-﻿-----   Version 14.4.1 - March 16, 2026   -----
+﻿-----   Version 14.5.0 - April ??, 2026   -----
+• Added support for modifying Rayman 30th Anniversary Edition assets using the Archive Explorer
+• Added a mod loader module for Rayman 30th Anniversary Edition which allows for replacing music in the MS-DOS versions
+• Added GameBanana mod support for Rayman 30th Anniversary Edition
+• Added options to replace the icon and banner images for games
+• Added an option to freely change the app accent color
+• Added support for linebreaks when using the UBIART-LOC mod module
+• Removing an emulator will no longer default the games which used it to now use the first available game client, avoiding issues where games such as Rayman Forever would get set to launch through Ubisoft Connect after removing DOSBox
+
+
+-----   Version 14.4.1 - March 16, 2026   -----
 • The Discord Rich Presence for running games now shows the current level you're in for Rayman 2, Rayman 3, Rayman Origins and Rayman Legends
 • The play time shown for the Discord Rich Presence now reflects when the app or game launched rather than when the presence itself was updated
 • Minor improvements and fixes when searching for running games and updating Discord Rich Presence
