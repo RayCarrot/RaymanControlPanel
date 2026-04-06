@@ -6,6 +6,9 @@ public enum GameIconAsset
     [AssetFileName("Rayman1.png")]
     Rayman1,
 
+    [AssetFileName("Rayman1_Snes.png")]
+    Rayman1_Snes,
+
     [AssetFileName("Rayman1Jaguar.png")]
     Rayman1Jaguar,
 

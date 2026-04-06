@@ -12,6 +12,9 @@ public enum GamePlatformIconAsset
     [AssetFileName("WindowsPackage.png")]
     WindowsPackage,
 
+    [AssetFileName("SNES.png")]
+    Snes,
+
     [AssetFileName("Jaguar.png")]
     Jaguar,
 

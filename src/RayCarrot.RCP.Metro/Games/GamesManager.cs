@@ -61,7 +61,8 @@ public class GamesManager
             new GameDescriptor_RaymanHoodlumsRevenge_Gba(),
             new GameDescriptor_RaymanRavingRabbids_Gba(),
 
-            // Demos (no longer a category in the app)
+            // Demos/prototypes (no longer a category in the app)
+            new GameDescriptor_Rayman1_Prototype_Snes(),
             new GameDescriptor_Rayman1_Demo_19951207_MsDos(),
             new GameDescriptor_Rayman1_Demo_19960215_MsDos(),
             new GameDescriptor_Rayman1_Demo_19951204_MsDos(),

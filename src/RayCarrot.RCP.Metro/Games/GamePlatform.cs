@@ -26,6 +26,12 @@ public enum GamePlatform
     WindowsPackage,
 
     /// <summary>
+    /// Super Nintendo Entertainment System
+    /// </summary>
+    [GamePlatformInfo("Super Nintendo Entertainment System", GamePlatformIconAsset.Snes)] // 1990 // TODO-LOC
+    Snes,
+
+    /// <summary>
     /// Atari Jaguar
     /// </summary>
     [GamePlatformInfo(nameof(Resources.Platform_Jaguar), GamePlatformIconAsset.Jaguar)] // 1993

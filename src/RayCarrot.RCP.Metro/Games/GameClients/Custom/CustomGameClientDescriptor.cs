@@ -14,6 +14,7 @@ public sealed class CustomGameClientDescriptor : EmulatorGameClientDescriptor
         GamePlatform.Jaguar, 
         GamePlatform.Ps1, 
         GamePlatform.Ps2, 
+        GamePlatform.Snes, 
         GamePlatform.Gbc, 
         GamePlatform.Gba, 
         GamePlatform.GameCube
