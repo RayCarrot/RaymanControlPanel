@@ -21,7 +21,7 @@ public sealed class GameDescriptor_Rayman1_Demo_19960215_MsDos : MsDosGameDescri
     public override LocalizedString DisplayName => new ResourceLocString(nameof(Resources.Rayman1_Demo_19960215_MsDos_Title));
     public override DateTime ReleaseDate => new(1996, 02, 15);
 
-    public override GameIconAsset Icon => GameIconAsset.Rayman1_Demo;
+    public override GameIconAsset Icon => GameIconAsset.Rayman1;
     public override GameBannerAsset Banner => GameBannerAsset.Rayman1;
 
     #endregion

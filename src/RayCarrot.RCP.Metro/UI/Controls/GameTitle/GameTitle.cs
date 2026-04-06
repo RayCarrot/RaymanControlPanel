@@ -37,7 +37,6 @@ public class GameTitle : Control, IRecipient<ModifiedGamesMessage>, IRecipient<M
         if (DesignerProperties.GetIsInDesignMode(gameTitle))
         {
             gameTitle.GameIcon = GameIconAsset.Rayman2.GetAssetPath();
-            gameTitle.GameType = GameType.Retail;
             gameTitle.GameDisplayName = "Rayman 2";
             gameTitle.PlatformIcon = GamePlatformIconAsset.Win32;
             gameTitle.PlatformDisplayName = Metro.Resources.Platform_Win32;
@@ -48,7 +47,6 @@ public class GameTitle : Control, IRecipient<ModifiedGamesMessage>, IRecipient<M
             GamePlatformInfoAttribute platformInfo = gameDescriptor.Platform.GetInfo();
 
             gameTitle.GameIcon = gameInstallation.GetIconAssetSource();
-            gameTitle.GameType = gameDescriptor.Type;
             gameTitle.GameDisplayName = gameInstallation.GetDisplayName();
             gameTitle.PlatformIcon = platformInfo.Icon;
             gameTitle.PlatformDisplayName = platformInfo.DisplayName;
@@ -56,7 +54,6 @@ public class GameTitle : Control, IRecipient<ModifiedGamesMessage>, IRecipient<M
         else
         {
             gameTitle.GameIcon = null;
-            gameTitle.GameType = GameType.Retail;
             gameTitle.GameDisplayName = null;
             gameTitle.PlatformIcon = null;
             gameTitle.PlatformDisplayName = null;
@@ -85,7 +82,6 @@ public class GameTitle : Control, IRecipient<ModifiedGamesMessage>, IRecipient<M
         if (DesignerProperties.GetIsInDesignMode(gameTitle))
         {
             gameTitle.GameIcon = GameIconAsset.Rayman2.GetAssetPath();
-            gameTitle.GameType = GameType.Retail;
             gameTitle.GameDisplayName = "Rayman 2";
             gameTitle.PlatformIcon = GamePlatformIconAsset.Win32;
             gameTitle.PlatformDisplayName = Metro.Resources.Platform_Win32;
@@ -95,7 +91,6 @@ public class GameTitle : Control, IRecipient<ModifiedGamesMessage>, IRecipient<M
             GamePlatformInfoAttribute platformInfo = gameDescriptor.Platform.GetInfo();
 
             gameTitle.GameIcon = gameDescriptor.Icon.GetAssetPath();
-            gameTitle.GameType = gameDescriptor.Type;
             gameTitle.GameDisplayName = gameDescriptor.DisplayName;
             gameTitle.PlatformIcon = platformInfo.Icon;
             gameTitle.PlatformDisplayName = platformInfo.DisplayName;
@@ -103,7 +98,6 @@ public class GameTitle : Control, IRecipient<ModifiedGamesMessage>, IRecipient<M
         else
         {
             gameTitle.GameIcon = null;
-            gameTitle.GameType = GameType.Retail;
             gameTitle.GameDisplayName = null;
             gameTitle.PlatformIcon = null;
             gameTitle.PlatformDisplayName = null;
@@ -137,21 +131,6 @@ public class GameTitle : Control, IRecipient<ModifiedGamesMessage>, IRecipient<M
         DependencyProperty.RegisterReadOnly(nameof(GameIcon), typeof(string), typeof(GameTitle), new FrameworkPropertyMetadata());
 
     public static readonly DependencyProperty GameIconProperty = GameIconPropertyKey.DependencyProperty;
-
-    #endregion
-
-    #region GameType
-
-    public GameType GameType
-    {
-        get => (GameType)GetValue(GameTypeProperty);
-        private set => SetValue(GameTypePropertyKey, value);
-    }
-
-    private static readonly DependencyPropertyKey GameTypePropertyKey = 
-        DependencyProperty.RegisterReadOnly(nameof(GameType), typeof(GameType), typeof(GameTitle), new FrameworkPropertyMetadata());
-
-    public static readonly DependencyProperty GameTypeProperty = GameTypePropertyKey.DependencyProperty;
 
     #endregion
 

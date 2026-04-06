@@ -3,12 +3,6 @@
 [AssetDirectory($"{Assets.AssetsPath}/GameIcons")]
 public enum GameIconAsset
 {
-    [AssetFileName("OverlayDemo.png")]
-    DemoOverlay,
-
-    [AssetFileName("OverlayProto.png")]
-    PrototypeOverlay,
-
     [AssetFileName("Rayman1.png")]
     Rayman1,
 
@@ -86,21 +80,6 @@ public enum GameIconAsset
 
     [AssetFileName("RaymanHoodlumsRevenge.png")]
     RaymanHoodlumsRevenge,
-
-    [AssetFileName("Rayman1Demo.png")]
-    Rayman1_Demo,
-
-    [AssetFileName("RaymanGoldDemo.png")]
-    RaymanGold_Demo,
-
-    [AssetFileName("Rayman2Demo.png")]
-    Rayman2_Demo,
-
-    [AssetFileName("RaymanMDemo.png")]
-    RaymanM_Demo,
-
-    [AssetFileName("Rayman3Demo.png")]
-    Rayman3_Demo,
 
     [AssetFileName("Ray1Minigames.png")]
     Rayman1Minigames,

@@ -27,27 +27,12 @@
                                 </MultiBinding>
                             </Grid.Clip>
 
-                            <!-- Game icon -->
                             <Image Source="{TemplateBinding Source}"
                                    Width="{TemplateBinding IconWidth}"
                                    Height="{TemplateBinding IconHeight}" />
 
-                            <!-- Demo overlay -->
-                            <Image Visibility="{TemplateBinding GameType, Converter={local:EnumVisibilityConverter}, ConverterParameter={x:Static local:GameType.Demo}}"
-                                   Source="{local:AssetImageSource Asset={x:Static local:GameIconAsset.DemoOverlay}}"
-                                   Width="{TemplateBinding IconWidth}"
-                                   Height="{TemplateBinding IconHeight}" />
-
-                            <!-- Prototype overlay -->
-                            <Image Visibility="{TemplateBinding GameType, Converter={local:EnumVisibilityConverter}, ConverterParameter={x:Static local:GameType.Prototype}}"
-                                   Source="{local:AssetImageSource Asset={x:Static local:GameIconAsset.PrototypeOverlay}}"
-                                   Width="{TemplateBinding IconWidth}"
-                                   Height="{TemplateBinding IconHeight}" />
-
                         </Grid>
-
                     </Border>
-
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

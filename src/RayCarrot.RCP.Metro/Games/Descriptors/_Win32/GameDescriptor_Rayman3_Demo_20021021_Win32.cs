@@ -20,7 +20,7 @@ public sealed class GameDescriptor_Rayman3_Demo_20021021_Win32 : Win32GameDescri
     public override LocalizedString DisplayName => new ResourceLocString(nameof(Resources.Rayman3_Demo_20021021_Win32_Title));
     public override DateTime ReleaseDate => new(2002, 10, 21);
 
-    public override GameIconAsset Icon => GameIconAsset.Rayman3_Demo;
+    public override GameIconAsset Icon => GameIconAsset.Rayman3;
     public override GameBannerAsset Banner => GameBannerAsset.Rayman3;
 
     #endregion

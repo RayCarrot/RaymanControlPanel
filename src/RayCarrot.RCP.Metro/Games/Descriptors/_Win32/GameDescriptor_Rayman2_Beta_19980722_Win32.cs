@@ -18,7 +18,7 @@ public sealed class GameDescriptor_Rayman2_Beta_19980722_Win32 : Win32GameDescri
     public override LocalizedString DisplayName => new ResourceLocString(nameof(Resources.Rayman2_Beta_19980722_Win32_Title));
     public override DateTime ReleaseDate => new(1998, 07, 22);
 
-    public override GameIconAsset Icon => GameIconAsset.Rayman2_Demo;
+    public override GameIconAsset Icon => GameIconAsset.Rayman2;
     public override GameBannerAsset Banner => GameBannerAsset.Rayman2;
 
     #endregion

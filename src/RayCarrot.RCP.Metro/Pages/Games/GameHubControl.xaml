@@ -71,7 +71,6 @@
                             <rcp:GameIcon x:Name="GameIcon"
                                             Source="{Binding Path=GameIcon}"
                                             d:Source="{x:Static rcp:DesignData.GameIconSource}"
-                                            GameType="{Binding Path=Type, Mode=OneTime}" 
                                             IconSize="Largest" />
                         </Border>
 

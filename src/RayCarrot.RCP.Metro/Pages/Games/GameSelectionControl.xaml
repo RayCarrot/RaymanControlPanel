@@ -189,7 +189,6 @@
                                 <rcp:GameIcon Grid.Column="0"
                                               IconSize="Small"
                                               Source="{Binding Path=Icon, Mode=OneTime, Converter={rcp:AssetEnumToImageSourceConverter}}"
-                                              GameType="Retail"
                                               Margin="0 0 8 0" />
 
                                 <TextBlock Grid.Column="1" 

@@ -109,7 +109,6 @@ public class InstalledGameViewModel : BaseViewModel
     public LocalizedString PlatformDisplayName { get; }
     public GamePlatformIconAsset PlatformIcon { get; }
 
-    public GameType Type => GameDescriptor.Type;
     public string GameIcon { get; set; }
     public bool HasCustomGameIcon { get; set; }
     public string GameBanner { get; set; }

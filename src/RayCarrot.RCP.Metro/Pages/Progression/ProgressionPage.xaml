@@ -99,7 +99,6 @@
                                                       IconSize="Small"
                                                       Source="{Binding Path=Icon, Mode=OneTime, Converter={rcp:AssetEnumToImageSourceConverter}}"
                                                       d:Source="{x:Static rcp:DesignData.GameIconSource}"
-                                                      GameType="Retail"
                                                       Margin="0 0 8 0" />
 
                                         <TextBlock Grid.Column="1" 

@@ -60,19 +60,6 @@ public class GameIcon : Control
 
     #endregion
 
-    #region Type
-
-    public GameType GameType
-    {
-        get => (GameType)GetValue(GameTypeProperty);
-        set => SetValue(GameTypeProperty, value);
-    }
-
-    public static readonly DependencyProperty GameTypeProperty = DependencyProperty.Register(
-        nameof(GameType), typeof(GameType), typeof(GameIcon), new PropertyMetadata(GameType.Retail));
-
-    #endregion
-
     #region IconWidth
 
     public double IconWidth

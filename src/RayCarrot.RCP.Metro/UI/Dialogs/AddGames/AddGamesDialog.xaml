@@ -68,7 +68,6 @@
                                                             IconSize="Small"
                                                             Source="{Binding Path=Icon, Mode=OneTime, Converter={local:AssetEnumToImageSourceConverter}}"
                                                             d:Source="{x:Static local:DesignData.GameIconSource}"
-                                                            GameType="Retail"
                                                             Margin="0 0 8 0" />
 
                                             <TextBlock Grid.Column="1" 
