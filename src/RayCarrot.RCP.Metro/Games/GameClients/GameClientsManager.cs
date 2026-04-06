@@ -29,6 +29,7 @@ public class GameClientsManager
             new DuckStationGameClientDescriptor(),
             new BizHawkGameClientDescriptor(),
             new PCSX2GameClientDescriptor(),
+            new BsnesGameClientDescriptor(),
             new SameBoyGameClientDescriptor(),
             new MGbaGameClientDescriptor(),
             new VisualBoyAdvanceMGameClientDescriptor(),

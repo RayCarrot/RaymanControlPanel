@@ -21,6 +21,9 @@ public enum GameClientIconAsset
     [AssetFileName("PCSX2.png")]
     PCSX2,
 
+    [AssetFileName("bsnes.png")]
+    Bsnes,
+
     [AssetFileName("SameBoy.png")]
     SameBoy,
 
