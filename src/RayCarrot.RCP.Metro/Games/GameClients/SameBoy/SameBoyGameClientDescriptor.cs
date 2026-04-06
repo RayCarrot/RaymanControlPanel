@@ -22,8 +22,7 @@ public sealed class SameBoyGameClientDescriptor : EmulatorGameClientDescriptor
         base.RegisterComponents(builder);
 
         builder.Register<LaunchGameComponent, DefaultGameClientLaunchGameComponent>();
-        // For now we can avoid registering a save file component since no GBC games support progression in RCP
-        //builder.Register<EmulatedSaveFilesComponent, >();
+        builder.Register<EmulatedSaveFilesComponent, SameBoyEmulatedSaveFilesComponent>();
     }
 
     public override FinderQuery[] GetFinderQueries() => new FinderQuery[]
