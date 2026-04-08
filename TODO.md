@@ -113,11 +113,11 @@ Open with (external) ->
 - Find fan-games if they have been installed through the GameJolt client
 - Sometimes a game might be incorrectly set to launch through a client which is not associated with the game, for example launching Rayman Forever through Ubisoft Connect when you have the GOG version. There should be some proper detection for which game version it is and only allow the valid clients to be used.
 - Add support for more platforms and emulators. The following is a list of the upcoming platforms in roughly their priority order:
-    - Sega Saturn
+    - Sega Saturn (through Ymir)
     - Nintendo DS
     - Nintendo 64
     - Sega Dreamcast
-    - Nintendo Wii
+    - Nintendo Wii (through Dolphin)
 
 ## ⚒️ Game Settings
 - Have settings which replace a file, such as the controller fixes, apply it through a mod in the mod loader rather than just manually replacing the file
@@ -134,6 +134,7 @@ Open with (external) ->
 - Remove progression page and have it only be accessible from the game panels. Have an "open" button which opens it in a window with more details, editing options etc.
 - Alternatively redesign the progression page to be more similar to the games page. Left navbar with games, shows progressbar for percentage but no info. Then when you click on a game it shows details on the right with convert options, save editors, backup etc.
 - Update the code to use some generic IFileSystem abstraction to access saves, making it easier to work across different platforms. Allow getting metadata for files since we need it for some console to get attributes for files, like PS1 memory cards.
+- Implement a caching system so we don't load saves multiple times. Have a general way of managing memory cards (files with saves for multiple games) and use some file watcher to automatically refresh when the file has been updated.
 - Add save editors. Currently you have to manually edit the JSON which is confusing. Instead have each game have a UI for editing common fields.
 - Add button `Convert and copy save to game...` which brings up selection or drop-down. Allow to select slot to copy, destination game and destination slot to overwrite (or add as a new slot if game supports that). This allows converting a save between platforms, for examples *Rayman 1 PC* -> *Rayman Advance GBA*.
 - Show game in progression page if there is backup, but not installed? Otherwise you don't know you had a backup from when it was installed.
