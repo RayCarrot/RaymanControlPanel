@@ -1,5 +1,11 @@
 [
     {
+        "date": "April 9, 2026",
+        "icon": "rayman",
+        "header": "Rayman 30th Anniversary Edition version 1.1 is now available!",
+        "text": "The patch for the Rayman 30th Anniversary Edition is now live. All of the games now retain the saves after resetting them, preventing issues with the saves being lost. There is also a new option to disable the rewind feature along with various bug fixes. As I announced before there will also be a new Rayman Control Panel update releasing soon alongside various mods to improve the game on PC."
+    },
+    {
         "date": "March 26, 2026",
         "icon": "rayman",
         "header": "Rayman 30th Anniversary Edition is getting a patch",
