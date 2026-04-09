@@ -1,10 +1,15 @@
 ﻿-----   Version 14.5.0 - April ??, 2026   -----
+• Added support for the SNES prototype of Rayman 1
+• Added support for the bsnes emulator
 • Added support for modifying Rayman 30th Anniversary Edition assets using the Archive Explorer
 • Added a mod loader module for Rayman 30th Anniversary Edition which allows for replacing music in the MS-DOS versions
 • Added GameBanana mod support for Rayman 30th Anniversary Edition
 • Added options to replace the icon and banner images for games
 • Added an option to freely change the app accent color
 • Added support for linebreaks when using the UBIART-LOC mod module
+• Added progression support for GBC games when using the SameBoy emulator
+• Removed the custom game icons for demos and prototypes, making them now use the same icons as the retail versions
+• Updated the order which games available on multiple platforms are shown to follow platform release order, while prioritizing PC platforms first
 • Removing an emulator will no longer default the games which used it to now use the first available game client, avoiding issues where games such as Rayman Forever would get set to launch through Ubisoft Connect after removing DOSBox
 
 
