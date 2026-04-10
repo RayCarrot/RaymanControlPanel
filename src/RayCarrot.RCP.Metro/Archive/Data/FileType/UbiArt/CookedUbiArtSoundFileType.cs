@@ -145,6 +145,9 @@ public sealed class CookedUbiArtSoundFileType : FileType
 
             // Write the .wav file using a new context since we don't want the UbiArt settings here
             using Context context = new RCPContext(String.Empty);
+            RIFFSettings riffSettings = new();
+            riffSettings.RegisterWAV();
+            context.AddSettings(riffSettings);
             context.WriteStreamData(outputStream, wavFile, mode: VirtualFileMode.DoNotClose);
         }
     }
@@ -170,7 +173,12 @@ public sealed class CookedUbiArtSoundFileType : FileType
             // Read the .wav file using a new context since we don't want the UbiArt settings here
             WAV wavFile;
             using (Context context = new RCPContext(String.Empty))
+            {
+                RIFFSettings riffSettings = new();
+                riffSettings.RegisterWAV();
+                context.AddSettings(riffSettings);
                 wavFile = context.ReadStreamData<WAV>(inputStream.Stream, name: inputStream.Name, mode: VirtualFileMode.DoNotClose);
+            }
 
             // Get the riff chunks
             RIFF_Chunk_Format formatChunk = wavFile.Format;
