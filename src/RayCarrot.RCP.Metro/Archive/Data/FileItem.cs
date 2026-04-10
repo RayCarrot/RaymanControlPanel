@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using RayCarrot.RCP.Metro.Archive.Bakesale;
 using RayCarrot.RCP.Metro.Archive.CPA;
 using RayCarrot.RCP.Metro.Archive.UbiArt;
 
@@ -20,6 +21,7 @@ public class FileItem : IDisposable
             new CookedUbiArtSoundFileType(),
             new ImageFileType(),
             new CookedUbiArtTextureFileType(),
+            new BakesaleSpritesFileType(),
         };
 
         // Set default file type
