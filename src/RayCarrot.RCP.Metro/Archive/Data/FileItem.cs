@@ -23,6 +23,7 @@ public class FileItem : IDisposable
             new CookedUbiArtTextureFileType(),
             new BakesaleSpritesFileType(),
             new BakesaleWavesFileType(),
+            new BakesaleLocaleFileType(),
         };
 
         // Set default file type

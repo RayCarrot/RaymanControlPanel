@@ -59,10 +59,10 @@ public static class ContextExtensions
                ?? throw new FileNotFoundException($"The requested file {file.FilePath} was not found");
     }
 
-    public static T ReadStreamData<T>(this Context context, Stream stream, string name = "Stream", Endian? endian = null, VirtualFileMode mode = VirtualFileMode.Close, Action<T>? onPreSerialize = null, bool maintainPosition = false)
+    public static T ReadStreamData<T>(this Context context, Stream stream, string name = "Stream", Endian? endian = null, VirtualFileMode mode = VirtualFileMode.Close, Action<T>? onPreSerialize = null, bool maintainPosition = false, bool allowLocalPointers = false)
         where T : BinarySerializable, new()
     {
-        BinaryFile file = new StreamFile(context, name, stream, endian, mode: mode);
+        BinaryFile file = new StreamFile(context, name, stream, endian, mode: mode, allowLocalPointers: allowLocalPointers);
 
         context.AddFile(file);
 
