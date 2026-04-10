@@ -22,6 +22,7 @@ public class FileItem : IDisposable
             new ImageFileType(),
             new CookedUbiArtTextureFileType(),
             new BakesaleSpritesFileType(),
+            new BakesaleWavesFileType(),
         };
 
         // Set default file type
