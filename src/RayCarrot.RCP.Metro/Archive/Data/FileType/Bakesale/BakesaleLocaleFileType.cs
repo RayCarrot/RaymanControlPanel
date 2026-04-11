@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.IO.Compression;
 using BinarySerializer;
+using BinarySerializer.Bakesale;
 using MahApps.Metro.IconPacks;
 
 namespace RayCarrot.RCP.Metro.Archive.Bakesale;

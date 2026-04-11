@@ -22,3 +22,6 @@
 [submodule "submodules/BinarySerializer.PlayStation"]
 	path = submodules/BinarySerializer.PlayStation
 	url = https://github.com/BinarySerializer/BinarySerializer.PlayStation
+[submodule "submodules/BinarySerializer.Bakesale"]
+	path = submodules/BinarySerializer.Bakesale
+	url = https://github.com/BinarySerializer/BinarySerializer.Bakesale

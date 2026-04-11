@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.31912.275
+# Visual Studio Version 18
+VisualStudioVersion = 18.4.11626.88 stable
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RayCarrot.RCP.Metro", "RayCarrot.RCP.Metro\RayCarrot.RCP.Metro.csproj", "{A97AAB72-0F1B-4D6B-8E1C-DEB5D9DE0710}"
 EndProject
@@ -34,6 +34,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BinarySerializer.PlayStation", "..\submodules\BinarySerializer.PlayStation\src\BinarySerializer.PlayStation.csproj", "{0B4C0C5D-377C-476F-B701-6852E557C6B2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinarySerializer.Ray1.Jaguar", "..\submodules\BinarySerializer.Ray1\src\BinarySerializer.Ray1.Jaguar\BinarySerializer.Ray1.Jaguar.csproj", "{0FD47044-B9F9-7BD3-BD00-BC28B5238943}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinarySerializer.Bakesale", "..\submodules\BinarySerializer.Bakesale\src\BinarySerializer.Bakesale.csproj", "{738D4430-CF15-1DC4-4A93-8694ADBB7957}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -155,6 +157,14 @@ Global
 		{0FD47044-B9F9-7BD3-BD00-BC28B5238943}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0FD47044-B9F9-7BD3-BD00-BC28B5238943}.Release|x86.ActiveCfg = Release|Any CPU
 		{0FD47044-B9F9-7BD3-BD00-BC28B5238943}.Release|x86.Build.0 = Release|Any CPU
+		{738D4430-CF15-1DC4-4A93-8694ADBB7957}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{738D4430-CF15-1DC4-4A93-8694ADBB7957}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{738D4430-CF15-1DC4-4A93-8694ADBB7957}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{738D4430-CF15-1DC4-4A93-8694ADBB7957}.Debug|x86.Build.0 = Debug|Any CPU
+		{738D4430-CF15-1DC4-4A93-8694ADBB7957}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{738D4430-CF15-1DC4-4A93-8694ADBB7957}.Release|Any CPU.Build.0 = Release|Any CPU
+		{738D4430-CF15-1DC4-4A93-8694ADBB7957}.Release|x86.ActiveCfg = Release|Any CPU
+		{738D4430-CF15-1DC4-4A93-8694ADBB7957}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -172,6 +182,7 @@ Global
 		{BAD42571-2CF6-4638-8C0A-8399848D7484} = {7467979D-E630-4407-97D2-8EBAE531D746}
 		{0B4C0C5D-377C-476F-B701-6852E557C6B2} = {7467979D-E630-4407-97D2-8EBAE531D746}
 		{0FD47044-B9F9-7BD3-BD00-BC28B5238943} = {7467979D-E630-4407-97D2-8EBAE531D746}
+		{738D4430-CF15-1DC4-4A93-8694ADBB7957} = {7467979D-E630-4407-97D2-8EBAE531D746}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {72682148-CB63-41E1-94BC-0CE816F7E910}

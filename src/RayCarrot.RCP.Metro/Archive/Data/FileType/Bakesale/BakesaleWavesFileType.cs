@@ -2,6 +2,7 @@
 using System.IO.Compression;
 using BinarySerializer;
 using BinarySerializer.Audio.RIFF;
+using BinarySerializer.Bakesale;
 using MahApps.Metro.IconPacks;
 using SharpCompress.Compressors.Deflate;
 using CompressionLevel = System.IO.Compression.CompressionLevel;
@@ -70,10 +71,7 @@ public sealed partial class BakesaleWavesFileType : FileType
         // Create the context
         using Context context = new RCPContext(String.Empty);
         RIFFSettings riffSettings = new();
-        riffSettings.RegisterChunkResolver("wavs", (s, data, chunkSize, name) =>
-            s.SerializeObject<RIFF_Chunk_Waves>((RIFF_Chunk_Waves)data, x => x.Pre_ChunkSize = chunkSize, name: name));
-        riffSettings.RegisterChunkResolver("wdta", (s, data, chunkSize, name) =>
-            s.SerializeObject<RIFF_Chunk_WaveData>((RIFF_Chunk_WaveData)data, x => x.Pre_ChunkSize = chunkSize, name: name));
+        riffSettings.RegisterWaves();
         context.AddSettings(riffSettings);
 
         // Read the resource file

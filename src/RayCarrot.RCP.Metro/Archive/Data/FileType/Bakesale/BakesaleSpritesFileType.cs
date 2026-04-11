@@ -2,6 +2,7 @@
 using System.IO.Compression;
 using BinarySerializer;
 using BinarySerializer.Audio.RIFF;
+using BinarySerializer.Bakesale;
 using ImageMagick;
 using K4os.Compression.LZ4;
 using MahApps.Metro.IconPacks;
@@ -69,10 +70,7 @@ public sealed partial class BakesaleSpritesFileType : FileType
         // Create the context
         using Context context = new RCPContext(String.Empty);
         RIFFSettings riffSettings = new();
-        riffSettings.RegisterChunkResolver("sprs", (s, data, chunkSize, name) =>
-            s.SerializeObject<RIFF_Chunk_Sprites>((RIFF_Chunk_Sprites)data, x => x.Pre_ChunkSize = chunkSize, name: name));
-        riffSettings.RegisterChunkResolver("fmt ", (s, data, chunkSize, name) =>
-            s.SerializeObject<RIFF_Chunk_ImgFormat>((RIFF_Chunk_ImgFormat)data, x => x.Pre_ChunkSize = chunkSize, name: name));
+        riffSettings.RegisterSprites();
         context.AddSettings(riffSettings);
 
         // Read the resource file
