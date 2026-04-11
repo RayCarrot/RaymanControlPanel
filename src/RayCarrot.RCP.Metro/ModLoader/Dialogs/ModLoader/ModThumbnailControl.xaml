@@ -13,7 +13,8 @@
 
         <Image Source="{Binding Path=Thumbnail}"
                VerticalAlignment="{Binding Path=VerticalAlignment, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type modLoader:ModThumbnailControl}}}"
-               HorizontalAlignment="Center"/>
+               HorizontalAlignment="Center"
+               RenderOptions.BitmapScalingMode="HighQuality"/>
 
         <iconPacks:PackIconMaterial Visibility="{Binding Path=Thumbnail, Converter={rcp:ObjectNullToVisibilityConverter}}" 
                                     Kind="FileSettingsOutline" 
