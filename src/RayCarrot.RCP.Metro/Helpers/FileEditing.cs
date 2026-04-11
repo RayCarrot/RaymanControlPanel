@@ -43,7 +43,7 @@ public class FileEditing : IDisposable
         // If read-only set the attribute
         if (readOnly)
         {
-            var info = FilePath.GetFileInfo();
+            FileInfo info = FilePath.GetFileInfo();
             info.Attributes |= FileAttributes.ReadOnly;
         }
 
@@ -116,6 +116,13 @@ public class FileEditing : IDisposable
         finally
         {
             process?.Dispose();
+        }
+
+        // Remove the read-only attribute
+        if (readOnly)
+        {
+            FileInfo info = FilePath.GetFileInfo();
+            info.Attributes &= ~FileAttributes.ReadOnly;
         }
 
         // If canceled or read-only we don't need to check if it has been modified
