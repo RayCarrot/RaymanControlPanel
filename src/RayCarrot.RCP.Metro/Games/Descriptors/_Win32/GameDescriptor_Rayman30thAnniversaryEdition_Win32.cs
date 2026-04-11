@@ -3,6 +3,7 @@ using RayCarrot.RCP.Metro.Games.Components;
 using RayCarrot.RCP.Metro.Games.Finder;
 using RayCarrot.RCP.Metro.Games.Options;
 using RayCarrot.RCP.Metro.Games.Settings;
+using RayCarrot.RCP.Metro.Games.SetupGame;
 using RayCarrot.RCP.Metro.Games.Structure;
 using RayCarrot.RCP.Metro.ModLoader.Modules.BakesaleResource;
 using RayCarrot.RCP.Metro.ModLoader.Modules.Rayman30thMsDosMusic;
@@ -81,6 +82,10 @@ public sealed class GameDescriptor_Rayman30thAnniversaryEdition_Win32 : Win32Gam
         }));
         builder.Register(new ModModuleComponent(_ => new Rayman30thMsDosMusicModule()));
         builder.Register(new ModModuleComponent(_ => new BakesaleResourceModule()));
+
+        builder.Register(new SetupGameActionComponent(_ => new Rayman30thTechnicalDosFixesSetupGameAction()));
+        builder.Register(new SetupGameActionComponent(_ => new Rayman30thAccessAllByHisFansLevelsSetupGameAction()));
+        builder.Register(new SetupGameActionComponent(_ => new Rayman30thAccessUbiKeyBonusSetupGameAction()));
 
         builder.Register(new DiscordRichPresenceComponent("Rayman 30th Anniversary Edition", "rayman_30th_anniversary_edition"));
     }
