@@ -3,7 +3,7 @@
 namespace RayCarrot.RCP.Metro.ModLoader;
 
 [JsonConverter(typeof(ModFilePathJsonConverter))]
-public readonly struct ModFilePath
+public readonly record struct ModFilePath
 {
     public ModFilePath(string filePath)
     {
