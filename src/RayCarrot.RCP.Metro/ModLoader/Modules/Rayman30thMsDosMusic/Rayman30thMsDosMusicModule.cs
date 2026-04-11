@@ -4,7 +4,6 @@ using RayCarrot.RCP.Metro.ModLoader.Resource;
 
 namespace RayCarrot.RCP.Metro.ModLoader.Modules.Rayman30thMsDosMusic;
 
-// TODO-UPDATE: Add documentation to wiki
 public class Rayman30thMsDosMusicModule : ModModule
 {
     public override string Id => "30th-dos-music";

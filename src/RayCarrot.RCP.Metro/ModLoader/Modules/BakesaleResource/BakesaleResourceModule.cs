@@ -4,7 +4,6 @@ using RayCarrot.RCP.Metro.ModLoader.Modules.Deltas;
 
 namespace RayCarrot.RCP.Metro.ModLoader.Modules.BakesaleResource;
 
-// TODO-UPDATE: Add documentation to wiki
 public class BakesaleResourceModule : ModModule
 {
     private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
