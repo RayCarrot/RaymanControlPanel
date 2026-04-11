@@ -116,7 +116,7 @@ public sealed partial class BakesaleSpritesFileType : FileType
                     // Export the sheet
                     ZipArchiveEntry zipEntry = zip.CreateEntry($"_sheets/{fmt.Name}.png", CompressionLevel.Fastest);
                     using Stream zipEntryStream = zipEntry.Open();
-                    image.Write(zipEntryStream);
+                    image.Write(zipEntryStream, MagickFormat.Png);
                 }
             }
 
@@ -151,7 +151,7 @@ public sealed partial class BakesaleSpritesFileType : FileType
                 // Export the sprite
                 ZipArchiveEntry zipEntry = zip.CreateEntry(spriteOutputPath, CompressionLevel.Fastest);
                 using Stream zipEntryStream = zipEntry.Open();
-                image.Write(zipEntryStream);
+                image.Write(zipEntryStream, MagickFormat.Png);
             }
         }
         finally
