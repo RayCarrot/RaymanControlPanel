@@ -66,6 +66,7 @@ public sealed class GameDescriptor_Rayman30thAnniversaryEdition_Win32 : Win32Gam
         [
             new GameProgressionManager_Rayman30thAnniversaryEdition_Ps1_Win32(this, x, "Rayman 30th Anniversary Edition - Rayman PlayStation"),
             new GameProgressionManager_Rayman30thAnniversaryEdition_MsDos_Win32(this, x, "Rayman 30th Anniversary Edition - Rayman MS-DOS"),
+            new GameProgressionManager_Rayman30thAnniversaryEdition_Gba_Win32(this, x, "Rayman 30th Anniversary Edition - Rayman Game Boy Advance"),
         ]));
         builder.Register(new RayMapComponent(RayMapComponent.RayMapViewer.Ray1Map, "RaymanPS1US", "r1/ps1_us"));
         builder.Register<BinaryGameModeComponent>(new BakesaleGameModeComponent(BakesaleGameMode.Rayman30thAnniversaryEdition_PC));
