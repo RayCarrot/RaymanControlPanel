@@ -4,23 +4,19 @@ using BinarySerializer.Ray1;
 
 namespace RayCarrot.RCP.Metro;
 
-public class GameProgressionManager_Rayman30thAnniversaryEdition_MsDos_Win32 : GameProgressionManager_Rayman30thAnniversaryEdition_Win32
+public class GameProgressionManager_Rayman30thAnniversaryEdition_RaymanMsDos_Win32 : GameProgressionManager_Rayman30thAnniversaryEdition_Win32
 {
-    public GameProgressionManager_Rayman30thAnniversaryEdition_MsDos_Win32(GameDescriptor_Rayman30thAnniversaryEdition_Win32 gameDescriptor, GameInstallation gameInstallation, string progressionId) 
-        : base(gameDescriptor, gameInstallation, progressionId) { }
+    public GameProgressionManager_Rayman30thAnniversaryEdition_RaymanMsDos_Win32(GameDescriptor_Rayman30thAnniversaryEdition_Win32 gameDescriptor, GameInstallation gameInstallation, string progressionId, string gameId) 
+        : base(gameDescriptor, gameInstallation, progressionId, gameId) { }
 
     private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-    public override string Name => "MS-DOS"; // TODO-LOC?
-    public override GameBackups_Directory[] BackupDirectories => new GameBackups_Directory[]
-    {
-        new(GameDescriptor.GetSaveDirectory(GameInstallation), SearchOption.TopDirectoryOnly, "dreamm_rayman.bsav?", "0", 0),
-    };
+    public override string Name => "Rayman - MS-DOS"; // TODO-LOC?
 
     public override async IAsyncEnumerable<GameProgressionSlot> LoadSlotsAsync(FileSystemWrapper fileSystem)
     {
         // Get the save directory
-        FileSystemPath? saveDir = fileSystem.GetDirectory(new IOSearchPattern(GameDescriptor.GetSaveDirectory(GameInstallation), SearchOption.TopDirectoryOnly, "dreamm_rayman.bsav*"))?.DirPath;
+        FileSystemPath? saveDir = fileSystem.GetDirectory(new IOSearchPattern(GameDescriptor.GetSaveDirectory(GameInstallation), SearchOption.TopDirectoryOnly, $"{GameId}.bsav?"))?.DirPath;
 
         if (saveDir == null)
             yield break;
@@ -33,14 +29,14 @@ public class GameProgressionManager_Rayman30thAnniversaryEdition_MsDos_Win32 : G
         // Check every save (the collection save states)
         for (int saveIndex = 0; saveIndex < SavesPerGame; saveIndex++)
         {
-            string fileName = $"dreamm_rayman.bsav{saveIndex}";
+            string fileName = $"{GameId}.bsav{saveIndex}";
 
             Logger.Info("{0} save {1} is being loaded...", GameInstallation.FullId, saveIndex);
 
             // Load the save
             BakesaleSaveFile<DreammSaveData>? saveData = await context.ReadFileDataAsync<BakesaleSaveFile<DreammSaveData>>(fileName, removeFileWhenComplete: false);
 
-            if (saveData == null || saveData.SaveData == null)
+            if (saveData?.SaveData == null)
             {
                 Logger.Info("{0} save {1} was not found", GameInstallation.FullId, saveIndex);
                 continue;

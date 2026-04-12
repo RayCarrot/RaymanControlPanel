@@ -6,23 +6,19 @@ using BinarySerializer.Ray1.GBA;
 
 namespace RayCarrot.RCP.Metro;
 
-public class GameProgressionManager_Rayman30thAnniversaryEdition_Gba_Win32 : GameProgressionManager_Rayman30thAnniversaryEdition_Win32
+public class GameProgressionManager_Rayman30thAnniversaryEdition_RaymanAdvanceGba_Win32 : GameProgressionManager_Rayman30thAnniversaryEdition_Win32
 {
-    public GameProgressionManager_Rayman30thAnniversaryEdition_Gba_Win32(GameDescriptor_Rayman30thAnniversaryEdition_Win32 gameDescriptor, GameInstallation gameInstallation, string progressionId) 
-        : base(gameDescriptor, gameInstallation, progressionId) { }
+    public GameProgressionManager_Rayman30thAnniversaryEdition_RaymanAdvanceGba_Win32(GameDescriptor_Rayman30thAnniversaryEdition_Win32 gameDescriptor, GameInstallation gameInstallation, string progressionId, string gameId) 
+        : base(gameDescriptor, gameInstallation, progressionId, gameId) { }
 
     private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-    public override string Name => "Game Boy Advance"; // TODO-LOC?
-    public override GameBackups_Directory[] BackupDirectories => new GameBackups_Directory[]
-    {
-        new(GameDescriptor.GetSaveDirectory(GameInstallation), SearchOption.TopDirectoryOnly, "gba_rayman.bsav?", "0", 0),
-    };
+    public override string Name => "Rayman Advance - Game Boy Advance"; // TODO-LOC?
 
     public override async IAsyncEnumerable<GameProgressionSlot> LoadSlotsAsync(FileSystemWrapper fileSystem)
     {
         // Get the save directory
-        FileSystemPath? saveDir = fileSystem.GetDirectory(new IOSearchPattern(GameDescriptor.GetSaveDirectory(GameInstallation), SearchOption.TopDirectoryOnly, "gba_rayman.bsav*"))?.DirPath;
+        FileSystemPath? saveDir = fileSystem.GetDirectory(new IOSearchPattern(GameDescriptor.GetSaveDirectory(GameInstallation), SearchOption.TopDirectoryOnly, $"{GameId}.bsav?"))?.DirPath;
 
         if (saveDir == null)
             yield break;
@@ -35,7 +31,7 @@ public class GameProgressionManager_Rayman30thAnniversaryEdition_Gba_Win32 : Gam
         // Check every save (the collection save states)
         for (int saveIndex = 0; saveIndex < SavesPerGame; saveIndex++)
         {
-            string fileName = $"gba_rayman.bsav{saveIndex}";
+            string fileName = $"{GameId}.bsav{saveIndex}";
 
             Logger.Info("{0} save {1} is being loaded...", GameInstallation.FullId, saveIndex);
 
@@ -45,7 +41,7 @@ public class GameProgressionManager_Rayman30thAnniversaryEdition_Gba_Win32 : Gam
                 onPreSerialize: x => x.Pre_OnPreSerializeSaveData = y => y.Pre_Size = EEPROM<SaveData>.EEPROMSize.Kbit_64, 
                 removeFileWhenComplete: false);
 
-            if (saveData == null || saveData.SaveData == null)
+            if (saveData?.SaveData == null)
             {
                 Logger.Info("{0} save {1} was not found", GameInstallation.FullId, saveIndex);
                 continue;

@@ -5,23 +5,19 @@ using BinarySerializer.Ray1;
 
 namespace RayCarrot.RCP.Metro;
 
-public class GameProgressionManager_Rayman30thAnniversaryEdition_Ps1_Win32 : GameProgressionManager_Rayman30thAnniversaryEdition_Win32
+public class GameProgressionManager_Rayman30thAnniversaryEdition_RaymanPs1_Win32 : GameProgressionManager_Rayman30thAnniversaryEdition_Win32
 {
-    public GameProgressionManager_Rayman30thAnniversaryEdition_Ps1_Win32(GameDescriptor_Rayman30thAnniversaryEdition_Win32 gameDescriptor, GameInstallation gameInstallation, string progressionId) 
-        : base(gameDescriptor, gameInstallation, progressionId) { }
+    public GameProgressionManager_Rayman30thAnniversaryEdition_RaymanPs1_Win32(GameDescriptor_Rayman30thAnniversaryEdition_Win32 gameDescriptor, GameInstallation gameInstallation, string progressionId, string gameId) 
+        : base(gameDescriptor, gameInstallation, progressionId, gameId) { }
 
     private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-    public override string Name => "PlayStation"; // TODO-LOC?
-    public override GameBackups_Directory[] BackupDirectories => new GameBackups_Directory[]
-    {
-        new(GameDescriptor.GetSaveDirectory(GameInstallation), SearchOption.TopDirectoryOnly, "ps1_rayman.bsav?", "0", 0),
-    };
+    public override string Name => "Rayman - PlayStation"; // TODO-LOC?
 
     public override async IAsyncEnumerable<GameProgressionSlot> LoadSlotsAsync(FileSystemWrapper fileSystem)
     {
         // Get the save directory
-        FileSystemPath? saveDir = fileSystem.GetDirectory(new IOSearchPattern(GameDescriptor.GetSaveDirectory(GameInstallation), SearchOption.TopDirectoryOnly, "ps1_rayman.bsav*"))?.DirPath;
+        FileSystemPath? saveDir = fileSystem.GetDirectory(new IOSearchPattern(GameDescriptor.GetSaveDirectory(GameInstallation), SearchOption.TopDirectoryOnly, $"{GameId}.bsav?"))?.DirPath;
 
         if (saveDir == null)
             yield break;
@@ -34,14 +30,14 @@ public class GameProgressionManager_Rayman30thAnniversaryEdition_Ps1_Win32 : Gam
         // Check every save (the collection save states)
         for (int saveIndex = 0; saveIndex < SavesPerGame; saveIndex++)
         {
-            string fileName = $"ps1_rayman.bsav{saveIndex}";
+            string fileName = $"{GameId}.bsav{saveIndex}";
 
             Logger.Info("{0} save {1} is being loaded...", GameInstallation.FullId, saveIndex);
 
             // Load the save
             BakesaleSaveFile<PancakeMemoryCard<SaveSlot>>? saveData = await context.ReadFileDataAsync<BakesaleSaveFile<PancakeMemoryCard<SaveSlot>>>(fileName, removeFileWhenComplete: false);
 
-            if (saveData == null || saveData.SaveData == null)
+            if (saveData?.SaveData == null)
             {
                 Logger.Info("{0} save {1} was not found", GameInstallation.FullId, saveIndex);
                 continue;

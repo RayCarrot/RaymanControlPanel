@@ -64,9 +64,24 @@ public sealed class GameDescriptor_Rayman30thAnniversaryEdition_Win32 : Win32Gam
         
         builder.Register(new ProgressionManagersComponent(x => 
         [
-            new GameProgressionManager_Rayman30thAnniversaryEdition_Ps1_Win32(this, x, "Rayman 30th Anniversary Edition - Rayman PlayStation"),
-            new GameProgressionManager_Rayman30thAnniversaryEdition_MsDos_Win32(this, x, "Rayman 30th Anniversary Edition - Rayman MS-DOS"),
-            new GameProgressionManager_Rayman30thAnniversaryEdition_Gba_Win32(this, x, "Rayman 30th Anniversary Edition - Rayman Game Boy Advance"),
+            new GameProgressionManager_Rayman30thAnniversaryEdition_RaymanPrototypeSnes_Win32(this, x, 
+                "Rayman 30th Anniversary Edition", "snes_rayman_proto"),
+            new GameProgressionManager_Rayman30thAnniversaryEdition_RaymanPs1_Win32(this, x, 
+                "Rayman 30th Anniversary Edition", "ps1_rayman"),
+            new GameProgressionManager_Rayman30thAnniversaryEdition_RaymanJaguar_Win32(this, x, 
+                "Rayman 30th Anniversary Edition", "jaguar_rayman"),
+            new GameProgressionManager_Rayman30thAnniversaryEdition_RaymanMsDos_Win32(this, x, 
+                "Rayman 30th Anniversary Edition", "dreamm_rayman"),
+            new GameProgressionManager_Rayman30thAnniversaryEdition_RaymansNewLevelsMsDos_Win32(this, x, 
+                "Rayman 30th Anniversary Edition", "dreamm_rayman_new_levels"),
+            new GameProgressionManager_Rayman30thAnniversaryEdition_RaymanByHisFansMsDos_Win32(this, x, 
+                "Rayman 30th Anniversary Edition", "dreamm_rayman_fan_levels"),
+            new GameProgressionManager_Rayman30thAnniversaryEdition_Rayman60LevelsMsDos_Win32(this, x, 
+                "Rayman 30th Anniversary Edition", "dreamm_rayman_60_levels"),
+            new GameProgressionManager_Rayman30thAnniversaryEdition_RaymanGbc_Win32(this, x, 
+                "Rayman 30th Anniversary Edition", "gbc_rayman"),
+            new GameProgressionManager_Rayman30thAnniversaryEdition_RaymanAdvanceGba_Win32(this, x, 
+                "Rayman 30th Anniversary Edition", "gba_rayman"),
         ]));
         builder.Register(new RayMapComponent(RayMapComponent.RayMapViewer.Ray1Map, "RaymanPS1US", "r1/ps1_us"));
         builder.Register<BinaryGameModeComponent>(new BakesaleGameModeComponent(BakesaleGameMode.Rayman30thAnniversaryEdition_PC));
