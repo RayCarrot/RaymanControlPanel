@@ -1,16 +1,23 @@
 ﻿-----   Version 14.5.0 - April ??, 2026   -----
 • Added support for the SNES prototype of Rayman 1
 • Added support for the bsnes emulator
-• Added support for modifying Rayman 30th Anniversary Edition assets using the Archive Explorer
-• Added a mod loader module for Rayman 30th Anniversary Edition which allows for replacing music in the MS-DOS versions
-• Added GameBanana mod support for Rayman 30th Anniversary Edition
+• Rayman 30th Anniversary Edition improvements:
+    • Added support for modifying the assets using the Archive Explorer. Resource files (for sprites, sounds and text) can be exported as .zip files, but not currently imported. However sprites and sounds can both be replaced through mods.
+    • Added a mod loader module which allows for replacing music in the MS-DOS versions
+    • Added a mod loader module which allows for replacing sprites and sounds from resource files
+    • Added GameBanana mod support
+    • Add progression support
+    • Add setup game actions, recommending mods to fix various issues
 • Added options to replace the icon and banner images for games
 • Added an option to freely change the app accent color
 • Added support for linebreaks when using the UBIART-LOC mod module
 • Added progression support for GBC games when using the SameBoy emulator
 • Removed the custom game icons for demos and prototypes, making them now use the same icons as the retail versions
 • Updated the order which games available on multiple platforms are shown to follow platform release order, while prioritizing PC platforms first
+• Improved the image scaling for mod thumbnails in the mod loader
 • Removing an emulator will no longer default the games which used it to now use the first available game client, avoiding issues where games such as Rayman Forever would get set to launch through Ubisoft Connect after removing DOSBox
+• Fixed a bug where temp files would not always get deleted when viewing a read-only file in the Archive Explorer
+• Bug fixes
 
 
 -----   Version 14.4.1 - March 16, 2026   -----
