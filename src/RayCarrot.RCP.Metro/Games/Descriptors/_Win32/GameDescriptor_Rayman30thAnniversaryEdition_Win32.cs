@@ -62,13 +62,17 @@ public sealed class GameDescriptor_Rayman30thAnniversaryEdition_Win32 : Win32Gam
         builder.Register(new SteamGameClientComponent(SteamId, usesSteamStubDrm: true));
         builder.Register(new UbisoftConnectGameClientComponent(UbisoftConnectGameId, UbisoftConnectProductId));
         
-        // TODO: Add progression
+        builder.Register(new ProgressionManagersComponent(x => 
+        [
+            new GameProgressionManager_Rayman30thAnniversaryEdition_Ps1_Win32(this, x, "Rayman 30th Anniversary Edition - Rayman PlayStation"),
+            new GameProgressionManager_Rayman30thAnniversaryEdition_MsDos_Win32(this, x, "Rayman 30th Anniversary Edition - Rayman MS-DOS"),
+        ]));
         builder.Register(new RayMapComponent(RayMapComponent.RayMapViewer.Ray1Map, "RaymanPS1US", "r1/ps1_us"));
         builder.Register<BinaryGameModeComponent>(new BakesaleGameModeComponent(BakesaleGameMode.Rayman30thAnniversaryEdition_PC));
         builder.Register<ArchiveComponent, BakesaleArchiveComponent>();
         builder.Register(new GameOptionsComponent(x => new Rayman30thGameOptionsViewModel(x)));
         builder.Register(new LaunchArgumentsComponent(GetLaunchArgs));
-        builder.Register(new GameSettingsComponent(x => new Rayman30thSettingsViewModel(x)));
+        builder.Register(new GameSettingsComponent(x => new Rayman30thSettingsViewModel(this, x)));
         builder.Register<OnGameAddedComponent, AddToJumpListOnGameAddedComponent>();
 
         builder.Register(new PCGamingWikiComponent("Rayman:_30th_Anniversary_Edition"));
@@ -121,6 +125,17 @@ public sealed class GameDescriptor_Rayman30thAnniversaryEdition_Win32 : Win32Gam
 
         new UbisoftConnectFinderQuery(UbisoftConnectGameId),
     };
+
+    public FileSystemPath GetSaveDirectory(GameInstallation gameInstallation)
+    {
+        FileSystemPath baseSavePath = Environment.SpecialFolder.ApplicationData.GetFolderPath() + "Rayman 30th Anniversary Edition";
+        FileSystemPath savePath = UbisoftConnectHelpers.GetSaveDirectory(gameInstallation, baseSavePath);
+
+        if (savePath != FileSystemPath.EmptyPath)
+            return savePath;
+        else
+            return baseSavePath;
+    }
 
     #endregion
 }

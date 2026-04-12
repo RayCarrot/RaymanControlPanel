@@ -11,18 +11,12 @@ public class Rayman30thSettingsViewModel : GameSettingsViewModel
 {
     #region Constructor
 
-    public Rayman30thSettingsViewModel(GameInstallation gameInstallation) : base(gameInstallation)
+    public Rayman30thSettingsViewModel(GameDescriptor_Rayman30thAnniversaryEdition_Win32 gameDescriptor, GameInstallation gameInstallation) : base(gameInstallation)
     {
         GraphicsMode = new GraphicsModeSelectionViewModel();
         GraphicsMode.GraphicsModeChanged += (_, _) => UnsavedChanges = true;
 
-        FileSystemPath baseSavePath = Environment.SpecialFolder.ApplicationData.GetFolderPath() + DataDirectoryName;
-        FileSystemPath savePath = UbisoftConnectHelpers.GetSaveDirectory(gameInstallation, baseSavePath);
-
-        if (savePath != FileSystemPath.EmptyPath)
-            SettingsFilePath = savePath + SettingsFileName;
-        else
-            SettingsFilePath = baseSavePath + SettingsFileName;
+        SettingsFilePath = gameDescriptor.GetSaveDirectory(gameInstallation) + SettingsFileName;
 
         // From options.lua
         LanguageIds = ["en-us", "fr-fr", "de-de", "it-it", "es-es", "ja-jp", "zh-tw", "zh-cn", "pt-br"];
@@ -44,7 +38,6 @@ public class Rayman30thSettingsViewModel : GameSettingsViewModel
 
     #region Private Constants
 
-    private const string DataDirectoryName = "Rayman 30th Anniversary Edition";
     private const string SettingsFileName = "settings_main.json";
 
     private const string GlobalKey = "global";
