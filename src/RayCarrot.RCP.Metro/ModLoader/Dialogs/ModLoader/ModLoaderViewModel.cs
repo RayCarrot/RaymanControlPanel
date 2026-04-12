@@ -1083,7 +1083,7 @@ public class ModLoaderViewModel : BaseViewModel, IDisposable
                     {
                         // TODO-LOC
                         await Services.MessageUI.DisplayMessageAsync(
-                            $"At least one of the selected mods requires the game's executable file to have its DRM removed for it to be correctly patched.\n\nIn order to remove the DRM you can use a tool such as \"Steamless\". Then run it on the {Path.GetFileName(exeFilePath)} file and replace it with the unpacked file that it creates.",
+                            $"At least one of the selected mods requires the game's executable file to have its DRM removed for it to be correctly patched.\n\nIn order to remove the DRM you can use a tool such as \"Steamless\", which can be downloaded from its GitHub page. Once downloaded, open the exe, select the {Path.GetFileName(exeFilePath)} file, press the unpack button and then replace the original exe file with the unpacked file that it creates.",
                             "SteamStub DRM detected",
                             MessageType.Error);
                         return null;
