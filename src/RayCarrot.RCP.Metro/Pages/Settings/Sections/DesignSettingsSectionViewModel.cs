@@ -28,8 +28,7 @@ public class DesignSettingsSectionViewModel : SettingsSectionViewModel
     {
         ColorSelectionResult? result = await UI.SelectColorAsync(new ColorSelectionViewModel()
         {
-            // TODO-LOC
-            Title = "Select an accent color",
+            Title = Resources.Settings_SelectAccentColor,
             SelectedColor = Data.Theme_Color ?? Colors.Black
         });
 

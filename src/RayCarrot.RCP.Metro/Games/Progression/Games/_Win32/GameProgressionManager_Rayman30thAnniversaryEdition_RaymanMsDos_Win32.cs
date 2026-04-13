@@ -11,7 +11,7 @@ public class GameProgressionManager_Rayman30thAnniversaryEdition_RaymanMsDos_Win
 
     private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-    public override string Name => "Rayman - MS-DOS"; // TODO-LOC?
+    public override string Name => Resources.Progression_Rayman30thAnniversaryEdition_RaymanMsDos;
 
     public override async IAsyncEnumerable<GameProgressionSlot> LoadSlotsAsync(FileSystemWrapper fileSystem)
     {

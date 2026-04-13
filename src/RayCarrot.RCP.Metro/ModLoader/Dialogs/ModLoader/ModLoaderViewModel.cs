@@ -1081,10 +1081,9 @@ public class ModLoaderViewModel : BaseViewModel, IDisposable
                     using FileStream exeFileStream = File.OpenRead(GameInstallation.InstallLocation.Directory + exeFilePath);
                     if (SteamHelpers.IsSteamStubDrmApplied(exeFileStream))
                     {
-                        // TODO-LOC
                         await Services.MessageUI.DisplayMessageAsync(
-                            $"At least one of the selected mods requires the game's executable file to have its DRM removed for it to be correctly patched.\n\nIn order to remove the DRM you can use a tool such as \"Steamless\", which can be downloaded from its GitHub page. Once downloaded, open the exe, select the {Path.GetFileName(exeFilePath)} file, press the unpack button and then replace the original exe file with the unpacked file that it creates.",
-                            "SteamStub DRM detected",
+                            String.Format(Resources.ModLoader_SteamDrmError, Path.GetFileName(exeFilePath)),
+                            Resources.ModLoader_SteamDrmErrorHeader,
                             MessageType.Error);
                         return null;
                     }

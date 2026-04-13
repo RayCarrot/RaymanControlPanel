@@ -10,7 +10,7 @@ public sealed class BsnesGameClientDescriptor : EmulatorGameClientDescriptor
     public override string GameClientId => "bsnes";
     public override bool InstallationRequiresFile => true;
     public override GamePlatform[] SupportedPlatforms => new[] { GamePlatform.Snes };
-    public override LocalizedString DisplayName => "bsnes"; // TODO-LOC
+    public override LocalizedString DisplayName => new ResourceLocString(nameof(Resources.GameClients_Bsnes));
     public override GameClientIconAsset Icon => GameClientIconAsset.Bsnes;
 
     #endregion

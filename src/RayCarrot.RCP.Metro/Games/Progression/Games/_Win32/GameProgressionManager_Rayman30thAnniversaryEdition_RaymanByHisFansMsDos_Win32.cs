@@ -5,5 +5,5 @@ public class GameProgressionManager_Rayman30thAnniversaryEdition_RaymanByHisFans
     public GameProgressionManager_Rayman30thAnniversaryEdition_RaymanByHisFansMsDos_Win32(GameDescriptor_Rayman30thAnniversaryEdition_Win32 gameDescriptor, GameInstallation gameInstallation, string progressionId, string gameId) 
         : base(gameDescriptor, gameInstallation, progressionId, gameId) { }
 
-    public override string Name => "Rayman By His Fans - MS-DOS"; // TODO-LOC?
+    public override string Name => Resources.Progression_Rayman30thAnniversaryEdition_RaymanByHisFansMsDos;
 }

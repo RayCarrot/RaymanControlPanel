@@ -28,7 +28,7 @@ public enum GamePlatform
     /// <summary>
     /// Super Nintendo Entertainment System
     /// </summary>
-    [GamePlatformInfo("Super Nintendo Entertainment System", GamePlatformIconAsset.Snes)] // 1990 // TODO-LOC
+    [GamePlatformInfo(nameof(Resources.Platform_Snes), GamePlatformIconAsset.Snes)] // 1990
     Snes,
 
     /// <summary>

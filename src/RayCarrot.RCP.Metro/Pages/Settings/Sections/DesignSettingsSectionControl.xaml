@@ -27,18 +27,17 @@
                           OffContent="{Resx Settings_DesignLight}" 
                           Margin="0 0 0 4" />
 
-        <!-- TODO-LOC -->
         <StackPanel Orientation="Horizontal"
                     IsEnabled="{Binding Path=Data.Theme_SyncTheme, Converter={rcp:InvertedBooleanConverter}}"
                     Margin="0 0 0 8">
             <Button HorizontalContentAlignment="Left"
-                    Content="Change accent color"
+                    Content="{Resx Settings_ChangeAccentColor}"
                     Command="{Binding Path=ChangeAccentColorCommand, Mode=OneTime}"
                     rcp:Icon.Kind="BrushOutline" 
                     Style="{StaticResource RCP.Styles.Button.Default}"
                     Margin="0 0 4 0" />
             <Button HorizontalContentAlignment="Left"
-                    Content="Reset accent color"
+                    Content="{Resx Settings_ResetAccentColor}"
                     Command="{Binding Path=ResetAccentColorCommand, Mode=OneTime}"
                     IsEnabled="{Binding Path=Data.Theme_Color, Converter={rcp:IsNotNullConverter}}"
                     rcp:Icon.Kind="BrushOff" 

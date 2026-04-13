@@ -1195,6 +1195,33 @@ namespace RayCarrot.RCP.Metro {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to String Locales.
+        /// </summary>
+        public static string Archive_Format_BakesaleLocale {
+            get {
+                return ResourceManager.GetString("Archive_Format_BakesaleLocale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sprites Resource.
+        /// </summary>
+        public static string Archive_Format_BakesaleSprites {
+            get {
+                return ResourceManager.GetString("Archive_Format_BakesaleSprites", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sounds Resource.
+        /// </summary>
+        public static string Archive_Format_BakesaleWaves {
+            get {
+                return ResourceManager.GetString("Archive_Format_BakesaleWaves", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cooked UBIArt Sound.
         /// </summary>
         public static string Archive_Format_CookedUbiArtSound {
@@ -1868,6 +1895,24 @@ namespace RayCarrot.RCP.Metro {
         public static string CloseGameError {
             get {
                 return ResourceManager.GetString("CloseGameError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string ColorSelection_Name {
+            get {
+                return ResourceManager.GetString("ColorSelection_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preview.
+        /// </summary>
+        public static string ColorSelection_Preview {
+            get {
+                return ResourceManager.GetString("ColorSelection_Preview", resourceCulture);
             }
         }
         
@@ -3956,6 +4001,15 @@ namespace RayCarrot.RCP.Metro {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to bsnes.
+        /// </summary>
+        public static string GameClients_Bsnes {
+            get {
+                return ResourceManager.GetString("GameClients_Bsnes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Configure game clients/emulators.
         /// </summary>
         public static string GameClients_ConfigTitle {
@@ -4768,11 +4822,65 @@ namespace RayCarrot.RCP.Metro {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remove custom banner image.
+        /// </summary>
+        public static string GameHub_RemoveCustomBannerImage {
+            get {
+                return ResourceManager.GetString("GameHub_RemoveCustomBannerImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove custom icon image.
+        /// </summary>
+        public static string GameHub_RemoveCustomIconImage {
+            get {
+                return ResourceManager.GetString("GameHub_RemoveCustomIconImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rename.
         /// </summary>
         public static string GameHub_Rename {
             get {
                 return ResourceManager.GetString("GameHub_Rename", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Replace banner image.
+        /// </summary>
+        public static string GameHub_ReplaceBannerImage {
+            get {
+                return ResourceManager.GetString("GameHub_ReplaceBannerImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The recommended image size is 1024x512.
+        /// </summary>
+        public static string GameHub_ReplaceBannerImageInfo {
+            get {
+                return ResourceManager.GetString("GameHub_ReplaceBannerImageInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Replace icon image.
+        /// </summary>
+        public static string GameHub_ReplaceIconImage {
+            get {
+                return ResourceManager.GetString("GameHub_ReplaceIconImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The recommended image size is 128x128.
+        /// </summary>
+        public static string GameHub_ReplaceIconImageInfo {
+            get {
+                return ResourceManager.GetString("GameHub_ReplaceIconImageInfo", resourceCulture);
             }
         }
         
@@ -4791,6 +4899,42 @@ namespace RayCarrot.RCP.Metro {
         public static string GameHub_RuntimeModificationsPanel_Open {
             get {
                 return ResourceManager.GetString("GameHub_RuntimeModificationsPanel_Open", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select banner image.
+        /// </summary>
+        public static string GameHub_SelectCustomBannerImage {
+            get {
+                return ResourceManager.GetString("GameHub_SelectCustomBannerImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred when replacing the banner image. Make sure the image file is valid and try again..
+        /// </summary>
+        public static string GameHub_SelectCustomBannerImageError {
+            get {
+                return ResourceManager.GetString("GameHub_SelectCustomBannerImageError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select icon image.
+        /// </summary>
+        public static string GameHub_SelectCustomIconImage {
+            get {
+                return ResourceManager.GetString("GameHub_SelectCustomIconImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred when replacing the icon image. Make sure the image file is valid and try again..
+        /// </summary>
+        public static string GameHub_SelectCustomIconImageError {
+            get {
+                return ResourceManager.GetString("GameHub_SelectCustomIconImageError", resourceCulture);
             }
         }
         
@@ -8756,6 +8900,15 @@ namespace RayCarrot.RCP.Metro {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This allows replacing individual files within sprite and sound resources. Keep in mind that sprites have to maintain the same dimensions..
+        /// </summary>
+        public static string ModLoader_BakesaleResourceModule_Description {
+            get {
+                return ResourceManager.GetString("ModLoader_BakesaleResourceModule_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string ModLoader_CancelDownload {
@@ -9652,6 +9805,15 @@ namespace RayCarrot.RCP.Metro {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This allows replacing the MP3 audio tracks in the MS-DOS versions, automatically updating the boot save-states with the new audio track sizes..
+        /// </summary>
+        public static string ModLoader_Rayman30thMsDosMusicModule_Description {
+            get {
+                return ResourceManager.GetString("ModLoader_Rayman30thMsDosMusicModule_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The selected mod could not be read.
         /// </summary>
         public static string ModLoader_ReadingModError {
@@ -9765,6 +9927,26 @@ namespace RayCarrot.RCP.Metro {
         public static string ModLoader_ShowModificationsAsTree {
             get {
                 return ResourceManager.GetString("ModLoader_ShowModificationsAsTree", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to At least one of the selected mods requires the game&apos;s executable file to have its DRM removed for it to be correctly patched.
+        ///
+        ///In order to remove the DRM you can use a tool such as &quot;Steamless&quot;, which can be downloaded from its GitHub page. Once downloaded, open the exe, select the {0} file, press the unpack button and then replace the original exe file with the unpacked file that it creates..
+        /// </summary>
+        public static string ModLoader_SteamDrmError {
+            get {
+                return ResourceManager.GetString("ModLoader_SteamDrmError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SteamStub DRM detected.
+        /// </summary>
+        public static string ModLoader_SteamDrmErrorHeader {
+            get {
+                return ResourceManager.GetString("ModLoader_SteamDrmErrorHeader", resourceCulture);
             }
         }
         
@@ -10143,6 +10325,15 @@ namespace RayCarrot.RCP.Metro {
         public static string Platform_Ps2 {
             get {
                 return ResourceManager.GetString("Platform_Ps2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Super Nintendo Entertainment System.
+        /// </summary>
+        public static string Platform_Snes {
+            get {
+                return ResourceManager.GetString("Platform_Snes", resourceCulture);
             }
         }
         
@@ -10730,6 +10921,87 @@ namespace RayCarrot.RCP.Metro {
         public static string Progression_Rank {
             get {
                 return ResourceManager.GetString("Progression_Rank", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rayman 60 Levels - MS-DOS.
+        /// </summary>
+        public static string Progression_Rayman30thAnniversaryEdition_Rayman60LevelsMsDos {
+            get {
+                return ResourceManager.GetString("Progression_Rayman30thAnniversaryEdition_Rayman60LevelsMsDos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rayman Advance - Game Boy Advance.
+        /// </summary>
+        public static string Progression_Rayman30thAnniversaryEdition_RaymanAdvanceGba {
+            get {
+                return ResourceManager.GetString("Progression_Rayman30thAnniversaryEdition_RaymanAdvanceGba", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rayman By His Fans - MS-DOS.
+        /// </summary>
+        public static string Progression_Rayman30thAnniversaryEdition_RaymanByHisFansMsDos {
+            get {
+                return ResourceManager.GetString("Progression_Rayman30thAnniversaryEdition_RaymanByHisFansMsDos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rayman - Game Boy Color.
+        /// </summary>
+        public static string Progression_Rayman30thAnniversaryEdition_RaymanGbc {
+            get {
+                return ResourceManager.GetString("Progression_Rayman30thAnniversaryEdition_RaymanGbc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rayman - Atari Jaguar.
+        /// </summary>
+        public static string Progression_Rayman30thAnniversaryEdition_RaymanJaguar {
+            get {
+                return ResourceManager.GetString("Progression_Rayman30thAnniversaryEdition_RaymanJaguar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rayman - MS-DOS.
+        /// </summary>
+        public static string Progression_Rayman30thAnniversaryEdition_RaymanMsDos {
+            get {
+                return ResourceManager.GetString("Progression_Rayman30thAnniversaryEdition_RaymanMsDos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rayman Prototype - SNES.
+        /// </summary>
+        public static string Progression_Rayman30thAnniversaryEdition_RaymanPrototypeSnes {
+            get {
+                return ResourceManager.GetString("Progression_Rayman30thAnniversaryEdition_RaymanPrototypeSnes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rayman - PlayStation.
+        /// </summary>
+        public static string Progression_Rayman30thAnniversaryEdition_RaymanPs1 {
+            get {
+                return ResourceManager.GetString("Progression_Rayman30thAnniversaryEdition_RaymanPs1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rayman&apos;s New Levels - MS-DOS.
+        /// </summary>
+        public static string Progression_Rayman30thAnniversaryEdition_RaymansNewLevelsMsDos {
+            get {
+                return ResourceManager.GetString("Progression_Rayman30thAnniversaryEdition_RaymansNewLevelsMsDos", resourceCulture);
             }
         }
         
@@ -12863,6 +13135,15 @@ namespace RayCarrot.RCP.Metro {
         public static string Rayman1_Prototype_Jaguar_Title {
             get {
                 return ResourceManager.GetString("Rayman1_Prototype_Jaguar_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rayman Prototype.
+        /// </summary>
+        public static string Rayman1_Prototype_Snes_Title {
+            get {
+                return ResourceManager.GetString("Rayman1_Prototype_Snes_Title", resourceCulture);
             }
         }
         
@@ -15747,6 +16028,15 @@ namespace RayCarrot.RCP.Metro {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change accent color.
+        /// </summary>
+        public static string Settings_ChangeAccentColor {
+            get {
+                return ResourceManager.GetString("Settings_ChangeAccentColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Check for and show if games are running.
         /// </summary>
         public static string Settings_CheckForRunningGames {
@@ -16152,11 +16442,29 @@ namespace RayCarrot.RCP.Metro {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reset accent color.
+        /// </summary>
+        public static string Settings_ResetAccentColor {
+            get {
+                return ResourceManager.GetString("Settings_ResetAccentColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reset.
         /// </summary>
         public static string Settings_ResetAppData {
             get {
                 return ResourceManager.GetString("Settings_ResetAppData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select an accent color.
+        /// </summary>
+        public static string Settings_SelectAccentColor {
+            get {
+                return ResourceManager.GetString("Settings_SelectAccentColor", resourceCulture);
             }
         }
         
@@ -16494,6 +16802,42 @@ namespace RayCarrot.RCP.Metro {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Install the Access all Levels (Rayman by his Fans) mod.
+        /// </summary>
+        public static string SetupGameAction_AccessAllByHisFansLevels_Header {
+            get {
+                return ResourceManager.GetString("SetupGameAction_AccessAllByHisFansLevels_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to By default there are two levels (&quot;The enchanted forest&quot; and &quot;High flyer&quot;) which were made inaccessible. This is due to the levels having a bug where using a checkpoint twice causes the game to crash. The Access all Levels (Rayman by his Fans) mod by RayCarrot restores access to these levels..
+        /// </summary>
+        public static string SetupGameAction_AccessAllByHisFansLevels_Info {
+            get {
+                return ResourceManager.GetString("SetupGameAction_AccessAllByHisFansLevels_Info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Install the Access Ubi Key Bonus (GBC) mod.
+        /// </summary>
+        public static string SetupGameAction_AccessUbiKeyBonus_Header {
+            get {
+                return ResourceManager.GetString("SetupGameAction_AccessUbiKeyBonus_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is a bonus level which can normally only be unlocked by linking the game to another supported title through the Ubi Key feature. This feature is however not available in the collection and there is no other way to access the level. The Access Ubi Key Bonus (GBC) mod by RayCarrot removes this requirement, allowing the level to be accessed..
+        /// </summary>
+        public static string SetupGameAction_AccessUbiKeyBonus_Info {
+            get {
+                return ResourceManager.GetString("SetupGameAction_AccessUbiKeyBonus_Info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Install Better Rayman 3.
         /// </summary>
         public static string SetupGameAction_BetterRayman3_Header {
@@ -16544,6 +16888,24 @@ namespace RayCarrot.RCP.Metro {
         public static string SetupGameAction_DownloadModFix {
             get {
                 return ResourceManager.GetString("SetupGameAction_DownloadModFix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Install the Fix Window Icon mod.
+        /// </summary>
+        public static string SetupGameAction_FixWindowIcon_Header {
+            get {
+                return ResourceManager.GetString("SetupGameAction_FixWindowIcon_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Due to the game trying to load the icon from the wrong resource it will not display in the taskbar when the game is running. The Fix Window Icon mod by RayCarrot fixes this issue..
+        /// </summary>
+        public static string SetupGameAction_FixWindowIcon_Info {
+            get {
+                return ResourceManager.GetString("SetupGameAction_FixWindowIcon_Info", resourceCulture);
             }
         }
         
@@ -16904,6 +17266,24 @@ namespace RayCarrot.RCP.Metro {
         public static string SetupGameAction_RequiresLaunchComponent_Info {
             get {
                 return ResourceManager.GetString("SetupGameAction_RequiresLaunchComponent_Info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Install the Technical Fixes (DOS) mod.
+        /// </summary>
+        public static string SetupGameAction_TechnicalDosFixes_Header {
+            get {
+                return ResourceManager.GetString("SetupGameAction_TechnicalDosFixes_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The MS-DOS versions have several issues in the collection, such as there being lag in some levels, parallax scrolling being disabled and the Mr Dark boss music not playing. The Technical Fixes (DOS) mod by RayCarrot fixes these issues..
+        /// </summary>
+        public static string SetupGameAction_TechnicalDosFixes_Info {
+            get {
+                return ResourceManager.GetString("SetupGameAction_TechnicalDosFixes_Info", resourceCulture);
             }
         }
         
@@ -17328,6 +17708,15 @@ namespace RayCarrot.RCP.Metro {
         public static string Utilities_ArchiveExplorer_Open {
             get {
                 return ResourceManager.GetString("Utilities_ArchiveExplorer_Open", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bakesale archives (.pie).
+        /// </summary>
+        public static string Utilities_ArchiveExplorer_PIEHeader {
+            get {
+                return ResourceManager.GetString("Utilities_ArchiveExplorer_PIEHeader", resourceCulture);
             }
         }
         

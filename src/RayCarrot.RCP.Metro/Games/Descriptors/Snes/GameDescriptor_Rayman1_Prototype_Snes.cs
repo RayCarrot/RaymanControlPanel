@@ -15,7 +15,7 @@ public sealed class GameDescriptor_Rayman1_Prototype_Snes : SnesGameDescriptor
     public override GameCategory Category => GameCategory.Rayman;
     public override GameType Type => GameType.Prototype;
 
-    public override LocalizedString DisplayName => "Rayman Prototype"; // TODO-LOC
+    public override LocalizedString DisplayName => new ResourceLocString(nameof(Resources.Rayman1_Prototype_Snes_Title));
     public override DateTime ReleaseDate => new(1992, 01, 01); // Unknown
 
     public override GameIconAsset Icon => GameIconAsset.Rayman1_Snes;

@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using BinarySerializer;
 using BinarySerializer.Bakesale;
 using BinarySerializer.Ray1;
 using BinarySerializer.Ray1.Jaguar;
@@ -13,7 +12,7 @@ public class GameProgressionManager_Rayman30thAnniversaryEdition_RaymanJaguar_Wi
 
     private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-    public override string Name => "Rayman - Atari Jaguar"; // TODO-LOC?
+    public override string Name => Resources.Progression_Rayman30thAnniversaryEdition_RaymanJaguar;
 
     public override async IAsyncEnumerable<GameProgressionSlot> LoadSlotsAsync(FileSystemWrapper fileSystem)
     {

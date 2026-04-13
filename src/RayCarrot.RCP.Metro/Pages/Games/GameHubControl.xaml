@@ -265,26 +265,25 @@
                                                 </Style>
                                             </Button.Style>
                                         </Button>
-                                        <!-- TODO-LOC -->
-                                        <Button Content="Replace icon image"
-                                                ToolTip="The recommended image size is 128x128"
+                                        <Button Content="{Resx GameHub_ReplaceIconImage}"
+                                                ToolTip="{Resx GameHub_ReplaceIconImageInfo}"
                                                 Command="{Binding Path=ReplaceIconImageCommand, Mode=OneTime}"
                                                 rcp:Icon.Kind="ImageOutline"
                                                 rcp:Icon.Brush="{StaticResource RCP.Brushes.Info}"
                                                 HorizontalContentAlignment="Stretch" />
-                                        <Button Content="Remove custom icon image"
+                                        <Button Content="{Resx GameHub_RemoveCustomIconImage}"
                                                 Command="{Binding Path=RemoveCustomIconImageCommand, Mode=OneTime}"
                                                 Visibility="{Binding Path=HasCustomGameIcon, Converter={rcp:BooleanToVisibilityConverter}}"
                                                 rcp:Icon.Kind="ImageRemoveOutline"
                                                 rcp:Icon.Brush="{StaticResource RCP.Brushes.Info}"
                                                 HorizontalContentAlignment="Stretch" />
-                                        <Button Content="Replace banner image"
-                                                ToolTip="The recommended image size is 1024x512"
+                                        <Button Content="{Resx GameHub_ReplaceBannerImage}"
+                                                ToolTip="{Resx GameHub_ReplaceBannerImageInfo}"
                                                 Command="{Binding Path=ReplaceBannerImageCommand, Mode=OneTime}"
                                                 rcp:Icon.Kind="ImageOutline"
                                                 rcp:Icon.Brush="{StaticResource RCP.Brushes.Info}"
                                                 HorizontalContentAlignment="Stretch" />
-                                        <Button Content="Remove custom banner image"
+                                        <Button Content="{Resx GameHub_RemoveCustomBannerImage}"
                                                 Command="{Binding Path=RemoveCustomBannerImageCommand, Mode=OneTime}"
                                                 Visibility="{Binding Path=HasCustomGameBanner, Converter={rcp:BooleanToVisibilityConverter}}"
                                                 rcp:Icon.Kind="ImageRemoveOutline"

@@ -1135,7 +1135,7 @@ Fehler Meldung: {1}</value>
     <value>Blau</value>
   </data>
   <data name="JumpListEditor_NotIncludedHeader" xml:space="preserve">
-    <value>Nicht dazu gelegt</value>
+    <value>Ausgeschlossen</value>
   </data>
   <data name="GameDisplay_OpenInWinStore" xml:space="preserve">
     <value>Microsoft Store öffnen</value>
@@ -1147,7 +1147,7 @@ Fehler Meldung: {1}</value>
     <value>Deinstallieren</value>
   </data>
   <data name="GameDisplay_GameJolt" xml:space="preserve">
-    <value>Laden von GameJolt</value>
+    <value>Herunterladen von GameJolt</value>
   </data>
   <data name="GameDisplay_OpenGameJoltPage" xml:space="preserve">
     <value>GameJolt Seite öffnen</value>
@@ -1322,5 +1322,122 @@ Fehler Meldung: {1}</value>
   </data>
   <data name="GameOptions_GraphicsApi_OpenGL" xml:space="preserve">
     <value>OpenGL</value>
+  </data>
+  <data name="GoHomeConfig_VersionIndex" xml:space="preserve">
+    <value>Versions Inhaltsangabe</value>
+  </data>
+  <data name="GoHomeConfig_BigFile" xml:space="preserve">
+    <value>Große Datei</value>
+  </data>
+  <data name="JumpListEditor_IncludedHeader" xml:space="preserve">
+    <value>Eingeschlossen</value>
+  </data>
+  <data name="Installer_OverwriteOutput" xml:space="preserve">
+    <value>{0} existiert bereits. Möchtest du es überschreiben?</value>
+  </data>
+  <data name="Installer_OverwriteOutputHeader" xml:space="preserve">
+    <value>Überschreibungs pfad</value>
+  </data>
+  <data name="Config_DiscCheck" xml:space="preserve">
+    <value>Disk Check</value>
+  </data>
+  <data name="Config_DisableDiscCheck" xml:space="preserve">
+    <value>Disk Check ausschalten</value>
+  </data>
+  <data name="UninstallGameErrorHeader" xml:space="preserve">
+    <value>Deinstallation fehlgeschlagen</value>
+  </data>
+  <data name="GamesPage_Category_Rayman" xml:space="preserve">
+    <value>Rayman</value>
+  </data>
+  <data name="GamesPage_Category_Rabbids" xml:space="preserve">
+    <value>Rabbids</value>
+  </data>
+  <data name="GamesPage_Category_Other" xml:space="preserve">
+    <value>Andere</value>
+  </data>
+  <data name="GamesPage_Category_Fan" xml:space="preserve">
+    <value>Fan-Spiele</value>
+  </data>
+  <data name="FileFilterDescription_JSON" xml:space="preserve">
+    <value>JSON Datein</value>
+  </data>
+  <data name="ImportSelectionHeader" xml:space="preserve">
+    <value>Wähle eine konvertierte JSON Datei aus die du importieren möchtest</value>
+  </data>
+  <data name="Progression_Header" xml:space="preserve">
+    <value>Fortschritt</value>
+  </data>
+  <data name="Progression_GenericSlot" xml:space="preserve">
+    <value>Slot {0}</value>
+  </data>
+  <data name="Progression_Export" xml:space="preserve">
+    <value>Exportieren</value>
+  </data>
+  <data name="Progression_Import" xml:space="preserve">
+    <value>Importieren</value>
+  </data>
+  <data name="Progression_ExportError" xml:space="preserve">
+    <value>Ein Fehler ist aufgetaucht während des exportieren der Spielstand Datei. Stelle sicher dass die Datei unterstützt wird.</value>
+  </data>
+  <data name="Progression_ImportError" xml:space="preserve">
+    <value>Ein Fehler ist aufgetaucht während des importieren der Spielstand Datei. Stelle sicher dass die .JSON Datei unterstützt ist und korrekt ist.</value>
+  </data>
+  <data name="UninstallGameSuccess" xml:space="preserve">
+    <value>{0} wurde deinstalliert</value>
+  </data>
+  <data name="UninstallGameSuccessHeader" xml:space="preserve">
+    <value>Deinstellation abgeschlossen</value>
+  </data>
+  <data name="Config_CharacterHeader" xml:space="preserve">
+    <value>Charakter</value>
+  </data>
+  <data name="Config_MusicVolumeHeader" xml:space="preserve">
+    <value>Musik Lautstärke</value>
+  </data>
+  <data name="Config_SoundVolumeHeader" xml:space="preserve">
+    <value>Geraüsche Lautstärke</value>
+  </data>
+  <data name="GameDisplay_DownloadUplay" xml:space="preserve">
+    <value>Herunterladen von Ubisoft Connect</value>
+  </data>
+  <data name="Archive_ExportingFileStatus" xml:space="preserve">
+    <value>{0} am exportieren</value>
+  </data>
+  <data name="Archive_Title" xml:space="preserve">
+    <value>Archive Explorer</value>
+  </data>
+  <data name="GameClients_Bsnes" xml:space="preserve">
+    <value>bsnes</value>
+  </data>
+  <data name="Platform_Snes" xml:space="preserve">
+    <value>Super Nintendo Entertainment System</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymanPrototypeSnes" xml:space="preserve">
+    <value>Rayman Prototype - SNES</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymanPs1" xml:space="preserve">
+    <value>Rayman - PlayStation</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymanJaguar" xml:space="preserve">
+    <value>Rayman - Atari Jaguar</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymanMsDos" xml:space="preserve">
+    <value>Rayman - MS-DOS</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymansNewLevelsMsDos" xml:space="preserve">
+    <value>Rayman's New Levels - MS-DOS</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymanByHisFansMsDos" xml:space="preserve">
+    <value>Rayman By His Fans - MS-DOS</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_Rayman60LevelsMsDos" xml:space="preserve">
+    <value>Rayman 60 Levels - MS-DOS</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymanGbc" xml:space="preserve">
+    <value>Rayman - Game Boy Color</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymanAdvanceGba" xml:space="preserve">
+    <value>Rayman Advance - Game Boy Advance</value>
   </data>
 </root>

@@ -5,9 +5,8 @@ public class Rayman30thAccessAllByHisFansLevelsSetupGameAction : InstallModSetup
     protected override long GameBananaModId => 668603;
     protected override string[] ModIds => ["Rayman30th.DosFan.AllLevels.Steam", "Rayman30th.DosFan.AllLevels.Uplay"];
 
-    // TODO-LOC
-    public override LocalizedString Header => "Install the Access all Levels (Rayman by his Fans) mod";
-    public override LocalizedString Info => "By default there are two levels (\"The enchanted forest\" and \"High flyer\") which were made inaccessible. This is due to the levels having a bug where using a checkpoint twice causes the game to crash. The Access all Levels (Rayman by his Fans) mod by RayCarrot restores access to these levels.";
+    public override LocalizedString Header => new ResourceLocString(nameof(Resources.SetupGameAction_AccessAllByHisFansLevels_Header));
+    public override LocalizedString Info => new ResourceLocString(nameof(Resources.SetupGameAction_AccessAllByHisFansLevels_Info));
 
     public override SetupGameActionType Type => SetupGameActionType.Optional;
 }

@@ -13,7 +13,7 @@ public class GameProgressionManager_Rayman30thAnniversaryEdition_RaymanAdvanceGb
 
     private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-    public override string Name => "Rayman Advance - Game Boy Advance"; // TODO-LOC?
+    public override string Name => Resources.Progression_Rayman30thAnniversaryEdition_RaymanAdvanceGba;
 
     public override async IAsyncEnumerable<GameProgressionSlot> LoadSlotsAsync(FileSystemWrapper fileSystem)
     {

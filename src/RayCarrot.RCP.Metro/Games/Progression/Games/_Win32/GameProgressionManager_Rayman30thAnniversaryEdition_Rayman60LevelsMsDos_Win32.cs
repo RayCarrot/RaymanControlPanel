@@ -5,5 +5,5 @@ public class GameProgressionManager_Rayman30thAnniversaryEdition_Rayman60LevelsM
     public GameProgressionManager_Rayman30thAnniversaryEdition_Rayman60LevelsMsDos_Win32(GameDescriptor_Rayman30thAnniversaryEdition_Win32 gameDescriptor, GameInstallation gameInstallation, string progressionId, string gameId) 
         : base(gameDescriptor, gameInstallation, progressionId, gameId) { }
 
-    public override string Name => "Rayman 60 Levels - MS-DOS"; // TODO-LOC?
+    public override string Name => Resources.Progression_Rayman30thAnniversaryEdition_Rayman60LevelsMsDos;
 }

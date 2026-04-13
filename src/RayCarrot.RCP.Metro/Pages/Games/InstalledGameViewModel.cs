@@ -602,10 +602,9 @@ public class InstalledGameViewModel : BaseViewModel
 
     public async Task ReplaceIconImageAsync()
     {
-        // TODO-LOC
         FileBrowserResult result = await Services.BrowseUI.BrowseFileAsync(new FileBrowserViewModel()
         {
-            Title = "Select icon image",
+            Title = Resources.GameHub_SelectCustomIconImage,
             ExtensionFilter = "Image files|*.png;*.jpg;*.jpeg;*.bmp"
         });
 
@@ -634,9 +633,7 @@ public class InstalledGameViewModel : BaseViewModel
         catch (Exception ex)
         {
             Logger.Error(ex, "Replacing icon image for {0}", GameInstallation.FullId);
-
-            // TODO-LOC
-            await Services.MessageUI.DisplayExceptionMessageAsync(ex, "An error occurred when replacing the icon image. Make sure the image file is valid and try again.");
+            await Services.MessageUI.DisplayExceptionMessageAsync(ex, Resources.GameHub_SelectCustomIconImageError);
         }
     }
 
@@ -668,10 +665,9 @@ public class InstalledGameViewModel : BaseViewModel
 
     public async Task ReplaceBannerImageAsync()
     {
-        // TODO-LOC
         FileBrowserResult result = await Services.BrowseUI.BrowseFileAsync(new FileBrowserViewModel()
         {
-            Title = "Select banner image",
+            Title = Resources.GameHub_SelectCustomBannerImage,
             ExtensionFilter = "Image files|*.png;*.jpg;*.jpeg;*.bmp"
         });
 
@@ -699,9 +695,7 @@ public class InstalledGameViewModel : BaseViewModel
         catch (Exception ex)
         {
             Logger.Error(ex, "Replacing banner image for {0}", GameInstallation.FullId);
-
-            // TODO-LOC
-            await Services.MessageUI.DisplayExceptionMessageAsync(ex, "An error occurred when replacing the banner image. Make sure the image file is valid and try again.");
+            await Services.MessageUI.DisplayExceptionMessageAsync(ex, Resources.GameHub_SelectCustomBannerImageError);
         }
     }
 

@@ -34,7 +34,7 @@ public sealed partial class BakesaleLocaleFileType : FileType
 
     #region Public Properties
 
-    public override string TypeDisplayName => "String Locales"; // TODO-LOC
+    public override string TypeDisplayName => Resources.Archive_Format_BakesaleLocale;
     public override PackIconMaterialKind Icon => PackIconMaterialKind.FileDocumentOutline;
 
     #endregion

@@ -6374,4 +6374,137 @@ version</comment>
   <data name="GameOptions_GraphicsApi_OpenGL" xml:space="preserve">
     <value>OpenGL</value>
   </data>
+  <data name="Archive_Format_BakesaleLocale" xml:space="preserve">
+    <value>String Locales</value>
+  </data>
+  <data name="Archive_Format_BakesaleSprites" xml:space="preserve">
+    <value>Sprites Resource</value>
+  </data>
+  <data name="Archive_Format_BakesaleWaves" xml:space="preserve">
+    <value>Sounds Resource</value>
+  </data>
+  <data name="Rayman1_Prototype_Snes_Title" xml:space="preserve">
+    <value>Rayman Prototype</value>
+  </data>
+  <data name="GameClients_Bsnes" xml:space="preserve">
+    <value>bsnes</value>
+  </data>
+  <data name="Platform_Snes" xml:space="preserve">
+    <value>Super Nintendo Entertainment System</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymanPrototypeSnes" xml:space="preserve">
+    <value>Rayman Prototype - SNES</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymanPs1" xml:space="preserve">
+    <value>Rayman - PlayStation</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymanJaguar" xml:space="preserve">
+    <value>Rayman - Atari Jaguar</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymanMsDos" xml:space="preserve">
+    <value>Rayman - MS-DOS</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymansNewLevelsMsDos" xml:space="preserve">
+    <value>Rayman's New Levels - MS-DOS</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymanByHisFansMsDos" xml:space="preserve">
+    <value>Rayman By His Fans - MS-DOS</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_Rayman60LevelsMsDos" xml:space="preserve">
+    <value>Rayman 60 Levels - MS-DOS</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymanGbc" xml:space="preserve">
+    <value>Rayman - Game Boy Color</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymanAdvanceGba" xml:space="preserve">
+    <value>Rayman Advance - Game Boy Advance</value>
+  </data>
+  <data name="SetupGameAction_AccessAllByHisFansLevels_Header" xml:space="preserve">
+    <value>Install the Access all Levels (Rayman by his Fans) mod</value>
+  </data>
+  <data name="SetupGameAction_AccessAllByHisFansLevels_Info" xml:space="preserve">
+    <value>By default there are two levels ("The enchanted forest" and "High flyer") which were made inaccessible. This is due to the levels having a bug where using a checkpoint twice causes the game to crash. The Access all Levels (Rayman by his Fans) mod by RayCarrot restores access to these levels.</value>
+  </data>
+  <data name="SetupGameAction_AccessUbiKeyBonus_Header" xml:space="preserve">
+    <value>Install the Access Ubi Key Bonus (GBC) mod</value>
+  </data>
+  <data name="SetupGameAction_AccessUbiKeyBonus_Info" xml:space="preserve">
+    <value>There is a bonus level which can normally only be unlocked by linking the game to another supported title through the Ubi Key feature. This feature is however not available in the collection and there is no other way to access the level. The Access Ubi Key Bonus (GBC) mod by RayCarrot removes this requirement, allowing the level to be accessed.</value>
+  </data>
+  <data name="SetupGameAction_FixWindowIcon_Header" xml:space="preserve">
+    <value>Install the Fix Window Icon mod</value>
+  </data>
+  <data name="SetupGameAction_FixWindowIcon_Info" xml:space="preserve">
+    <value>Due to the game trying to load the icon from the wrong resource it will not display in the taskbar when the game is running. The Fix Window Icon mod by RayCarrot fixes this issue.</value>
+  </data>
+  <data name="SetupGameAction_TechnicalDosFixes_Header" xml:space="preserve">
+    <value>Install the Technical Fixes (DOS) mod</value>
+  </data>
+  <data name="SetupGameAction_TechnicalDosFixes_Info" xml:space="preserve">
+    <value>The MS-DOS versions have several issues in the collection, such as there being lag in some levels, parallax scrolling being disabled and the Mr Dark boss music not playing. The Technical Fixes (DOS) mod by RayCarrot fixes these issues.</value>
+  </data>
+  <data name="ModLoader_SteamDrmError" xml:space="preserve">
+    <value>At least one of the selected mods requires the game's executable file to have its DRM removed for it to be correctly patched.
+
+In order to remove the DRM you can use a tool such as "Steamless", which can be downloaded from its GitHub page. Once downloaded, open the exe, select the {0} file, press the unpack button and then replace the original exe file with the unpacked file that it creates.</value>
+    <comment>Arguments:
+exeFileName</comment>
+  </data>
+  <data name="ModLoader_SteamDrmErrorHeader" xml:space="preserve">
+    <value>SteamStub DRM detected</value>
+  </data>
+  <data name="ModLoader_BakesaleResourceModule_Description" xml:space="preserve">
+    <value>This allows replacing individual files within sprite and sound resources. Keep in mind that sprites have to maintain the same dimensions.</value>
+  </data>
+  <data name="ModLoader_Rayman30thMsDosMusicModule_Description" xml:space="preserve">
+    <value>This allows replacing the MP3 audio tracks in the MS-DOS versions, automatically updating the boot save-states with the new audio track sizes.</value>
+  </data>
+  <data name="GameHub_ReplaceIconImage" xml:space="preserve">
+    <value>Replace icon image</value>
+  </data>
+  <data name="GameHub_ReplaceIconImageInfo" xml:space="preserve">
+    <value>The recommended image size is 128x128</value>
+  </data>
+  <data name="GameHub_RemoveCustomIconImage" xml:space="preserve">
+    <value>Remove custom icon image</value>
+  </data>
+  <data name="GameHub_ReplaceBannerImage" xml:space="preserve">
+    <value>Replace banner image</value>
+  </data>
+  <data name="GameHub_ReplaceBannerImageInfo" xml:space="preserve">
+    <value>The recommended image size is 1024x512</value>
+  </data>
+  <data name="GameHub_RemoveCustomBannerImage" xml:space="preserve">
+    <value>Remove custom banner image</value>
+  </data>
+  <data name="GameHub_SelectCustomIconImage" xml:space="preserve">
+    <value>Select icon image</value>
+  </data>
+  <data name="GameHub_SelectCustomIconImageError" xml:space="preserve">
+    <value>An error occurred when replacing the icon image. Make sure the image file is valid and try again.</value>
+  </data>
+  <data name="GameHub_SelectCustomBannerImage" xml:space="preserve">
+    <value>Select banner image</value>
+  </data>
+  <data name="GameHub_SelectCustomBannerImageError" xml:space="preserve">
+    <value>An error occurred when replacing the banner image. Make sure the image file is valid and try again.</value>
+  </data>
+  <data name="Settings_ChangeAccentColor" xml:space="preserve">
+    <value>Change accent color</value>
+  </data>
+  <data name="Settings_ResetAccentColor" xml:space="preserve">
+    <value>Reset accent color</value>
+  </data>
+  <data name="Settings_SelectAccentColor" xml:space="preserve">
+    <value>Select an accent color</value>
+  </data>
+  <data name="ColorSelection_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="ColorSelection_Preview" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="Utilities_ArchiveExplorer_PIEHeader" xml:space="preserve">
+    <value>Bakesale archives (.pie)</value>
+  </data>
 </root>

@@ -6148,4 +6148,37 @@ Zastosowanie modyfikacji bez nich może spowodować, że nie będzie ona działa
   <data name="Settings_UseDiscordRichPresenceInfo" xml:space="preserve">
     <value>Jeśli ta opcja jest włączona, twoja aktywność na Discordzie będzie wyświetlana podczas używania Rayman Control Panel i gier, w które grasz. Pamiętaj, że obecnie funkcja ta nie działa w przypadku gier uruchamianych w emulatorze. W niektórych przypadkach konieczne jest ponowne uruchomienie aplikacji, aby zmiany zostały wprowadzone.</value>
   </data>
+  <data name="GameClients_Bsnes" xml:space="preserve">
+    <value>bsnes</value>
+  </data>
+  <data name="Platform_Snes" xml:space="preserve">
+    <value>Super Nintendo Entertainment System</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymanPrototypeSnes" xml:space="preserve">
+    <value>Rayman Prototype - SNES</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymanPs1" xml:space="preserve">
+    <value>Rayman - PlayStation</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymanJaguar" xml:space="preserve">
+    <value>Rayman - Atari Jaguar</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymanMsDos" xml:space="preserve">
+    <value>Rayman - MS-DOS</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymansNewLevelsMsDos" xml:space="preserve">
+    <value>Rayman's New Levels - MS-DOS</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymanByHisFansMsDos" xml:space="preserve">
+    <value>Rayman By His Fans - MS-DOS</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_Rayman60LevelsMsDos" xml:space="preserve">
+    <value>Rayman 60 Levels - MS-DOS</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymanGbc" xml:space="preserve">
+    <value>Rayman - Game Boy Color</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymanAdvanceGba" xml:space="preserve">
+    <value>Rayman Advance - Game Boy Advance</value>
+  </data>
 </root>

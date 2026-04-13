@@ -20,8 +20,9 @@
 
         <local:Card Grid.Row="0"
                     Margin="{StaticResource RCP.Thicknesses.Card}">
-            <!-- TODO-LOC -->
-            <mah:ColorCanvas SelectedColor="{Binding Path=SelectedColor}" />
+            <mah:ColorCanvas SelectedColor="{Binding Path=SelectedColor}"
+                             LabelColorName="{Resx ColorSelection_Name}"
+                             LabelColorPreview="{Resx ColorSelection_Preview}"/>
         </local:Card>
 
         <Grid Grid.Row="1"

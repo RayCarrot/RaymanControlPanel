@@ -5287,7 +5287,7 @@ Mensajes de error:
     <value>Instalar el mod de Tiempos Mínimos de Carga</value>
   </data>
   <data name="SetupGameAction_MinimumRaymanOriginsLoadingTimes_Info" xml:space="preserve">
-    <value>Este mod, creado por RayCarrot, reduce el tiempo mínimo de la pantalla de carga de 4 segundos a 0 segundos, haciendo que los tiempos de carga sean más rápidos.</value>
+    <value>El mod Minimum Loading Times es un mod de RayCarrot que cambia el tiempo mínimo de pantalla de carga de 4 segundos a 0 segundos, haciendo así que los tiempos de carga sean más rápidos. Como alternativa, puedes usar el mod Loadless Origins de RayCarrot, que elimina por completo las pantallas de carga.</value>
   </data>
   <data name="SetupGameAction_MissingMapperConfig_Header" xml:space="preserve">
     <value>Falta o es inválido el archivo de configuración del Mapper</value>
@@ -5431,7 +5431,7 @@ Mensajes de error:
     <value>El juego necesita ser parcheado para permitir el archivo cmdline.txt. Esto se puede hacer utilizando el mod CommandLine File Fix.</value>
   </data>
   <data name="GameSettings_UbiArt_LaunchCommands_LaunchArgumentsNotAvailableInfo" xml:space="preserve">
-    <value>El cliente de juego seleccionado actualmente no admite pasar argumentos de lanzamiento al juego. Cambia el cliente o configura el juego para que no use un cliente al lanzarlo si deseas utilizar argumentos de lanzamiento.</value>
+    <value>El cliente de juego seleccionado actualmente no permite pasar argumentos de inicio al juego. Cambia el cliente o configúralo para que no utilice ningún cliente de juego al iniciarlo si quieres usar argumentos de inicio.</value>
   </data>
   <data name="GameSettings_UbiArt_LaunchCommands_RootHeader" xml:space="preserve">
     <value>Directorio raíz</value>
@@ -5507,7 +5507,7 @@ ADVERTENCIA: Cargar directamente un mapa con esto omitirá la carga de tu archiv
     <value>Predeterminado</value>
   </data>
   <data name="PostUpdate_MigrateTPLS" xml:space="preserve">
-    <value>La utilidad de Banda sonora por nivel para Rayman 1 ha sido rediseñada en esta versión para no depender de una compilación personalizada de DOSBox. Para continuar usándola, debes instalarla nuevamente. La versión anterior se ha desinstalado automáticamente.</value>
+    <value>La herramienta de banda sonora por nivel para Rayman 1 se ha trasladado a un mod descargable en el Mod Loader. Para seguir utilizándola, debes volver a descargarla. La versión anterior se ha desinstalado automáticamente.</value>
   </data>
   <data name="PostUpdate_MigrateTPLSHeader" xml:space="preserve">
     <value>Aviso de actualización de banda sonora por nivel</value>
@@ -5743,5 +5743,425 @@ ADVERTENCIA: Cargar directamente un mapa con esto omitirá la carga de tu archiv
   </data>
   <data name="GameOptions_GraphicsApi_OpenGL" xml:space="preserve">
     <value>OpenGL</value>
+  </data>
+  <data name="About_Credits_Mr5088" xml:space="preserve">
+    <value>Traducción del programa al portugués (Brasil)</value>
+  </data>
+  <data name="ModLoader_DownloadPageBack" xml:space="preserve">
+    <value>Volver</value>
+  </data>
+  <data name="ModLoader_GameBanana_Credits" xml:space="preserve">
+    <value>Créditos</value>
+  </data>
+  <data name="ModLoader_GameBanana_Downloads" xml:space="preserve">
+    <value>Descargas</value>
+  </data>
+  <data name="ModLoader_GameBanana_DownloadsEmpty" xml:space="preserve">
+    <value>No hay archivos compatibles</value>
+  </data>
+  <data name="ModLoader_GameBanana_FileDownloaded" xml:space="preserve">
+    <value>Añadido a la biblioteca</value>
+  </data>
+  <data name="ModLoader_GameBanana_UpdateInfo" xml:space="preserve">
+    <value>Última actualización el {0}</value>
+  </data>
+  <data name="ModLoader_GameBanana_Version" xml:space="preserve">
+    <value>Versión {0}</value>
+  </data>
+  <data name="About_Credits_Clef" xml:space="preserve">
+    <value>Traducción del programa al chino (simplificado)</value>
+  </data>
+  <data name="Settings_ModLoader_ShowEssentialMods" xml:space="preserve">
+    <value>Mostrar primero los mods esenciales</value>
+  </data>
+  <data name="Settings_ModLoader_MarkUnseenMods" xml:space="preserve">
+    <value>Marcar mods no vistos</value>
+  </data>
+  <data name="ModLoader_DownloadModError" xml:space="preserve">
+    <value>Se produjo un error al descargar el mod {0}</value>
+  </data>
+  <data name="ModLoader_CategoryAndSortFeedInfo" xml:space="preserve">
+    <value>Mostrando los mods de la categoría "{0}" ordenados por "{1}"</value>
+  </data>
+  <data name="SetupGameAction_RaymanOriginsCrashDumps_Header" xml:space="preserve">
+    <value>Eliminar volcados de memoria</value>
+  </data>
+  <data name="SetupGameAction_RaymanOriginsCrashDumps_Info" xml:space="preserve">
+    <value>Cada vez que el juego se cierra de forma inesperada, se crea un archivo de volcado de memoria. Estos archivos ocupan alrededor de 200 MB cada uno, por lo que pueden consumir espacio innecesario. Se pueden eliminar con seguridad para liberar espacio en tu equipo.</value>
+  </data>
+  <data name="SetupGameAction_RaymanOriginsCrashDumps_Success" xml:space="preserve">
+    <value>Se eliminaron correctamente {0} de volcados de memoria</value>
+  </data>
+  <data name="SetupGameAction_RaymanOriginsCrashDumps_Error" xml:space="preserve">
+    <value>Se produjo un error al eliminar los volcados de memoria</value>
+  </data>
+  <data name="ExternalLinkWarning" xml:space="preserve">
+    <value>Estás a punto de abrir "{0}".
+Solo continúa si confías en este sitio web.</value>
+  </data>
+  <data name="ExternalLinkWarningHeader" xml:space="preserve">
+    <value>Advertencia de enlace externo</value>
+  </data>
+  <data name="ModLoader_DependenciesHeader" xml:space="preserve">
+    <value>Dependencias</value>
+  </data>
+  <data name="ModLoader_DependencyState_Enabled" xml:space="preserve">
+    <value>Descargado y activado</value>
+  </data>
+  <data name="ModLoader_DependencyState_Disabled" xml:space="preserve">
+    <value>Desactivado</value>
+  </data>
+  <data name="ModLoader_DependencyState_SortedTooHigh" xml:space="preserve">
+    <value>Ordenado demasiado alto</value>
+  </data>
+  <data name="ModLoader_DependencyState_SortedTooLow" xml:space="preserve">
+    <value>Ordenado demasiado bajo</value>
+  </data>
+  <data name="ModLoader_DependencyState_NotDownloaded" xml:space="preserve">
+    <value>No descargado</value>
+  </data>
+  <data name="ModLoader_DownloadDependencies" xml:space="preserve">
+    <value>El mod {0} requiere que los siguientes mods estén instalados. ¿Quieres descargarlos?
+
+{1}</value>
+  </data>
+  <data name="ModLoader_DownloadDependenciesHeader" xml:space="preserve">
+    <value>Dependencias del mod detectadas</value>
+  </data>
+  <data name="ModLoader_DownloadDependenciesError" xml:space="preserve">
+    <value>Se produjo un error al descargar las dependencias del mod</value>
+  </data>
+  <data name="ModLoader_MissingDependenciesWarning" xml:space="preserve">
+    <value>Los siguientes mods, requeridos por {0}, no están instalados, activados o están en un orden incorrecto:
+
+{1}
+
+Aplicar el mod sin estos puede hacer que no funcione correctamente. ¿Seguro que quieres continuar?</value>
+  </data>
+  <data name="ModLoader_UninstallModWithDependantsWarning" xml:space="preserve">
+    <value>Tienes al menos otro mod que requiere que este mod esté instalado para funcionar. Desinstalarlo puede hacer que otros mods dejen de funcionar correctamente. ¿Seguro que quieres continuar?</value>
+  </data>
+  <data name="ModLoader_GameBanana_SelectDependencyFileHeader" xml:space="preserve">
+    <value>Selecciona el archivo de GameBanana que quieres usar para el mod {0}</value>
+  </data>
+  <data name="ModLoader_GameBanana_SelectDependencyFileTitle" xml:space="preserve">
+    <value>Seleccionar archivo del mod</value>
+  </data>
+  <data name="ModLoader_GameTargetNotAddedError" xml:space="preserve">
+    <value>No se puede abrir el mod porque ninguno de los siguientes juegos compatibles ha sido añadido:
+
+{0}</value>
+  </data>
+  <data name="ModLoader_UnsupportedModVersionError" xml:space="preserve">
+    <value>No se pudo instalar el mod {0} porque fue creado para una versión posterior de Rayman Control Panel.</value>
+  </data>
+  <data name="Utilities_R1GbcPasswordGenerator_Header" xml:space="preserve">
+    <value>Generador de contraseñas de Rayman 1 GBC</value>
+  </data>
+  <data name="R1GBCPasswords_Worldmap" xml:space="preserve">
+    <value>Mapa del mundo desbloqueado</value>
+  </data>
+  <data name="R1GBCPasswords_Level" xml:space="preserve">
+    <value>Nivel</value>
+  </data>
+  <data name="R1GBC_LevelName_0" xml:space="preserve">
+    <value>Spellbound Forest 1</value>
+  </data>
+  <data name="R1GBC_LevelName_1" xml:space="preserve">
+    <value>Spellbound Forest 2</value>
+  </data>
+  <data name="R1GBC_LevelName_2" xml:space="preserve">
+    <value>Spellbound Forest 3</value>
+  </data>
+  <data name="R1GBC_LevelName_3" xml:space="preserve">
+    <value>Spellbound Forest 4</value>
+  </data>
+  <data name="R1GBC_LevelName_4" xml:space="preserve">
+    <value>Airy Tunes 1</value>
+  </data>
+  <data name="R1GBC_LevelName_5" xml:space="preserve">
+    <value>Airy Tunes 2</value>
+  </data>
+  <data name="R1GBC_LevelName_6" xml:space="preserve">
+    <value>Airy Tunes 3</value>
+  </data>
+  <data name="R1GBC_LevelName_7" xml:space="preserve">
+    <value>Airy Tunes 4</value>
+  </data>
+  <data name="R1GBC_LevelName_8" xml:space="preserve">
+    <value>Rainy Forest 1</value>
+  </data>
+  <data name="R1GBC_LevelName_9" xml:space="preserve">
+    <value>Rainy Forest 2</value>
+  </data>
+  <data name="R1GBC_LevelName_10" xml:space="preserve">
+    <value>Rainy Forest 3</value>
+  </data>
+  <data name="R1GBC_LevelName_11" xml:space="preserve">
+    <value>Rocky Peaks 1</value>
+  </data>
+  <data name="R1GBC_LevelName_12" xml:space="preserve">
+    <value>Rocky Peaks 2</value>
+  </data>
+  <data name="R1GBC_LevelName_13" xml:space="preserve">
+    <value>Rocky Peaks 3</value>
+  </data>
+  <data name="R1GBC_LevelName_14" xml:space="preserve">
+    <value>Rocky Peaks 4</value>
+  </data>
+  <data name="R1GBC_LevelName_15" xml:space="preserve">
+    <value>Ancient Forest 1</value>
+  </data>
+  <data name="R1GBC_LevelName_16" xml:space="preserve">
+    <value>Ancient Forest 2</value>
+  </data>
+  <data name="R1GBC_LevelName_17" xml:space="preserve">
+    <value>Ancient Forest 3</value>
+  </data>
+  <data name="R1GBC_LevelName_18" xml:space="preserve">
+    <value>Fiery Depths 1</value>
+  </data>
+  <data name="R1GBC_LevelName_19" xml:space="preserve">
+    <value>Fiery Depths 2</value>
+  </data>
+  <data name="R1GBC_LevelName_20" xml:space="preserve">
+    <value>Fiery Depths 3</value>
+  </data>
+  <data name="R1GBC_LevelName_21" xml:space="preserve">
+    <value>Fiery Depths 4</value>
+  </data>
+  <data name="R1GBC_LevelName_22" xml:space="preserve">
+    <value>Arcane Forest 1</value>
+  </data>
+  <data name="R1GBC_LevelName_23" xml:space="preserve">
+    <value>Arcane Forest 2</value>
+  </data>
+  <data name="R1GBC_LevelName_24" xml:space="preserve">
+    <value>Arcane Forest 3</value>
+  </data>
+  <data name="R1GBC_LevelName_25" xml:space="preserve">
+    <value>Arcane Forest 4</value>
+  </data>
+  <data name="R1GBC_LevelName_26" xml:space="preserve">
+    <value>Arcane Forest 5</value>
+  </data>
+  <data name="R1GBC_LevelName_27" xml:space="preserve">
+    <value>Dark Legacy 1</value>
+  </data>
+  <data name="R1GBC_LevelName_28" xml:space="preserve">
+    <value>Dark Legacy 2</value>
+  </data>
+  <data name="R1GBC_LevelName_29" xml:space="preserve">
+    <value>Dark Legacy 3</value>
+  </data>
+  <data name="R1GBC_LevelName_30" xml:space="preserve">
+    <value>Dark Legacy 4</value>
+  </data>
+  <data name="R1GBC_LevelName_31" xml:space="preserve">
+    <value>Time Attack</value>
+  </data>
+  <data name="R1GBC_LevelName_32" xml:space="preserve">
+    <value>Unused 1</value>
+  </data>
+  <data name="R1GBC_LevelName_33" xml:space="preserve">
+    <value>Unused 2</value>
+  </data>
+  <data name="R1GBCPasswords_Cage1" xml:space="preserve">
+    <value>Cage 1</value>
+  </data>
+  <data name="R1GBCPasswords_Cage2" xml:space="preserve">
+    <value>Cage 2</value>
+  </data>
+  <data name="GameLink_DirectX" xml:space="preserve">
+    <value>Configuración de DirectX</value>
+  </data>
+  <data name="GameHub_ModLoaderPanel_AppliedModsSingle" xml:space="preserve">
+    <value>{0}/{1} mod aplicado</value>
+  </data>
+  <data name="GameHub_ModLoaderPanel_AppliedModsMultiple" xml:space="preserve">
+    <value>{0}/{1} mods aplicados</value>
+  </data>
+  <data name="GameHub_ModLoaderPanel_DownloadableModsSingle" xml:space="preserve">
+    <value>{0} mod descargable disponible</value>
+  </data>
+  <data name="GameHub_ModLoaderPanel_DownloadableModsMultiple" xml:space="preserve">
+    <value>{0} mods descargables disponibles</value>
+  </data>
+  <data name="ToolDownload_Status" xml:space="preserve">
+    <value>Descargando archivos</value>
+  </data>
+  <data name="ToolDownload_Success" xml:space="preserve">
+    <value>Los archivos se descargaron correctamente</value>
+  </data>
+  <data name="ToolDownload_Error" xml:space="preserve">
+    <value>Se produjo un error al descargar los archivos</value>
+  </data>
+  <data name="Rayman1_Prototype_Jaguar_Title" xml:space="preserve">
+    <value>Rayman Prototype</value>
+  </data>
+  <data name="Rayman1_Demo_Jaguar_Title" xml:space="preserve">
+    <value>Rayman Demo</value>
+  </data>
+  <data name="Rayman30thAnniversaryEdition_Win32_Title" xml:space="preserve">
+    <value>Rayman 30th Anniversary Edition</value>
+  </data>
+  <data name="GameHub_PerLevelSoundtrackPanel_Download" xml:space="preserve">
+    <value>Descargar mod</value>
+  </data>
+  <data name="Progression_RA_Skins" xml:space="preserve">
+    <value>Aspectos</value>
+  </data>
+  <data name="Progression_RA_BeginnerLeague" xml:space="preserve">
+    <value>Copas de la Liga Principiante</value>
+  </data>
+  <data name="Progression_RA_ProLeague" xml:space="preserve">
+    <value>Copas de la Liga Profesional</value>
+  </data>
+  <data name="Progression_RA_MasterLeague" xml:space="preserve">
+    <value>Ligas Máster completadas</value>
+  </data>
+  <data name="Utilities_Converter_R1JaguarSaveHeader" xml:space="preserve">
+    <value>Rayman 1 (Atari Jaguar)</value>
+  </data>
+  <data name="Utilities_Converter_R2GbcSaveHeader" xml:space="preserve">
+    <value>Datos de guardado de Rayman 2 (GBC)</value>
+  </data>
+  <data name="AddGames_ToggleDemosAndPrototypes" xml:space="preserve">
+    <value>Mostrar {0} demos/prototipos</value>
+  </data>
+  <data name="UpdateAvailable_Header" xml:space="preserve">
+    <value>Actualización disponible</value>
+  </data>
+  <data name="UpdateAvailable_ChangelogHeader" xml:space="preserve">
+    <value>Registro de cambios</value>
+  </data>
+  <data name="UpdateAvailable_Cancel" xml:space="preserve">
+    <value>Recordármelo más tarde</value>
+  </data>
+  <data name="UpdateAvailable_Confirm" xml:space="preserve">
+    <value>Actualizar</value>
+  </data>
+  <data name="UpdateAvailable_Title" xml:space="preserve">
+    <value>Nueva actualización disponible</value>
+  </data>
+  <data name="UpdateAvailable_Info_CurrentVersion" xml:space="preserve">
+    <value>Versión actual</value>
+  </data>
+  <data name="UpdateAvailable_Info_NewVersion" xml:space="preserve">
+    <value>Nueva versión</value>
+  </data>
+  <data name="UpdateAvailable_Info_VersionBeta" xml:space="preserve">
+    <value>{0} (BETA)</value>
+  </data>
+  <data name="UpdateAvailable_Info_ReleaseDate" xml:space="preserve">
+    <value>Fecha de lanzamiento</value>
+  </data>
+  <data name="UpdateAvailable_Info_Size" xml:space="preserve">
+    <value>Tamaño de la actualización</value>
+  </data>
+  <data name="UpdateAvailable_Info_Url" xml:space="preserve">
+    <value>URL de la actualización</value>
+  </data>
+  <data name="UpdateCheck_NoReleaseFoundError" xml:space="preserve">
+    <value>No se encontró una versión válida de la aplicación</value>
+  </data>
+  <data name="UpdateCheck_ConnectionError" xml:space="preserve">
+    <value>No se puede conectar al servidor. Comprueba tu conexión a Internet.</value>
+  </data>
+  <data name="UpdateCheck_UnknownError" xml:space="preserve">
+    <value>Se produjo un error desconocido</value>
+  </data>
+  <data name="AprilFoolsMessage" xml:space="preserve">
+    <value>¡INOCENTE! ¡Los Rabbids han invadido el Rayman Control Panel! ¿Puedes encontrarlos a todos?</value>
+  </data>
+  <data name="AprilFoolsMessageHeader" xml:space="preserve">
+    <value>INOCENTE</value>
+  </data>
+  <data name="GameDisplay_OpenPCGamingWikiPage" xml:space="preserve">
+    <value>Abrir página de PCGamingWiki</value>
+  </data>
+  <data name="Config_MenuMusic" xml:space="preserve">
+    <value>Música del menú</value>
+  </data>
+  <data name="Config_Volume" xml:space="preserve">
+    <value>Volumen</value>
+  </data>
+  <data name="Lang_Japanese" xml:space="preserve">
+    <value>Japonés</value>
+  </data>
+  <data name="Lang_TraditionalChinese" xml:space="preserve">
+    <value>Chino (tradicional)</value>
+  </data>
+  <data name="Lang_SimplifiedChinese" xml:space="preserve">
+    <value>Chino (simplificado)</value>
+  </data>
+  <data name="Lang_BrazilianPortuguese" xml:space="preserve">
+    <value>Portugués (Brasil)</value>
+  </data>
+  <data name="Config_JoypadRumbleRace" xml:space="preserve">
+    <value>Activar vibración del mando (modo carrera)</value>
+  </data>
+  <data name="Config_JoypadRumbleBattle" xml:space="preserve">
+    <value>Activar vibración del mando (modo batalla)</value>
+  </data>
+  <data name="SetupGameAction_Rayman1FMVs_Header" xml:space="preserve">
+    <value>Instalar el mod Rayman FMVs</value>
+  </data>
+  <data name="SetupGameAction_Rayman1FMVs_Info" xml:space="preserve">
+    <value>Algunas versiones del juego no incluyen las cinemáticas de introducción y final. Al usar el mod Rayman FMVs, junto con la herramienta de banda sonora por nivel, se pueden restaurar estas cinemáticas.</value>
+  </data>
+  <data name="SetupGameAction_GBCRemoveUbiKeyRequirement_Header" xml:space="preserve">
+    <value>Instalar el mod Remove Ubi Key Requirement</value>
+  </data>
+  <data name="SetupGameAction_GBCRemoveUbiKeyRequirement_Info" xml:space="preserve">
+    <value>Hay un nivel extra que normalmente solo se puede desbloquear vinculando el juego con otro título compatible mediante la función Ubi Key. El mod Remove Ubi Key Requirement de RayCarrot elimina este requisito, permitiendo acceder al nivel sin necesidad de vincularlo a otro juego.</value>
+  </data>
+  <data name="CloseGameError" xml:space="preserve">
+    <value>Se produjo un error al cerrar el juego</value>
+  </data>
+  <data name="GameHub_Close" xml:space="preserve">
+    <value>Detener</value>
+  </data>
+  <data name="Settings_CheckForRunningGames" xml:space="preserve">
+    <value>Comprobar y mostrar si hay juegos en ejecución</value>
+  </data>
+  <data name="Settings_UseDiscordRichPresence" xml:space="preserve">
+    <value>Activar Discord Rich Presence</value>
+  </data>
+  <data name="Settings_UseDiscordRichPresenceInfo" xml:space="preserve">
+    <value>Si está activado, tu actividad de Discord mostrará cuándo estás usando Rayman Control Panel y a qué juegos estás jugando mientras está en ejecución. Ten en cuenta que actualmente no funciona con juegos emulados. En algunos casos, es necesario reiniciar la aplicación para que se actualice.</value>
+  </data>
+  <data name="GameClients_Bsnes" xml:space="preserve">
+    <value>bsnes</value>
+  </data>
+  <data name="Platform_Snes" xml:space="preserve">
+    <value>Super Nintendo Entertainment System</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymanPrototypeSnes" xml:space="preserve">
+    <value>Rayman Prototype - SNES</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymanPs1" xml:space="preserve">
+    <value>Rayman - PlayStation</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymanJaguar" xml:space="preserve">
+    <value>Rayman - Atari Jaguar</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymanMsDos" xml:space="preserve">
+    <value>Rayman - MS-DOS</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymansNewLevelsMsDos" xml:space="preserve">
+    <value>Rayman's New Levels - MS-DOS</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymanByHisFansMsDos" xml:space="preserve">
+    <value>Rayman By His Fans - MS-DOS</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_Rayman60LevelsMsDos" xml:space="preserve">
+    <value>Rayman 60 Levels - MS-DOS</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymanGbc" xml:space="preserve">
+    <value>Rayman - Game Boy Color</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymanAdvanceGba" xml:space="preserve">
+    <value>Rayman Advance - Game Boy Advance</value>
   </data>
 </root>

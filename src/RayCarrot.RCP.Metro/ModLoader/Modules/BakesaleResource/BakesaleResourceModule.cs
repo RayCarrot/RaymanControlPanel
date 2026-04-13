@@ -12,7 +12,7 @@ public class BakesaleResourceModule : ModModule
     public const string WavesResourceFileExtension = ".waves";
 
     public override string Id => "bakesale-resources";
-    public override LocalizedString Description => "This allows replacing individual files within sprite and sound resources. Keep in mind that sprites have to maintain the same dimensions."; // TODO-LOC
+    public override LocalizedString Description => new ResourceLocString(nameof(Resources.ModLoader_BakesaleResourceModule_Description));
 
     public override IReadOnlyCollection<IFilePatch> GetPatchedFiles(Mod mod, FileSystemPath modulePath)
     {

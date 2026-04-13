@@ -38,7 +38,7 @@ public sealed partial class BakesaleWavesFileType : FileType
 
     #region Public Properties
 
-    public override string TypeDisplayName => "Sounds Resource"; // TODO-LOC
+    public override string TypeDisplayName => Resources.Archive_Format_BakesaleWaves;
     public override PackIconMaterialKind Icon => PackIconMaterialKind.FileMusicOutline;
 
     #endregion

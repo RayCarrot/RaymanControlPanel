@@ -6006,4 +6006,76 @@ Back：穿墙模式
   <data name="GameOptions_GraphicsApi_OpenGL" xml:space="preserve">
     <value>OpenGL</value>
   </data>
+  <data name="ToolDownload_Status" xml:space="preserve">
+    <value>下载文件</value>
+  </data>
+  <data name="ToolDownload_Success" xml:space="preserve">
+    <value>此文件已成功下载</value>
+  </data>
+  <data name="ToolDownload_Error" xml:space="preserve">
+    <value>在下载文件时出现错误</value>
+  </data>
+  <data name="Rayman1_Prototype_Jaguar_Title" xml:space="preserve">
+    <value>雷曼原型</value>
+  </data>
+  <data name="Rayman1_Demo_Jaguar_Title" xml:space="preserve">
+    <value>雷曼Demo</value>
+  </data>
+  <data name="Rayman30thAnniversaryEdition_Win32_Title" xml:space="preserve">
+    <value>雷曼30周年纪念版</value>
+  </data>
+  <data name="GameHub_PerLevelSoundtrackPanel_Download" xml:space="preserve">
+    <value>下载Mod</value>
+  </data>
+  <data name="Progression_RA_Skins" xml:space="preserve">
+    <value>皮肤</value>
+  </data>
+  <data name="Progression_RA_BeginnerLeague" xml:space="preserve">
+    <value>新手联盟杯</value>
+  </data>
+  <data name="Progression_RA_ProLeague" xml:space="preserve">
+    <value>专业联盟杯</value>
+  </data>
+  <data name="Progression_RA_MasterLeague" xml:space="preserve">
+    <value>大师联盟赛完成</value>
+  </data>
+  <data name="Utilities_Converter_R1JaguarSaveHeader" xml:space="preserve">
+    <value>雷曼1 （雅达利美洲豹）</value>
+  </data>
+  <data name="Utilities_Converter_R2GbcSaveHeader" xml:space="preserve">
+    <value>雷曼2 （GBC） 存档数据</value>
+  </data>
+  <data name="GameClients_Bsnes" xml:space="preserve">
+    <value>bsnes</value>
+  </data>
+  <data name="Platform_Snes" xml:space="preserve">
+    <value>Super Nintendo Entertainment System</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymanPrototypeSnes" xml:space="preserve">
+    <value>Rayman Prototype - SNES</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymanPs1" xml:space="preserve">
+    <value>Rayman - PlayStation</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymanJaguar" xml:space="preserve">
+    <value>Rayman - Atari Jaguar</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymanMsDos" xml:space="preserve">
+    <value>Rayman - MS-DOS</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymansNewLevelsMsDos" xml:space="preserve">
+    <value>Rayman's New Levels - MS-DOS</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymanByHisFansMsDos" xml:space="preserve">
+    <value>Rayman By His Fans - MS-DOS</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_Rayman60LevelsMsDos" xml:space="preserve">
+    <value>Rayman 60 Levels - MS-DOS</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymanGbc" xml:space="preserve">
+    <value>Rayman - Game Boy Color</value>
+  </data>
+  <data name="Progression_Rayman30thAnniversaryEdition_RaymanAdvanceGba" xml:space="preserve">
+    <value>Rayman Advance - Game Boy Advance</value>
+  </data>
 </root>

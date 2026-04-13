@@ -7,7 +7,7 @@ namespace RayCarrot.RCP.Metro.ModLoader.Modules.Rayman30thMsDosMusic;
 public class Rayman30thMsDosMusicModule : ModModule
 {
     public override string Id => "30th-dos-music";
-    public override LocalizedString Description => "This allows replacing the MP3 audio tracks in the MS-DOS versions, automatically updating the boot save-states with the new audio track sizes."; // TODO-LOC
+    public override LocalizedString Description => new ResourceLocString(nameof(Resources.ModLoader_Rayman30thMsDosMusicModule_Description));
 
     public Rayman30thMsDosMusicModuleGame[] Games { get; } =
     [

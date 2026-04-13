@@ -37,7 +37,7 @@ public sealed partial class BakesaleSpritesFileType : FileType
 
     #region Public Properties
 
-    public override string TypeDisplayName => "Sprites Resource"; // TODO-LOC
+    public override string TypeDisplayName => Resources.Archive_Format_BakesaleSprites;
     public override PackIconMaterialKind Icon => PackIconMaterialKind.FileImageOutline;
 
     #endregion

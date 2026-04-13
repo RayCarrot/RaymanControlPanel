@@ -98,7 +98,7 @@ public class ArchivesUtilityViewModel : UtilityViewModel
                 })),
 
             new ArchivesUtilityTypeViewModel(
-                name: "Bakesale archives (.pie)", // TODO-LOC
+                name: new ResourceLocString(nameof(Resources.Utilities_ArchiveExplorer_PIEHeader)),
                 fileExtension: new FileExtension(".pie"),
                 getManagerFunc: (data, mode) => new BakesalePieArchiveDataManager(
                     gameKey: data.GetRequiredAttribute<BakesaleGameModeInfoAttribute>().GameKey),
