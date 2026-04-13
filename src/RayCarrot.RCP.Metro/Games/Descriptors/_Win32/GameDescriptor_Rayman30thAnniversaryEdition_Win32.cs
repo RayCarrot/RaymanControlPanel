@@ -103,6 +103,7 @@ public sealed class GameDescriptor_Rayman30thAnniversaryEdition_Win32 : Win32Gam
         builder.Register(new ModModuleComponent(_ => new Rayman30thMsDosMusicModule()));
         builder.Register(new ModModuleComponent(_ => new BakesaleResourceModule()));
 
+        builder.Register(new SetupGameActionComponent(_ => new Rayman30thFixWindowIconSetupGameAction()));
         builder.Register(new SetupGameActionComponent(_ => new Rayman30thTechnicalDosFixesSetupGameAction()));
         builder.Register(new SetupGameActionComponent(_ => new Rayman30thAccessAllByHisFansLevelsSetupGameAction()));
         builder.Register(new SetupGameActionComponent(_ => new Rayman30thAccessUbiKeyBonusSetupGameAction()));
