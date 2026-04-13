@@ -21,75 +21,18 @@ public class GameProgressionManager_Rayman_Jaguar : EmulatedGameProgressionManag
             if (saveSlot.SaveName.IsNullOrEmpty())
                 continue;
 
-            int cages = 0;
-
-            void addCages(JAG_SaveLevel saveLevel)
-            {
-                if (saveLevel.Cage1)
-                    cages++;
-                if (saveLevel.Cage2)
-                    cages++;
-                if (saveLevel.Cage3)
-                    cages++;
-                if (saveLevel.Cage4)
-                    cages++;
-                if (saveLevel.Cage5)
-                    cages++;
-                if (saveLevel.Cage6)
-                    cages++;
-            }
-
-            // Calculate cages from each level
-            addCages(saveSlot.PinkPlantWoods);
-            addCages(saveSlot.AnguishLagoon);
-            addCages(saveSlot.ForgottenSwamps);
-            addCages(saveSlot.MoskitosNest);
-            addCages(saveSlot.BongoHills);
-            addCages(saveSlot.AllegroPresto);
-            addCages(saveSlot.GongHeights);
-            addCages(saveSlot.MrSaxsHullaballoo);
-            addCages(saveSlot.TwilightGulch);
-            addCages(saveSlot.TheHardRocks);
-            addCages(saveSlot.MrStonesPeaks);
-            addCages(saveSlot.EraserPlains);
-            addCages(saveSlot.PencilPentathlon);
-            addCages(saveSlot.SpaceMamasCrater);
-            addCages(saveSlot.CrystalPalace);
-            addCages(saveSlot.EatatJoes);
-            addCages(saveSlot.MrSkopsStalactites);
-
-            // Convert from BCD
-            int livesCount = 0;
-            livesCount += 10 * (saveSlot.LivesCount >> 4);
-            livesCount += saveSlot.LivesCount & 0xF;
+            IReadOnlyList<GameProgressionDataItem> dataItems = Rayman1Progression.CreateProgressionItems(
+                saveSlot, out int collectiblesCount, out int maxCollectiblesCount);
 
             int slotIndex = saveIndex;
 
             yield return new SerializabeEmulatedGameProgressionSlot<JAG_SaveData>(
                 name: saveSlot.SaveName.ToUpper(),
                 index: saveIndex,
-                collectiblesCount: cages,
-                totalCollectiblesCount: 102,
+                collectiblesCount: collectiblesCount,
+                totalCollectiblesCount: maxCollectiblesCount,
                 emulatedSave: emulatedSave,
-                dataItems: new[]
-                {
-                    new GameProgressionDataItem(
-                        isPrimaryItem: true,
-                        icon: ProgressionIconAsset.R1_Cage,
-                        header: new ResourceLocString(nameof(Resources.Progression_Cages)),
-                        value: cages,
-                        max: 102),
-                    new GameProgressionDataItem(
-                        isPrimaryItem: false,
-                        icon: ProgressionIconAsset.R1_Continue,
-                        header: new ResourceLocString(nameof(Resources.Progression_Continues)),
-                        value: saveSlot.ContinuesCount),
-                    new GameProgressionDataItem(
-                        isPrimaryItem: false,
-                        icon: ProgressionIconAsset.R1_Life,
-                        header: new ResourceLocString(nameof(Resources.Progression_Lives)),
-                        value: livesCount),
-                },
+                dataItems: dataItems,
                 serializable: saveData)
             {
                 GetExportObject = x => x.SaveSlots[slotIndex],
