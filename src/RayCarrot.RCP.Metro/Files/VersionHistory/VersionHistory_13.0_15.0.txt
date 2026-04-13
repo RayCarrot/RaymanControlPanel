@@ -6,8 +6,8 @@
     • Added a mod loader module which allows for replacing music in the MS-DOS versions
     • Added a mod loader module which allows for replacing sprites and sounds from resource files
     • Added GameBanana mod support
-    • Add progression support
-    • Add setup game actions, recommending mods to fix various issues
+    • Added progression support
+    • Added setup game actions, recommending mods to fix various issues
 • Added options to replace the icon and banner images for games
 • Added an option to freely change the app accent color
 • Added support for linebreaks when using the UBIART-LOC mod module
