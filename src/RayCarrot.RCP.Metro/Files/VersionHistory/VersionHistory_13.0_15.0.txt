@@ -1,4 +1,4 @@
-﻿-----   Version 14.5.0 - April ??, 2026   -----
+﻿-----   Version 14.5.0 - April 13, 2026   -----
 • Added support for the SNES prototype of Rayman 1
 • Added support for the bsnes emulator
 • Rayman 30th Anniversary Edition improvements:
@@ -14,6 +14,7 @@
 • Added progression support for GBC games when using the SameBoy emulator
 • Removed the custom game icons for demos and prototypes, making them now use the same icons as the retail versions
 • Updated the order which games available on multiple platforms are shown to follow platform release order, while prioritizing PC platforms first
+• Changed the setup game actions for removing the Ubi Key requirement for Rayman (GBC) and Tonic Trouble (GBC) to be listed as recommended rather than optional actions
 • Improved the image scaling for mod thumbnails in the mod loader
 • Removing an emulator will no longer default the games which used it to now use the first available game client, avoiding issues where games such as Rayman Forever would get set to launch through Ubisoft Connect after removing DOSBox
 • Fixed a bug where temp files would not always get deleted when viewing a read-only file in the Archive Explorer
