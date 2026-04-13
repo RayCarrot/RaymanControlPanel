@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Windows.Input;
+using ImageMagick;
 using Nito.AsyncEx;
 using RayCarrot.RCP.Metro.Games.Components;
 using RayCarrot.RCP.Metro.Games.Data;
@@ -109,9 +110,9 @@ public class InstalledGameViewModel : BaseViewModel
     public LocalizedString PlatformDisplayName { get; }
     public GamePlatformIconAsset PlatformIcon { get; }
 
-    public string GameIcon { get; set; }
+    public object GameIcon { get; set; }
     public bool HasCustomGameIcon { get; set; }
-    public string GameBanner { get; set; }
+    public object GameBanner { get; set; }
     public bool HasCustomGameBanner { get; set; }
 
     public ObservableCollection<GamePanelViewModel> GamePanels { get; }
@@ -360,6 +361,29 @@ public class InstalledGameViewModel : BaseViewModel
         HasCustomGameBanner = GameInstallation.GetValue<string?>(GameDataKey.RCP_BannerImage) != null;
     }
 
+    private void CropToAspectRatio(MagickImage img, uint width, uint height)
+    {
+        double aspectRatio = width / (double)height;
+        
+        uint newWidth;
+        uint newHeight;
+        if (img.Width >= aspectRatio * img.Height)
+        {
+            newHeight = img.Height;
+            newWidth = (uint)(aspectRatio * newHeight);
+        }
+        else
+        {
+            newWidth = img.Width;
+            newHeight = Math.Max(1, newWidth / 2);
+        }
+
+        int cropX = (int)((img.Width - newWidth) / 2);
+        int cropY = (int)((img.Height - newHeight) / 2);
+
+        img.Crop(new MagickGeometry(cropX, cropY, newWidth, newHeight));
+    }
+
     #endregion
 
     #region Public Methods
@@ -588,13 +612,55 @@ public class InstalledGameViewModel : BaseViewModel
         if (result.CanceledByUser)
             return;
 
-        GameInstallation.SetValue<string>(GameDataKey.RCP_IconImage, result.SelectedFile);
-        Services.Messenger.Send(new ModifiedGameIconMessage(GameInstallation));
-        RefreshGameIcon();
+        try
+        {
+            FileSystemPath dstFilePath = AppFilePaths.GameAssetsPath + GameInstallation.InstallationId + "GameIcon.png";
+
+            using MagickImage img = new(result.SelectedFile);
+            CropToAspectRatio(img, 128, 128);
+            img.Resize(128, 128);
+
+            // Save the modified file to the game assets directory
+            Directory.CreateDirectory(dstFilePath.Parent);
+            await img.WriteAsync(dstFilePath);
+
+            // Store as a modified file so it automatically gets removed with the game
+            GameInstallation.ModifyObject<AddedGameFiles>(GameDataKey.RCP_AddedFiles, x => x.Files.Add(dstFilePath));
+
+            GameInstallation.SetValue<string>(GameDataKey.RCP_IconImage, dstFilePath);
+            Services.Messenger.Send(new ModifiedGameIconMessage(GameInstallation));
+            RefreshGameIcon();
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex, "Replacing icon image for {0}", GameInstallation.FullId);
+
+            // TODO-LOC
+            await Services.MessageUI.DisplayExceptionMessageAsync(ex, "An error occurred when replacing the icon image. Make sure the image file is valid and try again.");
+        }
     }
 
     public void RemoveCustomIconImage()
     {
+        // Delete the icon if it was added
+        FileSystemPath iconPath = GameInstallation.GetValue<string?>(GameDataKey.RCP_IconImage);
+        if (iconPath.FileExists)
+        {
+            AddedGameFiles? addedFiles = GameInstallation.GetObject<AddedGameFiles>(GameDataKey.RCP_AddedFiles);
+            if (addedFiles != null && addedFiles.Files.Contains(iconPath))
+            {
+                try
+                {
+                    Services.File.DeleteFile(iconPath);
+                    addedFiles.Files.Remove(iconPath);
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex, "Deleting custom game icon file");
+                }
+            }
+        }
+
         GameInstallation.SetValue<string?>(GameDataKey.RCP_IconImage, null);
         Services.Messenger.Send(new ModifiedGameIconMessage(GameInstallation));
         RefreshGameIcon();
@@ -612,12 +678,54 @@ public class InstalledGameViewModel : BaseViewModel
         if (result.CanceledByUser)
             return;
 
-        GameInstallation.SetValue<string>(GameDataKey.RCP_BannerImage, result.SelectedFile);
-        RefreshGameBanner();
+        try
+        {
+            FileSystemPath dstFilePath = AppFilePaths.GameAssetsPath + GameInstallation.InstallationId + "GameBanner.png";
+
+            using MagickImage img = new(result.SelectedFile);
+            CropToAspectRatio(img, 1024, 512);
+            img.Resize(1024, 512);
+
+            // Save the modified file to the game assets directory
+            Directory.CreateDirectory(dstFilePath.Parent);
+            await img.WriteAsync(dstFilePath);
+
+            // Store as a modified file so it automatically gets removed with the game
+            GameInstallation.ModifyObject<AddedGameFiles>(GameDataKey.RCP_AddedFiles, x => x.Files.Add(dstFilePath));
+
+            GameInstallation.SetValue<string>(GameDataKey.RCP_BannerImage, dstFilePath);
+            RefreshGameBanner();
+        }
+        catch (Exception ex)
+        {
+            Logger.Error(ex, "Replacing banner image for {0}", GameInstallation.FullId);
+
+            // TODO-LOC
+            await Services.MessageUI.DisplayExceptionMessageAsync(ex, "An error occurred when replacing the banner image. Make sure the image file is valid and try again.");
+        }
     }
 
     public void RemoveCustomBannerImage()
     {
+        // Delete the banner if it was added
+        FileSystemPath bannerPath = GameInstallation.GetValue<string?>(GameDataKey.RCP_BannerImage);
+        if (bannerPath.FileExists)
+        {
+            AddedGameFiles? addedFiles = GameInstallation.GetObject<AddedGameFiles>(GameDataKey.RCP_AddedFiles);
+            if (addedFiles != null && addedFiles.Files.Contains(bannerPath))
+            {
+                try
+                {
+                    Services.File.DeleteFile(bannerPath);
+                    addedFiles.Files.Remove(bannerPath);
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex, "Deleting custom game banner file");
+                }
+            }
+        }
+
         GameInstallation.SetValue<string?>(GameDataKey.RCP_BannerImage, null);
         RefreshGameBanner();
     }

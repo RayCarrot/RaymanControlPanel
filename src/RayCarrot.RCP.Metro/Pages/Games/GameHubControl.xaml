@@ -267,6 +267,7 @@
                                         </Button>
                                         <!-- TODO-LOC -->
                                         <Button Content="Replace icon image"
+                                                ToolTip="The recommended image size is 128x128"
                                                 Command="{Binding Path=ReplaceIconImageCommand, Mode=OneTime}"
                                                 rcp:Icon.Kind="ImageOutline"
                                                 rcp:Icon.Brush="{StaticResource RCP.Brushes.Info}"
@@ -278,6 +279,7 @@
                                                 rcp:Icon.Brush="{StaticResource RCP.Brushes.Info}"
                                                 HorizontalContentAlignment="Stretch" />
                                         <Button Content="Replace banner image"
+                                                ToolTip="The recommended image size is 1024x512"
                                                 Command="{Binding Path=ReplaceBannerImageCommand, Mode=OneTime}"
                                                 rcp:Icon.Kind="ImageOutline"
                                                 rcp:Icon.Brush="{StaticResource RCP.Brushes.Info}"

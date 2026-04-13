@@ -50,6 +50,11 @@ public static class AppFilePaths
     public static FileSystemPath IconsPath => UserDataBaseDir + "Icons";
 
     /// <summary>
+    /// The game assets path
+    /// </summary>
+    public static FileSystemPath GameAssetsPath => UserDataBaseDir + "GameAssets";
+
+    /// <summary>
     /// The temporary files path
     /// </summary>
     public static FileSystemPath TempPath => Path.Combine(Path.GetTempPath(), "RCP_Metro");

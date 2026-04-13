@@ -17,14 +17,14 @@ public static class GameInstallationExtensions
             : gameInstallation.GameDescriptor.DisplayName;
     }
 
-    public static string GetIconAssetSource(this GameInstallation gameInstallation)
+    public static object GetIconAssetSource(this GameInstallation gameInstallation)
     {
         // Get the custom icon image
         if (gameInstallation.GetValue<string?>(GameDataKey.RCP_IconImage) is { } iconImage)
         {
             // Return if it exists
             if (File.Exists(iconImage))
-                return iconImage;
+                return BitmapImageHelpers.CreateFromFile(iconImage);
 
             // Remove if it does not exist
             gameInstallation.SetValue<string?>(GameDataKey.RCP_IconImage, null);
@@ -35,14 +35,14 @@ public static class GameInstallationExtensions
         return gameInstallation.GameDescriptor.Icon.GetAssetPath();
     }
 
-    public static string GetBannerAssetSource(this GameInstallation gameInstallation)
+    public static object GetBannerAssetSource(this GameInstallation gameInstallation)
     {
         // Get the custom banner image
         if (gameInstallation.GetValue<string?>(GameDataKey.RCP_BannerImage) is { } bannerImage)
         {
             // Return if it exists
             if (File.Exists(bannerImage))
-                return bannerImage;
+                return BitmapImageHelpers.CreateFromFile(bannerImage);
 
             // Remove if it does not exist
             gameInstallation.SetValue<string?>(GameDataKey.RCP_BannerImage, null);

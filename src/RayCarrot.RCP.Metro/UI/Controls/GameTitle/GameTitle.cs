@@ -121,14 +121,14 @@ public class GameTitle : Control, IRecipient<ModifiedGamesMessage>, IRecipient<M
 
     #region GameIcon
 
-    public string? GameIcon
+    public object? GameIcon
     {
-        get => (string?)GetValue(GameIconProperty);
+        get => (object?)GetValue(GameIconProperty);
         private set => SetValue(GameIconPropertyKey, value);
     }
 
     private static readonly DependencyPropertyKey GameIconPropertyKey = 
-        DependencyProperty.RegisterReadOnly(nameof(GameIcon), typeof(string), typeof(GameTitle), new FrameworkPropertyMetadata());
+        DependencyProperty.RegisterReadOnly(nameof(GameIcon), typeof(object), typeof(GameTitle), new FrameworkPropertyMetadata());
 
     public static readonly DependencyProperty GameIconProperty = GameIconPropertyKey.DependencyProperty;
 

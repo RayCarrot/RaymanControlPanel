@@ -1,6 +1,5 @@
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using RayCarrot.RCP.Metro.ModLoader.Library;
 using RayCarrot.RCP.Metro.ModLoader.Metadata;
 using RayCarrot.RCP.Metro.ModLoader.Sources;
@@ -103,17 +102,7 @@ public class DownloadedModViewModel : BaseViewModel
                 return;
             }
 
-            BitmapImage thumb = new();
-            thumb.BeginInit();
-            thumb.CreateOptions |= BitmapCreateOptions.IgnoreImageCache;
-            thumb.CacheOption = BitmapCacheOption.OnLoad; // Required to allow the file to be deleted, such as if a temp file
-            thumb.UriSource = new Uri(thumbFilePath);
-            thumb.EndInit();
-
-            if (thumb.CanFreeze)
-                thumb.Freeze();
-
-            Thumbnail = thumb;
+            Thumbnail = BitmapImageHelpers.CreateFromFile(thumbFilePath);
         }
         catch (Exception ex)
         {
