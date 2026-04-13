@@ -3,7 +3,7 @@
 public class Rayman30thAccessAllByHisFansLevelsSetupGameAction : InstallModSetupGameAction
 {
     protected override long GameBananaModId => 668603;
-    protected override string[] ModIds => ["Rayman30th.DosFan.AllLevels"];
+    protected override string[] ModIds => ["Rayman30th.DosFan.AllLevels.Steam", "Rayman30th.DosFan.AllLevels.Uplay"];
 
     // TODO-LOC
     public override LocalizedString Header => "Install the Access all Levels (Rayman by his Fans) mod";
