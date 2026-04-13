@@ -8,5 +8,5 @@ public class TonicTroubleGBCRemoveUbiKeyRequirementSetupGameAction : InstallModS
     public override LocalizedString Header => new ResourceLocString(nameof(Resources.SetupGameAction_GBCRemoveUbiKeyRequirement_Header));
     public override LocalizedString Info => new ResourceLocString(nameof(Resources.SetupGameAction_GBCRemoveUbiKeyRequirement_Info));
 
-    public override SetupGameActionType Type => SetupGameActionType.Optional;
+    public override SetupGameActionType Type => SetupGameActionType.Recommended;
 }
