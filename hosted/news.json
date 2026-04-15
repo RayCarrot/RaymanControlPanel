@@ -1,5 +1,11 @@
 [
     {
+        "date": "April 15, 2026",
+        "icon": "main",
+        "header": "Version 14.5 is now available!",
+        "text": "After being soft-launched for a few days I've now fully released the new 14.5 update which features various improvements for the Rayman 30th Anniversary Edition. You can now view your progress for the main game versions, modify files through the Archive Explorer and create various mods using the new mod modules. There is now also full GameBanana support, with some mods already being available letting you fix various issues with the game, such as the window icon not showing, technical issues with the MS-DOS versions, the Ubi Key bonus level being inaccessible in the GBC version and more. There are also mods for every version letting you restore the original soundtrack. Just keep in mind that most of these mods require you to press Reset Game from the pause menu after applying (make sure to save in-game beforehand!).\n\nAs the Rayman 30th Anniversary Edition is a newer game it might still receive additional updates. If a new update releases it is generally recommended to disable all applied mods before updating to ensure that there won't be any conflicts. If you update with the mods applied and then disable the mods the mod loader will most likely revert some files to their state before the update. If that happens you can go to Steam or Ubisoft Connect and chose to verify the game files, making it re-download any game files not matching the latest version.\n\nBesides these additions there is now also support for the SNES prototype to be played through the bsnes emulator. I've also added more customization options to the program, letting you freely change the accent color and replace the icons and banners for games."
+    },
+    {
         "date": "April 9, 2026",
         "icon": "rayman",
         "header": "Rayman 30th Anniversary Edition version 1.1 is now available!",
