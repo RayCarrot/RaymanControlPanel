@@ -42,7 +42,7 @@ public sealed class GameDescriptor_RaymanMysteryOfPolokus_Win32 : Win32GameDescr
     protected override ProgramInstallationStructure CreateStructure() => new DirectoryProgramInstallationStructure(new ProgramFileSystem(new ProgramPath[]
     {
         // Files
-        new ProgramFilePath("Rayman Mystery Of Polokus 1.6 The Boss Update.exe", ProgramPathType.PrimaryExe, required: true),
+        new ProgramFilePath("Rayman Mystery Of Polokus 1.7.exe", ProgramPathType.PrimaryExe, required: true),
     }));
 
     #endregion
