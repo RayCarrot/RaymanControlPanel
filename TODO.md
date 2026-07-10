@@ -63,6 +63,7 @@ Open with (external) ->
 - Add `costumes` module for Origins and Legends, allowing new costumes to be added, with the mod loader then merging them all together into the gameconfig to avoid file conflicts
 - Allow mods to specify custom game icon and name, useful for mods which act as expansion packs to the game such as Rayman Expert and Rayman Origins 2
 - In Mod Creator have Mod Editor option for editing metadata. Or as a separate option from the game panel?
+- Add support for remote installing through GameBanana
 
 ## 📦 Archive Explorer
 - Add launch handlers for common archives like .ipk and .cnt so they can be opened in RCP directly from Windows File Explorer. Check if it's in a game folder to find version info, otherwise ask the user.
