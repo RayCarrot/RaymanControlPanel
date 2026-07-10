@@ -48,7 +48,7 @@ public class DownloadableModsFeedViewModel : BaseViewModel, IDisposable
 
     public GameInstallation GameInstallation { get; }
 
-    public ObservableCollection<DownloadableModViewModel> Mods { get; } = new();
+    public ObservableCollectionEx<DownloadableModViewModel> Mods { get; } = new();
 
     public DownloadableModsFeedFilter? Filter { get; set; }
 
@@ -88,7 +88,7 @@ public class DownloadableModsFeedViewModel : BaseViewModel, IDisposable
 
     private void RemovePlaceholderMods()
     {
-        Mods.RemoveWhere(x => x is PlaceholderDownloadableModViewModel);
+        Mods.ModifyCollection(mods => mods.RemoveAll(x => x is PlaceholderDownloadableModViewModel));
     }
 
     private void AddPlaceholderMods()
