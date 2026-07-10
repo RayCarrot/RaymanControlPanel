@@ -58,11 +58,6 @@ public static class AppURLs
     public const string BlueskyUrl = "https://bsky.app/profile/raycarrot.bsky.social";
 
     /// <summary>
-    /// The email URL
-    /// </summary>
-    public const string EmailUrl = "mailto:RayCarrotMaster@gmail.com";
-
-    /// <summary>
     /// The Steam group URL
     /// </summary>
     public const string SteamUrl = "https://steamcommunity.com/groups/RaymanControlPanel";

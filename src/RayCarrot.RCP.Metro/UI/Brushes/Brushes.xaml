@@ -26,7 +26,6 @@
     <SolidColorBrush x:Key="RCP.Brushes.Skeleton" Color="#808080" po:Freeze="True" />
 
     <!-- Brands -->
-    <SolidColorBrush x:Key="RCP.Brushes.Email" Color="{StaticResource RCP.Colors.PurplePrimary600}" po:Freeze="True" />
     <SolidColorBrush x:Key="RCP.Brushes.Bluesky" Color="{StaticResource RCP.Colors.Bluesky}" po:Freeze="True" />
     <SolidColorBrush x:Key="RCP.Brushes.YouTube" Color="{StaticResource RCP.Colors.YouTube}" po:Freeze="True" />
     <SolidColorBrush x:Key="RCP.Brushes.Windows11" Color="{StaticResource RCP.Colors.Windows11}" po:Freeze="True" />

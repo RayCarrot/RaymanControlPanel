@@ -178,14 +178,6 @@
                     </Viewbox>
                 </Button>
 
-                <Button Style="{StaticResource RCP.Styles.Button.IconCircle}" 
-                        Margin="3"
-                        rcp:Icon.Kind="EmailOutline"
-                        ToolTip="{Resx About_Email}"
-                        Foreground="{StaticResource RCP.Brushes.Email}"
-                        Command="{Binding Path=OpenUrlCommand}"
-                        CommandParameter="{x:Static rcp:AppURLs.EmailUrl}" />
-
             </StackPanel>
 
         </Grid>
